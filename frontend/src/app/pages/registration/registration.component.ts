@@ -39,6 +39,7 @@ constructor(
     id: new FormControl(0),
     nombre: new FormControl(""),
     apellido: new FormControl(""),
+    email: new FormControl(""),
     password:new FormControl(""),
     fechaNacimiento:new FormControl(new Date),
     rol:new FormControl(0)
