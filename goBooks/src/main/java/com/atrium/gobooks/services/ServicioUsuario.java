@@ -1,6 +1,7 @@
 package com.atrium.gobooks.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -16,6 +17,6 @@ public interface ServicioUsuario extends UserDetailsService{
 	Usuario conseguirUsuario(Integer idUsuario) throws ServicioException;
 	void eliminarUsuario(Integer idUsuario) throws ServicioException;
 
-	public Usuario findByUserName(String username);
+	public Optional<Usuario> findByUsername(String username);
 
 }

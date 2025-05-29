@@ -40,19 +40,25 @@ public class SecurityConfig {
 			.cors(Customizer.withDefaults()) 
 			
 			.authorizeHttpRequests((authz) -> authz
-					.requestMatchers("/","/api/registroUsuario/**", "/js/**", "/css/**", "/img/**").permitAll()
+					.requestMatchers("/","/api/login/**", "/api/registroUsuario/**", "/js/**", "/css/**", "/img/**").permitAll()
 					.anyRequest().authenticated())
+			//.formLogin(Customizer.withDefaults())
 			.formLogin((form) -> form
+					//.formLogin(withDefaults());
 					.loginPage("/login")
 					.failureUrl("/loginError")
-					.successForwardUrl("/user").permitAll())
+					.successForwardUrl("/user").permitAll()
+					)
 			.logout((logout) -> logout
 					.logoutUrl("/auth/logout")
-					.logoutSuccessUrl("/login?logout").permitAll())
+					.logoutSuccessUrl("/login?logout").permitAll()
+					)
 			
 		.httpBasic(Customizer.withDefaults())
 		.csrf((csrf) -> csrf
-				.disable())
+				.disable()
+				//.csrf((AbstractHttpConfigurer::disable)
+				)
 		.headers((headers)-> headers
 				.disable());
 		
@@ -94,17 +100,20 @@ public class SecurityConfig {
 	}
 
 
-	  @Bean public AuthenticationManager
-	  authenticationManager(AuthenticationConfiguration
-	  authenticationConfiguration) throws Exception { return
-	  authenticationConfiguration.getAuthenticationManager(); }
+//	  @Bean public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception { return
+//	  authenticationConfiguration.getAuthenticationManager(); }
+	
+	@Autowired
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(usuarioServicio).passwordEncoder(passwordEncoder());
+    }
 	  
-	  @Bean public DaoAuthenticationProvider authenticationProvider() {
-	  DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-	  auth.setUserDetailsService(usuarioServicio);
-	  auth.setPasswordEncoder(passwordEncoder());
-	  
-	  return auth; }
+//	  @Bean public DaoAuthenticationProvider authenticationProvider() {
+//	  DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
+//	  auth.setUserDetailsService(usuarioServicio);
+//	  auth.setPasswordEncoder(passwordEncoder());
+//	  
+//	  return auth; }
 	  
 	  @Autowired public void configureGlobal(AuthenticationManagerBuilder auth)
 	  throws Exception {

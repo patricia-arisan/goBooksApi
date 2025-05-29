@@ -27,7 +27,7 @@ public class Usuario {
 	private String apellido;
 		
 	@Column(name = "USUARIO_EMAIL")
-	private String email;
+	private String username;
 
 	@Column(name = "USUARIO_PASSWORD")
 	private String password;
@@ -44,15 +44,21 @@ public class Usuario {
 			
 	}
 
-	public Usuario(String nombre, String apellido, String email, String password,
+	public Usuario(String nombre, String apellido, String username, String password,
 			Date fechaNacimiento, Rol rol) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.email = email;
+		this.username = username;
 		this.password = password;
 		this.fechaNacimiento = fechaNacimiento;
 		this.rol = rol;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", username=" + username
+				+ ", password=" + password + ", fechaNacimiento=" + fechaNacimiento + ", rol=" + rol + "]";
 	}
 
 	public Integer getId() {
@@ -79,12 +85,12 @@ public class Usuario {
 		this.apellido = apellido;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -111,11 +117,6 @@ public class Usuario {
 		this.rol = rol;
 	}
 
-	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email="
-				+ email + ", password=" + password + ", fechaNacimiento=" + fechaNacimiento + ", rol=" + rol + "]";
-	}
 
 	
 }

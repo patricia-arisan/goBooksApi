@@ -6,6 +6,8 @@ import com.atrium.gobooks.entities.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 	
-	public Usuario findByEmail(String username);
+	//public Usuario findByEmail(String username);
+	
+	public Usuario findByUsername(String username); 
 	
 }

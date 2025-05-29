@@ -26,7 +26,7 @@ constructor(
       id:[0],
       nombre:["",[Validators.required]],
       apellido:[""],
-      email:["",[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      username:["",[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
       password:["",[Validators.required]],
       fechaNacimiento:[new Date],
       rol:[{id:2}]
@@ -38,7 +38,7 @@ constructor(
   formNewUser:FormGroup = new FormGroup({
     id: new FormControl(0),
     nombre: new FormControl(""),
-    apellido: new FormControl(""),
+    username: new FormControl(""),
     password:new FormControl(""),
     fechaNacimiento:new FormControl(new Date),
     rol:new FormControl(0)

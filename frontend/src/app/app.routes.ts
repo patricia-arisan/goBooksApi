@@ -21,4 +21,13 @@ export const routes: Routes = [
             ),
         title: 'Registro'
     },
+     {
+        path: 'home',
+        loadComponent: () =>
+            import('./pages/home/home.component').then(
+                (m) => m.HomeComponent
+
+            ),
+        title: 'Home'
+    },
 ];

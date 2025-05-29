@@ -46,17 +46,20 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 		return usuarios;
 	}
 
-	@Override
-	public Usuario findByUserName(String username) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public Usuario findByUserName(String username) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+	public Optional<Usuario> findByUsername(String username) {
+        return Optional.ofNullable(usuarioRepository.findByUsername(username)); //findbyusername?
+    }
 
 	// validacion de registro. Encontrar usuario registrado por su email
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		Usuario usuario = usuarioRepository.findByEmail(username);
+		Usuario usuario = usuarioRepository.findByUsername(username);
 		// si el campo esta vacio
 		if (usuario == null) {
 			// throw new UsernameNotFoundException("Usuario o password inválidos");
@@ -64,9 +67,14 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 
 		}
 
-		UserDetails user = User.withUsername(usuario.getEmail()).password(usuario.getPassword()).authorities("USER")
-				.build();
-		return user;
+//		UserDetails user = User.withUsername(usuario.getEmail()).password(usuario.getPassword()).authorities("USER")
+//				.build();
+//		return user;
+		return org.springframework.security.core.userdetails.User
+                .withUsername(usuario.getUsername())
+                .password(usuario.getPassword())
+                .authorities("USER")
+                .build();
 	}
 
 	@Override
@@ -76,7 +84,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 		
 		
 		Usuario usuario = new Usuario(registro.getNombre(), registro.getApellido(), 
-				registro.getEmail(), passwordEncoder.encode(registro.getPassword()),
+				registro.getUsername(), passwordEncoder.encode(registro.getPassword()),
 				registro.getFechaNacimiento(),registro.getRol());
 		
 		try {
@@ -126,4 +134,6 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 		}
 
 	}
+
+	
 }
