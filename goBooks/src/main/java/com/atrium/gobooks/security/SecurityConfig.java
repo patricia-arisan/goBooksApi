@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
@@ -46,8 +47,9 @@ public class SecurityConfig {
 			.formLogin((form) -> form
 					//.formLogin(withDefaults());
 					.loginPage("/login")
+					
 					.failureUrl("/loginError")
-					.successForwardUrl("/user").permitAll()
+					//.successForwardUrl("/user").permitAll()
 					)
 			.logout((logout) -> logout
 					.logoutUrl("/auth/logout")
@@ -76,7 +78,8 @@ public class SecurityConfig {
 	CorsConfigurationSource corsConfigurationSource(){
 		CorsConfiguration configuration = new CorsConfiguration();
 		configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-		configuration.setAllowedMethods(Arrays.asList("GET","POST","UPDATE","DELETE"));
+		configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE","PATCH","OPTIONS","HEAD"));
+		configuration.setAllowCredentials(true);
 		configuration.setAllowedHeaders(List.of("*"));
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

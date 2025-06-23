@@ -47,14 +47,12 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 	}
 
 //	@Override
-//	public Usuario findByUserName(String username) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+
 	public Optional<Usuario> findByUsername(String username) {
         return Optional.ofNullable(usuarioRepository.findByUsername(username)); //findbyusername?
     }
 
+	//SE ESTA USANDO EL DEL OPTIONAL
 	// validacion de registro. Encontrar usuario registrado por su email
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -97,6 +95,25 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 		return usuario;
 	}
 
+	
+	
+	@Override 
+	public Usuario modificar(Usuario usuario) throws ServicioException{
+		
+		Optional<Usuario> usuarioOp = usuarioRepository.findById(usuario.getId());
+		if (!usuarioOp.isPresent()) throw new ServicioException(CodigoError.USUARIO_NOT_FOUND);
+		
+		try {
+			usuario= usuarioRepository.save(usuario);
+			
+		} catch (Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL, e);
+		}
+		return usuario;
+		
+	}
+	
 	@Override
 	public Usuario conseguirUsuario(Integer idUsuario) throws ServicioException {
 		log.info("[conseguirUsuario]");

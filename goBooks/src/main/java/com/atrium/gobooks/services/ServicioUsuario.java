@@ -10,7 +10,9 @@ import com.atrium.gobooks.exceptions.ServicioException;
 
 public interface ServicioUsuario extends UserDetailsService{
 	
-	public Usuario registrar(Usuario usuario)throws ServicioException;;
+	public Usuario registrar(Usuario usuario)throws ServicioException;
+	
+	public Usuario modificar(Usuario usuario) throws ServicioException;
 	
 	public List<Usuario> listarUsuarios() throws ServicioException;
 	

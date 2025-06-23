@@ -12,6 +12,8 @@ export const routes: Routes = [
         component: LoginComponent,
         title: 'Login'
     },
+    
+   
     {
         path: 'registration',
         loadComponent: () =>
@@ -21,7 +23,7 @@ export const routes: Routes = [
             ),
         title: 'Registro'
     },
-     {
+    {
         path: 'home',
         loadComponent: () =>
             import('./pages/home/home.component').then(
@@ -29,5 +31,14 @@ export const routes: Routes = [
 
             ),
         title: 'Home'
+    },
+    {
+        path: 'profile',
+        loadComponent: () =>
+            import('./pages/profile/profile.component').then(
+                (m) => m.ProfileComponent
+
+            ),
+        title: 'Profile'
     },
 ];

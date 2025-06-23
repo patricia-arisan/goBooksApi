@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ServicesService } from '../../services/services.service';
 import { Usuario } from '../../interfaces/usuario';
+import { first, take } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,9 @@ import { Usuario } from '../../interfaces/usuario';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
+
+  
 constructor(
     private formBuilder: FormBuilder,
     private userService: ServicesService,
@@ -34,25 +37,38 @@ constructor(
 
   login(){
       console.log(this.formLogin.value);
+      
+      console.log(localStorage)
+      
       this.userService.sendUser(this.formLogin.value).subscribe((data:Usuario) =>{
-        console.log(data);
         
+        //  localStorage.setItem('token',btoa(data.username + ':' + data.password))  
+        //  let cred = localStorage.getItem('token')
+        // console.log('cred: ' + cred)  
+        
+        
+        ////////////////////
+        console.log(data);
+        localStorage.setItem('usuario', JSON.stringify(data));
+      //////////////////
+          
+        
+              /////////////////////
+
+        console.log("LOGIN " + data);
+        const idUsuario = data.id.toString();
+        
+        this.userService.setItem('id',idUsuario);
+        console.log("LOGIN " + idUsuario);
         this.router.navigate(['/home']);
+
+        
       })
 
       
-        //this.userService.sendUser(this.formLogin.value).subscribe(isValid =>{
-        //if(isValid) {
-          //sessionStorage.setItem(
-          //'token', 
-          //btoa(this.formLogin.get("username") + ':' + this.formLogin.get("password"))
-          //);
-          //this.router.navigate(['/home']);
-          //} else {
-        //alert("Authentication failed.")
-    //}
         
-        
-      //})
     };
+
+
+    
 }

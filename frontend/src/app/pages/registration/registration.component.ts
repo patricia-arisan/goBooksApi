@@ -38,6 +38,7 @@ constructor(
   formNewUser:FormGroup = new FormGroup({
     id: new FormControl(0),
     nombre: new FormControl(""),
+    apellido: new FormControl(""),
     username: new FormControl(""),
     password:new FormControl(""),
     fechaNacimiento:new FormControl(new Date),
