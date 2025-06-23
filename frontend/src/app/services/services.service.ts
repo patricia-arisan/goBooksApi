@@ -92,6 +92,20 @@ constructor(private client: HttpClient) { }
     
     return this.client.put<Usuario>(`${this.userServiceLoggedUrl}/${id}`,user,{headers})
   }
+
+  private readonly userServiceLogoutUrl = `${environment.proyectoUrl}auth/logout`;
+
+  logoutUser(){
+    const credentials = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            
+            'Authorization' : credentials || ''
+           
+        })
+
+    return this.client.post(`${this.userServiceLogoutUrl}`,null,{headers})
+  }
   
  
 }

@@ -18,7 +18,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -53,7 +54,12 @@ public class SecurityConfig {
 					)
 			.logout((logout) -> logout
 					.logoutUrl("/auth/logout")
-					.logoutSuccessUrl("/login?logout").permitAll()
+					.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
+					//.logoutSuccessUrl("/login?logout")
+					.permitAll()
+					
+					//.logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
+			          
 					)
 			
 		.httpBasic(Customizer.withDefaults())
