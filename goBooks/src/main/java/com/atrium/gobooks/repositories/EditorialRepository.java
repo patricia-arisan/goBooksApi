@@ -1,9 +1,15 @@
 package com.atrium.gobooks.repositories;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.atrium.gobooks.entities.Editorial;
 
 public interface EditorialRepository extends JpaRepository<Editorial,Integer>{
+	
+	@Query(value="SELECT e FROM Editorial e ORDER BY e.nombre")
+	List<Editorial> buscarEditorialesPorOrdenAlfabetico();
 
 }

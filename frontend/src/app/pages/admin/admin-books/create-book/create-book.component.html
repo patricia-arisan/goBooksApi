@@ -1,0 +1,105 @@
+<p>create-book works!</p>
+<app-header-admin></app-header-admin>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            
+
+            <h3>Registrate</h3>
+            <form  [formGroup]="formNewBook" (submit)="registerBook()"> 
+            
+                <div class="form-group">
+                    <label class="control-label" for="id"> </label> <input
+                        id="id" type="hidden" formControlName="id" class="form-control" 
+                        autofocus="autofocus"> 
+                </div>
+                 
+                        
+                
+                <div class="form-group">
+                    <label class="control-label" for="nombre">Título : </label> 
+                    <input id="nombre" type="text" formControlName="nombre" class="form-control"  autofocus="autofocus">
+                    
+                </div>
+                
+                <div class="form-group">
+                             
+                    <!-- <div formGroupName="autor"> -->
+                    <label class="control-label" for="autor">Autor : </label> <select formControlName="autor">
+                        <!-- <select (change)="onChange()"> -->
+    		    <option [ngValue]="null">Elegir autor</option>
+                @for (autor of autores; track autor){
+                    
+                    <option [ngValue]="autor">
+                    {{ autor.nombre}}
+                    </option>
+                    }
+    		    
+    	        </select>
+                    </div>
+                    <button type="button" (click)="toggleForm()">Nuevo Autor</button>
+                    
+
+                <!-- </div> -->
+
+                <div class="form-group">
+                    <label class="control-label" for="isbn">isbn : </label> <input
+                        id="isbn" type="text" formControlName="isbn" class="form-control" 
+                        autofocus="autofocus">
+                </div>
+                
+               <div class="form-group">
+                   
+                    <!-- <div formGroupName="editorial"> -->
+                    <label class="control-label" for="editorial">Editorial : </label> <select formControlName="editorial" >
+                    <option [ngValue]="null" >Elegir editorial</option>
+                @for (editorial of editoriales; track editorial.nombre){
+                    
+                    <option [ngValue]="editorial">
+                    {{ editorial.nombre}}
+                    </option>
+                    }
+                    </select>
+                    </div>
+                    <button type="button" (click)="toggleFormEditorial()">Nueva Editorial</button>
+                    
+                    <!-- </div> -->
+                
+                
+                <div class="form-group">
+                  
+                    <!-- <div formGroupName="genero"> -->
+                    <label class="control-label" for="genero">Género : </label> <select formControlName="genero" >
+                    <option [ngValue]="null" >Elegir genero</option>
+                    @for (genero of generos; track genero){
+                    
+                    <option [ngValue]="genero">
+                    {{ genero.nombre}}
+                    </option>
+                    }
+                    </select>
+                    </div>
+                    <button type="button" (click)="toggleFormGenero()">Nuevo Género</button>
+                <!-- </div> -->
+                
+                <div class="form-group">
+                    <label class="control-label" for="portada">Portada : </label> <input
+                        type="text" id="portada" formControlName="portada" class="form-control" 
+                        autofocus="autofocus">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="sinopsis">Sinópsis : </label> <input
+                        type="text" id="sinopsis" formControlName="sinopsis" class="form-control" 
+                        autofocus="autofocus">
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Añadir</button>
+                    
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

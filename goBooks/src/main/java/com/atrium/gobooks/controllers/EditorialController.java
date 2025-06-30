@@ -1,0 +1,35 @@
+package com.atrium.gobooks.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.atrium.gobooks.entities.Editorial;
+import com.atrium.gobooks.exceptions.ServicioException;
+import com.atrium.gobooks.services.ServicioEditorial;
+
+@RestController
+@RequestMapping("/api/editorial")
+public class EditorialController {
+	
+	@Autowired
+	private ServicioEditorial servicioEditorial;
+	
+	@PostMapping(value="/registroEditorial")
+	public Editorial registrarNuevoEditorial(@RequestBody Editorial editorial) throws ServicioException {
+		return servicioEditorial.guardarEditorial(editorial);
+		 
+	}
+	
+	@GetMapping("/listadoEditoriales")
+	public List <Editorial> listarEditoriales() throws ServicioException{
+		List <Editorial> editoriales = servicioEditorial.buscarEditorialesPorOrdenAlfabetico();
+		return editoriales;
+	}
+
+}

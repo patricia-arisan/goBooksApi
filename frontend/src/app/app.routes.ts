@@ -41,4 +41,22 @@ export const routes: Routes = [
             ),
         title: 'Profile'
     },
+    {
+    path: 'admin-books',
+        loadComponent: () =>
+            import('./pages/admin/admin-books/admin-books.component').then(
+                (m) => m.AdminBooksComponent
+
+            ),
+        title: 'Administrar Libros'
+    },
+    {
+    path: 'create-book',
+        loadComponent: () =>
+            import('./pages/admin/admin-books/create-book/create-book.component').then(
+                (m) => m.CreateBookComponent
+
+            ),
+        title: 'Crear Libro'
+    }
 ];
