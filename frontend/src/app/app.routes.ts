@@ -33,6 +33,24 @@ export const routes: Routes = [
         title: 'Home'
     },
     {
+        path: 'books',
+        loadComponent: () =>
+            import('./pages/books/books.component').then(
+                (m) => m.BooksComponent
+
+            ),
+        title: 'Books'
+    },
+    {
+        path: 'book-section/:libro.id',
+        loadComponent: () =>
+            import('./pages/books/book-section/book-section.component').then(
+                (m) => m.BookSectionComponent
+
+            ),
+        title: 'Book Section'
+    },
+    {
         path: 'profile',
         loadComponent: () =>
             import('./pages/profile/profile.component').then(

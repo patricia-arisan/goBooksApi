@@ -38,9 +38,8 @@
     		    
     	        </select>
                     </div>
-                    <button type="button" (click)="toggleForm()">Nuevo Autor</button>
-                    
-
+                                       
+                    <button type="button" matButton="elevated" (click)="openDialog('0ms', '0ms')">Autor +</button>
                 <!-- </div> -->
 
                 <div class="form-group">
@@ -62,7 +61,7 @@
                     }
                     </select>
                     </div>
-                    <button type="button" (click)="toggleFormEditorial()">Nueva Editorial</button>
+                    <button type="button" matButton="elevated" (click)="openEditorialDialog('0ms', '0ms')">Editorial +</button>
                     
                     <!-- </div> -->
                 
@@ -80,7 +79,7 @@
                     }
                     </select>
                     </div>
-                    <button type="button" (click)="toggleFormGenero()">Nuevo Género</button>
+                    <button type="button" matButton="elevated" (click)="openGenderDialog('0ms', '0ms')">Género +</button>
                 <!-- </div> -->
                 
                 <div class="form-group">

@@ -1,6 +1,10 @@
 package com.atrium.gobooks.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,5 +26,19 @@ public class LibroController {
 		return servicioLibro.guardarLibro(libro);
 		 
 	}
+	
+	@GetMapping("/listadoLibros")
+	public List <Libro> listarLibros() throws ServicioException{
+		List <Libro> libros = servicioLibro.buscarLibrosPorOrdenAlfabetico();
+		return libros;
+	}
+	
+	@GetMapping("/{id}")
+	public Libro paginaFichaLibro(@PathVariable Integer id) throws Exception {
+		return servicioLibro.obtenerLibro(id);
+		
+		
+	}
+
 	
 }

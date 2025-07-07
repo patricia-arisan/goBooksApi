@@ -1,6 +1,7 @@
 package com.atrium.gobooks.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,15 +22,41 @@ public class ServicioLibroImpl implements ServicioLibro{
 	LibroRepository libroRepository;
 
 	@Override
-	public List<Libro> listaLibros() throws ServicioException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Libro> buscarLibrosPorOrdenAlfabetico() throws ServicioException {
+		log.info("[listLibros]");
+		
+		List<Libro> libros;
+		
+		try {
+			libros= libroRepository.buscarLibrosPorOrdenAlfabetico();
+			
+		}catch(Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
+		}
+		return libros;
 	}
 
 	@Override
 	public Libro obtenerLibro(Integer idLibro) throws ServicioException {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("[conseguirLibro]");
+		log.debug("[idLibro: "+idLibro+"]");
+		
+		Libro libro;
+		
+		try {
+			Optional<Libro> libroOp= libroRepository.findById(idLibro);
+			if(!libroOp.isPresent()) throw new ServicioException(CodigoError.LIBRO_NOT_FOUND);
+			libro= libroOp.get();
+		}catch(ServicioException se) {
+			log.error("ServicioException", se);
+			throw se;
+		}catch(Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
+		}
+		return libro;
+
 	}
 
 	@Override

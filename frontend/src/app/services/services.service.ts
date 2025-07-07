@@ -62,17 +62,7 @@ constructor(private client: HttpClient) { }
             'Authorization' : credentials || ''
            
         })
-    // const headers = new HttpHeaders({
-    //         responseType: 'text'
-           
-    //     } );
-       
-    // const headers = new HttpHeaders(cred ? {
-    //         'Content-Type': 'application/json',
-    //         'Access-Control-Expose-Headers': 'Authorization',
-    //         Authorization :'Basic ' + btoa(cred.username + ':' + cred.password)
-           
-    //     } : {});
+    
     
     return this.client.get<Usuario>(`${this.userServiceLoggedUrl}/${id}`,{headers})
     

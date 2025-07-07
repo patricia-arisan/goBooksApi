@@ -1,0 +1,45 @@
+<p>reading workssssss!</p>
+
+<p>{{data}}</p>
+ <form [formGroup]="formNewReading" (submit)="registerReading()"> <!--(submit)="registerReading()" -->
+    
+    <div class="form-group">
+                    <label class="control-label" for="id"> </label> <input
+                        id="id" type="hidden" formControlName="idLectura" class="form-control" 
+                        autofocus="autofocus"> 
+                
+                <label class="control-label" for="id"> </label> <input
+                        id="id" type="hidden" formControlName="idLibro" class="form-control" 
+                        autofocus="autofocus"> 
+                
+                <label class="control-label" for="id"> </label> <input
+                        id="id" type="hidden" formControlName="idUsuario" class="form-control" 
+                        autofocus="autofocus"> 
+                </div>
+
+    <div class="form-group" >
+        <label class="control-label" for="estado">Estado: </label>
+                        <select formControlName="idEstado" name="estado">
+        @for (estado of estados; track estado){
+                <!-- <option [ngValue]=""  [selected]="estado.id===1"> -->
+                <option [value]="estado.id">
+                
+                    {{ estado.situacion}} 
+                    </option> 
+            
+                    
+                       
+                   
+                    
+                    }
+    </select>
+    </div>
+                        <div class="form-group">
+                    <button type="submit"  class="btn btn-success">Añadir</button>
+                    
+                    </div>
+
+                    
+</form>
+
+

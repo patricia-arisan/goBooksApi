@@ -1,0 +1,72 @@
+package com.atrium.gobooks.services;
+
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.atrium.gobooks.dto.LecturaDTO;
+import com.atrium.gobooks.entities.Estado;
+import com.atrium.gobooks.entities.Lectura;
+import com.atrium.gobooks.entities.Libro;
+import com.atrium.gobooks.entities.Usuario;
+import com.atrium.gobooks.exceptions.CodigoError;
+import com.atrium.gobooks.exceptions.ServicioException;
+import com.atrium.gobooks.repositories.EstadoRepository;
+import com.atrium.gobooks.repositories.LecturaRepository;
+import com.atrium.gobooks.repositories.LibroRepository;
+import com.atrium.gobooks.repositories.UsuarioRepository;
+
+@Service
+public class ServicioLecturaImpl implements ServicioLectura{
+	
+Logger log = LoggerFactory.getLogger(ServicioLecturaImpl.class);
+	
+	@Autowired
+	LecturaRepository lecturaRepository;
+
+	@Autowired
+	LibroRepository libroRepository;
+	
+	@Autowired
+	UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	EstadoRepository estadoRepository;
+	
+	
+	@Override
+	public Lectura grabarLectura(LecturaDTO lecturaDTO) throws ServicioException {
+		log.info("[grabarLectura]");
+		log.info("lectura: "+lecturaDTO.toString()+"]");
+		
+		Lectura lectura = new Lectura();
+		try {
+			Optional<Usuario> usuarioOp;
+			usuarioOp = usuarioRepository.findById(lecturaDTO.getIdUsuario());
+			if(!usuarioOp.isPresent()) throw new ServicioException(CodigoError.USUARIO_NOT_FOUND);
+			lectura.setUsuario(usuarioOp.get());
+			
+			Optional<Libro> libroOp;
+			libroOp = libroRepository.findById(lecturaDTO.getIdLibro());
+			if(!libroOp.isPresent()) throw new ServicioException(CodigoError.LIBRO_NOT_FOUND);
+			lectura.setLibro(libroOp.get());
+			
+			Optional<Estado> estadoOp;
+			estadoOp = estadoRepository.findById(lecturaDTO.getIdEstado());
+			if(!estadoOp.isPresent()) throw new ServicioException(CodigoError.ESTADO_NOT_FOUND);
+			lectura.setEstado(estadoOp.get());
+			
+			lecturaRepository.save(lectura);
+			
+		}catch(Exception e){
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
+		}
+		
+		return lectura;
+	}
+
+}

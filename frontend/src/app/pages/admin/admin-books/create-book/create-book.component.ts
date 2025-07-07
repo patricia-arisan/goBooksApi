@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { HeaderAdminComponent } from '../../../shared/headers/header-admin/header-admin.component';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,22 +10,25 @@ import { EditorialService } from '../../../../services/editorial-service';
 import { GenderService } from '../../../../services/gender-service';
 import { Editorial } from '../../../../interfaces/editorial';
 import { Genero } from '../../../../interfaces/genero';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { AuthorComponent } from '../../../../modals/author/author.component';
+import { EditorialComponent } from '../../../../modals/editorial/editorial.component';
+import { GenderComponent } from '../../../../modals/gender/gender.component';
 
 @Component({
   selector: 'app-create-book',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule,HeaderAdminComponent],
+  imports: [FormsModule, ReactiveFormsModule,HeaderAdminComponent,MatButtonModule],
   templateUrl: './create-book.component.html',
-  styleUrl: './create-book.component.css'
+  styleUrl: './create-book.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateBookComponent implements OnInit{
   autores!: Autor[];
   editoriales!: Editorial[];
   generos!: Genero[];
-  showNewAuthorForm: Boolean = false;
-  showNewEditorialForm: Boolean = false;
-  showNewGeneroForm: Boolean = false;
-
+    
   constructor(
     private formBuilder: FormBuilder,
     private bookService: BookService,
@@ -36,28 +39,7 @@ export class CreateBookComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-    // this.formNewBook = this.formBuilder.group ({
-    //   id:[0],
-    //   nombre:["",[Validators.required]],
-    //   autor:this.formBuilder.group({
-    //     id:[0],
-    //     nombre:["",[Validators.required]]
-    //   }),
-    //   isbn:[""],
-    //   editorial:this.formBuilder.group({
-    //     id:[0],
-    //     nombre:["",[Validators.required]]
-    //   }),
-    //   portada:[""],
-    //   genero:this.formBuilder.group({
-    //     id:[0],
-    //     nombre:["",[Validators.required]]
-    //   }),
-    //   sinopsis:[""]
-    // });
-
     
-
     this.formNewBook = this.formBuilder.group ({
       id:[null],
       nombre:["",[Validators.required]],
@@ -71,41 +53,8 @@ export class CreateBookComponent implements OnInit{
     this.getAuthors();
     this.getEditorials();
     this.getGenders();
-    // this.formNewAuthor = this.formBuilder.group ({
-    //   id:[0],
-    //   nombre:["",[Validators.required]]
-    // });
-
-    // this.formNewEditorial = this.formBuilder.group ({
-    //   id:[0],
-    //   nombre:["",[Validators.required]]
-    // });
-
-    // this.formNewGenero = this.formBuilder.group ({
-    //   id:[0],
-    //   nombre:["",[Validators.required]]
-    // });
+    
   }
-
-  // formNewBook:FormGroup = new FormGroup({
-  //   id: new FormControl(0),
-  //   nombre: new FormControl(""),
-  //   autor: new FormGroup({
-  //     id:new FormControl(0),
-  //     nombre: new FormControl("")
-  //   }),
-  //   isbn: new FormControl(""),
-  //   editorial: new FormGroup({
-  //     id:new FormControl(0),
-  //     nombre: new FormControl("")
-  //   }),
-  //   portada: new FormControl(""),
-  //   genero: new FormGroup({
-  //     id:new FormControl(0),
-  //     nombre: new FormControl("")
-  //   }),
-  //   sinopsis:new FormControl("")
-  // })
 
   formNewBook:FormGroup = new FormGroup({
     id: new FormControl(null),
@@ -118,27 +67,14 @@ export class CreateBookComponent implements OnInit{
     sinopsis:new FormControl("")
   })
 
-  // formNewAuthor:FormGroup = new FormGroup({
-  //   id: new FormControl(0),
-  //   nombre: new FormControl("")
-  // })
-
-  // formNewEditorial:FormGroup = new FormGroup({
-  //   id: new FormControl(0),
-  //   nombre: new FormControl("")
-  // })
-
-  // formNewGenero:FormGroup = new FormGroup({
-  //   id: new FormControl(0),
-  //   nombre: new FormControl("")
-  // })
-
   getAuthors(){
     this.authorService.getAuthorsByNameOrder().subscribe((data:Autor[])=>{
         this.autores = data;
       })
 
     }
+
+    
 
     getEditorials(){
     this.editorialService.getEditorialsByNameOrder().subscribe((data:Editorial[])=>{
@@ -154,9 +90,38 @@ export class CreateBookComponent implements OnInit{
 
     }
 
-    onChange(){
+    ////////////////////////
+    readonly dialog = inject(MatDialog);
+    
+    openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(AuthorComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    }).afterClosed().subscribe((data: Autor)=>{
+      this.autores.push(data);
+    });
+  }
 
-    }
+  openEditorialDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(EditorialComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+
+  openGenderDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(GenderComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  } 
+
+    /////////////////////////
+
+    
   
 
   registerBook(){
@@ -166,34 +131,12 @@ export class CreateBookComponent implements OnInit{
         })
     };
 
-    // registerAuthor(){
-    //   this.authorService.createAuthor(this.formNewAuthor.value).subscribe((data:Autor) =>{
-    //       console.log(data);
-    //       this.router.navigate(['/create-books']);
-    //     })
-    // }
-
-    registerEditorial(){
-      
-    }
-
-    registerGenero(){
-      
-    }
-  
-
-  toggleForm(){
-    this.showNewAuthorForm = !this.showNewAuthorForm;
     
-  }
 
-  toggleFormEditorial(){
-    this.showNewEditorialForm = !this.showNewEditorialForm;
-  }
+    
 
-  toggleFormGenero(){
-    this.showNewGeneroForm = !this.showNewGeneroForm;
-  }
+  
+  
 
   
 

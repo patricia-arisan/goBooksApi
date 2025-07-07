@@ -1,0 +1,22 @@
+<p>book-section works!</p>
+<app-header-user></app-header-user>
+<p>{{libro.nombre}}</p>
+<p>{{libro.autor.nombre}}</p>
+<p>{{libro.editorial.nombre}}</p>
+<p>{{libro.isbn}}</p>
+<p>{{libro.genero.nombre}}</p>
+<p>{{libro.sinopsis}}</p>
+<p>{{libro.portada}}</p>
+
+<button type="button" matButton="elevated" (click)="openReadingDialog('0ms', '0ms')">Añadir +</button>
+<!-- <form>
+    <select>
+        @for (estado of estados; track estado){
+                    
+                    <option value="{{estado.id}}">
+                    {{ estado.nombre}}
+                    </option>
+                    }
+    </select>
+
+</form> -->

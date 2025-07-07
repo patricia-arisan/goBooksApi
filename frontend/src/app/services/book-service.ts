@@ -25,5 +25,34 @@ constructor(private client: HttpClient) { }
         }:{})
       return this.client.post<Libro>(`${this.bookServiceUrl}`,libro,{headers})
     }
+
+    private readonly bookListServiceUrl = `${environment.proyectoUrl}api/libro/listadoLibros`;
+    
+      getBooksByNameOrder(): Observable<Libro[]>{
+        const credentials = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+              'Content-Type': 'application/json',
+                
+              'Authorization' : credentials || ''
+               
+          })
+    
+          return this.client.get<Libro[]>(`${this.bookListServiceUrl}`,{headers})
+      }
+
+      private readonly bookSectionServiceUrl = `${environment.proyectoUrl}api/libro`;
+    
+      getBookById(id: number): Observable<Libro>{
+        const credentials = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+              'Content-Type': 'application/json',
+                
+              'Authorization' : credentials || ''
+               
+          })
+    
+          return this.client.get<Libro>(`${this.bookSectionServiceUrl}/${id}`,{headers})
+      }
  
+
 }

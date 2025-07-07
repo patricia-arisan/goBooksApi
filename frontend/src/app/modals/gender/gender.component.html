@@ -1,1 +1,11 @@
-<p>gender works!</p>
+<form [formGroup]="formNewGender" (submit)="registerGender()">
+    <div class="form-group" >
+                            <label class="control-label" for="nombre">Género : </label> <input
+                        id="nombre" type="text" formControlName="nombre" class="form-control" 
+                        required autofocus="autofocus">
+                        </div>
+                        <div class="form-group">
+                    <button type="submit"  class="btn btn-success">Añadir</button>
+                    
+                    </div>
+</form>

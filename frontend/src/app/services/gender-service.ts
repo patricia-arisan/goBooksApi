@@ -14,7 +14,7 @@ constructor(private client: HttpClient) { }
   
   private readonly genderServiceUrl = `${environment.proyectoUrl}api/genero/registroGenero`;
   
-    createAuthor(genero: Genero): Observable<Genero>{
+    createGender(genero: Genero): Observable<Genero>{
       const credentials = localStorage.getItem('token');
     const headers = new HttpHeaders({
             'Content-Type': 'application/json',

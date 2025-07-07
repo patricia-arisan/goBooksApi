@@ -1,0 +1,6 @@
+<p>books works!</p>
+<app-header-user></app-header-user>
+<h1>Listado de libros</h1>
+@for (libro of libros; track libro){
+    <p><a [routerLink]="['/book-section',libro.id]" >{{libro.nombre}}</a></p>
+}

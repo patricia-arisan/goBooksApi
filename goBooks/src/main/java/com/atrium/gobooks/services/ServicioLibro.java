@@ -7,7 +7,7 @@ import com.atrium.gobooks.exceptions.ServicioException;
 
 public interface ServicioLibro {
 	
-	List<Libro> listaLibros() throws ServicioException;
+	List<Libro> buscarLibrosPorOrdenAlfabetico() throws ServicioException;
 
 	Libro obtenerLibro(Integer idLibro) throws ServicioException;
 
