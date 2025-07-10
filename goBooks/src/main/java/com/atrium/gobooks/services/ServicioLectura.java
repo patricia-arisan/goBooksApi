@@ -1,5 +1,7 @@
 package com.atrium.gobooks.services;
 
+import java.util.List;
+
 import com.atrium.gobooks.dto.LecturaDTO;
 import com.atrium.gobooks.entities.Lectura;
 import com.atrium.gobooks.exceptions.ServicioException;
@@ -7,5 +9,8 @@ import com.atrium.gobooks.exceptions.ServicioException;
 public interface ServicioLectura {
 	
 	Lectura grabarLectura(LecturaDTO lecturaDTO) throws ServicioException;
-
+	
+	List <Lectura> buscarLecturasUsuario(Integer id) throws ServicioException;
+	
+	List <Lectura> buscarLecturasEstadoUsuario(Integer idUsuario, Integer idEstado) throws ServicioException;
 }

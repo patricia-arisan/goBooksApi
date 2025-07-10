@@ -27,19 +27,26 @@
                     {{ estado.situacion}} 
                     </option> 
             
-                    
-                       
-                   
-                    
                     }
     </select>
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="puntuacion"> </label> <input
+                        id="puntuacion" type="hidden" formControlName="puntuacion" class="form-control" 
+                        autofocus="autofocus"> 
     </div>
                         <div class="form-group">
                     <button type="submit"  class="btn btn-success">Añadir</button>
                     
                     </div>
+<mat-toolbar color="primary"></mat-toolbar>
+@for (star of ratingArray; track star; let index = $index){
+     <mat-icon (mouseenter)="setStar(index)" [ngClass]="{checked:selectedStar>index}"
+        (mouseleave)="unselectStar()" (click)="rating(index)">star</mat-icon>   
+}
 
                     
 </form>
+
 
 

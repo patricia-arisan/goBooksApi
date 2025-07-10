@@ -51,6 +51,15 @@ export const routes: Routes = [
         title: 'Book Section'
     },
     {
+        path: 'readings',
+        loadComponent: () =>
+            import('./pages/readings/readings.component').then(
+                (m) => m.ReadingsComponent
+
+            ),
+        title: 'Readings'
+    },
+    {
         path: 'profile',
         loadComponent: () =>
             import('./pages/profile/profile.component').then(

@@ -1,0 +1,9 @@
+<p>readings works!</p>
+<app-header-user></app-header-user>
+
+<button type="button" (click)="getReadings()">Todos</button>
+<button type="button" (click)="getReadingsByState(2)">Leídos</button>
+<button type="button" (click)="getReadingsByState(3)">Pendientes</button>
+@for(lectura of lecturas; track lectura.id){
+    <p>{{lectura.libro.nombre}}</p>
+}

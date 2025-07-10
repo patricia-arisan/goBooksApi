@@ -15,6 +15,7 @@ import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialo
 import { AuthorComponent } from '../../../../modals/author/author.component';
 import { EditorialComponent } from '../../../../modals/editorial/editorial.component';
 import { GenderComponent } from '../../../../modals/gender/gender.component';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-create-book',
@@ -22,7 +23,7 @@ import { GenderComponent } from '../../../../modals/gender/gender.component';
   imports: [FormsModule, ReactiveFormsModule,HeaderAdminComponent,MatButtonModule],
   templateUrl: './create-book.component.html',
   styleUrl: './create-book.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush No cargan al principio las cosas, mejor quitar esto
 })
 export class CreateBookComponent implements OnInit{
   autores!: Autor[];
@@ -39,6 +40,9 @@ export class CreateBookComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
+    this.getAuthors();
+    this.getEditorials();
+    this.getGenders();
     
     this.formNewBook = this.formBuilder.group ({
       id:[null],
@@ -50,9 +54,7 @@ export class CreateBookComponent implements OnInit{
       genero:[{id:0}],
       sinopsis:["",[Validators.required]]
     });
-    this.getAuthors();
-    this.getEditorials();
-    this.getGenders();
+    
     
   }
 
@@ -100,6 +102,8 @@ export class CreateBookComponent implements OnInit{
       exitAnimationDuration,
     }).afterClosed().subscribe((data: Autor)=>{
       this.autores.push(data);
+      console.log(this.autores)
+      this.getAuthors();
     });
   }
 

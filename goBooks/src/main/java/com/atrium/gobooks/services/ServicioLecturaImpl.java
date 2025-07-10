@@ -1,5 +1,6 @@
 package com.atrium.gobooks.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -40,7 +41,7 @@ Logger log = LoggerFactory.getLogger(ServicioLecturaImpl.class);
 	@Override
 	public Lectura grabarLectura(LecturaDTO lecturaDTO) throws ServicioException {
 		log.info("[grabarLectura]");
-		log.info("lectura: "+lecturaDTO.toString()+"]");
+		log.info("lectura: "+lecturaDTO.toString());
 		
 		Lectura lectura = new Lectura();
 		try {
@@ -59,6 +60,8 @@ Logger log = LoggerFactory.getLogger(ServicioLecturaImpl.class);
 			if(!estadoOp.isPresent()) throw new ServicioException(CodigoError.ESTADO_NOT_FOUND);
 			lectura.setEstado(estadoOp.get());
 			
+			lectura.setPuntuacion(lecturaDTO.getPuntuacion());
+			
 			lecturaRepository.save(lectura);
 			
 		}catch(Exception e){
@@ -67,6 +70,41 @@ Logger log = LoggerFactory.getLogger(ServicioLecturaImpl.class);
 		}
 		
 		return lectura;
+	}
+
+
+	@Override
+	public List<Lectura> buscarLecturasUsuario(Integer id) throws ServicioException {
+		log.info("[listLecturas]");
+		
+		List<Lectura> lecturas;
+		
+		try {
+			lecturas= lecturaRepository.buscarLecturasUsuario(id);
+			
+		}catch(Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
+		}
+		return lecturas;
+	}
+
+
+	@Override
+	public List<Lectura> buscarLecturasEstadoUsuario(Integer idUsuario, Integer idEstado) throws ServicioException {
+		log.info("[listLecturasEstado]");
+				
+		List<Lectura> lecturas;
+		
+		try {
+			lecturas= lecturaRepository.buscarLecturasEstadoUsuario(idUsuario, idEstado);
+			log.info("lectura: "+lecturas.toString());
+			
+		}catch(Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
+		}
+		return lecturas;
 	}
 
 }

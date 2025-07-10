@@ -28,8 +28,8 @@
                     <!-- <div formGroupName="autor"> -->
                     <label class="control-label" for="autor">Autor : </label> <select formControlName="autor">
                         <!-- <select (change)="onChange()"> -->
-    		    <option [ngValue]="null">Elegir autor</option>
-                @for (autor of autores; track autor){
+    		    <option [ngValue]="null" >Elegir autor</option>
+                @for (autor of autores; track autor.id){
                     
                     <option [ngValue]="autor">
                     {{ autor.nombre}}
@@ -53,7 +53,7 @@
                     <!-- <div formGroupName="editorial"> -->
                     <label class="control-label" for="editorial">Editorial : </label> <select formControlName="editorial" >
                     <option [ngValue]="null" >Elegir editorial</option>
-                @for (editorial of editoriales; track editorial.nombre){
+                @for (editorial of editoriales; track editorial){
                     
                     <option [ngValue]="editorial">
                     {{ editorial.nombre}}

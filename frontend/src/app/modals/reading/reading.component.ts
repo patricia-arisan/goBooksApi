@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, Inject, inject, OnInit } from '@ang
 import { BookSectionComponent } from '../../pages/books/book-section/book-section.component';
 import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { StateService } from '../../services/state-service';
 import { Estado } from '../../interfaces/estado';
@@ -12,11 +14,12 @@ import { Usuario } from '../../interfaces/usuario';
 import { ServicesService } from '../../services/services.service';
 import { ReadingService } from '../../services/reading-service';
 import { LecturaDTO } from '../../interfaces/lecturaDTO';
+import {CommonModule} from "@angular/common"
 
 @Component({
   selector: 'app-reading',
   standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
+  imports: [CommonModule,MatIconModule,MatToolbarModule,MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
   templateUrl: './reading.component.html',
   styleUrl: './reading.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -24,8 +27,15 @@ import { LecturaDTO } from '../../interfaces/lecturaDTO';
 export class ReadingComponent implements OnInit{
   user!: Usuario;
   estados!: Estado[];
-  
 
+  //////////////////
+  
+  rateStars: number=5;
+  ratingArray:any=[];
+  selectedStar:number= 0;
+  previousSelection:number=0;
+  ////////////////////
+  
   readonly dialogRef = inject(MatDialogRef<BookSectionComponent>);
 
   fromParentComponent: number;
@@ -53,7 +63,7 @@ export class ReadingComponent implements OnInit{
       idLibro:[{id:null}],
       idUsuario:[{id:null}],
       idEstado:[{id:null}],
-      puntuacion:[0]
+      puntuacion:[null]
       
       
     });
@@ -64,6 +74,7 @@ export class ReadingComponent implements OnInit{
     
     this.getStates();
 
+    this.ratingArray= Array(this.rateStars).fill(0);
     
 
   }
@@ -76,14 +87,12 @@ export class ReadingComponent implements OnInit{
         let currentUser = 0;
         if(value!=null){
           currentUser = parseInt(value);
-          console.log("dentro: " + currentUser)
-            
+                      
           this.userService.getLoggedUser(currentUser).subscribe((data:Usuario)=>{
             
             this.user = data;
             
-            console.log("Local" + this.user.id);
-            
+                
           });
         }
         
@@ -94,7 +103,8 @@ export class ReadingComponent implements OnInit{
         this.formNewReading.patchValue({
           idUsuario:this.user.id,
           idLibro: this.data,
-          idEstado: 1
+          idEstado: 1,
+          
         })
       }
 
@@ -124,5 +134,32 @@ export class ReadingComponent implements OnInit{
                   this.dialogRef.close(data);
       });
     }
+
+    setStar(index:number){
+      this.selectedStar= index+1;
+    }
+
+    unselectStar(){
+      if(this.previousSelection!==0){
+        this.selectedStar = this.previousSelection;
+      }else{
+        this.selectedStar=0;
+      }
+    }
+
+    rating(index:number){
+      this.selectedStar= index+1;
+      this.previousSelection= this.selectedStar;
+      console.log(this.selectedStar)
+      this.fillRating();
+    }
+fillRating(){
+      this.formNewReading.patchValue({
+          
+          puntuacion: this.selectedStar,
+          
+        })
+    }
+    
   
 }
