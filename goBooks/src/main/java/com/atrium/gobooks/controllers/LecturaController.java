@@ -26,8 +26,12 @@ public class LecturaController {
 	
 	@PostMapping(value="/registroLectura")
 	public Lectura registrarNuevaLectura(@RequestBody LecturaDTO lectura) throws Exception {
-		
-		return servicioLectura.grabarLectura(lectura);
+		if(servicioLectura.buscarLecturaUsuario(lectura.getIdLibro(),lectura.getIdUsuario())==null){
+			return servicioLectura.grabarLectura(lectura);
+		}else {
+			return null;
+		}
+		 
 	}
 	
 	@GetMapping("/listadoLecturas/{id}")

@@ -15,7 +15,7 @@ public interface LecturaRepository extends JpaRepository<Lectura, Integer>{
 	
 	@Query(value="SELECT le FROM Lectura le, Libro li, Usuario u WHERE li.id=le.libro.id AND "
 			+ "li.id=:idLibro AND u.id=le.usuario.id AND u.id=:idUsuario")
-	Optional <Lectura> buscarLecturaUsuario(Integer idLibro, Integer idUsuario);
+	Lectura buscarLecturaUsuario(Integer idLibro, Integer idUsuario);
 	
 	@Query(value="SELECT le FROM Lectura le, Usuario u WHERE u.id=le.usuario.id AND u.id=:id")
 	List <Lectura> buscarLecturasUsuario(Integer id);

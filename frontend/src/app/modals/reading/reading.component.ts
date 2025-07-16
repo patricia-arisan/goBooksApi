@@ -28,13 +28,11 @@ export class ReadingComponent implements OnInit{
   user!: Usuario;
   estados!: Estado[];
 
-  //////////////////
-  
   rateStars: number=5;
   ratingArray:any=[];
   selectedStar:number= 0;
   previousSelection:number=0;
-  ////////////////////
+  
   
   readonly dialogRef = inject(MatDialogRef<BookSectionComponent>);
 
@@ -105,6 +103,7 @@ export class ReadingComponent implements OnInit{
           idLibro: this.data,
           idEstado: 1,
           
+          
         })
       }
 
@@ -152,8 +151,9 @@ export class ReadingComponent implements OnInit{
       this.previousSelection= this.selectedStar;
       console.log(this.selectedStar)
       this.fillRating();
+      
     }
-fillRating(){
+  fillRating(){
       this.formNewReading.patchValue({
           
           puntuacion: this.selectedStar,

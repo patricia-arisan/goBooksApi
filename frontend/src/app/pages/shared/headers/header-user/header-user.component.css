@@ -1,0 +1,48 @@
+#cabecera{
+	height: 120px;
+	background-color: rgb(253, 211, 159);
+	border-bottom: 1px solid rgb(116, 76, 27);
+}
+#logo{
+	height: 50px;
+	width: 50px;
+	margin-top: 35px;
+	margin-left: 40px;
+}
+#logo,h1{
+	float: left;
+}
+h1{
+	color:rgb(255, 255, 255);
+	font-family:Verdana, Geneva, Tahoma, sans-serif;
+	font-weight:bold;
+	margin-top: 38px;
+	margin-left: 15px;
+}
+#cuenta{
+	height: 40px;
+	width: 200px;
+	margin-top: 40px;
+	margin-right: 40px;
+	float: right;
+	border-radius: 20px;
+	border-style:none;
+	border-color:white;
+	background-color: rgb(253, 160, 54);
+	color: white;
+	font-family:Verdana, Geneva, Tahoma, sans-serif;
+	font-weight:bold;
+	font-size: 1.05em;
+	padding-left: 40px;
+	
+}
+#cuenta:hover{
+	background-color: rgb(255, 141, 11);
+}
+#usuario{
+	height: 20px;
+	width: 20px;
+	float: left;
+	margin-left: -35px;
+	position:absolute;
+}

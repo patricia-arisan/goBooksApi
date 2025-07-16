@@ -107,4 +107,31 @@ Logger log = LoggerFactory.getLogger(ServicioLecturaImpl.class);
 		return lecturas;
 	}
 
+
+	@Override
+	public Lectura buscarLecturaUsuario(Integer idLibro, Integer idUsuario) throws ServicioException {
+		Libro libro;
+		Usuario usuario;
+		Lectura lectura;
+		try {
+			Optional<Libro> libroOp= libroRepository.findById(idLibro);
+			if(!libroOp.isPresent()) throw new ServicioException(CodigoError.LIBRO_NOT_FOUND);
+			libro= libroOp.get();
+			Optional<Usuario> usuarioOp= usuarioRepository.findById(idLibro);
+			if(!usuarioOp.isPresent()) throw new ServicioException(CodigoError.USUARIO_NOT_FOUND);
+			usuario= usuarioOp.get();
+			
+			lectura= lecturaRepository.buscarLecturaUsuario(idLibro, idUsuario);
+		}catch(ServicioException se) {
+			log.error("ServicioException", se);
+			throw se;
+		}catch(Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
+		}
+		return lectura;
+	}
+
+
+	
 }

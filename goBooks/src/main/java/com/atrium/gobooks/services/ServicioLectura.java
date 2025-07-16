@@ -1,6 +1,7 @@
 package com.atrium.gobooks.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.atrium.gobooks.dto.LecturaDTO;
 import com.atrium.gobooks.entities.Lectura;
@@ -13,4 +14,6 @@ public interface ServicioLectura {
 	List <Lectura> buscarLecturasUsuario(Integer id) throws ServicioException;
 	
 	List <Lectura> buscarLecturasEstadoUsuario(Integer idUsuario, Integer idEstado) throws ServicioException;
+	
+	Lectura buscarLecturaUsuario(Integer idLibro, Integer idUsuario) throws ServicioException;
 }

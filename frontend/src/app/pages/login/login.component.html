@@ -1,35 +1,34 @@
-<div class="container">
-<div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <h3>Inicio de sesión</h3>
-           
-
-              
-            <form [formGroup]="formLogin" (submit)="login()">
-                <div class="form-group">
-                    <label  for="username"> Correo electrónico</label>
-                    <input id="email" type="text" formControlName="username" class="form-control"
-                        required autofocus="autofocus" placeholder="Introducir email">
-                </div>
-
-                <div class="form-group">
-                    <label  for="password">Contraseña </label> <input id="password" type="password" formControlName="password" class="form-control" required
-                        autofocus="autofocus" placeholder="Introducir password">
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-6 col-md-offset-3">
-                            <input type="submit" class="form-control btn btn-primary" name="login-submit" id="login-submit"
-                                value="Iniciar sesión" />
-                        </div>
+<div class="cabecera">
+    <div class="titulo">
+        <h1>GoBooks</h1>
+    </div>
+    <div class="registro">
+        <span>¿Aún no tienes cuenta?</span>
+        <a routerLink="/registration">REGÍSTRATE</a>
+    </div>
+</div>
+<div class="contenedor">
+    <h2>Inicia sesión</h2>
+    <div class="formulario">
+        <img src="/assets/logo/ibooks.png" alt="logo" id="logo" />
+        <form [formGroup]="formLogin" (submit)="login()">
+            <div class="form-group">
+                <input id="email" type="text" formControlName="username" class="form-control" required placeholder="Dirección de email">
+            </div>
+            <div class="form-group">
+                <input id="password" type="password" formControlName="password" class="form-control" required placeholder="Contraseña">
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <input type="submit" class="form-control btn btn-primary" name="login-submit" id="login-submit" value="Iniciar sesión"/>
                     </div>
                 </div>
-            </form>
-            <div class="form-group">
-                <span>Si eres nuevo usuario  regístrate
-                        <a routerLink="/registration">aqui</a></span>
-                        
             </div>
+        </form>
+        <div class="form-group">
+            <p>¿No tienes cuenta en GoBooks?</p>
+            <p><a routerLink="/registration">¡Regístrate aquí!</a></p>
         </div>
-</div>
+    </div>
 </div>

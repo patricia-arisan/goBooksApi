@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Rol } from '../../interfaces/rol';
 import { Usuario } from '../../interfaces/usuario';
 import { ServicesService } from '../../services/services.service';
@@ -8,7 +8,7 @@ import { ServicesService } from '../../services/services.service';
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [RouterLink,FormsModule, ReactiveFormsModule],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.css'
 })
