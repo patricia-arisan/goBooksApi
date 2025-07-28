@@ -24,7 +24,7 @@ constructor(
     
     this.formNewUser = this.formBuilder.group ({
       id:[0],
-      nombre:["",[Validators.required]],
+      nombre:[""],
       apellido:[""],
       username:["",[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
       password:["",[Validators.required]],
@@ -44,6 +44,14 @@ constructor(
     fechaNacimiento:new FormControl(new Date),
     rol:new FormControl(0)
   })
+
+  get username(){
+    return this.formNewUser.get('username')!;
+  }
+
+  get password(){
+    return this.formNewUser.get('password')!;
+  }
   
   rol: Rol = {
     id: 2,

@@ -1,0 +1,52 @@
+.ficha{
+    margin-top: 20px;
+}
+.detalles{
+    margin-top: 20px;
+    margin-left: 380px;
+    position: absolute;
+    width: 700px;
+}
+#nombre{
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.9em;
+    margin-bottom: 0px;
+}
+.autor,.editorial,.isbn{
+    color: grey;
+    margin-bottom: 0px;
+    
+    
+    
+    
+}
+.autor{
+    width: max-content;
+    border-bottom: 1px solid rgb(126, 126, 126);
+}
+.editorial{
+    width: max-content;
+    float: left;
+    padding-right: 5px;
+}
+span{
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+#portada{
+    height: 300px;
+    width: 220px;
+    margin-top: 32px;
+    margin-left: 110px;
+    box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
+   
+}

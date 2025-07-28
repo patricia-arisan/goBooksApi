@@ -14,5 +14,9 @@ public interface ServicioLibro {
 	Libro guardarLibro(Libro libro) throws ServicioException;
 
 	void eliminarLibro(Integer idLibro) throws ServicioException;
+	
+	List<Libro> buscarLibrosPorGeneroId(Integer id) throws ServicioException;
+	
+	List<Libro> buscarUltimosLibrosIncorporados() throws ServicioException;
 
 }

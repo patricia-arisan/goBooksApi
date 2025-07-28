@@ -72,11 +72,44 @@ public class ServicioLibroImpl implements ServicioLibro{
 		}
 		return libro;
 	}
+	
+	@Override
+	public List<Libro> buscarLibrosPorGeneroId(Integer id) throws ServicioException {
+		
+		log.info("[listLibrosGenero]");
+		
+		List<Libro> libros;
+		
+		try {
+			libros= libroRepository.buscarLibrosPorGeneroId(id);
+			
+		}catch(Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
+		}
+		return libros;
 
+	}
 	@Override
 	public void eliminarLibro(Integer idLibro) throws ServicioException {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Libro> buscarUltimosLibrosIncorporados() throws ServicioException {
+		log.info("[listUltimosLibros]");
+		
+		List<Libro> libros;
+		
+		try {
+			libros= libroRepository.buscarUltimosLibrosIncorporados();
+			
+		}catch(Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
+		}
+		return libros;
 	}
 
 }

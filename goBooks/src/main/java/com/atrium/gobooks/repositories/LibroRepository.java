@@ -11,5 +11,11 @@ public interface LibroRepository extends JpaRepository<Libro, Integer>{
 	
 	@Query(value="SELECT l FROM Libro l ORDER BY l.nombre")
 	List<Libro> buscarLibrosPorOrdenAlfabetico();
+	
+	@Query(value="SELECT l FROM Libro l, Genero g WHERE g.id=l.genero.id AND g.id=:id")
+	List<Libro> buscarLibrosPorGeneroId(Integer id);
+	
+	@Query(value="SELECT l FROM Libro l ORDER BY l.id DESC LIMIT 4")
+	List<Libro> buscarUltimosLibrosIncorporados();
 
 }

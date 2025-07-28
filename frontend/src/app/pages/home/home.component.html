@@ -4,7 +4,74 @@
 }@if(user.rol.id==2){
     <app-header-user></app-header-user>
 }
-<div class="lema">
-<p id="frase1">Encuentra tu próxima lectura</p>
-<p id="frase2">¡Únete al BookCrossing!</p>
-<div>{{user.nombre}}</div> 
+<div id="ilustracionLibro">
+    <img src="/assets/main-home/pixel-cells.png" id="ilustracion" alt="ilustracion">
+    </div>
+<div id="seccionBuscador">
+        <form th:action="@{/inicio/resultados}">
+            <input type="text"  name="clave" id="buscador" placeholder="Título, autor, editorial o ISBN"/>
+            <input type="submit" name="buscar" id="buscar" value="Submit" />
+        </form>
+    </div>
+    <div id="apartados">
+        <div id="categoriasDestacadas">
+            <h3>Categorías destacadas</h3>
+            <section class="listaCategorias">
+                <div class="categoria">
+                    <img src="/assets/categorias/hat.png" alt="logo" />
+                    <span class="titulo"><a [routerLink]="['/results/3']">MISTERIO</a></span>
+                </div>
+                <div class="categoria">
+                    <img src="/assets/categorias/castle.png" alt="logo" />
+                    <span class="titulo"><a [routerLink]="['/results/1']">FANTASÍA</a ></span>
+                </div>
+                <div class="categoria">
+                    <img src="/assets/categorias/ghost.png" alt="logo" />
+                    <span class="titulo"><a [routerLink]="['/results/4']">TERROR</a></span>
+                </div>
+                <div class="categoria">
+                    <img src="/assets/categorias/reading.png" alt="logo" />
+                    <span class="titulo"><a [routerLink]="['/results/7']">CONTEMPORÁNEA</a></span>
+                </div>
+                <div class="categoria">
+                    <img src="/assets/categorias/hearts.png" alt="logo" />
+                    <span class="titulo"><a [routerLink]="['/results/5']">ROMÁNTICA</a></span>
+                </div>
+                <div class="categoria">
+                    <img src="/assets/categorias/pottery.png" alt="logo" />
+                    <span class="titulo"><a [routerLink]="['/results/6']">HISTÓRICA</a></span>
+                </div>
+                <div class="categoria">
+                    <img src="/assets/categorias/luggage.png" alt="logo" />
+                    <span class="titulo"><a [routerLink]="['/results/2']">AVENTURAS</a></span>
+                </div>
+                <div class="categoria">
+                    <img src="/assets/categorias/ovni.png" alt="logo" />
+                    <span class="titulo"><a [routerLink]="['/results/8']">CIENCIA FICCIÓN</a></span>
+                </div>
+                
+
+            </section>
+            <section id="ultimosLibros">
+        	<h3>Últimos libros</h3><br/>
+            <div class="listadoLibros"> 
+            @for (libro of libros; track libro){
+        <div class="libro">
+
+        <a [routerLink]="['/book-section',libro.id]" ><img src="{{libro.portada}}" id="portada"/></a>
+        <p class="nombre"><a [routerLink]="['/book-section',libro.id]" >{{libro.nombre}}</a></p>
+    </div>
+    }
+    </div>
+            </section>
+        <section id="mejorValorados">
+        	<h3>Mejor valorados</h3>
+        		
+ 				<span id="botonLibros"><a th:href="@{/libros}">Ver más libros</a></span>
+		</section>
+
+
+</div>
+</div>
+
+

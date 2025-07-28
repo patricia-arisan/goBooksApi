@@ -1,7 +1,8 @@
 #cabecera{
 	height: 120px;
 	background-color: rgb(253, 211, 159);
-	border-bottom: 1px solid rgb(116, 76, 27);
+	/* border-bottom: 1px solid rgb(116, 76, 27); */
+	box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
 }
 #logo{
 	height: 50px;
@@ -46,3 +47,11 @@ h1{
 	margin-left: -35px;
 	position:absolute;
 }
+.nav{
+	--bs-nav-link-color:gray;
+	font-weight:bold;
+	--bs-nav-link-hover-color:#46434e;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+	background-color: rgb(255, 141, 11);
+} /*revisar nombres*/

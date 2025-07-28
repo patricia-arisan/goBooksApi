@@ -36,8 +36,18 @@ public class LibroController {
 	@GetMapping("/{id}")
 	public Libro paginaFichaLibro(@PathVariable Integer id) throws Exception {
 		return servicioLibro.obtenerLibro(id);
-		
-		
+	}
+	
+	@GetMapping("/categoria/{id}")
+	public List <Libro> librosCategoria(@PathVariable Integer id) throws Exception {
+		List<Libro> libros = servicioLibro.buscarLibrosPorGeneroId(id);
+		return libros;
+	}
+	
+	@GetMapping("/ultimosLibros")
+	public List <Libro> listarUltimosLibros() throws ServicioException{
+		List <Libro> libros = servicioLibro.buscarUltimosLibrosIncorporados();
+		return libros;
 	}
 
 	

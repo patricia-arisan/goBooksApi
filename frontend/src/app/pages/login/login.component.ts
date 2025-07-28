@@ -29,15 +29,26 @@ constructor(
     
   }
 
+
+
   formLogin:FormGroup = new FormGroup({
     username: new FormControl(""),
     password:new FormControl(""),
   })
 
+  get username(){
+    return this.formLogin.get('username')!;
+  }
+
+  get password(){
+    return this.formLogin.get('password')!;
+  }
+
   login(){
       console.log(this.formLogin.value);
       
       console.log(localStorage)
+     
       
       this.userService.sendUser(this.formLogin.value).subscribe((data:Usuario) =>{
         

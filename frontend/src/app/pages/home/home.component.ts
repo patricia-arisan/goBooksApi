@@ -4,7 +4,8 @@ import { ServicesService } from '../../services/services.service';
 import { Usuario } from '../../interfaces/usuario';
 import { HeaderAdminComponent } from '../shared/headers/header-admin/header-admin.component';
 import { HeaderUserComponent } from '../shared/headers/header-user/header-user.component';
-import { take } from 'rxjs';
+import { BookService } from '../../services/book-service';
+import { Libro } from '../../interfaces/libro';
 
 @Component({
   selector: 'app-home',
@@ -15,17 +16,19 @@ import { take } from 'rxjs';
 })
 export class HomeComponent implements OnInit{
   user!: Usuario;   
-  
+  libros!: Libro[];
+
 constructor(
     
     private router: Router,
     private userService: ServicesService,
+    private bookService: BookService
   ){}
 
   ngOnInit(): void {
    
     this.retrieveFromLocalStorage();
-
+    this.getLastBooks();
     
 
   }
@@ -59,7 +62,12 @@ constructor(
     console.log(currentUser);
     
   }
-
+  getLastBooks(){
+      this.bookService.getLastBooks().subscribe((data:Libro[])=>{
+              this.libros = data;
+            })
+      
+    }
   
   
 }

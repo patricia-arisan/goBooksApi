@@ -67,7 +67,7 @@ h2 {
     border-radius: 20px;
     background-color: rgba(243, 238, 233, 0.623);
     width: 500px;
-    height: 450px;
+    height: 470px;
     margin: auto;
     margin-top: 40px;
 }
@@ -75,8 +75,8 @@ h2 {
 .form-group {
     margin-top: 22px;
 }
-
-.btn-primary {
+/* ver si quitar abajo colores */
+.btn-primary { 
     width: 400px;
     background-color: rgb(252, 163, 40);
     border-color: rgb(252, 163, 40);
@@ -86,6 +86,17 @@ h2 {
 .btn-primary:hover {
     background-color: rgb(255, 141, 11);
     border-color: rgb(255, 141, 11);
+}
+
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+    color: var(--bs-btn-active-color);
+    background-color: #f59b1e;
+    border-color: #f59b1e;
+}
+
+.btn.disabled, .btn:disabled, fieldset:disabled .btn{
+    background-color: rgb(252, 163, 40);
+    border-color: rgb(252, 163, 40);
 }
 
 input {
@@ -108,4 +119,23 @@ p a {
 
 p a:hover {
     color: rgb(255, 141, 11);
+}
+
+
+.alert{
+    height: 22px;
+    font-size: 0.8em;
+    text-align: left;
+    color: #820000;
+    padding-top: 2px;
+    margin-left: -19px;
+    margin-bottom: -7px;
+    margin-top: 2px;
+} 
+
+svg{
+   height: 19px;
+    width: 19px; 
+    fill: #820000;
+    padding-bottom: 2px;
 }

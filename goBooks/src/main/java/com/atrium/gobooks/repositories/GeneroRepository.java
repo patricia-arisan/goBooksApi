@@ -12,4 +12,8 @@ public interface GeneroRepository extends JpaRepository<Genero, Integer>{
 	@Query(value="SELECT g FROM Genero g ORDER BY g.nombre")
 	List<Genero> buscarGenerosPorOrdenAlfabetico();
 	
+	
+	
+	
+	
 }

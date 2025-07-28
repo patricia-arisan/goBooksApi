@@ -53,6 +53,36 @@ constructor(private client: HttpClient) { }
     
           return this.client.get<Libro>(`${this.bookSectionServiceUrl}/${id}`,{headers})
       }
+
+      private readonly bookByGenderServiceUrl = `${environment.proyectoUrl}api/libro/categoria`;
+
+      getBookByGenderId(id: number): Observable<Libro[]>{
+
+        const credentials = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+              'Content-Type': 'application/json',
+                
+              'Authorization' : credentials || ''
+               
+          })
+    
+          return this.client.get<Libro[]>(`${this.bookByGenderServiceUrl}/${id}`,{headers})
+
+      }
+
+      private readonly lastBooksListServiceUrl = `${environment.proyectoUrl}api/libro/ultimosLibros`;
+    
+      getLastBooks(): Observable<Libro[]>{
+        const credentials = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+              'Content-Type': 'application/json',
+                
+              'Authorization' : credentials || ''
+               
+          })
+    
+          return this.client.get<Libro[]>(`${this.lastBooksListServiceUrl}`,{headers})
+      }
  
 
 }

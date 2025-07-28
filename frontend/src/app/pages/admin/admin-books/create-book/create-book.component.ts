@@ -112,6 +112,10 @@ export class CreateBookComponent implements OnInit{
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
+    }).afterClosed().subscribe((data: Editorial)=>{
+      this.editoriales.push(data);
+      console.log(this.editoriales)
+      this.getEditorials();
     });
   }
 
@@ -120,6 +124,10 @@ export class CreateBookComponent implements OnInit{
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
+    }).afterClosed().subscribe((data: Genero)=>{
+      this.generos.push(data);
+      console.log(this.editoriales)
+      this.getGenders();
     });
   } 
 

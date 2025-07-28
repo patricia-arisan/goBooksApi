@@ -1,14 +1,21 @@
-<p>book-section works!</p>
 <app-header-user></app-header-user>
-<p>{{libro.nombre}}</p>
-<p>{{libro.autor.nombre}}</p>
-<p>{{libro.editorial.nombre}}</p>
-<p>{{libro.isbn}}</p>
-<p>{{libro.genero.nombre}}</p>
+<div class="ficha">
+    <div class="detalles">
+        <p id="nombre">{{libro.nombre}}</p>
+<p class="autor">{{libro.autor.nombre}}</p>
+<p class="editorial">{{libro.editorial.nombre}} ·</p>
+<p class="isbn">{{libro.isbn}}</p>
+<p class="genero">{{libro.genero.nombre}}</p>
+<span>Sinopsis:</span>
 <p>{{libro.sinopsis}}</p>
-<p>{{libro.portada}}</p>
-
 <button type="button" matButton="elevated" (click)="openReadingDialog('0ms', '0ms')">Añadir +</button>
+    </div>
+
+<img src="{{libro.portada}}" id="portada"/>
+
+
+
+</div>
 <!-- <form>
     <select>
         @for (estado of estados; track estado){
