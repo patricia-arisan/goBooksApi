@@ -117,7 +117,7 @@ Logger log = LoggerFactory.getLogger(ServicioLecturaImpl.class);
 			Optional<Libro> libroOp= libroRepository.findById(idLibro);
 			if(!libroOp.isPresent()) throw new ServicioException(CodigoError.LIBRO_NOT_FOUND);
 			libro= libroOp.get();
-			Optional<Usuario> usuarioOp= usuarioRepository.findById(idLibro);
+			Optional<Usuario> usuarioOp= usuarioRepository.findById(idUsuario);
 			if(!usuarioOp.isPresent()) throw new ServicioException(CodigoError.USUARIO_NOT_FOUND);
 			usuario= usuarioOp.get();
 			
