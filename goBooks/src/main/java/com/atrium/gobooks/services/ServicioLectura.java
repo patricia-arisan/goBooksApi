@@ -16,4 +16,6 @@ public interface ServicioLectura {
 	List <Lectura> buscarLecturasEstadoUsuario(Integer idUsuario, Integer idEstado) throws ServicioException;
 	
 	Lectura buscarLecturaUsuario(Integer idLibro, Integer idUsuario) throws ServicioException;
+	
+	Float mediaLectura(Integer idLibro) throws ServicioException; 
 }

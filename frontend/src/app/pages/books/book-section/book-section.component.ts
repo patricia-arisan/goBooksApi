@@ -10,11 +10,20 @@ import { Estado } from '../../../interfaces/estado';
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ReadingComponent } from '../../../modals/reading/reading.component';
+import { ReadingService } from '../../../services/reading-service';
+import { Lectura } from '../../../interfaces/lectura';
+
+
+//////////
+import {ProgressSpinnerMode, MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatCardModule} from '@angular/material/card';
 
 @Component({
   selector: 'app-book-section',
   standalone: true,
-  imports: [HeaderUserComponent,MatButtonModule],
+  imports: [HeaderUserComponent,MatButtonModule,MatCardModule, MatRadioModule, MatSliderModule, MatProgressSpinnerModule],
   templateUrl: './book-section.component.html',
   styleUrl: './book-section.component.css'
 })
@@ -22,12 +31,15 @@ export class BookSectionComponent implements OnInit{
   id!: string;
   libro!: Libro;
   estados!: Estado[];
-  
+  lectura!: Lectura;
+  puntuacion!: number;
+  valor!: number;
 
   constructor(
     private route: ActivatedRoute,
     private bookService: BookService,
-    private stateService: StateService
+    private readingService: ReadingService,
+    
       
     ){}
 
@@ -38,8 +50,10 @@ export class BookSectionComponent implements OnInit{
     });
     
     this.getCurrentBook();
-    
+    this.getScore();
     // this.getStates(); 
+    
+    this.getPercentage();
     
   }
 
@@ -63,11 +77,39 @@ export class BookSectionComponent implements OnInit{
       });
     }
 
+    getScore(){
+      let idLibro = parseInt(this.id)
+      // let puntuacion = 0.0;
+      this.readingService.getAverageReading(idLibro).subscribe((number)=>{
+        // this.puntuacion = number;
+        this.puntuacion=number;
+        
+      })
+    }
+
   // getStates(){
   //   this.stateService.getStatesList().subscribe((data:Estado[])=>{
   //     this.estados = data;
   //   })
   // }
+
+  //progreso fijo
+  mode: ProgressSpinnerMode = 'determinate';
+  
+  getPercentage(){
+    
+
+    let idLibro = parseInt(this.id)
+      
+      this.readingService.getAverageReading(idLibro).subscribe((number)=>{
+       
+        this.puntuacion=number;
+        this.valor=(100*this.puntuacion)/5;
+      })
+    
+  }
+    
+  
   
 
 }

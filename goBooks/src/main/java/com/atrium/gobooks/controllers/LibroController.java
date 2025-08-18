@@ -49,6 +49,13 @@ public class LibroController {
 		List <Libro> libros = servicioLibro.buscarUltimosLibrosIncorporados();
 		return libros;
 	}
+	
+	//////
+	@GetMapping("/puntuacionLibros")
+	public List <Libro> listarLibrosPuntuacion() throws ServicioException{
+		List <Libro> libros = servicioLibro.listaLibrosMayorPuntuacion();
+		return libros;
+	}
 
 	
 }

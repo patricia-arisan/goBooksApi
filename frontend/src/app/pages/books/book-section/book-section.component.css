@@ -6,6 +6,7 @@
     margin-left: 380px;
     position: absolute;
     width: 700px;
+    
 }
 #nombre{
     font-weight: bold;
@@ -34,14 +35,6 @@ span{
     font-weight: bold;
 }
 
-
-
-
-
-
-
-
-
 #portada{
     height: 300px;
     width: 220px;
@@ -50,3 +43,30 @@ span{
     box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
    
 }
+
+.score{
+    margin-right: 100px;
+    margin-top: 75px;
+    width: 120px;
+    text-align: center;
+    float: right;
+
+}
+.puntuacion{
+    font-size: 2.6em;
+    font-weight: bold;
+    color: gray;
+    margin-top: 30px;
+}
+
+.example-section{
+    margin-top: -97px;
+}
+
+
+.example-margin {
+  margin: 0 10px;
+  --mdc-circular-progress-active-indicator-color:rgb(221, 179, 40);
+  
+}
+

@@ -24,6 +24,13 @@ public interface LecturaRepository extends JpaRepository<Lectura, Integer>{
 			+ "u.id=:idUsuario AND e.id=le.estado.id AND e.id=:idEstado")
 	List <Lectura> buscarLecturasEstadoUsuario(Integer idUsuario, Integer idEstado);
 	
+	@Query(value="SELECT AVG(puntuacion) FROM Lectura le, Libro li WHERE li.id=le.libro.id AND li.id=:idLibro")
+	Float mediaLectura(Integer idLibro);
+	
+	
+//	@Query(value="SELECT AVG(puntuacion) FROM Lectura le, Libro li WHERE li.id=le.libro.id ORDER BY DESC")
+//	List <Lectura> listaLecturasMayorPuntuacion();
+	
 //	@Query(value="SELECT l FROM Lectura l, Libro l, Usuario u WHERE l.id=l.libro.id AND "
 //			+ "l.id=:id AND u.id=l.usuario.id AND u.id=:id")
 //	Optional <Lectura> buscarLecturaUsuario(Integer idLibro, Integer idUsuario);

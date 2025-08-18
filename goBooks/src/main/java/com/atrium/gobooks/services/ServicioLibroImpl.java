@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.atrium.gobooks.entities.Libro;
 import com.atrium.gobooks.exceptions.CodigoError;
 import com.atrium.gobooks.exceptions.ServicioException;
+import com.atrium.gobooks.repositories.LecturaRepository;
 import com.atrium.gobooks.repositories.LibroRepository;
 
 @Service
@@ -20,6 +21,8 @@ public class ServicioLibroImpl implements ServicioLibro{
 	
 	@Autowired
 	LibroRepository libroRepository;
+	
+	
 
 	@Override
 	public List<Libro> buscarLibrosPorOrdenAlfabetico() throws ServicioException {
@@ -104,6 +107,23 @@ public class ServicioLibroImpl implements ServicioLibro{
 		
 		try {
 			libros= libroRepository.buscarUltimosLibrosIncorporados();
+			
+		}catch(Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
+		}
+		return libros;
+	}
+
+	
+	////////////
+	@Override
+	public List<Libro> listaLibrosMayorPuntuacion() throws ServicioException {
+		log.info("[listPuntuacionLibros]");
+List<Libro> libros;
+		
+		try {
+			libros= libroRepository.listaLibrosMayorPuntuacion();
 			
 		}catch(Exception e) {
 			log.error("Exception", e);

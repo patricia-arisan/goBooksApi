@@ -57,6 +57,19 @@ constructor(private client: HttpClient) { }
         
               return this.client.get<Lectura[]>(`${this.readingUserStateServiceUrl}/${idUsuario}`,{headers, params:params}) 
    }
+
+   private readonly readingAverageServiceUrl =`${environment.proyectoUrl}api/lectura/mediaPuntuacionLibro`;
+
+   getAverageReading(idLibro: number): Observable <number>{
+    const credentials = localStorage.getItem('token');
+            const headers = new HttpHeaders({
+                  'Content-Type': 'application/json',
+                    
+                  'Authorization' : credentials || ''
+                   
+              })
+              return this.client.get<number>(`${this.readingAverageServiceUrl}/${idLibro}`,{headers})
+   }
     
  
 }

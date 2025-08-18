@@ -33,13 +33,22 @@ export const routes: Routes = [
         title: 'Home'
     },
     {
-        path: 'results/:id',
+        path: 'results/gender/:id',
         loadComponent: () =>
-            import('./pages/results/results.component').then(
-                (m) => m.ResultsComponent
+            import('./pages/results/results-gender/results-gender.component').then(
+                (m) => m.ResultsGenderComponent
 
             ),
-        title: 'Results'
+        title: 'Results Gender'
+    },
+    {
+        path: 'results/score',
+        loadComponent: () =>
+            import('./pages/results/results-score/results-score.component').then(
+                (m) => m.ResultsScoreComponent
+
+            ),
+        title: 'Results Score'
     },
     {
         path: 'books',

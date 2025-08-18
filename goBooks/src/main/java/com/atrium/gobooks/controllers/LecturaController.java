@@ -45,5 +45,11 @@ public class LecturaController {
 		List <Lectura> lecturas = servicioLectura.buscarLecturasEstadoUsuario(idUsuario, idEstado);
 		return lecturas;
 	}
+	
+	@GetMapping("/mediaPuntuacionLibro/{idLibro}")
+	public Float mediaPuntuacion(@PathVariable Integer idLibro) throws ServicioException{
+		Float mediaLectura = servicioLectura.mediaLectura(idLibro);
+		return mediaLectura;
+	}
 
 }

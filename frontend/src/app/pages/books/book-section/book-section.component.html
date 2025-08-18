@@ -8,12 +8,30 @@
 <p class="genero">{{libro.genero.nombre}}</p>
 <span>Sinopsis:</span>
 <p>{{libro.sinopsis}}</p>
+
 <button type="button" matButton="elevated" (click)="openReadingDialog('0ms', '0ms')">Añadir +</button>
     </div>
 
 <img src="{{libro.portada}}" id="portada"/>
 
+<div class="score">
+<span class="valoracion">Valoración</span>    
+<p class="puntuacion">{{puntuacion}}</p>
 
+<section class="example-section">
+  <mat-card-content>
+    
+
+    <mat-progress-spinner
+        class="example-margin"
+        mode="determinate"
+        
+        [value]="valor">
+    </mat-progress-spinner>
+  </mat-card-content>
+
+</section>
+</div>
 
 </div>
 <!-- <form>

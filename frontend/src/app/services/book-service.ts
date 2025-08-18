@@ -83,6 +83,20 @@ constructor(private client: HttpClient) { }
     
           return this.client.get<Libro[]>(`${this.lastBooksListServiceUrl}`,{headers})
       }
- 
+
+//////////////////////
+private readonly scoreBooksListServiceUrl = `${environment.proyectoUrl}api/libro/puntuacionLibros`;
+getListBookScore(): Observable<Libro[]>{
+        const credentials = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+              'Content-Type': 'application/json',
+                
+              'Authorization' : credentials || ''
+               
+          })
+    
+          return this.client.get<Libro[]>(`${this.scoreBooksListServiceUrl}`,{headers})
+      }
+      
 
 }

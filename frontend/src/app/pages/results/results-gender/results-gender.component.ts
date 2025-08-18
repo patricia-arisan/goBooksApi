@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { BookService } from '../../services/book-service';
-import { Libro } from '../../interfaces/libro';
-import { HeaderUserComponent } from '../shared/headers/header-user/header-user.component';
+
+
+import { HeaderUserComponent } from '../../shared/headers/header-user/header-user.component';
+import { Libro } from '../../../interfaces/libro';
+import { BookService } from '../../../services/book-service';
+
 
 @Component({
   selector: 'app-results',
   standalone: true,
   imports: [RouterLink,HeaderUserComponent],
-  templateUrl: './results.component.html',
-  styleUrl: './results.component.css'
+  templateUrl: './results-gender.component.html',
+  styleUrl: './results-gender.component.css'
 })
-export class ResultsComponent implements OnInit{
+export class ResultsGenderComponent implements OnInit{
   libros!: Libro[];
   id!: string;
 

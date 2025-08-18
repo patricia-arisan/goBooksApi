@@ -19,35 +19,35 @@
             <section class="listaCategorias">
                 <div class="categoria">
                     <img src="/assets/categorias/hat.png" alt="logo" />
-                    <span class="titulo"><a [routerLink]="['/results/3']">MISTERIO</a></span>
+                    <span class="titulo"><a [routerLink]="['/results/gender/3']">MISTERIO</a></span>
                 </div>
                 <div class="categoria">
                     <img src="/assets/categorias/castle.png" alt="logo" />
-                    <span class="titulo"><a [routerLink]="['/results/1']">FANTASÍA</a ></span>
+                    <span class="titulo"><a [routerLink]="['/results/gender/1']">FANTASÍA</a ></span>
                 </div>
                 <div class="categoria">
                     <img src="/assets/categorias/ghost.png" alt="logo" />
-                    <span class="titulo"><a [routerLink]="['/results/4']">TERROR</a></span>
+                    <span class="titulo"><a [routerLink]="['/results/gender/4']">TERROR</a></span>
                 </div>
                 <div class="categoria">
                     <img src="/assets/categorias/reading.png" alt="logo" />
-                    <span class="titulo"><a [routerLink]="['/results/7']">CONTEMPORÁNEA</a></span>
+                    <span class="titulo"><a [routerLink]="['/results/gender/7']">CONTEMPORÁNEA</a></span>
                 </div>
                 <div class="categoria">
                     <img src="/assets/categorias/hearts.png" alt="logo" />
-                    <span class="titulo"><a [routerLink]="['/results/5']">ROMÁNTICA</a></span>
+                    <span class="titulo"><a [routerLink]="['/results/gender/5']">ROMÁNTICA</a></span>
                 </div>
                 <div class="categoria">
                     <img src="/assets/categorias/pottery.png" alt="logo" />
-                    <span class="titulo"><a [routerLink]="['/results/6']">HISTÓRICA</a></span>
+                    <span class="titulo"><a [routerLink]="['/results/gender/6']">HISTÓRICA</a></span>
                 </div>
                 <div class="categoria">
                     <img src="/assets/categorias/luggage.png" alt="logo" />
-                    <span class="titulo"><a [routerLink]="['/results/2']">AVENTURAS</a></span>
+                    <span class="titulo"><a [routerLink]="['/results/gender/2']">AVENTURAS</a></span>
                 </div>
                 <div class="categoria">
                     <img src="/assets/categorias/ovni.png" alt="logo" />
-                    <span class="titulo"><a [routerLink]="['/results/8']">CIENCIA FICCIÓN</a></span>
+                    <span class="titulo"><a [routerLink]="['/results/gender/8']">CIENCIA FICCIÓN</a></span>
                 </div>
                 
 
@@ -66,8 +66,8 @@
             </section>
         <section id="mejorValorados">
         	<h3>Mejor valorados</h3>
-        		
- 				<span id="botonLibros"><a th:href="@{/libros}">Ver más libros</a></span>
+        	
+ 				<span id="botonLibros"><a [routerLink]="['/results/score']" >Ver más libros</a></span>
 		</section>
 
 

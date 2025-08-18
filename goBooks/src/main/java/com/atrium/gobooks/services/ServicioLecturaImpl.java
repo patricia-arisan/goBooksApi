@@ -110,6 +110,8 @@ Logger log = LoggerFactory.getLogger(ServicioLecturaImpl.class);
 
 	@Override
 	public Lectura buscarLecturaUsuario(Integer idLibro, Integer idUsuario) throws ServicioException {
+		log.info("[busquedaLecturaUsuario]");
+		
 		Libro libro;
 		Usuario usuario;
 		Lectura lectura;
@@ -130,6 +132,25 @@ Logger log = LoggerFactory.getLogger(ServicioLecturaImpl.class);
 			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
 		}
 		return lectura;
+	}
+
+
+	@Override
+	public Float mediaLectura(Integer idLibro) throws ServicioException {
+		log.info("[meadiaLecturas]");
+
+		
+		Float mediaLectura=0F;
+		
+		try {
+
+			
+			mediaLectura = lecturaRepository.mediaLectura(idLibro);
+		}catch(Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
+		}
+		return mediaLectura;
 	}
 
 
