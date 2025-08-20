@@ -8,9 +8,13 @@
     <img src="/assets/main-home/pixel-cells.png" id="ilustracion" alt="ilustracion">
     </div>
 <div id="seccionBuscador">
-        <form th:action="@{/inicio/resultados}">
+        <!-- <form th:action="@{/inicio/resultados}" method="get"> 
             <input type="text"  name="clave" id="buscador" placeholder="Título, autor, editorial o ISBN"/>
             <input type="submit" name="buscar" id="buscar" value="Submit" />
+        </form> -->
+        <form [formGroup]="formSearch" (submit)="search()">
+            <input type="text"  formControlName="clave" id="buscador" placeholder="Título, autor, editorial o ISBN"/>
+            <button type="submit">Buscar</button>
         </form>
     </div>
     <div id="apartados">
@@ -19,35 +23,35 @@
             <section class="listaCategorias">
                 <div class="categoria">
                     <img src="/assets/categorias/hat.png" alt="logo" />
-                    <span class="titulo"><a [routerLink]="['/results/gender/3']">MISTERIO</a></span>
+                    <span class="titulo"><a [routerLink]="['/results/genre/3']">MISTERIO</a></span>
                 </div>
                 <div class="categoria">
                     <img src="/assets/categorias/castle.png" alt="logo" />
-                    <span class="titulo"><a [routerLink]="['/results/gender/1']">FANTASÍA</a ></span>
+                    <span class="titulo"><a [routerLink]="['/results/genre/1']">FANTASÍA</a ></span>
                 </div>
                 <div class="categoria">
                     <img src="/assets/categorias/ghost.png" alt="logo" />
-                    <span class="titulo"><a [routerLink]="['/results/gender/4']">TERROR</a></span>
+                    <span class="titulo"><a [routerLink]="['/results/genre/4']">TERROR</a></span>
                 </div>
                 <div class="categoria">
                     <img src="/assets/categorias/reading.png" alt="logo" />
-                    <span class="titulo"><a [routerLink]="['/results/gender/7']">CONTEMPORÁNEA</a></span>
+                    <span class="titulo"><a [routerLink]="['/results/genre/7']">CONTEMPORÁNEA</a></span>
                 </div>
                 <div class="categoria">
                     <img src="/assets/categorias/hearts.png" alt="logo" />
-                    <span class="titulo"><a [routerLink]="['/results/gender/5']">ROMÁNTICA</a></span>
+                    <span class="titulo"><a [routerLink]="['/results/genre/5']">ROMÁNTICA</a></span>
                 </div>
                 <div class="categoria">
                     <img src="/assets/categorias/pottery.png" alt="logo" />
-                    <span class="titulo"><a [routerLink]="['/results/gender/6']">HISTÓRICA</a></span>
+                    <span class="titulo"><a [routerLink]="['/results/genre/6']">HISTÓRICA</a></span>
                 </div>
                 <div class="categoria">
                     <img src="/assets/categorias/luggage.png" alt="logo" />
-                    <span class="titulo"><a [routerLink]="['/results/gender/2']">AVENTURAS</a></span>
+                    <span class="titulo"><a [routerLink]="['/results/genre/2']">AVENTURAS</a></span>
                 </div>
                 <div class="categoria">
                     <img src="/assets/categorias/ovni.png" alt="logo" />
-                    <span class="titulo"><a [routerLink]="['/results/gender/8']">CIENCIA FICCIÓN</a></span>
+                    <span class="titulo"><a [routerLink]="['/results/genre/8']">CIENCIA FICCIÓN</a></span>
                 </div>
                 
 
@@ -67,6 +71,19 @@
         <section id="mejorValorados">
         	<h3>Mejor valorados</h3>
         	
+            <div class="listadoLibros"> 
+            @for (libro of librosPuntuacion; track libro){
+        <div class="libro">
+
+        <a [routerLink]="['/book-section',libro.id]" ><img src="{{libro.portada}}" id="portada"/></a>
+        <p class="nombre"><a [routerLink]="['/book-section',libro.id]" >{{libro.nombre}}</a></p>
+    </div>
+    }
+    </div>
+
+
+
+
  				<span id="botonLibros"><a [routerLink]="['/results/score']" >Ver más libros</a></span>
 		</section>
 

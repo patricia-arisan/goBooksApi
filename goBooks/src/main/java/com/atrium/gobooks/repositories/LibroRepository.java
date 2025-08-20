@@ -22,6 +22,16 @@ public interface LibroRepository extends JpaRepository<Libro, Integer>{
 			+ "ORDER BY media DESC")
 	List <Libro> listaLibrosMayorPuntuacion();
 	
+	@Query(value="SELECT l, AVG(le.puntuacion) AS media FROM Lectura le, Libro l WHERE l.id=le.libro.id GROUP BY l.id "
+			+ "ORDER BY media DESC LIMIT 4")
+	List <Libro> librosMayorPuntuacion();
+	
+	@Query(value="SELECT l FROM Libro l WHERE l.nombre like %:clave% "
+			+ "or l.autor.nombre like %:clave% "
+			+ "or l.editorial.nombre like %:clave% "
+			+ "or l.isbn like %:clave%")
+	List<Libro> buscarLibro (String clave);
+	
 	/////
 //	@Query(value="SELECT l FROM Libro l ORDER BY (SELECT AVG(puntuacion) FROM Lectura le, "
 //			+ "Libro l WHERE l.id=le.libro.id) DESC NULLS LAST")

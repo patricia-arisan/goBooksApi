@@ -11,12 +11,11 @@ import { BookService } from '../../../services/book-service';
   selector: 'app-results',
   standalone: true,
   imports: [RouterLink,HeaderUserComponent],
-  templateUrl: './results-gender.component.html',
-  styleUrl: './results-gender.component.css'
+  templateUrl: './results-search.component.html',
+  styleUrl: './results-search.component.css'
 })
-export class ResultsGenderComponent implements OnInit{
-  libros!: Libro[];
-  id!: string;
+export class ResultsSearchComponent implements OnInit{
+  
 
   constructor(
     private route: ActivatedRoute,
@@ -25,20 +24,9 @@ export class ResultsGenderComponent implements OnInit{
     ){}
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.id = params['id'];
-      
     
-    });
-    this.getBooksByGender();
   }
 
-  getBooksByGender(){
-    let idGenero = parseInt(this.id)
-    this.bookService.getBookByGenderId(idGenero).subscribe((data:Libro[])=>{
-          this.libros = data;
-          
-        })
-  }
+  
 
 }

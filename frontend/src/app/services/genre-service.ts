@@ -7,14 +7,14 @@ import { Genero } from '../interfaces/genero';
 @Injectable({
   providedIn: 'root'
 })
-export class GenderService {
+export class GenreService {
   
 
 constructor(private client: HttpClient) { }
   
-  private readonly genderServiceUrl = `${environment.proyectoUrl}api/genero/registroGenero`;
+  private readonly genreServiceUrl = `${environment.proyectoUrl}api/genero/registroGenero`;
   
-    createGender(genero: Genero): Observable<Genero>{
+    createGenre(genero: Genero): Observable<Genero>{
       const credentials = localStorage.getItem('token');
     const headers = new HttpHeaders({
             'Content-Type': 'application/json',
@@ -27,12 +27,12 @@ constructor(private client: HttpClient) { }
            
         })
         
-      return this.client.post<Genero>(`${this.genderServiceUrl}`,genero,{headers})
+      return this.client.post<Genero>(`${this.genreServiceUrl}`,genero,{headers})
     }
 
-    private readonly genderListServiceUrl = `${environment.proyectoUrl}api/genero/listadoGeneros`;
+    private readonly genreListServiceUrl = `${environment.proyectoUrl}api/genero/listadoGeneros`;
 
-    getGendersByNameOrder(): Observable<Genero[]>{
+    getGenresByNameOrder(): Observable<Genero[]>{
       const credentials = localStorage.getItem('token');
       const headers = new HttpHeaders({
             'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ constructor(private client: HttpClient) { }
            
         })
 
-        return this.client.get<Genero[]>(`${this.genderListServiceUrl}`,{headers})
+        return this.client.get<Genero[]>(`${this.genreListServiceUrl}`,{headers})
     }
  
 }

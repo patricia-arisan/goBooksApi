@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.atrium.gobooks.entities.Libro;
@@ -50,11 +51,26 @@ public class LibroController {
 		return libros;
 	}
 	
-	//////
 	@GetMapping("/puntuacionLibros")
 	public List <Libro> listarLibrosPuntuacion() throws ServicioException{
 		List <Libro> libros = servicioLibro.listaLibrosMayorPuntuacion();
 		return libros;
+	}
+	
+	@GetMapping("/mejorPuntuacionLibros")
+	public List <Libro> librosMejorPuntuacion() throws ServicioException{
+		List <Libro> libros = servicioLibro.librosMayorPuntuacion();
+		return libros;
+	}
+	
+	@GetMapping("/resultadosBusqueda")
+	public List<Libro> mostrarLibros(@RequestParam String clave) throws ServicioException {
+		List<Libro> libros=servicioLibro.busquedaLibros(clave);
+		
+		
+		
+		return libros;
+		
 	}
 
 	

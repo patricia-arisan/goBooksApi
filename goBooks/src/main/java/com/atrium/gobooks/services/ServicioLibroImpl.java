@@ -131,5 +131,34 @@ List<Libro> libros;
 		}
 		return libros;
 	}
+	
+	@Override
+	public List<Libro> librosMayorPuntuacion() throws ServicioException {
+		log.info("[puntuacionLibros]");
+		List<Libro> libros;
+		
+		try {
+			libros= libroRepository.librosMayorPuntuacion();
+			
+		}catch(Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
+		}
+		return libros;
+	}
+	
+	@Override
+	public List<Libro> busquedaLibros(String clave) throws ServicioException{
+		log.info("[resultadoLibros]");
+		List<Libro> libros;
+		
+		try {
+			libros=libroRepository.buscarLibro(clave);
+		}catch(Exception e){
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
+		}
+		return libros;
+	}
 
 }

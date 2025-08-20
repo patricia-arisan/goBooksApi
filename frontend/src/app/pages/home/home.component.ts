@@ -7,34 +7,60 @@ import { HeaderUserComponent } from '../shared/headers/header-user/header-user.c
 import { BookService } from '../../services/book-service';
 import { Libro } from '../../interfaces/libro';
 
+////
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { Search } from '../../interfaces/search';
+
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink,HeaderAdminComponent,HeaderUserComponent],
+  imports: [RouterLink,HeaderAdminComponent,HeaderUserComponent,FormsModule, ReactiveFormsModule], ///FormsModule, ReactiveFormsModule
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit{
   user!: Usuario;   
   libros!: Libro[];
+  librosPuntuacion!: Libro[];
+  ///////////
+  // busqueda!: Search[]
+  busqueda!:string;
 
 constructor(
     
     private router: Router,
     private userService: ServicesService,
-    private bookService: BookService
+    private bookService: BookService,
+    ////
+    private formBuilder: FormBuilder,
+   
   ){}
 
   ngOnInit(): void {
    
     this.retrieveFromLocalStorage();
     this.getLastBooks();
+    this.getBestScores();
 
-
-    
+    //////
+    this.formSearch = this.formBuilder.group ({
+      
+      clave:[""],
+      
+      
+    });
     
 
   }
+
+  ////
+  formSearch:FormGroup = new FormGroup({
+    
+    clave: new FormControl(""),
+    
+  })
+  /////
+  
 
   retrieveFromLocalStorage() {
     this.user = JSON.parse(localStorage.getItem('usuario') || '')
@@ -71,6 +97,23 @@ constructor(
             })
       
     }
+
+  getBestScores(){
+    this.bookService.getBooksBestScore().subscribe((data:Libro[])=>{
+              this.librosPuntuacion = data;
+            })
+  }
+
+  //////////////
+  search(){
+    let busqueda = this.formSearch.get('clave')?.value;
+    
+    this.bookService.searchByBookAuthorEditorial(busqueda).subscribe((data:Libro[]) =>{
+      this.libros=data;
+      this.router.navigate(['/results/search']);
+    })
+  }
+  //////////////////////////
 
 
   

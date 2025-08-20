@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment.development';
 import {Observable} from 'rxjs';
 import { Libro } from '../interfaces/libro';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -56,7 +57,7 @@ constructor(private client: HttpClient) { }
 
       private readonly bookByGenderServiceUrl = `${environment.proyectoUrl}api/libro/categoria`;
 
-      getBookByGenderId(id: number): Observable<Libro[]>{
+      getBookByGenreId(id: number): Observable<Libro[]>{
 
         const credentials = localStorage.getItem('token');
         const headers = new HttpHeaders({
@@ -97,6 +98,37 @@ getListBookScore(): Observable<Libro[]>{
     
           return this.client.get<Libro[]>(`${this.scoreBooksListServiceUrl}`,{headers})
       }
+
+private readonly bestScoreBooksServiceUrl = `${environment.proyectoUrl}api/libro/mejorPuntuacionLibros`;
+getBooksBestScore(): Observable<Libro[]>{
+        const credentials = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+              'Content-Type': 'application/json',
+                
+              'Authorization' : credentials || ''
+               
+          })
+    
+          return this.client.get<Libro[]>(`${this.bestScoreBooksServiceUrl}`,{headers})
+      }
+////////////////
+////////////////
+private readonly searchServiceUrl = `${environment.proyectoUrl}api/libro/resultadosBusqueda`;
+searchByBookAuthorEditorial(busqueda: string): Observable<Libro[]>{
+        const credentials = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+              'Content-Type': 'application/json',
+                
+              'Authorization' : credentials || ''
+               
+          })
+    
+          return this.client.get<Libro[]>(`${this.searchServiceUrl}?clave=${busqueda}`,{headers})
+      }
+    
+/////////////////
+////////////////////
       
+
 
 }

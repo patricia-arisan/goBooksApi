@@ -7,14 +7,14 @@ import { Libro } from '../../../../interfaces/libro';
 import { Autor } from '../../../../interfaces/autor';
 import { AuthorService } from '../../../../services/author-service';
 import { EditorialService } from '../../../../services/editorial-service';
-import { GenderService } from '../../../../services/gender-service';
+import { GenreService } from '../../../../services/genre-service';
 import { Editorial } from '../../../../interfaces/editorial';
 import { Genero } from '../../../../interfaces/genero';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { AuthorComponent } from '../../../../modals/author/author.component';
 import { EditorialComponent } from '../../../../modals/editorial/editorial.component';
-import { GenderComponent } from '../../../../modals/gender/gender.component';
+import { GenreComponent } from '../../../../modals/genre/genre.component';
 import { take } from 'rxjs';
 
 @Component({
@@ -35,14 +35,14 @@ export class CreateBookComponent implements OnInit{
     private bookService: BookService,
     private authorService: AuthorService,
     private editorialService: EditorialService,
-    private genderService: GenderService,
+    private genreService: GenreService,
     private router: Router
   ){}
 
   ngOnInit(): void {
     this.getAuthors();
     this.getEditorials();
-    this.getGenders();
+    this.getGenres();
     
     this.formNewBook = this.formBuilder.group ({
       id:[null],
@@ -85,8 +85,8 @@ export class CreateBookComponent implements OnInit{
 
     }
 
-    getGenders(){
-    this.genderService.getGendersByNameOrder().subscribe((data:Genero[])=>{
+    getGenres(){
+    this.genreService.getGenresByNameOrder().subscribe((data:Genero[])=>{
         this.generos = data;
       })
 
@@ -119,15 +119,15 @@ export class CreateBookComponent implements OnInit{
     });
   }
 
-  openGenderDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(GenderComponent, {
+  openGenreDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(GenreComponent, {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
     }).afterClosed().subscribe((data: Genero)=>{
       this.generos.push(data);
-      console.log(this.editoriales)
-      this.getGenders();
+      console.log(this.generos)
+      this.getGenres();
     });
   } 
 

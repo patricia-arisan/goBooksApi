@@ -19,7 +19,12 @@ public interface ServicioLibro {
 	
 	List<Libro> buscarUltimosLibrosIncorporados() throws ServicioException;
 	
-	///////
 	List <Libro> listaLibrosMayorPuntuacion() throws ServicioException;
+	
+	List <Libro> librosMayorPuntuacion() throws ServicioException;
+	
+	List<Libro> busquedaLibros(String clave) throws ServicioException;
+	
+	
 
 }

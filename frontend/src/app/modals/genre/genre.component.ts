@@ -3,29 +3,29 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { CreateBookComponent } from '../../pages/admin/admin-books/create-book/create-book.component';
-import { GenderService } from '../../services/gender-service';
+import { GenreService } from '../../services/genre-service';
 import { Genero } from '../../interfaces/genero';
 
 @Component({
   selector: 'app-gender',
   standalone: true,
   imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
-  templateUrl: './gender.component.html',
-  styleUrl: './gender.component.css',
+  templateUrl: './genre.component.html',
+  styleUrl: './genre.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GenderComponent implements OnInit{
+export class GenreComponent implements OnInit{
   readonly dialogRef = inject(MatDialogRef<CreateBookComponent>);
 
   constructor(
     private formBuilder: FormBuilder,
-    private genderService: GenderService,
+    private genreService: GenreService,
     
   ){}
 
   ngOnInit(): void {
 
-    this.formNewGender = this.formBuilder.group ({
+    this.formNewGenre = this.formBuilder.group ({
       id:[null],
       nombre:["",[Validators.required]]
       
@@ -33,14 +33,14 @@ export class GenderComponent implements OnInit{
 
   }
 
-  formNewGender:FormGroup = new FormGroup({
+  formNewGenre:FormGroup = new FormGroup({
     id: new FormControl(null),
     nombre: new FormControl(""),
     
   })
 
-  registerGender(){
-        this.genderService.createGender(this.formNewGender.value).subscribe((data:Genero) =>{
+  registerGenre(){
+        this.genreService.createGenre(this.formNewGenre.value).subscribe((data:Genero) =>{
             console.log(data);
             this.dialogRef.close();
           })
