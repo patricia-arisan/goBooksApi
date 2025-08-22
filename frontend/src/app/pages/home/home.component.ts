@@ -11,6 +11,7 @@ import { Libro } from '../../interfaces/libro';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { Search } from '../../interfaces/search';
 
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -108,11 +109,22 @@ constructor(
   search(){
     let busqueda = this.formSearch.get('clave')?.value;
     
-    this.bookService.searchByBookAuthorEditorial(busqueda).subscribe((data:Libro[]) =>{
-      this.libros=data;
-      this.router.navigate(['/results/search']);
-    })
+    this.router.navigate(['results/search',busqueda]); 
+   
+    
+  
+      
+    
   }
+  // search(){
+  //   let busqueda = this.formSearch.get('clave')?.value;
+    
+  //   this.bookService.searchByBookAuthorEditorial(busqueda).subscribe((data:Libro[]) =>{
+  //     this.libros=data;
+  //     this.router.navigate(['results/search']);
+  //   })
+//}
+  
   //////////////////////////
 
 

@@ -51,7 +51,8 @@ export const routes: Routes = [
         title: 'Results Score'
     },
     {
-        path: 'results/search',
+        path: 'results/search/:busqueda',
+        
         loadComponent: () =>
             import('./pages/results/results-search/results-search.component').then(
                 (m) => m.ResultsSearchComponent
@@ -59,6 +60,15 @@ export const routes: Routes = [
             ),
         title: 'Results Search'
     },
+    // {
+    //     path: 'results/search',
+    //     loadComponent: () =>
+    //         import('./pages/results/results-search/results-search.component').then(
+    //             (m) => m.ResultsSearchComponent
+
+    //         ),
+    //     title: 'Results Search'
+    // },
     {
         path: 'books',
         loadComponent: () =>

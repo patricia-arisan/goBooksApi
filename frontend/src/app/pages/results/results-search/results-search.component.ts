@@ -15,7 +15,8 @@ import { BookService } from '../../../services/book-service';
   styleUrl: './results-search.component.css'
 })
 export class ResultsSearchComponent implements OnInit{
-  
+  libros!: Libro[];
+  busqueda!:string;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,9 +25,18 @@ export class ResultsSearchComponent implements OnInit{
     ){}
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.busqueda = params['busqueda'];
     
+    });
+    this.getCurrentSearch();
   }
 
+  getCurrentSearch(){
+    this.bookService.searchByBookAuthorEditorial(this.busqueda).subscribe((data:Libro[]) =>{
+       this.libros=data;
+       })
+  }
   
 
 }
