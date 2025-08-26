@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-readings',
   standalone: true,
-  imports: [HeaderUserComponent],
+  imports: [RouterLink,HeaderUserComponent],
   templateUrl: './readings.component.html',
   styleUrl: './readings.component.css'
 })

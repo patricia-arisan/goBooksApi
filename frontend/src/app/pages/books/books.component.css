@@ -1,5 +1,6 @@
 .libros{
     margin-top: 25px;
+    
 }
 h3{
     margin-left: 80px;
@@ -36,4 +37,8 @@ h3{
     text-decoration: none;
     color:rgb(99, 99, 99);
     
+}
+.paginator{
+    
+    margin-top: 690px; 
 }

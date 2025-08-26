@@ -1,8 +1,15 @@
 <app-header-user></app-header-user>
-
-<button type="button" (click)="getReadings()">Todos</button>
+<h2>Lecturas</h2>
+<div class="opciones">
+<button type="button" class="inicial" (click)="getReadings()">Todos</button>
 <button type="button" (click)="getReadingsByState(2)">Leídos</button>
 <button type="button" (click)="getReadingsByState(3)">Pendientes</button>
+</div>
+<div class="listadoLibros">
 @for(lectura of lecturas; track lectura.id){
-    <p>{{lectura.libro.nombre}}</p>
+    <div class="libro">
+    <a [routerLink]="['/book-section',lectura.libro.id]" ><img src="{{lectura.libro.portada}}" id="portada"/></a>
+    <p class="nombre"><a [routerLink]="['/book-section',lectura.libro.id]" >{{lectura.libro.nombre}}</a></p>
+    </div>
 }
+</div>
