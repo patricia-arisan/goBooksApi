@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { HeaderUserComponent } from '../shared/headers/header-user/header-user.component';
 import { ServicesService } from '../../services/services.service';
 import { Usuario } from '../../interfaces/usuario';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Rol } from '../../interfaces/rol';
 import { take } from 'rxjs';
+
+import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { DeleteUserComponent } from '../../modals/delete-item/delete-user/delete-user.component';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [HeaderUserComponent,FormsModule, ReactiveFormsModule],
+  imports: [RouterLink,HeaderUserComponent,FormsModule, ReactiveFormsModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -46,6 +49,7 @@ export class ProfileComponent implements OnInit{
     
     
     retrieveFromLocalStorage() {
+      console.log(localStorage)
       this.user = JSON.parse(localStorage.getItem('usuario') || '')
       //this.user = JSON.parse(localStorage.getItem('currentUser') || '')
       console.log(this.user)
@@ -125,4 +129,23 @@ export class ProfileComponent implements OnInit{
         this.router.navigate(['/home']);
     })
     };
+
+    readonly dialog = inject(MatDialog);
+
+    openDeleteUserDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+        this.dialog.open(DeleteUserComponent, {
+          width: '250px',
+          enterAnimationDuration,
+          exitAnimationDuration,
+        })
+      
+      }
+
+      logout(){
+      this.userService.logoutUser().subscribe(()=>{
+      localStorage.clear();
+      this.router.navigate(['/login']);
+    });
+    
+  }
 }

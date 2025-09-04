@@ -114,6 +114,22 @@ public class ServicioLibroImpl implements ServicioLibro{
 		}
 		return libros;
 	}
+	
+	@Override
+	public List<Libro> buscarTodosUltimosLibrosIncorporados() throws ServicioException {
+		log.info("[listTodosUltimosLibros]");
+		
+		List<Libro> libros;
+		
+		try {
+			libros= libroRepository.buscarTodosUltimosLibrosIncorporados();
+			
+		}catch(Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
+		}
+		return libros;
+	}
 
 	
 	////////////

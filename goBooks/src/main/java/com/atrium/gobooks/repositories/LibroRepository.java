@@ -18,6 +18,9 @@ public interface LibroRepository extends JpaRepository<Libro, Integer>{
 	@Query(value="SELECT l FROM Libro l ORDER BY l.id DESC LIMIT 4")
 	List<Libro> buscarUltimosLibrosIncorporados();
 	
+	@Query(value="SELECT l FROM Libro l ORDER BY l.id DESC")
+	List<Libro> buscarTodosUltimosLibrosIncorporados();
+	
 	@Query(value="SELECT l, AVG(le.puntuacion) AS media FROM Lectura le, Libro l WHERE l.id=le.libro.id GROUP BY l.id "
 			+ "ORDER BY media DESC")
 	List <Libro> listaLibrosMayorPuntuacion();
@@ -26,10 +29,10 @@ public interface LibroRepository extends JpaRepository<Libro, Integer>{
 			+ "ORDER BY media DESC LIMIT 4")
 	List <Libro> librosMayorPuntuacion();
 	
-	@Query(value="SELECT l FROM Libro l WHERE l.nombre like %:clave% "
-			+ "or l.autor.nombre like %:clave% "
-			+ "or l.editorial.nombre like %:clave% "
-			+ "or l.isbn like %:clave%")
+	@Query(value="SELECT l FROM Libro l WHERE l.nombre LIKE %:clave% "
+			+ "OR l.autor.nombre LIKE %:clave% "
+			+ "OR l.editorial.nombre LIKE %:clave% "
+			+ "OR l.isbn LIKE %:clave%")
 	List<Libro> buscarLibro (String clave);
 	
 	/////

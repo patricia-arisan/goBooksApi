@@ -19,6 +19,8 @@ public interface ServicioLibro {
 	
 	List<Libro> buscarUltimosLibrosIncorporados() throws ServicioException;
 	
+	List<Libro> buscarTodosUltimosLibrosIncorporados() throws ServicioException;
+	
 	List <Libro> listaLibrosMayorPuntuacion() throws ServicioException;
 	
 	List <Libro> librosMayorPuntuacion() throws ServicioException;

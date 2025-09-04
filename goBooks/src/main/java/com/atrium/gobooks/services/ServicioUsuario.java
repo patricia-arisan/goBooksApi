@@ -14,9 +14,12 @@ public interface ServicioUsuario extends UserDetailsService{
 	
 	public Usuario modificar(Usuario usuario) throws ServicioException;
 	
+	public Usuario modificarPassword(String password,Integer id) throws ServicioException;
+	
 	public List<Usuario> listarUsuarios() throws ServicioException;
 	
 	Usuario conseguirUsuario(Integer idUsuario) throws ServicioException;
+	
 	void eliminarUsuario(Integer idUsuario) throws ServicioException;
 
 	public Optional<Usuario> findByUsername(String username);

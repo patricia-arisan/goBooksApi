@@ -85,6 +85,20 @@ constructor(private client: HttpClient) { }
           return this.client.get<Libro[]>(`${this.lastBooksListServiceUrl}`,{headers})
       }
 
+      private readonly allLastBooksListServiceUrl = `${environment.proyectoUrl}api/libro/listaUltimosLibros`;
+    
+      getAllLastBooks(): Observable<Libro[]>{
+        const credentials = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+              'Content-Type': 'application/json',
+                
+              'Authorization' : credentials || ''
+               
+          })
+    
+          return this.client.get<Libro[]>(`${this.allLastBooksListServiceUrl}`,{headers})
+      }
+
 //////////////////////
 private readonly scoreBooksListServiceUrl = `${environment.proyectoUrl}api/libro/puntuacionLibros`;
 getListBookScore(): Observable<Libro[]>{

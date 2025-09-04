@@ -51,6 +51,15 @@ export const routes: Routes = [
         title: 'Results Score'
     },
     {
+        path: 'results/lastBooks',
+        loadComponent: () =>
+            import('./pages/results/results-last/results-last.component').then(
+                (m) => m.ResultsLastComponent
+
+            ),
+        title: 'Last Books'
+    },
+    {
         path: 'results/search/:busqueda',
         
         loadComponent: () =>
@@ -104,6 +113,15 @@ export const routes: Routes = [
 
             ),
         title: 'Profile'
+    },
+    {
+        path: 'profile/cambiar-password',
+        loadComponent: () =>
+            import('./pages/profile/profile-password/profile-password.component').then(
+                (m) => m.ProfilePasswordComponent
+
+            ),
+        title: 'Cambiar contraseña'
     },
     {
     path: 'admin-books',

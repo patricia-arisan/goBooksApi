@@ -64,6 +64,7 @@ constructor(
   
 
   retrieveFromLocalStorage() {
+    
     this.user = JSON.parse(localStorage.getItem('usuario') || '')
     //this.user = JSON.parse(localStorage.getItem('usuario') || '')
     let value = this.userService.getItem('id');

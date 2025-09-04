@@ -114,6 +114,26 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 		
 	}
 	
+	////
+//	public void modificarPassword(String password,Integer id) throws ServicioException{
+//		Usuario usuario;
+//
+//		try {
+//			Optional<Usuario> usuarioOp = usuarioRepository.findById(id);
+//			if (!usuarioOp.isPresent())
+//				throw new ServicioException(CodigoError.USUARIO_NOT_FOUND);
+//			usuario = usuarioOp.get();
+//			usuario.setPassword(password);
+//			usuario= usuarioRepository.save(usuario);
+//		} catch (ServicioException se) {
+//			log.error("ServicioException", se);
+//			throw se;
+//		} catch (Exception e) {
+//			log.error("Exception", e);
+//			throw new ServicioException(CodigoError.ERROR_GENERAL, e);
+//		}
+//	}
+	
 	@Override
 	public Usuario conseguirUsuario(Integer idUsuario) throws ServicioException {
 		log.info("[conseguirUsuario]");
@@ -150,6 +170,24 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 			throw new ServicioException(CodigoError.ERROR_GENERAL, e);
 		}
 
+	}
+
+	@Override
+	public Usuario modificarPassword(String password, Integer id) throws ServicioException {
+		log.info("[password]");
+		log.debug("[password: " + password + "]");
+		Optional<Usuario> usuarioOp = usuarioRepository.findById(id);
+		if (!usuarioOp.isPresent()) throw new ServicioException(CodigoError.USUARIO_NOT_FOUND);
+		Usuario usuario = usuarioOp.get();
+		try {
+			usuario.setPassword(passwordEncoder.encode(password));
+			usuario= usuarioRepository.save(usuario);
+			
+		} catch (Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL, e);
+		}
+		return usuario;
 	}
 
 	

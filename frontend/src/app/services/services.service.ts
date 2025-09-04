@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { Usuario } from '../interfaces/usuario';
@@ -81,6 +81,45 @@ constructor(private client: HttpClient) { }
         })
     
     return this.client.put<Usuario>(`${this.userServiceLoggedUrl}/${id}`,user,{headers})
+  }
+   private readonly userServiceUpdatePassUrl = `${environment.proyectoUrl}api/usuario/cambiarPassword`; 
+   updateUserPassword(id: number,password: string): Observable<Usuario>{
+    //updateUser(user: Usuario): Observable<Usuario>{
+    
+    const credentials = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            
+            'Authorization' : credentials || ''
+           
+        })
+    let params = new HttpParams().set('password', password);
+
+    
+      
+    return this.client.put<Usuario>(`${this.userServiceUpdatePassUrl}/${id}`,password,{headers, params:params})
+  }
+
+   
+
+  ////////delete
+  private readonly userServiceDeleteUrl = `${environment.proyectoUrl}api/usuario`;
+
+  
+  deleteLoggedUser(id: number): Observable<any>{
+    console.log("Service " + id);
+    const credentials = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            
+            'Authorization' : credentials || ''
+           
+        })
+    
+    
+    return this.client.delete<any>(`${this.userServiceDeleteUrl}/${id}`,{headers})
+    
+    
   }
 
   private readonly userServiceLogoutUrl = `${environment.proyectoUrl}auth/logout`;
