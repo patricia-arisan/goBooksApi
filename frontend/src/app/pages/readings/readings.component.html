@@ -1,4 +1,5 @@
 <app-header-user></app-header-user>
+<div class="libros">
 <h2>Lecturas</h2>
 <div class="opciones">
 <button type="button" class="inicial" (click)="getReadings()">Todos</button>
@@ -6,10 +7,19 @@
 <button type="button" (click)="getReadingsByState(3)">Pendientes</button>
 </div>
 <div class="listadoLibros">
-@for(lectura of lecturas; track lectura.id){
+@for(lectura of lecturas.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track lectura.id){
     <div class="libro">
     <a [routerLink]="['/book-section',lectura.libro.id]" ><img src="{{lectura.libro.portada}}" id="portada"/></a>
     <p class="nombre"><a [routerLink]="['/book-section',lectura.libro.id]" >{{lectura.libro.nombre}}</a></p>
     </div>
 }
+</div>
+<mat-paginator class="paginator"
+              [length]="totalItems"
+              [pageSize]="pageSize"
+              [pageIndex]="pageIndex"
+              [pageSizeOptions]="[16, 32, 40]"
+              aria-label="Select page"
+              (page)="onPageChange($event)">
+</mat-paginator> 
 </div>

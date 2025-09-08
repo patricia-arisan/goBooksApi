@@ -8,17 +8,16 @@ h3{
 .listadoLibros{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    height: 750px;
     width: 1100px;
     text-align: center;
-    /* border: 1px solid black; */
+    height: max-content;
     margin-left: 150px;
     margin-top: 30px;
 }
 .libro{
    height: 350px;
     width: 220px; 
-    /* border: 1px solid black; */
+    margin-bottom: 15px;
 }
 
 #portada{
@@ -31,9 +30,15 @@ h3{
 }
 .nombre{
     margin-top: 5px;
+    font-size: 0.95em;
 }
 .nombre a{
     text-decoration: none;
     color:rgb(99, 99, 99);
+    
+}
+.paginator{
+    margin-top: 14px;
+    background-color: white;
     
 }
