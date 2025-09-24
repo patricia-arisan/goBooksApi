@@ -117,5 +117,21 @@ constructor(private client: HttpClient) { }
               return this.client.get<Lectura>(`${this.readingBookServiceUrl}/${idUsuario}`,{headers, params:params}) 
    }
     
+   private readonly readingServiceDeleteUrl = `${environment.proyectoUrl}api/lectura`;
+   deleteReading(id: number): Observable<any>{
+    console.log("Service " + id);
+    const credentials = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            
+            'Authorization' : credentials || ''
+           
+        })
+    
+    
+    return this.client.delete<any>(`${this.readingServiceDeleteUrl}/${id}`,{headers})
+    
+    
+  }
  
 }

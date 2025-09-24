@@ -1,13 +1,8 @@
 
 <h2 mat-dialog-title>Añadir libro Update</h2>
-<!-- <p>Estado {{lectura.estado.id}}</p>
-<p>Puntuación {{lectura.puntuacion}}</p>
-<p>Lectura id {{lectura.id}}</p>
-<p>Usuario {{lectura.usuario.id}}</p> -->
-
 <div mat-dialog-content>
        <!-- <p>{{libro.nombre}}</p> -->
-        <form [formGroup]="formUpdateReading" (submit)="update()"> 
+        <form [formGroup]="formUpdateReading" (submit)="changeSituation()"> 
                 <div class="form-group">
                           
                         <!-- <input type="text" formControlName="id" id="id" class="form-control" >
@@ -38,15 +33,12 @@
                         </select>
                 </div>
                 @if(lectura.estado.id===2 && selectedOption!=="1" && selectedOption!=="3") {
-                <!-- @if(selectedOption==="2" || lectura.estado.id===2) { -->
                 <mat-toolbar color="primary"></mat-toolbar>
                 @for (star of ratingArray; track star; let index = $index){
                 <mat-icon (mouseenter)="setStar(index)" [ngClass]="{checked:selectedStar>index}"
                         (mouseleave)="unselectStar()" (click)="rating(index)">star</mat-icon>
                 }
                 }
-
-
 
                 <mat-dialog-actions>
                         <button type="button" class="btn " (click)="closeForm()">Atrás</button>
