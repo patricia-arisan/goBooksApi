@@ -1,0 +1,49 @@
+
+<h2 mat-dialog-title>Añadir libro</h2>
+<div mat-dialog-content>
+       <p>{{libro.nombre}}</p>
+        <form [formGroup]="formNewReading" (submit)="registerReading()"> <!--(submit)="registerReading()" -->
+                <div class="form-group">
+                        <label class="control-label" for="id"> </label> <input id="id" type="hidden"
+                                formControlName="idLectura" class="form-control" autofocus="autofocus">
+
+                        <label class="control-label" for="id"> </label> <input id="id" type="hidden"
+                                formControlName="idLibro" class="form-control" autofocus="autofocus">
+
+                        <label class="control-label" for="id"> </label> <input id="id" type="hidden"
+                                formControlName="idUsuario" class="form-control" autofocus="autofocus">
+                </div>
+                <div class="form-group">
+                        
+                        <!-- <label class="control-label" for="estado">Estado: </label> -->
+                        <select formControlName="idEstado" name="estado" class="estado" (change)="captureSelect($event)">
+                                
+                                @for (estado of estados; track estado){
+                                <!-- <option [ngValue]=""  [selected]="estado.id===1"> -->
+                                <option [value]="estado.id">
+                                        {{ estado.situacion}}
+                                </option>
+
+                                }
+                        </select>
+                </div>
+                <div class="form-group">
+                        <label class="control-label" for="puntuacion"> </label> <input id="puntuacion" type="hidden"
+                                formControlName="puntuacion" class="form-control" autofocus="autofocus">
+                </div>
+                @if(selectedOption==="2"){
+                <mat-toolbar color="primary"></mat-toolbar>
+                @for (star of ratingArray; track star; let index = $index){
+                <mat-icon (mouseenter)="setStar(index)" [ngClass]="{checked:selectedStar>index}"
+                        (mouseleave)="unselectStar()" (click)="rating(index)">star</mat-icon>
+                }
+                }
+                <div class="form-group">
+                        <button type="button" class="btn " (click)="closeForm()">Atrás</button>
+                        <button type="submit" class="btn btn-success">Añadir</button>
+
+                </div>
+                
+        </form>
+        
+</div>

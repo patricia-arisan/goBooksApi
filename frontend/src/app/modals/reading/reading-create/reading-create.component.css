@@ -1,0 +1,15 @@
+.checked{
+    color: yellow;
+}
+.estado{
+    height: 30px;
+    width: 100px;
+}
+h2{
+    
+    background-color: rgb(253, 197, 127);
+}
+.mat-mdc-dialog-title{
+   
+    color: white;
+}

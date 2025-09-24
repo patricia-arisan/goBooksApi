@@ -140,5 +140,14 @@ export const routes: Routes = [
 
             ),
         title: 'Crear Libro'
+    },
+    {
+    path: 'book-section/editar/:libro.id',
+        loadComponent: () =>
+            import('./pages/admin/admin-books/update-book/update-book.component').then(
+                (m) => m.UpdateBookComponent
+
+            ),
+        title: 'Editar Libro'
     }
 ];

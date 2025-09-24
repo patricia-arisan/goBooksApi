@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.atrium.gobooks.dto.LecturaDTO;
 import com.atrium.gobooks.entities.Lectura;
+import com.atrium.gobooks.entities.Usuario;
 import com.atrium.gobooks.exceptions.ServicioException;
 import com.atrium.gobooks.services.ServicioLectura;
 
@@ -32,6 +36,33 @@ public class LecturaController {
 			return null;
 		}
 		 
+	}
+	
+	@GetMapping(value="/{idUsuario}")
+	public Lectura mostrarLectura(@PathVariable Integer idUsuario,@RequestParam Integer idLibro) throws ServicioException {
+		
+		return servicioLectura.buscarLecturaUsuario(idLibro,idUsuario);
+
+	}
+	
+	@PutMapping(value="/{id}")
+	public Lectura actualizarLectura(@PathVariable Integer id, @RequestBody Lectura lectura) throws ServicioException {
+		return servicioLectura.modificarLectura(lectura);
+	}
+	
+	@DeleteMapping(value="/{id}") 
+	public ResponseEntity<?> eliminarLectura(@PathVariable Integer id) throws Exception{
+		servicioLectura.eliminarLectura(id);
+		return ResponseEntity.ok().build();
+	}
+	
+	@GetMapping(value="/estadoLecturaUsuario/{idUsuario}")
+	public Lectura buscarEstadoLecturaUsuario(@PathVariable Integer idUsuario,@RequestParam Integer idLibro) throws ServicioException{
+		
+			return servicioLectura.buscarLecturaUsuario(idLibro, idUsuario);
+		
+		
+		
 	}
 	
 	@GetMapping("/listadoLecturas/{id}")

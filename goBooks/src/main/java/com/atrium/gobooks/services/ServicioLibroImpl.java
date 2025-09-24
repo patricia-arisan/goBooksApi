@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.atrium.gobooks.entities.Lectura;
 import com.atrium.gobooks.entities.Libro;
 import com.atrium.gobooks.exceptions.CodigoError;
 import com.atrium.gobooks.exceptions.ServicioException;
@@ -175,6 +176,21 @@ List<Libro> libros;
 			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
 		}
 		return libros;
+	}
+	
+	@Override
+	public Libro modificarLibro(Libro libro) throws ServicioException {
+		Optional<Libro> libroOp = libroRepository.findById(libro.getId());
+		if (!libroOp.isPresent()) throw new ServicioException(CodigoError.LIBRO_NOT_FOUND);
+		
+		try {
+			libro= libroRepository.save(libro);
+			
+		} catch (Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL, e);
+		}
+		return libro;
 	}
 
 }

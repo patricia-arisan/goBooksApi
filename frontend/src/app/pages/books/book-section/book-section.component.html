@@ -1,5 +1,6 @@
 <app-header-user></app-header-user>
 <div class="ficha">
+    
     <div class="detalles">
         <p id="nombre">{{libro.nombre}}</p>
 <p class="autor">{{libro.autor.nombre}}</p>
@@ -7,17 +8,24 @@
 <p class="isbn">{{libro.isbn}}</p>
 <p class="genero">{{libro.genero.nombre}}</p>
 <span>Sinopsis:</span>
-<p>{{libro.sinopsis}}</p>
+<p class="sinopsis">{{libro.sinopsis }}</p>
+@if(lectura===null || lectura.estado.id===1){
+    <button type="button" matButton="elevated" (click)="openReadingDialog('0ms', '0ms')">Añadir +</button>
+}@else if(lectura.estado.id===2){ 
+    <button type="button" matButton="elevated" (click)="openReadingUpdateDialog('0ms', '0ms')">{{lectura.estado.situacion}}</button>
+}@else{
+    <button type="button" matButton="elevated" (click)="openReadingUpdateDialog('0ms', '0ms')">{{lectura.estado.situacion}}</button>
+}
 
-<button type="button" matButton="elevated" (click)="openReadingDialog('0ms', '0ms')">Añadir +</button>
     </div>
 
 <img src="{{libro.portada}}" id="portada"/>
 
+@if(puntuacion!=null){
 <div class="score">
 <span class="valoracion">Valoración</span>    
-<p class="puntuacion">{{puntuacion}}</p>
-
+<p class="puntuacion">{{puntuacion | number: '1.1-1'}}</p> 
+<!-- da formato 0.0 numero y redondea hacia arriba -->
 <section class="example-section">
   <mat-card-content>
     
@@ -32,8 +40,15 @@
 
 </section>
 </div>
+}
+
+<!-- admin -->
+@if(user.rol.id==1){
+<span id="editar"><a [routerLink]="['/book-section/editar/',libro.id]">Editar</a></span>
+}
 
 </div>
+
 <!-- <form>
     <select>
         @for (estado of estados; track estado){

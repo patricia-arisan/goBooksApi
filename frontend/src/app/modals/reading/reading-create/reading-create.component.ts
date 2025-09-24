@@ -1,37 +1,41 @@
 import { ChangeDetectionStrategy, Component, Inject, inject, OnInit } from '@angular/core';
-import { BookSectionComponent } from '../../pages/books/book-section/book-section.component';
+import { BookSectionComponent } from '../../../pages/books/book-section/book-section.component';
 import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { StateService } from '../../services/state-service';
-import { Estado } from '../../interfaces/estado';
-import { Libro } from '../../interfaces/libro';
+import { StateService } from '../../../services/state-service';
+import { Estado } from '../../../interfaces/estado';
+import { Libro } from '../../../interfaces/libro';
 import { ActivatedRoute } from '@angular/router';
-import { BookService } from '../../services/book-service';
-import { Usuario } from '../../interfaces/usuario';
-import { ServicesService } from '../../services/services.service';
-import { ReadingService } from '../../services/reading-service';
-import { LecturaDTO } from '../../interfaces/lecturaDTO';
+import { BookService } from '../../../services/book-service';
+import { Usuario } from '../../../interfaces/usuario';
+import { ServicesService } from '../../../services/services.service';
+import { ReadingService } from '../../../services/reading-service';
+import { LecturaDTO } from '../../../interfaces/lecturaDTO';
 import {CommonModule} from "@angular/common"
+import { Lectura } from '../../../interfaces/lectura';
 
 @Component({
-  selector: 'app-reading',
+  selector: 'app-reading-create',
   standalone: true,
   imports: [CommonModule,MatIconModule,MatToolbarModule,MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
-  templateUrl: './reading.component.html',
-  styleUrl: './reading.component.css',
+  templateUrl: './reading-create.component.html',
+  styleUrl: './reading-create.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReadingComponent implements OnInit{
+export class ReadingCreateComponent implements OnInit{
   user!: Usuario;
   estados!: Estado[];
-
+  lectura!: Lectura;
+  libro!: Libro;
   rateStars: number=5;
   ratingArray:any=[];
   selectedStar:number= 0;
   previousSelection:number=0;
+  selectedOption: string="";
+  
   
   
   readonly dialogRef = inject(MatDialogRef<BookSectionComponent>);
@@ -40,6 +44,7 @@ export class ReadingComponent implements OnInit{
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private bookService: BookService,
     private formBuilder: FormBuilder,
     private stateService: StateService,
     private userService: ServicesService,
@@ -53,7 +58,7 @@ export class ReadingComponent implements OnInit{
   ngOnInit(): void {
     
     console.log(this.data)
-
+    
     
 
     this.formNewReading = this.formBuilder.group ({
@@ -65,16 +70,26 @@ export class ReadingComponent implements OnInit{
       
       
     });
-
+    
     this.retrieveFromLocalStorage();
+    this.getStates();
 
     this.fillForm();
     
-    this.getStates();
+    // this.getStates();
 
     this.ratingArray= Array(this.rateStars).fill(0);
-    
+    this.getCurrentBook();
+    // this.getBookState();
 
+  }
+  
+  getCurrentBook(){
+    
+    this.bookService.getBookById(this.data).subscribe((data:Libro)=>{
+          this.libro = data;
+          
+        })
   }
 
   retrieveFromLocalStorage() {
@@ -160,6 +175,23 @@ export class ReadingComponent implements OnInit{
           
         })
     }
-    
+
+  closeForm(): void {
+    this.dialogRef.close();
+  }
+
+  // getBookState(){
+  //     let idLibro = parseInt(this.id)
+  //     this.readingService.getReadingBookState(this.user.id,idLibro).subscribe((data:Lectura)=>{
+  //           this.lectura = data;
+            
+  //         })
+  //   }
+    captureSelect(event:Event){
+      
+      const selectedValue = (event.target as HTMLSelectElement)!.value;
+      console.log(selectedValue);
+      this.selectedOption = selectedValue;
+    }
   
 }

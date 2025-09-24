@@ -33,6 +33,7 @@ export class ReadingsComponent implements OnInit {
     this.retrieveFromLocalStorage();
     this.getReadings();
     this.translatePaginator();
+    
 
   }
 

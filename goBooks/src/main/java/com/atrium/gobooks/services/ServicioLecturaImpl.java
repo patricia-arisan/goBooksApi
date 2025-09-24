@@ -112,6 +112,7 @@ Logger log = LoggerFactory.getLogger(ServicioLecturaImpl.class);
 	public Lectura buscarLecturaUsuario(Integer idLibro, Integer idUsuario) throws ServicioException {
 		log.info("[busquedaLecturaUsuario]");
 		
+		
 		Libro libro;
 		Usuario usuario;
 		Lectura lectura;
@@ -124,6 +125,7 @@ Logger log = LoggerFactory.getLogger(ServicioLecturaImpl.class);
 			usuario= usuarioOp.get();
 			
 			lectura= lecturaRepository.buscarLecturaUsuario(idLibro, idUsuario);
+			
 		}catch(ServicioException se) {
 			log.error("ServicioException", se);
 			throw se;
@@ -151,6 +153,37 @@ Logger log = LoggerFactory.getLogger(ServicioLecturaImpl.class);
 			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
 		}
 		return mediaLectura;
+	}
+
+
+	@Override
+	public Lectura modificarLectura(Lectura lectura) throws ServicioException {
+		Optional<Lectura> lecturaOp = lecturaRepository.findById(lectura.getId());
+		if (!lecturaOp.isPresent()) throw new ServicioException(CodigoError.LECTURA_NOT_FOUND);
+		
+		try {
+			lectura= lecturaRepository.save(lectura);
+			
+		} catch (Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL, e);
+		}
+		return lectura;
+	}
+
+
+	@Override
+	public void eliminarLectura(Integer idLectura) throws ServicioException {
+		log.info("[eliminarLectura]");
+		log.debug("[idLectura: " + idLectura + "]");
+
+		try {
+			lecturaRepository.deleteById(idLectura);
+		} catch (Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL, e);
+		}
+		
 	}
 
 

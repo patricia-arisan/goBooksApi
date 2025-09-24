@@ -1,0 +1,59 @@
+
+<h2 mat-dialog-title>Añadir libro Update</h2>
+<!-- <p>Estado {{lectura.estado.id}}</p>
+<p>Puntuación {{lectura.puntuacion}}</p>
+<p>Lectura id {{lectura.id}}</p>
+<p>Usuario {{lectura.usuario.id}}</p> -->
+
+<div mat-dialog-content>
+       <!-- <p>{{libro.nombre}}</p> -->
+        <form [formGroup]="formUpdateReading" (submit)="update()"> 
+                <div class="form-group">
+                          
+                        <!-- <input type="text" formControlName="id" id="id" class="form-control" >
+                        <label class="control-label" >Puntuación</label>  -->
+                        <input type="hidden" formControlName="puntuacion" id="puntuacion" class="form-control" >
+                       <!-- <label class="control-label" > </label> 
+                        <input type="text" formControlName="estado" class="form-control" [(ngModel)]="lectura.estado.id">        
+                        <label class="control-label" > </label> 
+                        <input type="text" formControlName="libro" class="form-control" [(ngModel)]="lectura.libro.id">
+                        <label class="control-label" > </label> 
+                        <input type="text" formControlName="usuario" class="form-control" [(ngModel)]="lectura.usuario.id">
+                         -->
+                </div>
+                <div class="form-group" formGroupName="estado">
+                        
+                        <!-- <label class="control-label" for="estado">Estado: </label> -->
+                         <select formControlName="id" class="estado"  (change)="captureSelect($event)"> <!--[(ngModel)]="lectura.estado.id" -->
+                                <!-- <option [value]="lectura.estado.id" [selected]="lectura.estado.id">{{lectura.estado.situacion}}</option> -->
+                                                                
+                                @for (estado of estados; track estado.id){
+                                  
+                                <!-- <option [ngValue]=""  [selected]="estado.id===1"> ngvalue pasar objeto y value cadena -->
+                                <option [value]="estado.id">
+                                        {{ estado.situacion}}
+                                </option>
+                                }
+                                
+                        </select>
+                </div>
+                @if(lectura.estado.id===2 && selectedOption!=="1" && selectedOption!=="3") {
+                <!-- @if(selectedOption==="2" || lectura.estado.id===2) { -->
+                <mat-toolbar color="primary"></mat-toolbar>
+                @for (star of ratingArray; track star; let index = $index){
+                <mat-icon (mouseenter)="setStar(index)" [ngClass]="{checked:selectedStar>index}"
+                        (mouseleave)="unselectStar()" (click)="rating(index)">star</mat-icon>
+                }
+                }
+
+
+
+                <mat-dialog-actions>
+                        <button type="button" class="btn " (click)="closeForm()">Atrás</button>
+                        <button type="submit" class="btn btn-success">Añadir</button>
+
+                </mat-dialog-actions>
+                
+        </form>
+        
+</div>

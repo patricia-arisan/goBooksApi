@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.atrium.gobooks.entities.Lectura;
 import com.atrium.gobooks.entities.Libro;
 import com.atrium.gobooks.exceptions.ServicioException;
 import com.atrium.gobooks.services.ServicioLibro;
@@ -79,5 +81,9 @@ public class LibroController {
 		
 	}
 
+	@PutMapping(value="/{id}")
+	public Libro actualizarLibro(@PathVariable Integer id, @RequestBody Libro libro) throws ServicioException {
+		return servicioLibro.modificarLibro(libro);
+	}
 	
 }

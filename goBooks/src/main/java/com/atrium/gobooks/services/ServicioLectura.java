@@ -11,6 +11,10 @@ public interface ServicioLectura {
 	
 	Lectura grabarLectura(LecturaDTO lecturaDTO) throws ServicioException;
 	
+	Lectura modificarLectura(Lectura lectura) throws ServicioException;
+	
+	void eliminarLectura(Integer idLectura) throws ServicioException;
+	
 	List <Lectura> buscarLecturasUsuario(Integer id) throws ServicioException;
 	
 	List <Lectura> buscarLecturasEstadoUsuario(Integer idUsuario, Integer idEstado) throws ServicioException;

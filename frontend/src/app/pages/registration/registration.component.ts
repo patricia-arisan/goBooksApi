@@ -28,7 +28,7 @@ constructor(
       apellido:[""],
       username:["",[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
       password:["",[Validators.required]],
-      fechaNacimiento:[new Date],
+      fechaNacimiento:[null],
       rol:[{id:2}]
       
     });
@@ -53,10 +53,10 @@ constructor(
     return this.formNewUser.get('password')!;
   }
   
-  rol: Rol = {
-    id: 2,
-    nombre:""
-  };
+  // rol: Rol = {
+  //   id: 2,
+  //   nombre:""
+  // };
 
   register(){
     this.userService.createUser(this.formNewUser.value).subscribe((data:Usuario) =>{

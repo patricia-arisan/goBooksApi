@@ -69,4 +69,7 @@ span{
   --mdc-circular-progress-active-indicator-color:rgb(221, 179, 40);
   
 }
-
+/* mostrar espacios gurdados en texto */
+.sinopsis{
+    white-space: pre-wrap;
+}

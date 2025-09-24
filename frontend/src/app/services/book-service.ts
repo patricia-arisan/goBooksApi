@@ -142,7 +142,19 @@ searchByBookAuthorEditorial(busqueda: string): Observable<Libro[]>{
     
 /////////////////
 ////////////////////
-      
+      private readonly updateBookServiceUrl = `${environment.proyectoUrl}api/libro`
+      updateBook(id: number,libro: Libro): Observable<Libro>{
+        
+            const credentials = localStorage.getItem('token');
+            const headers = new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    
+                    'Authorization' : credentials || ''
+                   
+                })
+            
+            return this.client.put<Libro>(`${this.updateBookServiceUrl}/${id}`,libro,{headers})
+      }
 
 
 }

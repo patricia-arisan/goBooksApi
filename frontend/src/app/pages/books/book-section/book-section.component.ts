@@ -1,15 +1,15 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { HeaderUserComponent } from '../../shared/headers/header-user/header-user.component';
 import { BookService } from '../../../services/book-service';
 import { Libro } from '../../../interfaces/libro';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { StateService } from '../../../services/state-service';
 import { Estado } from '../../../interfaces/estado';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { ReadingComponent } from '../../../modals/reading/reading.component';
+import { ReadingCreateComponent } from '../../../modals/reading/reading-create/reading-create.component';
 import { ReadingService } from '../../../services/reading-service';
 import { Lectura } from '../../../interfaces/lectura';
 
@@ -19,19 +19,28 @@ import {ProgressSpinnerMode, MatProgressSpinnerModule} from '@angular/material/p
 import {MatSliderModule} from '@angular/material/slider';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCardModule} from '@angular/material/card';
+import { ServicesService } from '../../../services/services.service';
+import { Usuario } from '../../../interfaces/usuario';
+import { ReadingUpdateComponent } from '../../../modals/reading/reading-update/reading-update.component';
+import { ReadingDeleteComponent } from '../../../modals/reading/reading-delete/reading-delete.component';
+import { DecimalPipe, formatNumber } from '@angular/common';
 
 @Component({
   selector: 'app-book-section',
   standalone: true,
-  imports: [HeaderUserComponent,MatButtonModule,MatCardModule, MatRadioModule, MatSliderModule, MatProgressSpinnerModule],
+  imports: [DecimalPipe,RouterLink,HeaderUserComponent,MatButtonModule,MatCardModule, MatRadioModule, MatSliderModule, MatProgressSpinnerModule],
   templateUrl: './book-section.component.html',
-  styleUrl: './book-section.component.css'
+  styleUrl: './book-section.component.css',
+  // changeDetection: ChangeDetectionStrategy.OnPush No????? Si se pone desaparece score
+  //decimalpipe para redondeo
 })
 export class BookSectionComponent implements OnInit{
+  user!: Usuario;
   id!: string;
   libro!: Libro;
   estados!: Estado[];
   lectura!: Lectura;
+  
   puntuacion!: number;
   valor!: number;
 
@@ -39,11 +48,12 @@ export class BookSectionComponent implements OnInit{
     private route: ActivatedRoute,
     private bookService: BookService,
     private readingService: ReadingService,
-    
+    private userService: ServicesService,
       
     ){}
 
   ngOnInit(): void {
+    this.retrieveFromLocalStorage();
     this.route.params.subscribe(params => {
       this.id = params['libro.id'];
     console.log(this.id)
@@ -54,8 +64,27 @@ export class BookSectionComponent implements OnInit{
     // this.getStates(); 
     
     this.getPercentage();
+    this.getBookState();
     
   }
+
+  retrieveFromLocalStorage() {
+          this.user = JSON.parse(localStorage.getItem('usuario') || '')
+          
+          let value = this.userService.getItem('id');
+             
+          let currentUser = 0;
+          if(value!=null){
+            currentUser = parseInt(value);
+                        
+            this.userService.getLoggedUser(currentUser).subscribe((data:Usuario)=>{
+              
+              this.user = data;
+              
+                  
+            });
+          }  
+        }
 
   getCurrentBook(){
     let idLibro = parseInt(this.id)
@@ -68,7 +97,28 @@ export class BookSectionComponent implements OnInit{
   readonly dialog = inject(MatDialog);
 
   openReadingDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-      this.dialog.open(ReadingComponent, {
+      this.dialog.open(ReadingCreateComponent, {
+        width: '250px',
+        enterAnimationDuration,
+        exitAnimationDuration,
+        data:this.libro.id
+        
+      });
+    }
+
+    openReadingUpdateDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+      this.dialog.open(ReadingUpdateComponent, {
+        width: '250px',
+        enterAnimationDuration,
+        exitAnimationDuration,
+        disableClose: true,
+        data:this.libro.id
+        
+      });
+    }
+
+    openReadingDeleteDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+      this.dialog.open(ReadingDeleteComponent, {
         width: '250px',
         enterAnimationDuration,
         exitAnimationDuration,
@@ -81,8 +131,8 @@ export class BookSectionComponent implements OnInit{
       let idLibro = parseInt(this.id)
       // let puntuacion = 0.0;
       this.readingService.getAverageReading(idLibro).subscribe((number)=>{
-        // this.puntuacion = number;
-        this.puntuacion=number;
+        this.puntuacion = number;
+        
         
       })
     }
@@ -109,7 +159,13 @@ export class BookSectionComponent implements OnInit{
     
   }
     
-  
+  getBookState(){
+    let idLibro = parseInt(this.id)
+    this.readingService.getReadingBookState(this.user.id,idLibro).subscribe((data:Lectura)=>{
+          this.lectura = data;
+          
+        })
+  }
   
 
 }

@@ -1,0 +1,55 @@
+<app-header-admin></app-header-admin>
+<div>
+<form [formGroup]="formUpdate" (submit)="update()">
+    
+          <div class="row pb-3">
+            <div class="col-sm-6 form-group">
+              <label for="ac-fn">Id</label>
+              <input type="text" id="id" class="form-control" formControlName="id">
+
+              
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="ac-fn">Título</label>
+              <input type="text" id="nombre" class="form-control" formControlName="nombre">
+
+              
+            </div>
+            <div class="col-sm-6 form-group" formGroupName="autor">
+              <label for="ac-ln">Autor</label>
+              <input id="autor" type="text" formControlName="id" class="form-control">
+            </div>
+            <div class="col-sm-6 form-group">
+              <label>isbn</label>
+              <input id="isbn" type="text" formControlName="isbn" class="form-control">
+            </div>
+            
+            <div class="col-sm-6 form-group" formGroupName="editorial">
+              <label>Editorial</label>
+              <input id="isbn" type="text" formControlName="id" class="form-control">
+            </div>
+            <div class="col-sm-6 form-group" formGroupName="genero">
+              <label>Género</label>
+              <input id="isbn" type="text" formControlName="id" class="form-control">
+            </div>
+            <div class="col-sm-6 form-group">
+              <label>Portada</label>
+              <input type="text" id="portada" formControlName="portada" class="form-control">
+            </div>
+            <div class="col-sm-6 form-group">
+              <label>Sinópsis</label>
+              <textarea id="sinopsis" formControlName="sinopsis" class="form-control"></textarea>
+            </div>
+
+            
+
+            
+        </div>
+          <!-- <button type="submit" class="btn btn-primary btn-lg">&nbsp;Actualizar&nbsp;</button> -->
+        </form>
+      
+
+
+</div>
+
+   
