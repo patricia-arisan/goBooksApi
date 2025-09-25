@@ -18,6 +18,10 @@ public interface ServicioLibro {
 	
 	List<Libro> buscarLibrosPorGeneroId(Integer id) throws ServicioException;
 	
+	List<Libro> buscarLibrosPorAutorId(Integer id) throws ServicioException;
+	
+	List<Libro> buscarLibrosPorEditorialId(Integer id) throws ServicioException;
+	
 	List<Libro> buscarUltimosLibrosIncorporados() throws ServicioException;
 	
 	List<Libro> buscarTodosUltimosLibrosIncorporados() throws ServicioException;

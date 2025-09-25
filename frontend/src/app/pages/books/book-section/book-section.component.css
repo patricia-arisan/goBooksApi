@@ -1,11 +1,14 @@
 .ficha{
     margin-top: 20px;
+    
 }
 .detalles{
     margin-top: 20px;
     margin-left: 380px;
     position: absolute;
     width: 700px;
+    padding-bottom: 20px;
+    
     
 }
 #nombre{
@@ -17,19 +20,31 @@
 .autor,.editorial,.isbn{
     color: grey;
     margin-bottom: 0px;
-    
-    
-    
-    
 }
 .autor{
     width: max-content;
     border-bottom: 1px solid rgb(126, 126, 126);
 }
+.autor:hover,.editorial:hover{
+    color: #46434e;
+}
 .editorial{
     width: max-content;
     float: left;
     padding-right: 5px;
+}
+.genero{
+    background-color: rgb(253, 160, 54);
+	color: white;
+    width: max-content;
+    padding: 4px 7.5px ;
+    margin-top: 3px;
+    border-radius: 2px;
+    font-weight: 500;
+    font-size: 0.9em;
+}
+.genero:hover{
+	background-color: rgb(255, 141, 11);
 }
 span{
     font-weight: bold;
@@ -61,15 +76,49 @@ span{
 
 .example-section{
     margin-top: -97px;
+   
+    
 }
-
+.circle{
+   --mdc-circular-progress-active-indicator-color:rgb(197, 197, 195); 
+   position: absolute;
+   margin-left: 10px;
+}
 
 .example-margin {
   margin: 0 10px;
   --mdc-circular-progress-active-indicator-color:rgb(221, 179, 40);
   
+  
 }
 /* mostrar espacios gurdados en texto */
 .sinopsis{
     white-space: pre-wrap;
+}
+
+a {
+    text-decoration: none;
+}
+.seleccionEstado{
+    float: right;
+    margin-top: 265px;
+    margin-right: -130px; 
+    width: 120px;
+    
+}
+
+.lectura{
+    border: none;
+    color:white;
+    background-color: rgb(253, 160, 54);
+    font-weight: 500;
+    font-size: 1.1em;
+    padding: 10px 15px;
+    width: 110px;
+    margin: auto;
+    border-radius: 2px;
+        
+}
+.lectura:hover{
+    background-color: rgb(255, 141, 11);
 }

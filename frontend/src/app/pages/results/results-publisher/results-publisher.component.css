@@ -1,0 +1,48 @@
+.libros{
+    margin-top: 25px;
+}
+h3{
+    margin-left: 80px;
+    
+}
+.listadoLibros{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 1100px;
+    text-align: center;
+    height: max-content;
+    margin-left: 150px;
+    margin-top: 30px;
+}
+.libro{
+   height: 350px;
+    width: 220px; 
+    margin-bottom: 15px;
+}
+
+#portada{
+    height: 300px;
+    width: 220px;
+    
+    box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
+    
+   
+}
+.nombre{
+    margin-top: 5px;
+    font-size: 0.95em;
+}
+.nombre a{
+    text-decoration: none;
+    color:rgb(99, 99, 99);
+    
+}
+
+.paginator{
+    
+    /* margin-top: 840px;  */
+    margin-top: 14px;
+    
+    background-color: white;
+    
+}

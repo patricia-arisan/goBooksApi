@@ -71,6 +71,38 @@ constructor(private client: HttpClient) { }
 
       }
 
+      private readonly bookByAuthorServiceUrl = `${environment.proyectoUrl}api/libro/autor`;
+
+      getBookByAuthorId(id: number): Observable<Libro[]>{
+
+        const credentials = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+              'Content-Type': 'application/json',
+                
+              'Authorization' : credentials || ''
+               
+          })
+    
+          return this.client.get<Libro[]>(`${this.bookByAuthorServiceUrl}/${id}`,{headers})
+
+      }
+
+      private readonly bookByPublisherServiceUrl = `${environment.proyectoUrl}api/libro/editorial`;
+
+      getBookByPublisherId(id: number): Observable<Libro[]>{
+
+        const credentials = localStorage.getItem('token');
+        const headers = new HttpHeaders({
+              'Content-Type': 'application/json',
+                
+              'Authorization' : credentials || ''
+               
+          })
+    
+          return this.client.get<Libro[]>(`${this.bookByPublisherServiceUrl}/${id}`,{headers})
+
+      }
+
       private readonly lastBooksListServiceUrl = `${environment.proyectoUrl}api/libro/ultimosLibros`;
     
       getLastBooks(): Observable<Libro[]>{

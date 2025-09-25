@@ -160,7 +160,7 @@ export class ReadingUpdateComponent implements OnInit {
   }
 
   closeForm(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   captureSelect(event: Event) {
@@ -222,6 +222,7 @@ export class ReadingUpdateComponent implements OnInit {
 
   setSavedStars() {
     this.selectedStar = this.lectura.puntuacion;
+    
   }
 
   changeSituation() {
@@ -229,12 +230,12 @@ export class ReadingUpdateComponent implements OnInit {
     if(this.selectedOption==='1'){
 
       this.readingService.deleteReading(this.lectura.id).subscribe((data:any) =>{
-        this.dialogRef.close(data);
+        this.dialogRef.close(true);
     })
     }else{
       this.readingService.updateReading(this.lectura.id, this.formUpdateReading.value).subscribe((data: Lectura) => {
 
-      this.dialogRef.close(data);
+      this.dialogRef.close(true);
       })
     
   }

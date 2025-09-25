@@ -22,7 +22,7 @@ import {MatCardModule} from '@angular/material/card';
 import { ServicesService } from '../../../services/services.service';
 import { Usuario } from '../../../interfaces/usuario';
 import { ReadingUpdateComponent } from '../../../modals/reading/reading-update/reading-update.component';
-import { ReadingDeleteComponent } from '../../../modals/reading/reading-delete/reading-delete.component';
+
 import { DecimalPipe, formatNumber } from '@angular/common';
 
 @Component({
@@ -103,7 +103,9 @@ export class BookSectionComponent implements OnInit{
         exitAnimationDuration,
         data:this.libro.id
         
-      });
+      }).afterClosed().subscribe((reloadView:boolean) => { 
+        if(reloadView) window.location.reload(); 
+      } )
     }
 
     openReadingUpdateDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
@@ -114,17 +116,9 @@ export class BookSectionComponent implements OnInit{
         disableClose: true,
         data:this.libro.id
         
-      });
-    }
-
-    openReadingDeleteDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-      this.dialog.open(ReadingDeleteComponent, {
-        width: '250px',
-        enterAnimationDuration,
-        exitAnimationDuration,
-        data:this.libro.id
-        
-      });
+      }).afterClosed().subscribe((reloadView:boolean) => { 
+        if(reloadView) window.location.reload(); 
+      } )
     }
 
     getScore(){

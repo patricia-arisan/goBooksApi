@@ -47,6 +47,18 @@ public class LibroController {
 		return libros;
 	}
 	
+	@GetMapping("/autor/{id}")
+	public List <Libro> librosAutor(@PathVariable Integer id) throws Exception {
+		List<Libro> libros = servicioLibro.buscarLibrosPorAutorId(id);
+		return libros;
+	}
+	
+	@GetMapping("/editorial/{id}")
+	public List <Libro> librosEditorial(@PathVariable Integer id) throws Exception {
+		List<Libro> libros = servicioLibro.buscarLibrosPorEditorialId(id);
+		return libros;
+	}
+	
 	@GetMapping("/ultimosLibros")
 	public List <Libro> listarUltimosLibros() throws ServicioException{
 		List <Libro> libros = servicioLibro.buscarUltimosLibrosIncorporados();

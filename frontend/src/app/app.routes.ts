@@ -42,6 +42,24 @@ export const routes: Routes = [
         title: 'Results Genre'
     },
     {
+        path: 'results/author/:id',
+        loadComponent: () =>
+            import('./pages/results/results-author/results-author.component').then(
+                (m) => m.ResultsAuthorComponent
+
+            ),
+        title: 'Results Author'
+    },
+    {
+        path: 'results/publisher/:id',
+        loadComponent: () =>
+            import('./pages/results/results-publisher/results-publisher.component').then(
+                (m) => m.ResultsPublisherComponent
+
+            ),
+        title: 'Results Publisher'
+    },
+    {
         path: 'results/score',
         loadComponent: () =>
             import('./pages/results/results-score/results-score.component').then(

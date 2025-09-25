@@ -3,19 +3,12 @@
     
     <div class="detalles">
         <p id="nombre">{{libro.nombre}}</p>
-<p class="autor">{{libro.autor.nombre}}</p>
-<p class="editorial">{{libro.editorial.nombre}} ·</p>
-<p class="isbn">{{libro.isbn}}</p>
-<p class="genero">{{libro.genero.nombre}}</p>
+<a [routerLink]="['/results/author',libro.autor.id]"><p class="autor">{{libro.autor.nombre}}</p></a>
+<a [routerLink]="['/results/publisher',libro.editorial.id]"><p class="editorial">{{libro.editorial.nombre}}</p></a>
+<p class="isbn"> · {{libro.isbn}}</p>
+<a [routerLink]="['/results/genre',libro.genero.id]"><p class="genero">{{libro.genero.nombre}}</p></a>
 <span>Sinopsis:</span>
 <p class="sinopsis">{{libro.sinopsis }}</p>
-@if(lectura===null || lectura.estado.id===1){
-    <button type="button" matButton="elevated" (click)="openReadingDialog('0ms', '0ms')">Añadir +</button>
-}@else if(lectura.estado.id===2){ 
-    <button type="button" matButton="elevated" (click)="openReadingUpdateDialog('0ms', '0ms')">{{lectura.estado.situacion}}</button>
-}@else{
-    <button type="button" matButton="elevated" (click)="openReadingUpdateDialog('0ms', '0ms')">{{lectura.estado.situacion}}</button>
-}
 
     </div>
 
@@ -24,12 +17,17 @@
 @if(puntuacion!=null){
 <div class="score">
 <span class="valoracion">Valoración</span>    
-<p class="puntuacion">{{puntuacion | number: '1.1-1'}}</p> 
-<!-- da formato 0.0 numero y redondea hacia arriba -->
+<p class="puntuacion">{{puntuacion | number: '1.0-1'}}</p> 
+<!-- da formato 0.0 numero y redondea hacia arriba. El 1.0 hace que solo salgan decimales cuando los haya -->
 <section class="example-section">
   <mat-card-content>
     
-
+<mat-progress-spinner
+        class="circle"
+        mode="determinate"
+        
+        [value]=100>
+    </mat-progress-spinner>
     <mat-progress-spinner
         class="example-margin"
         mode="determinate"
@@ -38,10 +36,21 @@
     </mat-progress-spinner>
   </mat-card-content>
 
+
+
 </section>
 </div>
 }
-
+<div class="seleccionEstado">
+    @if(lectura===null || lectura.estado.id===1){
+    <button type="button" class="lectura" matButton="elevated" (click)="openReadingDialog('0ms', '0ms')">Añadir</button>
+}@else if(lectura.estado.id===2){ 
+    <button type="button" class="lectura" matButton="elevated" (click)="openReadingUpdateDialog('0ms', '0ms')">{{lectura.estado.situacion}}</button>
+}@else{
+    <button type="button" class="lectura" matButton="elevated" (click)="openReadingUpdateDialog('0ms', '0ms')">{{lectura.estado.situacion}}</button>
+}
+</div>
+<div class="editar">
 <!-- admin -->
 @if(user.rol.id==1){
 <span id="editar"><a [routerLink]="['/book-section/editar/',libro.id]">Editar</a></span>
@@ -49,14 +58,7 @@
 
 </div>
 
-<!-- <form>
-    <select>
-        @for (estado of estados; track estado){
-                    
-                    <option value="{{estado.id}}">
-                    {{ estado.nombre}}
-                    </option>
-                    }
-    </select>
+</div>
 
-</form> -->
+
+
