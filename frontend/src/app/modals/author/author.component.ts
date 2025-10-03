@@ -48,4 +48,7 @@ export class AuthorComponent implements OnInit{
           this.dialogRef.close(data);
         })
     }
+  closeForm(): void {
+    this.dialogRef.close();
+  }
 }

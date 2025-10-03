@@ -101,6 +101,7 @@ export class BookSectionComponent implements OnInit{
         width: '250px',
         enterAnimationDuration,
         exitAnimationDuration,
+        disableClose: true,
         data:this.libro.id
         
       }).afterClosed().subscribe((reloadView:boolean) => { 

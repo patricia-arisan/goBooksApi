@@ -29,7 +29,7 @@ export class CreateBookComponent implements OnInit{
   autores!: Autor[];
   editoriales!: Editorial[];
   generos!: Genero[];
-  url: string="/assets/icon/book_example.png";
+  url: string="/assets/icon/book.png";
     
   constructor(
     private formBuilder: FormBuilder,
@@ -101,6 +101,7 @@ export class CreateBookComponent implements OnInit{
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
+      disableClose: true,
     }).afterClosed().subscribe((data: Autor)=>{
       this.autores.push(data);
       console.log(this.autores)
@@ -113,6 +114,7 @@ export class CreateBookComponent implements OnInit{
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
+      disableClose: true,
     }).afterClosed().subscribe((data: Editorial)=>{
       this.editoriales.push(data);
       console.log(this.editoriales)
@@ -125,6 +127,7 @@ export class CreateBookComponent implements OnInit{
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
+      disableClose: true,
     }).afterClosed().subscribe((data: Genero)=>{
       this.generos.push(data);
       console.log(this.generos)
@@ -147,10 +150,21 @@ export class CreateBookComponent implements OnInit{
     
 
     sendImage(event: Event){
-      const selectedUrl = (event.target as HTMLInputElement)!.value;
+      let selectedUrl = (event.target as HTMLInputElement)!.value;
       console.log(selectedUrl);
       console.log(this.url)
       this.url=selectedUrl;
+      
+      
+        if(this.url===null || this.url.trim().length === 0) {
+        
+        this.url="/assets/icon/book.png";
+        
+      }
+      
+      
+     
+      
       
       
       

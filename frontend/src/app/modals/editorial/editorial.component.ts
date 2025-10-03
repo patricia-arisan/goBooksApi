@@ -45,5 +45,9 @@ export class EditorialComponent implements OnInit{
           })
       }
 
+    closeForm(): void {
+    this.dialogRef.close();
+  }
+
 
 }
