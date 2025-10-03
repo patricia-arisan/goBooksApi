@@ -29,6 +29,7 @@ export class CreateBookComponent implements OnInit{
   autores!: Autor[];
   editoriales!: Editorial[];
   generos!: Genero[];
+  url: string="/assets/icon/book_example.png";
     
   constructor(
     private formBuilder: FormBuilder,
@@ -145,7 +146,15 @@ export class CreateBookComponent implements OnInit{
 
     
 
-    
+    sendImage(event: Event){
+      const selectedUrl = (event.target as HTMLInputElement)!.value;
+      console.log(selectedUrl);
+      console.log(this.url)
+      this.url=selectedUrl;
+      
+      
+      
+    }
 
   
   

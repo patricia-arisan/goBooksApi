@@ -1,24 +1,22 @@
-<p>create-book works!</p>
 <app-header-admin></app-header-admin>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            
+    
+            <h2>Registrar libro</h2>
 
-            <h3>Registrate</h3>
+<div class="row g-5">
             <form  [formGroup]="formNewBook" (submit)="registerBook()"> 
             
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label class="control-label" for="id"> </label> <input
                         id="id" type="hidden" formControlName="id" class="form-control" 
                         autofocus="autofocus"> 
-                </div>
+                </div> -->
                  
                         
                 
                 <div class="form-group">
-                    <label class="control-label" for="nombre">Título : </label> 
+                    <label class="control-label" for="nombre">Título</label> 
                     <input id="nombre" type="text" formControlName="nombre" class="form-control"  autofocus="autofocus">
                     
                 </div>
@@ -26,7 +24,7 @@
                 <div class="form-group">
                              
                     <!-- <div formGroupName="autor"> -->
-                    <label class="control-label" for="autor">Autor : </label> <select formControlName="autor">
+                    <label class="control-label" for="autor">Autor</label> <select formControlName="autor" id="autor">
                         <!-- <select (change)="onChange()"> -->
     		    <option [ngValue]="null">Elegir autor</option>
                 @for (autor of autores; track autor.id){
@@ -37,13 +35,14 @@
                     }
     		    
     	        </select>
+                <button type="button" class="createButton" matButton="elevated" (click)="openDialog('0ms', '0ms')">Autor +</button>
                     </div>
-                                       
-                    <button type="button" matButton="elevated" (click)="openDialog('0ms', '0ms')">Autor +</button>
+                       <!-- aqui antes <button></button>                 -->
+                    
                 <!-- </div> -->
 
                 <div class="form-group">
-                    <label class="control-label" for="isbn">isbn : </label> <input
+                    <label class="control-label" for="isbn">ISBN</label> <input
                         id="isbn" type="text" formControlName="isbn" class="form-control" 
                         autofocus="autofocus">
                 </div>
@@ -51,7 +50,7 @@
                <div class="form-group">
                    
                     <!-- <div formGroupName="editorial"> -->
-                    <label class="control-label" for="editorial">Editorial : </label> <select formControlName="editorial" >
+                    <label class="control-label" for="editorial">Editorial</label> <select formControlName="editorial" id="editorial">
                     <option [ngValue]="null" >Elegir editorial</option>
                 @for (editorial of editoriales; track editorial){
                     
@@ -60,8 +59,9 @@
                     </option>
                     }
                     </select>
+                    <button type="button" class="createButton" matButton="elevated" (click)="openEditorialDialog('0ms', '0ms')">Editorial +</button>
                     </div>
-                    <button type="button" matButton="elevated" (click)="openEditorialDialog('0ms', '0ms')">Editorial +</button>
+                    
                     
                     <!-- </div> -->
                 
@@ -69,7 +69,7 @@
                 <div class="form-group">
                   
                     <!-- <div formGroupName="genero"> -->
-                    <label class="control-label" for="genero">Género : </label> <select formControlName="genero" >
+                    <label class="control-label" for="genero">Género</label> <select formControlName="genero" id="genero">
                     <option [ngValue]="null" >Elegir genero</option>
                     @for (genero of generos; track genero){
                     
@@ -77,18 +77,20 @@
                     {{ genero.nombre}}
                     </option>
                     }
-                    </select>
+                    </select> 
+                    <button type="button" class="createButton" matButton="elevated" (click)="openGenreDialog('0ms', '0ms')">Género +</button>
                     </div>
-                    <button type="button" matButton="elevated" (click)="openGenreDialog('0ms', '0ms')">Género +</button>
+                   
                 <!-- </div> -->
                 
                 <div class="form-group">
-                    <label class="control-label" for="portada">Portada : </label> <input
+                    <label class="control-label" for="portada">Portada</label> <input
                         type="text" id="portada" formControlName="portada" class="form-control" 
-                        autofocus="autofocus">
+                        autofocus="autofocus" (change)="sendImage($event)">
+                        
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="sinopsis">Sinópsis : </label> <textarea id="sinopsis" formControlName="sinopsis" class="form-control"></textarea>
+                    <label class="control-label" for="sinopsis">Sinopsis</label> <textarea id="sinopsis" formControlName="sinopsis" class="form-control"></textarea>
                 </div>
                 
                 <div class="form-group">
@@ -96,7 +98,7 @@
                     
                 </div>
             </form>
-
-        </div>
-    </div>
+            
+</div>
+<img [src]="url" />
 </div>

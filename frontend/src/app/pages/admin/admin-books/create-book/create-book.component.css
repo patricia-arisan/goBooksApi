@@ -1,7 +1,87 @@
-.iconoDeCierre{
+/* .iconoDeCierre{
     position: relative;
     top: -20px;
     right: 0;
     left: 97%;
     cursor: pointer;
+} */
+ .container{
+    width: 70%;
+    
+ }
+ h2{
+    margin-top: 45px;
+    margin-bottom: 40px;
+ }
+ /* .form{
+    width: 75%;
+ } */
+ img{
+    height: 300px;
+    width: 220px;
+    margin-top: 32px;
+    margin-left: 110px;
+    box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
+    float: right;
+    margin-top: -720px;
+   
+ }
+ .form-group{ 
+    /* border: 1px solid black; */
+    margin-bottom: 10px;
+    /* margin-bottom: 30px; */
+    
+    
+ }
+ .control-label{
+    font-size: 1.1em;
+    font-weight: 700;
+    margin-right: 40px;
+    margin-bottom: 10px;
+ }
+ 
+ #nombre,#isbn,#portada,#sinopsis{
+    width: 640px;
+    background-color: rgb(245, 243, 243);
+    
+    
+ }
+ #sinopsis{
+    height: 200px;
+ }
+#autor{
+    
+    width: 370px;
+    
+    margin-left: 5px;
+    margin-right: 60px;
+
+    
 }
+#autor,#editorial,#genero{
+   height: 35px; 
+   border: 1px solid rgb(212, 211, 211);
+    border-radius: 5px; 
+    background-color: rgb(245, 243, 243);
+}
+ input{
+    margin-bottom: 20px;
+ }
+ .createButton{
+    
+    
+    color:white;
+    height: 35px;
+    
+    border-radius: 8px;
+    width: 120px;
+    
+    
+
+ }
+ button{
+    background-color: rgb(253, 160, 54);
+    border: none;
+    font-weight: 500;
+ }
+ 

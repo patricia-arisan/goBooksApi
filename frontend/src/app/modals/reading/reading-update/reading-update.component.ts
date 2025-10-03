@@ -60,8 +60,6 @@ export class ReadingUpdateComponent implements OnInit {
     this.getCurrentBook();
     this.findReading();
 
-    ///aqui rating no da problemas
-
     this.formUpdateReading = this.formBuilder.group({
       id: [null],
       puntuacion: [null],

@@ -5,7 +5,7 @@
 @for (libro of libros.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro.id){
     <div class="libro">
     <a [routerLink]="['/book-section',libro.id]" ><img src="{{libro.portada}}" id="portada" alt="{{libro.nombre}}"/></a>
-    <p class="nombre"><a [routerLink]="['/book-section',libro.id]" >{{libro.nombre}}</a></p>
+    <a [routerLink]="['/book-section',libro.id]" ><p class="nombre">{{libro.nombre}}</p></a>
   </div>
 }
 
