@@ -7,11 +7,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.atrium.gobooks.entities.Autor;
+import com.atrium.gobooks.entities.Libro;
 import com.atrium.gobooks.exceptions.ServicioException;
 import com.atrium.gobooks.services.ServicioAutor;
 
@@ -35,9 +37,14 @@ public class AutorController {
 		List <Autor> autores = servicioAutor.buscarAutoresPorOrdenAlfabetico();
 		return autores;
 	}
-//	@GetMapping(value="{id}")
-//	public Autor find(@PathVariable Integer id) throws ServicioException{
-//		return servicioAutor.obtenerAutor(id);
-//	}
+	
+	@PutMapping(value="/{id}")
+	public Autor actualizarAutor(@PathVariable Integer id, @RequestBody Autor autor) throws ServicioException {
+		return servicioAutor.modificarAutor(autor);
+	}
+	@GetMapping(value="/{id}")
+	public Autor find(@PathVariable Integer id) throws ServicioException{
+		return servicioAutor.obtenerAutor(id);
+	}
 
 }

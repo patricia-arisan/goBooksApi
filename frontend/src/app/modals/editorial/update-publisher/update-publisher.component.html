@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Modificar editorial</h2>
+<mat-dialog-content>
+    <form [formGroup]="formUpdatePublisher" (submit)="updatePublisher()">
+        <div class="form-group">
+            <label class="control-label" for="nombre">Editorial</label>
+            <input id="nombre" type="text" formControlName="nombre" class="form-control">
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn" (click)="closeForm()">Atrás</button>
+            <button type="submit" class="btn btn-success">Actualizar</button>
+        </div>
+    </form>
+</mat-dialog-content>

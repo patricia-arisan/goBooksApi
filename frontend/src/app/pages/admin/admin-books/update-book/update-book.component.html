@@ -1,55 +1,93 @@
 <app-header-admin></app-header-admin>
-<div>
+<div class="container">
+  <h2>Modificar libro</h2>
+  <div class="row g-5">
 <form [formGroup]="formUpdate" (submit)="update()">
     
-          <div class="row pb-3">
-            <div class="col-sm-6 form-group">
+          
+            <!-- <div class="col-sm-6 form-group">
               <label for="ac-fn">Id</label>
               <input type="text" id="id" class="form-control" formControlName="id">
 
               
-            </div>
-            <div class="col-sm-6 form-group">
-              <label for="ac-fn">Título</label>
+            </div> -->
+            <div class="form-group">
+              <label class="control-label" for="ac-fn">Título</label>
               <input type="text" id="nombre" class="form-control" formControlName="nombre">
 
               
             </div>
-            <div class="col-sm-6 form-group" formGroupName="autor">
-              <label for="ac-ln">Autor</label>
-              <input id="autor" type="text" formControlName="id" class="form-control">
+            <div class="form-group" formGroupName="autor">
+              <label class="control-label" for="ac-ln">Autor</label>
+              <select formControlName="id" id="autor">
+                @for (autor of autores; track autor.id){
+                    
+                    <option [value]="autor.id" >
+                    {{ autor.nombre}}
+                    </option>
+                    }
+    		    
+    	        </select>
+              
+              <button type="button" class="editButton" matButton="elevated" (click)="openUpdateAuthorDialog('0ms', '0ms')">Editar</button>
             </div>
-            <div class="col-sm-6 form-group">
-              <label>isbn</label>
+            <div class="form-group">
+              <label class="control-label">ISBN</label>
               <input id="isbn" type="text" formControlName="isbn" class="form-control">
             </div>
             
-            <div class="col-sm-6 form-group" formGroupName="editorial">
-              <label>Editorial</label>
-              <input id="isbn" type="text" formControlName="id" class="form-control">
+            <div class="form-group" formGroupName="editorial">
+              <label class="control-label">Editorial</label>
+              <select formControlName="id" id="editorial">
+                    
+                @for (editorial of editoriales; track editorial){
+                    
+                    <option [value]="editorial.id">
+                    {{ editorial.nombre}}
+                    </option>
+                    }
+                    </select>
+              
+              
+              <button type="button" class="editButton" matButton="elevated" (click)="openUpdatePublisherDialog('0ms', '0ms')">Editar</button>
             </div>
-            <div class="col-sm-6 form-group" formGroupName="genero">
-              <label>Género</label>
-              <input id="isbn" type="text" formControlName="id" class="form-control">
+            <div class="form-group" formGroupName="genero">
+              <label class="control-label">Género</label>
+              <select formControlName="id" id="genero">
+                    
+                    @for (genero of generos; track genero){
+                    
+                    <option [value]="genero.id">
+                    {{ genero.nombre}}
+                    </option>
+                    }
+                    </select> 
+              
+              <button type="button" class="editButton" matButton="elevated" (click)="openUpdateGenreDialog('0ms', '0ms')">Género</button>
             </div>
-            <div class="col-sm-6 form-group">
-              <label>Portada</label>
-              <input type="text" id="portada" formControlName="portada" class="form-control">
+            <div class="form-group">
+              <label class="control-label">Portada</label>
+              <input type="text" id="portada" formControlName="portada" class="form-control" (input)="sendImage($event)">
             </div>
-            <div class="col-sm-6 form-group">
-              <label>Sinópsis</label>
+            <div class="form-group">
+              <label class="control-label">Sinópsis</label>
               <textarea id="sinopsis" formControlName="sinopsis" class="form-control"></textarea>
             </div>
 
             
 
-            
-        </div>
+            <div class="form-group">
+                    <button type="submit" class="btn btn-success">Actualizar</button>
+                    
+                </div>
+        
           <!-- <button type="submit" class="btn btn-primary btn-lg">&nbsp;Actualizar&nbsp;</button> -->
         </form>
       
-
-
+</div>
+<div class="imagen">
+<img [src]="url" />
+</div>
 </div>
 
    

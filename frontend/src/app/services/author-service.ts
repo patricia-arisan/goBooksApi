@@ -43,5 +43,33 @@ constructor(private client: HttpClient) { }
 
         return this.client.get<Autor[]>(`${this.authorListServiceUrl}`,{headers})
     }
+
+    private readonly updateAuthorServiceUrl = `${environment.proyectoUrl}api/autor`
+          updateAuthor(id: number,autor: Autor): Observable<Autor>{
+            
+                const credentials = localStorage.getItem('token');
+                const headers = new HttpHeaders({
+                        'Content-Type': 'application/json',
+                        
+                        'Authorization' : credentials || ''
+                       
+                    })
+                
+                return this.client.put<Autor>(`${this.updateAuthorServiceUrl}/${id}`,autor,{headers})
+          }
+
+          private readonly findAuthorServiceUrl = `${environment.proyectoUrl}api/autor`;
+              
+                getAuthorById(id: number): Observable<Autor>{
+                  const credentials = localStorage.getItem('token');
+                  const headers = new HttpHeaders({
+                        'Content-Type': 'application/json',
+                          
+                        'Authorization' : credentials || ''
+                         
+                    })
+              
+                    return this.client.get<Autor>(`${this.findAuthorServiceUrl}/${id}`,{headers})
+                }
  
 }

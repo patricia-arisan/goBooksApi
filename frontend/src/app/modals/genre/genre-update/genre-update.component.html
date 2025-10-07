@@ -1,13 +1,13 @@
-<h2 mat-dialog-title>Añadir editorial</h2>
+<h2 mat-dialog-title>Modificar género</h2>
 <mat-dialog-content>
-    <form [formGroup]="formNewGenre" (submit)="registerGenre()">
+    <form [formGroup]="formUpdateGenre" (submit)="updateGenre()">
         <div class="form-group">
-            <label class="control-label" for="nombre">Género : </label>
+            <label class="control-label" for="nombre">Género</label>
             <input id="nombre" type="text" formControlName="nombre" class="form-control" required>
         </div>
         <div class="form-group">
             <button type="button" class="btn" (click)="closeForm()">Atrás</button>
-            <button type="submit" class="btn btn-success">Añadir</button>
+            <button type="submit" class="btn btn-success">Actualizar</button>
         </div>
     </form>
 </mat-dialog-content>

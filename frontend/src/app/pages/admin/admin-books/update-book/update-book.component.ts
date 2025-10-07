@@ -17,6 +17,10 @@ import { EditorialComponent } from '../../../../modals/editorial/editorial.compo
 import { GenreComponent } from '../../../../modals/genre/genre.component';
 import { Usuario } from '../../../../interfaces/usuario';
 import { ServicesService } from '../../../../services/services.service';
+import { AuthorUpdateComponent } from '../../../../modals/author/author-update/author-update.component';
+import { UpdatePublisherComponent } from '../../../../modals/editorial/update-publisher/update-publisher.component';
+import { GenreUpdateComponent } from '../../../../modals/genre/genre-update/genre-update.component';
+
 
 
 @Component({
@@ -34,12 +38,19 @@ export class UpdateBookComponent implements OnInit{
   // generos!: Genero[];
   libro!: Libro;
   id!: string; //para recuperar luego id en url
+  url!: string;
+  autores!: Autor[];
+  editoriales!: Editorial[];
+  generos!: Genero[];
     
   constructor(
     private formBuilder: FormBuilder,
     private bookService: BookService,
     private route: ActivatedRoute,
     private userService: ServicesService,
+    private authorService: AuthorService,
+    private editorialService: EditorialService,
+    private genreService: GenreService,
     private router: Router
   ){}
 
@@ -52,7 +63,9 @@ export class UpdateBookComponent implements OnInit{
       this.id = params['libro.id'];
     });
     this.retrieveFromLocalStorage();
-    
+     this.getAuthors();
+    this.getEditorials();
+    this.getGenres();
     
 
     this.formUpdate = this.formBuilder.group ({
@@ -80,6 +93,7 @@ export class UpdateBookComponent implements OnInit{
       
     setTimeout(() => {
       this.fillForm();
+      
     }, 500);
 
      
@@ -140,7 +154,7 @@ export class UpdateBookComponent implements OnInit{
           
         
     });
-      
+      this.url=this.libro.portada;
    }
 
     formUpdate:FormGroup = new FormGroup({
@@ -170,5 +184,100 @@ export class UpdateBookComponent implements OnInit{
     })
     
     }
+
+    getAuthors(){
+    this.authorService.getAuthorsByNameOrder().subscribe((data:Autor[])=>{
+        this.autores = data;
+      })
+
+    }
+
+    
+
+    getEditorials(){
+    this.editorialService.getEditorialsByNameOrder().subscribe((data:Editorial[])=>{
+        this.editoriales = data;
+      })
+
+    }
+
+    getGenres(){
+    this.genreService.getGenresByNameOrder().subscribe((data:Genero[])=>{
+        this.generos = data;
+      })
+
+    }
+
+    sendImage(event: Event){
+      let selectedUrl = (event.target as HTMLInputElement)!.value;
+      console.log(selectedUrl);
+      console.log(this.url)
+      this.url=selectedUrl;
+      
+      
+        if(this.url===null || this.url.trim().length === 0) {
+        
+        this.url="/assets/icon/book.png";
+        
+      }
+    }
+
+    
+
+    readonly dialog = inject(MatDialog);
+    
+    openUpdateAuthorDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(AuthorUpdateComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      disableClose: true,
+      data:this.libro.id
+    }).afterClosed().subscribe((data: Libro)=>{
+      this.autores.push(data);
+     
+
+      
+      console.log(this.autores)
+      this.getAuthors();
+    });
+  }
+  
+  openUpdatePublisherDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(UpdatePublisherComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      disableClose: true,
+      data:this.libro.id
+    }).afterClosed().subscribe((data: Libro)=>{
+      this.editoriales.push(data);
+     
+
+      
+      
+      this.getEditorials();
+    });
+  }
+
+   openUpdateGenreDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(GenreUpdateComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      disableClose: true,
+      data:this.libro.id
+    }).afterClosed().subscribe((data: Libro)=>{
+      this.generos.push(data);
+     
+
+      
+      
+      this.getGenres();
+    });
+  }
+
+  
+    
   
 }

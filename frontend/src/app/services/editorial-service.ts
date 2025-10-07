@@ -43,5 +43,33 @@ constructor(private client: HttpClient) { }
 
         return this.client.get<Editorial[]>(`${this.editorialListServiceUrl}`,{headers})
     }
+
+    private readonly updatePublisherServiceUrl = `${environment.proyectoUrl}api/editorial`
+              updatePublisher(id: number,editorial: Editorial): Observable<Editorial>{
+                
+                    const credentials = localStorage.getItem('token');
+                    const headers = new HttpHeaders({
+                            'Content-Type': 'application/json',
+                            
+                            'Authorization' : credentials || ''
+                           
+                        })
+                    
+                    return this.client.put<Editorial>(`${this.updatePublisherServiceUrl}/${id}`,editorial,{headers})
+              }
+    
+              private readonly findPublisherServiceUrl = `${environment.proyectoUrl}api/editorial`;
+                  
+                    getPublisherById(id: number): Observable<Editorial>{
+                      const credentials = localStorage.getItem('token');
+                      const headers = new HttpHeaders({
+                            'Content-Type': 'application/json',
+                              
+                            'Authorization' : credentials || ''
+                             
+                        })
+                  
+                        return this.client.get<Editorial>(`${this.findPublisherServiceUrl}/${id}`,{headers})
+                    }
  
 }

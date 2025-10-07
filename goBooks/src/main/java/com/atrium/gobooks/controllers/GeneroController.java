@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.atrium.gobooks.entities.Autor;
 import com.atrium.gobooks.entities.Genero;
 import com.atrium.gobooks.exceptions.ServicioException;
 import com.atrium.gobooks.services.ServicioAutor;
@@ -31,6 +34,15 @@ public class GeneroController {
 	public List <Genero> listarGeneros() throws ServicioException{
 		List <Genero> generos = servicioGenero.buscarGenerosPorOrdenAlfabetico();
 		return generos;
+	}
+	
+	@PutMapping(value="/{id}")
+	public Genero actualizarGenero(@PathVariable Integer id, @RequestBody Genero genero) throws ServicioException {
+		return servicioGenero.modificarGenero(genero);
+	}
+	@GetMapping(value="/{id}")
+	public Genero find(@PathVariable Integer id) throws ServicioException{
+		return servicioGenero.obtenerGenero(id);
 	}
 
 }

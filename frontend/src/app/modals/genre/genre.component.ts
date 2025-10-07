@@ -45,5 +45,8 @@ export class GenreComponent implements OnInit{
             this.dialogRef.close();
           })
       }
+      closeForm(): void {
+    this.dialogRef.close();
+  }
 
 }

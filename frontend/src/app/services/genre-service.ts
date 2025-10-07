@@ -43,5 +43,33 @@ constructor(private client: HttpClient) { }
 
         return this.client.get<Genero[]>(`${this.genreListServiceUrl}`,{headers})
     }
+
+        private readonly updateGenreServiceUrl = `${environment.proyectoUrl}api/genero`
+              updateGenre(id: number,genero: Genero): Observable<Genero>{
+                
+                    const credentials = localStorage.getItem('token');
+                    const headers = new HttpHeaders({
+                            'Content-Type': 'application/json',
+                            
+                            'Authorization' : credentials || ''
+                           
+                        })
+                    
+                    return this.client.put<Genero>(`${this.updateGenreServiceUrl}/${id}`,genero,{headers})
+              }
+    
+              private readonly findGenreServiceUrl = `${environment.proyectoUrl}api/genero`;
+                  
+                    getGenreById(id: number): Observable<Genero>{
+                      const credentials = localStorage.getItem('token');
+                      const headers = new HttpHeaders({
+                            'Content-Type': 'application/json',
+                              
+                            'Authorization' : credentials || ''
+                             
+                        })
+                  
+                        return this.client.get<Genero>(`${this.findGenreServiceUrl}/${id}`,{headers})
+                    }
  
 }
