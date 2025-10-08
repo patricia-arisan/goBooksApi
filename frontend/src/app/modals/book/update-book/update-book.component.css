@@ -1,0 +1,14 @@
+h2 {
+    background-color: rgb(253, 197, 127);
+}
+
+.mat-mdc-dialog-title {
+    color: white;
+}
+
+.control-label {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: black;
+    margin-bottom: 10px;
+}

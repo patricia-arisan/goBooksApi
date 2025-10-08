@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
 import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-admin.component';
 import { RouterLink } from '@angular/router';
 import { BookService } from '../../../services/book-service';
@@ -7,6 +7,8 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginator, MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { UpdateBookComponent } from '../../../modals/book/update-book/update-book.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -125,5 +127,24 @@ applyFilterGalery(event: Event){
       return `Página ${page + 1} de ${totalPaginas}`;
     }
   }
+
+  readonly dialog = inject(MatDialog);
+  openDialog(libro:Libro,enterAnimationDuration: string, exitAnimationDuration: string): void {
+      this.dialog.open(UpdateBookComponent, {
+        width: '250px',
+        enterAnimationDuration,
+        exitAnimationDuration,
+        disableClose: true,
+        data:libro.id
+        
+      }).afterClosed().subscribe((data: Libro)=>{
+        
+       
+  
+        
+        
+        this.getBooks();
+      });
+    }
 
 }
