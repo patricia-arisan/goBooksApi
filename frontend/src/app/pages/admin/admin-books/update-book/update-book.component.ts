@@ -20,6 +20,7 @@ import { ServicesService } from '../../../../services/services.service';
 import { AuthorUpdateComponent } from '../../../../modals/author/author-update/author-update.component';
 import { UpdatePublisherComponent } from '../../../../modals/editorial/update-publisher/update-publisher.component';
 import { GenreUpdateComponent } from '../../../../modals/genre/genre-update/genre-update.component';
+import { DeleteBookComponent } from '../../../../modals/book/delete-book/delete-book.component';
 
 
 
@@ -33,9 +34,6 @@ import { GenreUpdateComponent } from '../../../../modals/genre/genre-update/genr
 })
 export class UpdateBookComponent implements OnInit{
   user!: Usuario;
-  // autores!: Autor[];
-  // editoriales!: Editorial[];
-  // generos!: Genero[];
   libro!: Libro;
   id!: string; //para recuperar luego id en url
   url!: string;
@@ -128,6 +126,8 @@ export class UpdateBookComponent implements OnInit{
         })
         
   }
+
+  
 
   fillForm(){
     
@@ -277,6 +277,15 @@ export class UpdateBookComponent implements OnInit{
     });
   }
 
+  openDeleteBookDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(DeleteBookComponent, {
+      width: '350px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      disableClose: true,
+      data:this.libro.id
+    })
+  }
   
     
   

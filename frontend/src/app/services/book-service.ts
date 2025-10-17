@@ -188,5 +188,26 @@ searchByBookAuthorEditorial(busqueda: string): Observable<Libro[]>{
             return this.client.put<Libro>(`${this.updateBookServiceUrl}/${id}`,libro,{headers})
       }
 
+      private readonly bookServiceDeleteUrl = `${environment.proyectoUrl}api/libro`;
+   deleteBook(id: number): Observable<any>{
+    console.log("Service " + id);
+    const credentials = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            
+            'Authorization' : credentials || ''
+           
+        })
+    
+    
+    return this.client.delete<any>(`${this.bookServiceDeleteUrl}/${id}`,{headers})
+    
+    
+  }
+
+
+  ///////////////////////
+  /////////////////////////
+
 
 }

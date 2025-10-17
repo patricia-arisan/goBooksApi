@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.atrium.gobooks.dto.AutorDTO;
 import com.atrium.gobooks.entities.Autor;
 import com.atrium.gobooks.entities.Libro;
 import com.atrium.gobooks.exceptions.ServicioException;
@@ -45,6 +46,19 @@ public class AutorController {
 	@GetMapping(value="/{id}")
 	public Autor find(@PathVariable Integer id) throws ServicioException{
 		return servicioAutor.obtenerAutor(id);
+	}
+	
+	
+	@GetMapping("/conteoLibross")
+	public List <Autor> conteoLibrosAutores() throws ServicioException{
+		List <Autor> autores = servicioAutor.numeroLibrosAutores();
+		return autores;
+	}
+	
+	@GetMapping("/conteoLibros")
+	public List <AutorDTO> conteoLibrosAutor() throws ServicioException{
+		List <AutorDTO> autores = servicioAutor.numeroLibrosAutor();
+		return autores;
 	}
 
 }

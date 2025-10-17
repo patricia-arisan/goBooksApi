@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import {Observable} from 'rxjs';
 import { Autor } from '../interfaces/autor';
+import { AutorDTO } from '../interfaces/autorDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -72,4 +73,20 @@ constructor(private client: HttpClient) { }
                     return this.client.get<Autor>(`${this.findAuthorServiceUrl}/${id}`,{headers})
                 }
  
+
+                private readonly numberBooksAuthorListServiceUrl = `${environment.proyectoUrl}api/autor/conteoLibros`;
+                getListBookAuthorNumber(): Observable<AutorDTO[]>{
+                        const credentials = localStorage.getItem('token');
+                        const headers = new HttpHeaders({
+                              'Content-Type': 'application/json',
+                                
+                              'Authorization' : credentials || ''
+                               
+                          })
+                    
+                          return this.client.get<AutorDTO[]>(`${this.numberBooksAuthorListServiceUrl}`,{headers})
+                      }
+
+                 
+
 }

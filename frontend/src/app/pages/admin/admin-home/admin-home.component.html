@@ -1,0 +1,34 @@
+
+@if(user.rol.id==1){
+<app-header-admin></app-header-admin>
+}
+<div id="seccionBuscador">
+    <form [formGroup]="formSearch" (submit)="search()">
+        <input type="text" formControlName="clave" id="buscador" placeholder="Título, autor, editorial o ISBN" />
+        <button type="submit"><img src="/assets/main-home/search.png" class="lupa" alt="buscar" /></button>
+    </form>
+</div>
+<div id="apartados">
+<section id="ultimosLibros">
+    <h3>Últimos añadidos</h3>
+            <div class="listadoLibros">  
+@for (libro of libros.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro){
+    <div class="libro">
+    <a [routerLink]="['/book-section',libro.id]" ><img src="{{libro.portada}}" id="portada" alt="{{libro.nombre}}"/></a>
+    <p class="nombre"><a [routerLink]="['/book-section',libro.id]" >{{libro.nombre}}</a></p>
+  </div>
+}
+</div>  
+<mat-paginator class="paginator"
+              [length]="totalItems"
+              [pageSize]="pageSize"
+              [pageIndex]="pageIndex"
+              [pageSizeOptions]="[16, 32, 40]"
+              aria-label="Select page"
+              (page)="onPageChange($event)">
+</mat-paginator>
+        </section>
+       
+</div>
+
+

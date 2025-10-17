@@ -1,0 +1,60 @@
+<app-header-admin></app-header-admin>
+<div class="administracion">
+
+<h2>Administrar autores</h2>
+<p>api/autor/conteoLibros</p>
+<p>AutorDTO</p>
+@for (autor of autores; track autor.nombre){
+ 
+<p>{{autor.nombre}}</p>
+<p>{{autor.numeroLibros}}</p>
+
+
+
+}
+
+
+
+<mat-form-field>
+  <mat-label>Filtrar</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Autor, editorial, género" #input>
+</mat-form-field>
+
+ 
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+   
+    
+  <ng-container matColumnDef="author" >
+    <th mat-header-cell *matHeaderCellDef > Autor </th>
+    
+    <td mat-cell *matCellDef="let libro"> {{libro.autor.nombre}} </td>
+    
+  </ng-container>
+  
+   <ng-container matColumnDef="edit">
+    
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let libro" (click)="$event.stopPropagation()"><button type="button" class="edit-buttom" [routerLink]="['/book-section/editar/',libro.id]"><img src="/assets/update/edit.png" class="edit" alt="edit" /></button></td>
+    
+  </ng-container>
+  
+   
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row (click)="openDialog(libro,'0ms', '0ms')" *matRowDef="let libro; columns: displayedColumns;"></tr>
+   
+  </table>
+
+  <mat-paginator class="paginator"
+              
+              [pageSize]="pageSize"
+              [pageIndex]="pageIndex"
+              [pageSizeOptions]="[16, 32, 40]"
+              aria-label="Select page"
+              (page)="onPageChange($event)">
+</mat-paginator> 
+
+
+
+  </div>
+  <!-- <span id="editar"><a [routerLink]="['/book-section/editar/',libro.id]">Editar</a></span> -->

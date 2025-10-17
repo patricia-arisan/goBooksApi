@@ -37,7 +37,9 @@ export class ResultsScoreComponent implements OnInit{
   getBooksOrderByScore(){
     
     this.bookService.getListBookScore().subscribe((data:Libro[])=>{
+      
           this.libros = data;
+          console.log(this.libros);
           this.totalItems=this.libros.length;
           
         })

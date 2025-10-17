@@ -133,7 +133,16 @@ public class ServicioLibroImpl implements ServicioLibro{
 	
 	@Override
 	public void eliminarLibro(Integer idLibro) throws ServicioException {
-		// TODO Auto-generated method stub
+		log.info("[eliminarLibro]");
+		log.debug("[idLibro: " + idLibro + "]");
+
+		try {
+			libroRepository.deleteById(idLibro);
+		} catch (Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL, e);
+		}
+		
 		
 	}
 
@@ -229,5 +238,7 @@ List<Libro> libros;
 		}
 		return libro;
 	}
-
+	
+	
+	
 }

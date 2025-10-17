@@ -1,20 +1,45 @@
-<div id="cabecera">
-    <div id="cabeceraBooks">    
-        <a routerLink="/home"><img src="/assets/logo/ibooks.png" alt="logo" id="logo"/></a>
-        <h1>GoBooks</h1>
-    </div>    
-    <div class="login">
-        <a routerLink="/profile"><button id="cuenta"><img src="/assets/user/user.png" alt="usuario" id="usuario"/>Mi cuenta</button></a>
-    </div>
+<!-- <div id="cabecera">
+  <div id="cabeceraBooks">
+    <a routerLink="/home"><img src="/assets/logo/ibooks.png" alt="logo" id="logo" /></a>
+    <h1>GoBooks</h1>
+  </div>
+  <div class="login">
+    <a routerLink="/profile">
+      <button id="cuenta"><img src="/assets/user/user.png" alt="usuario" id="usuario" />Mi cuenta</button>
+    </a>
+  </div>
 </div>
 <div class="container">
-    <nav class="d-flex justify-content-center py-3">
-      <ul class="nav nav-pills">
-        <li class="nav-item"><a routerLink="/home" class="nav-link active">Home</a></li>
-        <li class="nav-item"><a routerLink="/admin-books" class="nav-link">Libros</a></li>
-        <li class="nav-item"><a routerLink="/admin-books" class="nav-link">Administración</a></li>
-        
-        <li class="nav-item"><button class="nav-link" (click)="logout()">Cerrar Sesión</button></li>
-      </ul>
-    </nav>
+  <nav class="d-flex justify-content-center py-3">
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a routerLink="/home" class="nav-link active">Home</a></li>
+      <li class="nav-item"><a routerLink="/admin-books" class="nav-link">Libros</a></li>
+      <li class="nav-item"><a routerLink="/admin-booksdetails" class="nav-link">Administración</a></li>
+      <li class="nav-item"><button class="nav-link" (click)="logout()">Cerrar Sesión</button></li>
+    </ul>
+  </nav>
+</div> -->
+<div id="cabecera">
+  <div id="cabeceraBooks">
+    <a routerLink="/home"><img src="/assets/logo/ibooks.png" alt="logo" id="logo" /></a>
+    <h1>GoBooks</h1>
+  </div>
+  
+  <div class="login">
+    <a routerLink="/profile">
+      <button id="cuenta"><img src="/assets/user/user.png" alt="usuario" id="usuario" />Mi cuenta</button>
+    </a>
+  </div>
+</div>
+<div class="container">
+  <nav class="d-flex justify-content-center py-3">
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a routerLink="/admin-home" class="nav-link active">Home</a></li>
+      <li class="nav-item"><a routerLink="/admin-books" class="nav-link">Libros</a></li>
+      <li class="nav-item"><a routerLink="/admin-authors" class="nav-link">Autores</a></li>
+      <li class="nav-item"><a routerLink="/admin-genres" class="nav-link">Géneros</a></li>
+      <li class="nav-item"><a routerLink="/admin-booksdetails" class="nav-link">Editoriales</a></li>
+      <li class="nav-item"><button class="nav-link" (click)="logout()">Cerrar Sesión</button></li>
+    </ul>
+  </nav>
 </div>

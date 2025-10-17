@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.atrium.gobooks.dto.AutorDTO;
 import com.atrium.gobooks.entities.Autor;
 import com.atrium.gobooks.entities.Libro;
 import com.atrium.gobooks.exceptions.CodigoError;
@@ -88,5 +89,36 @@ public class ServicioAutorImpl implements ServicioAutor{
 		}
 		return autor;
 	}
+	
+	@Override
+	public List<Autor> numeroLibrosAutores() throws ServicioException {
+		log.info("[listConteoLibros]");
+		List<Autor> autores;
+		
+		try {
+			autores= autorRepository.numeroLibrosAutores();
+			
+		}catch(Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
+		}
+		return autores;
+	}
+	
+	@Override
+	public List<AutorDTO> numeroLibrosAutor() throws ServicioException {
+		log.info("[listConteoLibrosDTO]");
+		List<AutorDTO> autores;
+		
+		try {
+			autores= autorRepository.numeroLibrosAutor();
+			
+		}catch(Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
+		}
+		return autores;
+	}
+
 
 }

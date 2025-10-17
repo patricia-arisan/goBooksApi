@@ -151,6 +151,33 @@ export const routes: Routes = [
         title: 'Administrar Libros'
     },
     {
+    path: 'admin-authors',
+        loadComponent: () =>
+            import('./pages/admin/admin-authors/admin-authors.component').then(
+                (m) => m.AdminAuthorsComponent
+
+            ),
+        title: 'Administrar Autores'
+    },
+    {
+    path: 'admin-genres',
+        loadComponent: () =>
+            import('./pages/admin/admin-genres/admin-genres.component').then(
+                (m) => m.AdminGenresComponent
+
+            ),
+        title: 'Administrar Categorías'
+    },
+    {
+    path: 'admin-home',
+        loadComponent: () =>
+            import('./pages/admin/admin-home/admin-home.component').then(
+                (m) => m.AdminHomeComponent
+
+            ),
+        title: 'Home'
+    },
+    {
     path: 'create-book',
         loadComponent: () =>
             import('./pages/admin/admin-books/create-book/create-book.component').then(

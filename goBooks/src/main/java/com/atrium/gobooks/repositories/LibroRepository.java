@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import com.atrium.gobooks.dto.AutorDTO;
 import com.atrium.gobooks.entities.Libro;
 
 public interface LibroRepository extends JpaRepository<Libro, Integer>{
@@ -41,6 +42,7 @@ public interface LibroRepository extends JpaRepository<Libro, Integer>{
 			+ "OR l.isbn LIKE %:clave%")
 	List<Libro> buscarLibro (String clave);
 	
+	
 	/////
 //	@Query(value="SELECT l FROM Libro l ORDER BY (SELECT AVG(puntuacion) FROM Lectura le, "
 //			+ "Libro l WHERE l.id=le.libro.id) DESC NULLS LAST")
@@ -64,5 +66,7 @@ public interface LibroRepository extends JpaRepository<Libro, Integer>{
 	///WHERE l.libro_id=le.libro_id GROUP BY l.libro_id ORDER BY media DESC;
 	///SELECT le.libro_id, AVG(lectura_puntuacion) AS media FROM Lectura le, Libro l WHERE l.libro_id=le.libro_id 
 	///GROUP BY l.libro_id ORDER BY media DESC;
+	///
+	
 	
 }

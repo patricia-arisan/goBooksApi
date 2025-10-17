@@ -84,3 +84,20 @@ button:hover{
     float: right;
     margin-right: 280px;
 }
+
+
+
+.deleteButton{
+    float: right;
+    margin-top: -400px;
+    color: white;
+    width: 220px;
+   height: 40px;
+    border-radius: 8px;
+    background-color: rgb(190, 57, 57);
+    position: relative;
+    
+}
+.deleteButton:hover{
+   background-color: rgb(230, 48, 48); 
+}
