@@ -1,15 +1,11 @@
 package com.atrium.gobooks.repositories;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.atrium.gobooks.entities.Lectura;
-import com.atrium.gobooks.entities.Libro;
 
 public interface LecturaRepository extends JpaRepository<Lectura, Integer>{
 	

@@ -3,7 +3,6 @@ package com.atrium.gobooks.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.atrium.gobooks.dto.LecturaDTO;
 import com.atrium.gobooks.entities.Lectura;
-import com.atrium.gobooks.entities.Usuario;
 import com.atrium.gobooks.exceptions.ServicioException;
 import com.atrium.gobooks.services.ServicioLectura;
 

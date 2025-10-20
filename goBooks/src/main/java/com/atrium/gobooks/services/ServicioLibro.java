@@ -2,7 +2,6 @@ package com.atrium.gobooks.services;
 
 import java.util.List;
 
-import com.atrium.gobooks.entities.Lectura;
 import com.atrium.gobooks.entities.Libro;
 import com.atrium.gobooks.exceptions.ServicioException;
 

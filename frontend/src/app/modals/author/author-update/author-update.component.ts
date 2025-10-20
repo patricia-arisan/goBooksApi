@@ -61,7 +61,7 @@ export class AuthorUpdateComponent implements OnInit{
         // sinopsis:[""],
     });
 
-    this.getCurrentBook();
+    // this.getCurrentBook();
 setTimeout(() => {
     this.findCurrentAuthor();
     }, 500);
@@ -88,20 +88,20 @@ setTimeout(() => {
               }  
             }
 
-  getCurrentBook(){
+  // getCurrentBook(){
     
-    this.bookService.getBookById(this.data).subscribe((data:Libro)=>{
+  //   this.bookService.getBookById(this.data).subscribe((data:Libro)=>{
       
-          this.libro = data;
-          console.log(this.libro)
+  //         this.libro = data;
+  //         console.log(this.libro)
           
-        })
+  //       })
         
-  }
+  // }
 
   findCurrentAuthor(){
-    console.log(this.libro.autor.id)
-    this.authorService.getAuthorById(this.libro.autor.id).subscribe((data: Autor) => {
+    console.log(this.data)
+    this.authorService.getAuthorById(this.data).subscribe((data: Autor) => {
     
           this.autor = data;
           console.log(this.autor)

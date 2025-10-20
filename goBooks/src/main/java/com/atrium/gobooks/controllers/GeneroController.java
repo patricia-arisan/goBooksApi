@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.atrium.gobooks.entities.Autor;
 import com.atrium.gobooks.entities.Genero;
 import com.atrium.gobooks.exceptions.ServicioException;
-import com.atrium.gobooks.services.ServicioAutor;
 import com.atrium.gobooks.services.ServicioGenero;
 
 @RestController

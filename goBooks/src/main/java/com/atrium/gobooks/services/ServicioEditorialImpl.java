@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.atrium.gobooks.entities.Autor;
 import com.atrium.gobooks.entities.Editorial;
 import com.atrium.gobooks.exceptions.CodigoError;
 import com.atrium.gobooks.exceptions.ServicioException;

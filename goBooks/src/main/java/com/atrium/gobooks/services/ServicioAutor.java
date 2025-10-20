@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.atrium.gobooks.dto.AutorDTO;
 import com.atrium.gobooks.entities.Autor;
-import com.atrium.gobooks.entities.Libro;
 import com.atrium.gobooks.exceptions.ServicioException;
 
 public interface ServicioAutor {
@@ -16,8 +15,6 @@ public interface ServicioAutor {
 	List<Autor> buscarAutoresPorOrdenAlfabetico() throws ServicioException;
 	
 	Autor modificarAutor(Autor autor) throws ServicioException;
-	
-	List<Autor> numeroLibrosAutores() throws ServicioException;
 	
 	List<AutorDTO> numeroLibrosAutor() throws ServicioException; 
 }

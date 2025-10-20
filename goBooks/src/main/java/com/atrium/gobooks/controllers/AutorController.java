@@ -3,7 +3,6 @@ package com.atrium.gobooks.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.atrium.gobooks.dto.AutorDTO;
 import com.atrium.gobooks.entities.Autor;
-import com.atrium.gobooks.entities.Libro;
 import com.atrium.gobooks.exceptions.ServicioException;
 import com.atrium.gobooks.services.ServicioAutor;
 
@@ -46,13 +44,6 @@ public class AutorController {
 	@GetMapping(value="/{id}")
 	public Autor find(@PathVariable Integer id) throws ServicioException{
 		return servicioAutor.obtenerAutor(id);
-	}
-	
-	
-	@GetMapping("/conteoLibross")
-	public List <Autor> conteoLibrosAutores() throws ServicioException{
-		List <Autor> autores = servicioAutor.numeroLibrosAutores();
-		return autores;
 	}
 	
 	@GetMapping("/conteoLibros")

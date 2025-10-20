@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.atrium.gobooks.dto.AutorDTO;
 import com.atrium.gobooks.entities.Libro;
 
 public interface LibroRepository extends JpaRepository<Libro, Integer>{
