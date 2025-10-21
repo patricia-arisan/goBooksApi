@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import {Observable} from 'rxjs';
 import { Genero } from '../interfaces/genero';
+import { GeneroDTO } from '../interfaces/generoDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -71,5 +72,19 @@ constructor(private client: HttpClient) { }
                   
                         return this.client.get<Genero>(`${this.findGenreServiceUrl}/${id}`,{headers})
                     }
+
+                    private readonly numberBooksGenreListServiceUrl = `${environment.proyectoUrl}api/genero/conteoLibros`;
+                                    getListBookGenreNumber(): Observable<GeneroDTO[]>{
+                                            const credentials = localStorage.getItem('token');
+                                            const headers = new HttpHeaders({
+                                                  'Content-Type': 'application/json',
+                                                    
+                                                  'Authorization' : credentials || ''
+                                                   
+                                              })
+                                        
+                                              return this.client.get<GeneroDTO[]>(`${this.numberBooksGenreListServiceUrl}`,{headers})
+                                          }
+                    
  
 }

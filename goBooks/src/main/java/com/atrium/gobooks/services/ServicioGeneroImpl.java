@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.atrium.gobooks.dto.AutorDTO;
+import com.atrium.gobooks.dto.GeneroDTO;
 import com.atrium.gobooks.entities.Genero;
 import com.atrium.gobooks.exceptions.CodigoError;
 import com.atrium.gobooks.exceptions.ServicioException;
@@ -87,6 +89,19 @@ public class ServicioGeneroImpl implements ServicioGenero{
 		return genero;
 	}
 	
-
+	@Override
+	public List<GeneroDTO> numeroLibrosGenero() throws ServicioException {
+		log.info("[listConteoLibrosDTO]");
+		List<GeneroDTO> generos;
+		
+		try {
+			generos= generoRepository.numeroLibrosGenero();
+			
+		}catch(Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
+		}
+		return generos;
+	}
 
 }

@@ -17,4 +17,6 @@ public interface ServicioAutor {
 	Autor modificarAutor(Autor autor) throws ServicioException;
 	
 	List<AutorDTO> numeroLibrosAutor() throws ServicioException; 
+	
+	void eliminarAutor(Integer id) throws ServicioException;
 }

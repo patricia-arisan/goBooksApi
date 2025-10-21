@@ -87,6 +87,21 @@ constructor(private client: HttpClient) { }
                           return this.client.get<AutorDTO[]>(`${this.numberBooksAuthorListServiceUrl}`,{headers})
                       }
 
-                 
+                 private readonly authorServiceDeleteUrl = `${environment.proyectoUrl}api/autor`;
+   deleteAuthor(id: number): Observable<any>{
+    console.log("Service " + id);
+    const credentials = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            
+            'Authorization' : credentials || ''
+           
+        })
+    
+    
+    return this.client.delete<any>(`${this.authorServiceDeleteUrl}/${id}`,{headers})
+    
+    
+  }
 
 }

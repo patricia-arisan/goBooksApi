@@ -10,6 +10,8 @@ import { UpdateBookComponent } from '../../../modals/book/update-book/update-boo
 import { MatDialog } from '@angular/material/dialog';
 import { Genero } from '../../../interfaces/genero';
 import { GenreService } from '../../../services/genre-service';
+import { GeneroDTO } from '../../../interfaces/generoDTO';
+import { GenreUpdateComponent } from '../../../modals/genre/genre-update/genre-update.component';
 
 
 @Component({
@@ -20,13 +22,13 @@ import { GenreService } from '../../../services/genre-service';
   styleUrl: './admin-genres.component.css'
 })
 export class AdminGenresComponent implements OnInit, AfterViewInit {
-  generos!: Genero[];
+  generos!: GeneroDTO[];
   showBooksTable: Boolean = true;
   totalItems = 0;
   pageSize = 16;
   pageIndex = 0;
-  dataSource = new MatTableDataSource<Genero>();
-  displayedColumns: string[] = ['genre', 'edit'];
+  dataSource = new MatTableDataSource<GeneroDTO>();
+  displayedColumns: string[] = ['genre', 'books','edit','delete'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   filteredBooks!: any[];
   
@@ -40,8 +42,8 @@ export class AdminGenresComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
-    this.getGenres();
-
+    // this.getGenres();
+    this.getNumberOfBooksByGenre();
 
 
   }
@@ -54,14 +56,22 @@ export class AdminGenresComponent implements OnInit, AfterViewInit {
     
   }
 
-  getGenres(){
-      this.genreService.getGenresByNameOrder().subscribe((data:Genero[])=>{
-          this.generos = data;
-          this.dataSource.data = this.generos;
-        })
+  // getGenres(){
+  //     this.genreService.getGenresByNameOrder().subscribe((data:Genero[])=>{
+  //         this.generos = data;
+  //         this.dataSource.data = this.generos;
+  //       })
   
-      }
-
+  //     }
+getNumberOfBooksByGenre(){
+      this.genreService.getListBookGenreNumber().subscribe((data:GeneroDTO[])=>{
+          this.generos = data;
+          this.dataSource.data=this.generos;
+          
+          
+          
+        })
+    }
  
 
   applyFilter(event: Event) {
@@ -76,7 +86,7 @@ export class AdminGenresComponent implements OnInit, AfterViewInit {
   //filtrar dataSource por cuatro campos y datos de tablas externas
   filterByItem(){
     this.dataSource.filterPredicate = function (data, filter: string): boolean {
-      return data.nombre.toLowerCase().includes(filter);
+      return data.nombre.toLowerCase().includes(filter) || data.numeroLibros.toString().includes(filter);
     }
   }
 //filtro para vista sin dataSource, busca en this.libros
@@ -108,23 +118,25 @@ applyFilterGalery(event: Event){
     }
   }
 
-  readonly dialog = inject(MatDialog);
-  openDialog(libro:Libro,enterAnimationDuration: string, exitAnimationDuration: string): void {
-      this.dialog.open(UpdateBookComponent, {
-        width: '250px',
-        enterAnimationDuration,
-        exitAnimationDuration,
-        disableClose: true,
-        data:libro.id
+ readonly dialog = inject(MatDialog);
+   openDialog(genero:GeneroDTO,enterAnimationDuration: string, exitAnimationDuration: string): void {
+     
+       this.dialog.open(GenreUpdateComponent, {
+         width: '250px',
+         enterAnimationDuration,
+         exitAnimationDuration,
+         disableClose: true,
+         data:genero.idGenero
+         
+       }).afterClosed().subscribe((data: Genero)=>{
+         
         
-      }).afterClosed().subscribe((data: Libro)=>{
-        
-       
-  
-        
-        
-        this.getGenres();
-      });
-    }
+   
+         
+         
+         // this.getBooks();
+         this.getNumberOfBooksByGenre();
+       });
+      }
 
 }

@@ -13,7 +13,7 @@ public interface AutorRepository extends JpaRepository<Autor, Integer> {
 	@Query(value = "SELECT a FROM Autor a ORDER BY a.nombre")
 	List<Autor> buscarAutoresPorOrdenAlfabetico();
 
-	@Query(value = "SELECT NEW com.atrium.gobooks.dto.AutorDTO(a.id,a.nombre, COUNT(l.autor.nombre)) as numeroLibros FROM "
+	@Query(value = "SELECT NEW com.atrium.gobooks.dto.AutorDTO(a.id,a.nombre, COUNT(l.autor.nombre)) AS numeroLibros FROM "
 			+ "Autor a LEFT JOIN Libro l ON a.id=l.autor.id GROUP BY a.id ORDER BY a.nombre")
 	List<AutorDTO> numeroLibrosAutor();
 //	@Query(value = "SELECT NEW com.atrium.gobooks.dto.AutorDTO(a.id,a.nombre, COUNT(*)) as numeroLibros FROM Libro l, "

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.atrium.gobooks.dto.AutorDTO;
+import com.atrium.gobooks.dto.GeneroDTO;
 import com.atrium.gobooks.entities.Genero;
 import com.atrium.gobooks.exceptions.ServicioException;
 import com.atrium.gobooks.services.ServicioGenero;
@@ -41,6 +43,12 @@ public class GeneroController {
 	@GetMapping(value="/{id}")
 	public Genero find(@PathVariable Integer id) throws ServicioException{
 		return servicioGenero.obtenerGenero(id);
+	}
+	
+	@GetMapping("/conteoLibros")
+	public List <GeneroDTO> conteoLibrosGenero() throws ServicioException{
+		List <GeneroDTO> generos = servicioGenero.numeroLibrosGenero();
+		return generos;
 	}
 
 }

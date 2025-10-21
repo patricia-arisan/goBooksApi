@@ -60,7 +60,7 @@ export class AuthorUpdateComponent implements OnInit{
         // portada:[""],
         // sinopsis:[""],
     });
-
+    
     // this.getCurrentBook();
 setTimeout(() => {
     this.findCurrentAuthor();

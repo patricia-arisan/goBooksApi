@@ -13,6 +13,7 @@ import { AuthorService } from '../../../services/author-service';
 import { Autor } from '../../../interfaces/autor';
 import { AutorDTO } from '../../../interfaces/autorDTO';
 import { AuthorUpdateComponent } from '../../../modals/author/author-update/author-update.component';
+import { DeleteAuthorComponent } from '../../../modals/author/author-delete/delete-author.component';
 
 
 @Component({
@@ -39,7 +40,6 @@ export class AdminAuthorsComponent implements OnInit, AfterViewInit {
 
   constructor(
     // private route: ActivatedRoute,
-    private bookService: BookService,
     private paginatorIn: MatPaginatorIntl,
     private authorService: AuthorService
 
@@ -128,5 +128,15 @@ export class AdminAuthorsComponent implements OnInit, AfterViewInit {
         this.getNumberOfBooksByAuthor();
       });
     }
+
+    openDeleteDialog(autor:AutorDTO,enterAnimationDuration: string, exitAnimationDuration: string): void {
+        this.dialog.open(DeleteAuthorComponent, {
+          width: '350px',
+          enterAnimationDuration,
+          exitAnimationDuration,
+          disableClose: true,
+          data:autor.idAutor
+        })
+      }
 
 }

@@ -104,5 +104,19 @@ public class ServicioAutorImpl implements ServicioAutor{
 		return autores;
 	}
 
+	@Override
+	public void eliminarAutor(Integer id) throws ServicioException {
+		log.info("[eliminarAutor]");
+		log.debug("[idAutor: " + id + "]");
+
+		try {
+			autorRepository.deleteById(id);
+		} catch (Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL, e);
+		}
+		
+		
+	}
 
 }

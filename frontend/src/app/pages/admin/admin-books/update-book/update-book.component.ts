@@ -232,7 +232,7 @@ export class UpdateBookComponent implements OnInit{
       enterAnimationDuration,
       exitAnimationDuration,
       disableClose: true,
-      data:this.libro.id
+      data:this.libro.autor.id
     }).afterClosed().subscribe((data: Libro)=>{
       this.autores.push(data);
      
@@ -266,7 +266,7 @@ export class UpdateBookComponent implements OnInit{
       enterAnimationDuration,
       exitAnimationDuration,
       disableClose: true,
-      data:this.libro.id
+      data:this.libro.genero.id
     }).afterClosed().subscribe((data: Libro)=>{
       this.generos.push(data);
      

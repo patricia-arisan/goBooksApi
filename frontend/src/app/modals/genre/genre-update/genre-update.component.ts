@@ -46,7 +46,7 @@ export class GenreUpdateComponent implements OnInit{
       
     });
 
-    this.getCurrentBook();
+    // this.getCurrentBook();
 setTimeout(() => {
     this.findCurrentGenre();
     }, 500);
@@ -74,20 +74,20 @@ setTimeout(() => {
               }  
             }
 
-  getCurrentBook(){
+  // getCurrentBook(){
     
-    this.bookService.getBookById(this.data).subscribe((data:Libro)=>{
+  //   this.bookService.getBookById(this.data).subscribe((data:Libro)=>{
       
-          this.libro = data;
-          console.log(this.libro)
+  //         this.libro = data;
+  //         console.log(this.libro)
           
-        })
+  //       })
         
-  }
+  // }
 
   findCurrentGenre(){
       
-      this.genreService.getGenreById(this.libro.genero.id).subscribe((data: Genero) => {
+      this.genreService.getGenreById(this.data).subscribe((data: Genero) => {
       
             this.genero = data;
           //  console.log(this.genero)

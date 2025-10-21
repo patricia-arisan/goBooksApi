@@ -39,7 +39,7 @@
       @if(autor.numeroLibros===0){
 
       
-      <button type="button" class="edit-buttom" ><img src="/assets/icon/bin.png" class="edit" alt="delete" />
+      <button type="button" (click)="openDeleteDialog(autor,'0ms', '0ms')" class="edit-buttom" ><img src="/assets/icon/bin.png" class="edit" alt="delete" />
       </button>
       }
     </td>
