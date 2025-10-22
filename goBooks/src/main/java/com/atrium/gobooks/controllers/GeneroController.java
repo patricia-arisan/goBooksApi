@@ -3,6 +3,8 @@ package com.atrium.gobooks.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,6 +51,12 @@ public class GeneroController {
 	public List <GeneroDTO> conteoLibrosGenero() throws ServicioException{
 		List <GeneroDTO> generos = servicioGenero.numeroLibrosGenero();
 		return generos;
+	}
+	
+	@DeleteMapping(value="/{id}") 
+	public ResponseEntity<?> eliminarGenero(@PathVariable Integer id) throws Exception{
+		servicioGenero.eliminarGenero(id);
+		return ResponseEntity.ok().build();
 	}
 
 }

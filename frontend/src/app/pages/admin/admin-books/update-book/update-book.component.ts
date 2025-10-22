@@ -249,7 +249,7 @@ export class UpdateBookComponent implements OnInit{
       enterAnimationDuration,
       exitAnimationDuration,
       disableClose: true,
-      data:this.libro.id
+      data:this.libro.editorial.id
     }).afterClosed().subscribe((data: Libro)=>{
       this.editoriales.push(data);
      

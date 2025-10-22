@@ -103,5 +103,20 @@ public class ServicioGeneroImpl implements ServicioGenero{
 		}
 		return generos;
 	}
+	
+	@Override
+	public void eliminarGenero(Integer id) throws ServicioException {
+		log.info("[eliminarGenero]");
+		log.debug("[idGenero: " + id + "]");
+
+		try {
+			generoRepository.deleteById(id);
+		} catch (Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL, e);
+		}
+		
+		
+	}
 
 }

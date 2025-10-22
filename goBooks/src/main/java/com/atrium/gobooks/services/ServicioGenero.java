@@ -17,5 +17,7 @@ public interface ServicioGenero {
 	Genero modificarGenero(Genero genero) throws ServicioException;
 	
 	List<GeneroDTO> numeroLibrosGenero() throws ServicioException;
+	
+	void eliminarGenero(Integer id) throws ServicioException;
 
 }

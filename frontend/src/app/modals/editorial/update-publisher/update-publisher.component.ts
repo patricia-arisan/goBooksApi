@@ -47,7 +47,7 @@ export class UpdatePublisherComponent implements OnInit{
       
     });
 
-    this.getCurrentBook();
+    // this.getCurrentBook();
 setTimeout(() => {
     this.findCurrentPublisher();
     }, 500);
@@ -81,20 +81,20 @@ setTimeout(() => {
               }  
             }
 
-  getCurrentBook(){
+  // getCurrentBook(){
     
-    this.bookService.getBookById(this.data).subscribe((data:Libro)=>{
+  //   this.bookService.getBookById(this.data).subscribe((data:Libro)=>{
       
-          this.libro = data;
-          console.log(this.libro)
+  //         this.libro = data;
+  //         console.log(this.libro)
           
-        })
+  //       })
         
-  }
+  // }
 
   findCurrentPublisher(){
       
-      this.publisherService.getPublisherById(this.libro.editorial.id).subscribe((data: Editorial) => {
+      this.publisherService.getPublisherById(this.data).subscribe((data: Editorial) => {
       
             this.editorial = data;
            

@@ -2,7 +2,7 @@ package com.atrium.gobooks.services;
 
 import java.util.List;
 
-
+import com.atrium.gobooks.dto.EditorialDTO;
 import com.atrium.gobooks.entities.Editorial;
 import com.atrium.gobooks.exceptions.ServicioException;
 
@@ -15,5 +15,9 @@ public interface ServicioEditorial {
 	Editorial modificarEditorial(Editorial editorial) throws ServicioException;
 	
 	Editorial obtenerEditorial(Integer id) throws ServicioException;
+	
+	List<EditorialDTO> numeroLibrosEditorial() throws ServicioException;
+	
+	void eliminarEditorial(Integer id) throws ServicioException;
 
 }

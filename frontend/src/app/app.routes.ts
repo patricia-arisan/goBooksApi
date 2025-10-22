@@ -166,7 +166,16 @@ export const routes: Routes = [
                 (m) => m.AdminGenresComponent
 
             ),
-        title: 'Administrar Categorías'
+        title: 'Administrar Géneros'
+    },
+    {
+    path: 'admin-publishers',
+        loadComponent: () =>
+            import('./pages/admin/admin-publishers/admin-publishers.component').then(
+                (m) => m.AdminPublishersComponent
+
+            ),
+        title: 'Administrar Editoriales'
     },
     {
     path: 'admin-home',

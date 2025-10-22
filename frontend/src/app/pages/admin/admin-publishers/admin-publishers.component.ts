@@ -12,31 +12,35 @@ import { Genero } from '../../../interfaces/genero';
 import { GenreService } from '../../../services/genre-service';
 import { GeneroDTO } from '../../../interfaces/generoDTO';
 import { GenreUpdateComponent } from '../../../modals/genre/genre-update/genre-update.component';
-import { DeleteGenreComponent } from '../../../modals/genre/genre-delete/delete-genre.component';
+import { EditorialDTO } from '../../../interfaces/editorialDTO';
+import { EditorialService } from '../../../services/editorial-service';
+import { UpdatePublisherComponent } from '../../../modals/editorial/update-publisher/update-publisher.component';
+import { Editorial } from '../../../interfaces/editorial';
+import { DeletePublisherComponent } from '../../../modals/editorial/delete-publisher/delete-publisher.component';
 
 
 @Component({
-  selector: 'app-admin-genres',
+  selector: 'app-admin-publishers',
   standalone: true,
   imports: [RouterLink, HeaderAdminComponent, MatTableModule, MatFormFieldModule, MatInputModule, MatPaginatorModule],
-  templateUrl: './admin-genres.component.html',
-  styleUrl: './admin-genres.component.css'
+  templateUrl: './admin-publishers.component.html',
+  styleUrl: './admin-publishers.component.css'
 })
-export class AdminGenresComponent implements OnInit, AfterViewInit {
-  generos!: GeneroDTO[];
+export class AdminPublishersComponent implements OnInit, AfterViewInit {
+  editoriales!: EditorialDTO[];
   showBooksTable: Boolean = true;
   totalItems = 0;
   pageSize = 16;
   pageIndex = 0;
-  dataSource = new MatTableDataSource<GeneroDTO>();
-  displayedColumns: string[] = ['genre', 'books','edit','delete'];
+  dataSource = new MatTableDataSource<EditorialDTO>();
+  displayedColumns: string[] = ['publisher', 'books','edit','delete'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   filteredBooks!: any[];
   
 
   constructor(
     // private route: ActivatedRoute,
-    private genreService: GenreService,
+    private publisherService: EditorialService,
     private paginatorIn: MatPaginatorIntl
 
   ) { }
@@ -44,7 +48,7 @@ export class AdminGenresComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
 
     // this.getGenres();
-    this.getNumberOfBooksByGenre();
+    this.getNumberOfBooksByPublisher();
 
 
   }
@@ -64,10 +68,10 @@ export class AdminGenresComponent implements OnInit, AfterViewInit {
   //       })
   
   //     }
-getNumberOfBooksByGenre(){
-      this.genreService.getListBookGenreNumber().subscribe((data:GeneroDTO[])=>{
-          this.generos = data;
-          this.dataSource.data=this.generos;
+getNumberOfBooksByPublisher(){
+      this.publisherService.getListBookPublisherNumber().subscribe((data:EditorialDTO[])=>{
+          this.editoriales = data;
+          this.dataSource.data=this.editoriales;
           
           
           
@@ -120,33 +124,33 @@ getNumberOfBooksByGenre(){
   }
 
  readonly dialog = inject(MatDialog);
-   openDialog(genero:GeneroDTO,enterAnimationDuration: string, exitAnimationDuration: string): void {
+   openDialog(editorial:EditorialDTO,enterAnimationDuration: string, exitAnimationDuration: string): void {
      
-       this.dialog.open(GenreUpdateComponent, {
+       this.dialog.open(UpdatePublisherComponent, {
          width: '250px',
          enterAnimationDuration,
          exitAnimationDuration,
          disableClose: true,
-         data:genero.idGenero
+         data:editorial.idEditorial
          
-       }).afterClosed().subscribe((data: Genero)=>{
+       }).afterClosed().subscribe((data: Editorial)=>{
          
         
    
          
          
          // this.getBooks();
-         this.getNumberOfBooksByGenre();
+         this.getNumberOfBooksByPublisher();
        });
       }
 
-      openDeleteDialog(genero:GeneroDTO,enterAnimationDuration: string, exitAnimationDuration: string): void {
-              this.dialog.open(DeleteGenreComponent, {
+      openDeleteDialog(editorial:EditorialDTO,enterAnimationDuration: string, exitAnimationDuration: string): void {
+              this.dialog.open(DeletePublisherComponent, {
                 width: '350px',
                 enterAnimationDuration,
                 exitAnimationDuration,
                 disableClose: true,
-                data:genero.idGenero
+                data:editorial.idEditorial
               })
             }
 

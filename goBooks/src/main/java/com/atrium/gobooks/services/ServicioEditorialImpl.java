@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.atrium.gobooks.dto.AutorDTO;
+import com.atrium.gobooks.dto.EditorialDTO;
 import com.atrium.gobooks.entities.Editorial;
 import com.atrium.gobooks.exceptions.CodigoError;
 import com.atrium.gobooks.exceptions.ServicioException;
@@ -86,6 +88,35 @@ public class ServicioEditorialImpl implements ServicioEditorial{
 		}
 		return editorial;
 	}
+	
+	@Override
+	public List<EditorialDTO> numeroLibrosEditorial() throws ServicioException {
+		log.info("[listConteoLibrosDTO]");
+		List<EditorialDTO> editoriales;
+		
+		try {
+			editoriales= editorialRepository.numeroLibrosEditorial();
+			
+		}catch(Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
+		}
+		return editoriales;
+	}
 
+	@Override
+	public void eliminarEditorial(Integer id) throws ServicioException {
+		log.info("[eliminarEditorial]");
+		log.debug("[idEditorial: " + id + "]");
+
+		try {
+			editorialRepository.deleteById(id);
+		} catch (Exception e) {
+			log.error("Exception", e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL, e);
+		}
+		
+		
+	}
 
 }
