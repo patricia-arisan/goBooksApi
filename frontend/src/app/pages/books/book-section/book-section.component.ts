@@ -24,6 +24,7 @@ import { Usuario } from '../../../interfaces/usuario';
 import { ReadingUpdateComponent } from '../../../modals/reading/reading-update/reading-update.component';
 
 import { DecimalPipe, formatNumber } from '@angular/common';
+import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-admin.component';
 
 @Component({
   selector: 'app-book-section',
@@ -78,7 +79,7 @@ export class BookSectionComponent implements OnInit{
             currentUser = parseInt(value);
                         
             this.userService.getLoggedUser(currentUser).subscribe((data:Usuario)=>{
-              
+              console.log(data)
               this.user = data;
               
                   

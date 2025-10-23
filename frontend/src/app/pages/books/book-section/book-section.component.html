@@ -13,7 +13,7 @@
     </div>
 
 <img src="{{libro.portada}}" id="portada"/>
-
+@if(user.rol.id===2){
 @if(puntuacion!=null){
 <div class="score">
 <span class="valoracion">Valoración</span>    
@@ -50,13 +50,16 @@
     <button type="button" class="lectura" matButton="elevated" (click)="openReadingUpdateDialog('0ms', '0ms')">{{lectura.estado.situacion}}</button>
 }
 </div>
-<div class="editar">
-<!-- admin -->
-@if(user.rol.id==1){
-<span id="editar"><a [routerLink]="['/book-section/editar/',libro.id]">Editar</a></span>
 }
 
+<!-- admin -->
+@if(user.rol.id==1){
+<div class="editar">    
+<button type="button" class="botonEditar"><a [routerLink]="['/book-section/editar/',libro.id]">Editar</a></button>
 </div>
+}
+
+
 
 </div>
 

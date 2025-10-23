@@ -1,6 +1,7 @@
 .ficha{
     margin-top: 20px;
     
+    
 }
 .detalles{
     margin-top: 20px;
@@ -9,7 +10,7 @@
     width: 700px;
     padding-bottom: 20px;
     
-    
+    padding-bottom: 80px;
 }
 #nombre{
     font-weight: bold;
@@ -65,7 +66,7 @@ span{
     width: 120px;
     text-align: center;
     float: right;
-
+    
 }
 .puntuacion{
     font-size: 2.6em;
@@ -101,11 +102,19 @@ a {
 }
 .seleccionEstado{
     float: right;
+    position: absolute;
+    margin-top: -100px;
+    margin-left: 1136px;
+    
+}
+/* .seleccionEstado{
+    float: right;
     margin-top: 265px;
     margin-right: -130px; 
     width: 120px;
     
-}
+    
+} */
 
 .lectura{
     border: none;
@@ -121,4 +130,26 @@ a {
 }
 .lectura:hover{
     background-color: rgb(255, 141, 11);
+}
+
+.botonEditar{
+    margin-top: 16px;
+    margin-left: 110px;
+    border: none;
+    font-weight: 500;
+    background-color: rgb(253, 160, 54);
+    width: 220px;
+   height: 40px;
+    font-weight: 500;
+    font-size: 1.1em;
+    
+    border-radius: 2px;
+}
+
+.botonEditar:hover{
+    background-color: rgb(255, 141, 11);
+}
+
+.botonEditar a{
+    color:white;
 }
