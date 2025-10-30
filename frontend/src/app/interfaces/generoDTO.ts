@@ -1,5 +1,5 @@
 export interface GeneroDTO {
-    idGenero:number;
-    nombre:string;
-    numeroLibros:number;
+    idGenero: number;
+    nombre: string;
+    numeroLibros: number;
 }

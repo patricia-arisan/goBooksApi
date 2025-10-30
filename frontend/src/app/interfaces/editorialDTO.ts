@@ -1,5 +1,5 @@
 export interface EditorialDTO {
-    idEditorial:number;
-    nombre:string;
-    numeroLibros:number;
+    idEditorial: number;
+    nombre: string;
+    numeroLibros: number;
 }

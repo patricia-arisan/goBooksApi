@@ -1,4 +1,4 @@
 export interface Estado {
-    id:number;
-    situacion:string;
+    id: number;
+    situacion: string;
 }

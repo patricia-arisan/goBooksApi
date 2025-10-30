@@ -75,12 +75,14 @@ h2 {
 .form-group {
     margin-top: 22px;
 }
+
 /* ver si quitar abajo colores */
-.btn-primary { 
+.btn-primary {
     width: 400px;
     background-color: rgb(252, 163, 40);
     border-color: rgb(252, 163, 40);
     margin-bottom: 5px;
+    font-weight: 500;
 }
 
 .btn-primary:hover {
@@ -88,13 +90,19 @@ h2 {
     border-color: rgb(255, 141, 11);
 }
 
-.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+.btn-check:checked+.btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check)+.btn:active {
     color: var(--bs-btn-active-color);
     background-color: #f59b1e;
     border-color: #f59b1e;
 }
 
-.btn.disabled, .btn:disabled, fieldset:disabled .btn{
+.btn.disabled,
+.btn:disabled,
+fieldset:disabled .btn {
     background-color: rgb(252, 163, 40);
     border-color: rgb(252, 163, 40);
 }
@@ -121,8 +129,7 @@ p a:hover {
     color: rgb(255, 141, 11);
 }
 
-
-.alert{
+.alert {
     height: 22px;
     font-size: 0.8em;
     text-align: left;
@@ -131,11 +138,15 @@ p a:hover {
     margin-left: -19px;
     margin-bottom: -7px;
     margin-top: 2px;
-} 
+}
 
-svg{
-   height: 19px;
-    width: 19px; 
+svg {
+    height: 19px;
+    width: 19px;
     fill: #820000;
     padding-bottom: 2px;
+}
+
+.form-control {
+    transition: background-color 0s 600000s;
 }

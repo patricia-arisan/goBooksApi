@@ -79,6 +79,7 @@ h2 {
     margin-top: 5px;
     --bs-btn-disabled-bg: #f59b1e;
     --bs-btn-disabled-border-color: #f59b1e;
+    font-weight: 500;
 }
 
 .btn-success:hover {

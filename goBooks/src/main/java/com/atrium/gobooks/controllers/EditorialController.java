@@ -39,7 +39,7 @@ public class EditorialController {
 	}
 	
 	@PutMapping(value="/{id}")
-	public Editorial actualizarEditorialr(@PathVariable Integer id, @RequestBody Editorial editorial) throws ServicioException {
+	public Editorial actualizarEditorial(@PathVariable Integer id, @RequestBody Editorial editorial) throws ServicioException {
 		return servicioEditorial.modificarEditorial(editorial);
 	}
 	@GetMapping(value="/{id}")

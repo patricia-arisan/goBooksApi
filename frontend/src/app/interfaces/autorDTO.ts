@@ -1,5 +1,5 @@
 export interface AutorDTO {
-    idAutor:number;
-    nombre:string;
-    numeroLibros:number;
+    idAutor: number;
+    nombre: string;
+    numeroLibros: number;
 }
