@@ -46,7 +46,11 @@ export class AuthorComponent implements OnInit{
           console.log(data);
           //this.ngOnInit();
           this.dialogRef.close(data);
-        })
+        }, error=> {
+      if(error){
+        this.formNewAuthor.setErrors({foundauthor: true})
+      }
+    })
     }
   closeForm(): void {
     this.dialogRef.close();

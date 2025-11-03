@@ -28,7 +28,13 @@ public class ServicioAutorImpl implements ServicioAutor{
 		log.info("[autor: "+autor.toString()+"]");
 		
 		try{
+			Autor autorAux = autorRepository.findByName(autor.getNombre());
+			if(autorAux!=null) throw new ServicioException(CodigoError.AUTOR_FOUND);
 			autor =autorRepository.save(autor);
+		}catch(ServicioException se) {
+			log.error(se.getCodigo());
+			log.error("ServicioException", se);
+			throw se;
 		}catch(Exception e) {
 			log.error("Exception", e);
 			throw new ServicioException(CodigoError.ERROR_GENERAL,e);

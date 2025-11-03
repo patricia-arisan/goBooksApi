@@ -30,7 +30,12 @@ constructor(
       password:["",[Validators.required]],
       fechaNacimiento:[null],
       rol:[{id:2}]
-      
+      //Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+//       At least 8 characters in length
+// Lowercase letters
+// Uppercase letters
+// Numbers
+// Special characters
     });
 
   }
@@ -62,6 +67,10 @@ constructor(
     this.userService.createUser(this.formNewUser.value).subscribe((data:Usuario) =>{
       console.log(data);
       this.router.navigate(['/login']);
+    }, error=> {
+      if(error){
+        this.formNewUser.setErrors({founduser: true})
+      }
     })
   };
   

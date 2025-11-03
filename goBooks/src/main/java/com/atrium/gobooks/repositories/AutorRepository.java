@@ -20,4 +20,6 @@ public interface AutorRepository extends JpaRepository<Autor, Integer> {
 //			+ "Autor a WHERE l.autor.id=a.id GROUP BY l.autor.id ORDER BY a.nombre") inner join, solo cuenta los que tienen libro
 	//FROM Autor a LEFT JOIN a.libros l GROUP BY a.id, a.nombre ORDER BY a.nombre"
 	//LEFT JOIN para contar autores sin libro, hay que usar count l.autor.nombre (sin esto cuenta a todos minimo una vez)
+	@Query(value="SELECT a FROM Autor a WHERE a.nombre LIKE :nombre")
+	Autor findByName(String nombre);
 }

@@ -84,7 +84,14 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 				registro.getFechaNacimiento(),registro.getRol());
 		
 		try {
+			Usuario usuarioAux;
+			usuarioAux = usuarioRepository.findByUsername(usuario.getUsername());
+			if(usuarioAux!=null) throw new ServicioException(CodigoError.USUARIO_FOUND);
 			registro = usuarioRepository.save(usuario);
+		}catch(ServicioException se) {
+			log.error(se.getCodigo());
+			log.error("ServicioException", se);
+			throw se;
 		} catch (Exception e) {
 			log.error("Exception", e);
 			throw new ServicioException(CodigoError.ERROR_GENERAL, e);

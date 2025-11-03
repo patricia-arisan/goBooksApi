@@ -66,16 +66,17 @@ export class LoginComponent implements OnInit {
 
       this.userService.setItem('id', idUsuario);
       console.log("LOGIN " + idUsuario);
-
-      if(data.rol.id===1){
+      
+         if(data.rol.id===1){
         this.router.navigate(['/admin-home']);
       }else{
         
         this.router.navigate(['/home']);
       }
-      
-
-
+    }, error => {
+      if(error) {
+        this.formLogin.setErrors({unauthenticated: true})
+      }
     })
   };
 }

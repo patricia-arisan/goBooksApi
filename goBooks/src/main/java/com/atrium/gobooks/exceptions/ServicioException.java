@@ -13,5 +13,9 @@ final String codigo;
 	public ServicioException(String codigo) {
 		this.codigo=codigo;
 	}
+	
+	public String getCodigo() {
+		return this.codigo;
+	}
 
 }
