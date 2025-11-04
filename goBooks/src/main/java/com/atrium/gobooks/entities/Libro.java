@@ -46,7 +46,20 @@ public class Libro {
 	
 	
 	public Libro() {
-				
+		
+	}
+
+
+	public Libro(String nombre, Autor autor, String isbn, Editorial editorial, String sinopsis, String portada,
+			Genero genero) {
+		super();
+		this.nombre = nombre;
+		this.autor = autor;
+		this.isbn = isbn;
+		this.editorial = editorial;
+		this.sinopsis = sinopsis;
+		this.portada = portada;
+		this.genero = genero;
 	}
 
 

@@ -43,7 +43,11 @@ export class GenreComponent implements OnInit{
         this.genreService.createGenre(this.formNewGenre.value).subscribe((data:Genero) =>{
             console.log(data);
             this.dialogRef.close();
-          })
+          }, error=> {
+      if(error){
+        this.formNewGenre.setErrors({foundgenre: true})
+      }
+    })
       }
       closeForm(): void {
     this.dialogRef.close();

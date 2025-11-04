@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import com.atrium.gobooks.entities.Autor;
 import com.atrium.gobooks.entities.Libro;
 
 public interface LibroRepository extends JpaRepository<Libro, Integer>{
@@ -41,7 +42,8 @@ public interface LibroRepository extends JpaRepository<Libro, Integer>{
 			+ "OR l.isbn LIKE %:clave%")
 	List<Libro> buscarLibro (String clave);
 	
-	
+	@Query(value="SELECT l FROM Libro l WHERE l.nombre LIKE :nombre")
+	Libro findByName(String nombre);
 	/////
 //	@Query(value="SELECT l FROM Libro l ORDER BY (SELECT AVG(puntuacion) FROM Lectura le, "
 //			+ "Libro l WHERE l.id=le.libro.id) DESC NULLS LAST")

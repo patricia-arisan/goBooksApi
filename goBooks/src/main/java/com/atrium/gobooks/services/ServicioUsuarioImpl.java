@@ -79,8 +79,8 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 		log.debug("[registro_Usuario: " + registro.toString() + "]");
 		
 		
-		Usuario usuario = new Usuario(registro.getNombre(), registro.getApellido(), 
-				registro.getUsername(), passwordEncoder.encode(registro.getPassword()),
+		Usuario usuario = new Usuario(registro.getNombre().trim(), registro.getApellido().trim(), 
+				registro.getUsername(), passwordEncoder.encode(registro.getPassword().trim()),
 				registro.getFechaNacimiento(),registro.getRol());
 		
 		try {

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.atrium.gobooks.dto.AutorDTO;
 import com.atrium.gobooks.dto.GeneroDTO;
+import com.atrium.gobooks.entities.Autor;
 import com.atrium.gobooks.entities.Genero;
 import com.atrium.gobooks.exceptions.CodigoError;
 import com.atrium.gobooks.exceptions.ServicioException;
@@ -29,7 +30,13 @@ public class ServicioGeneroImpl implements ServicioGenero{
 		log.info("[genero: "+genero.toString()+"]");
 		
 		try{
+			Genero generoAux = generoRepository.findByName(genero.getNombre());
+			if(generoAux!=null) throw new ServicioException(CodigoError.GENERO_FOUND);
 			genero =generoRepository.save(genero);
+		}catch(ServicioException se) {
+			log.error(se.getCodigo());
+			log.error("ServicioException", se);
+			throw se;
 		}catch(Exception e) {
 			log.error("Exception", e);
 			throw new ServicioException(CodigoError.ERROR_GENERAL,e);

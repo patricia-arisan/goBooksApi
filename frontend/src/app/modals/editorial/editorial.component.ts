@@ -42,7 +42,11 @@ export class EditorialComponent implements OnInit{
         this.editorialService.createEditorial(this.formNewEditorial.value).subscribe((data:Editorial) =>{
             console.log(data);
             this.dialogRef.close();
-          })
+          }, error=> {
+                if(error){
+                  this.formNewEditorial.setErrors({foundpublisher: true})
+                }
+              })
       }
 
     closeForm(): void {

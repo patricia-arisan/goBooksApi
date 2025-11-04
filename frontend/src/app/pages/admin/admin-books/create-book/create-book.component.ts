@@ -144,7 +144,11 @@ export class CreateBookComponent implements OnInit{
     this.bookService.createBook(this.formNewBook.value).subscribe((data:Libro) =>{
           console.log(data);
           this.router.navigate(['/admin-books']);
-        })
+        }, error=> {
+      if(error){
+        this.formNewBook.setErrors({foundbook: true})
+      }
+    })
     };
 
     

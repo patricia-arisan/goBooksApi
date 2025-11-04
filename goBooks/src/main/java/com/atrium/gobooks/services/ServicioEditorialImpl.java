@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.atrium.gobooks.dto.AutorDTO;
 import com.atrium.gobooks.dto.EditorialDTO;
+import com.atrium.gobooks.entities.Autor;
 import com.atrium.gobooks.entities.Editorial;
 import com.atrium.gobooks.exceptions.CodigoError;
 import com.atrium.gobooks.exceptions.ServicioException;
@@ -29,7 +30,13 @@ public class ServicioEditorialImpl implements ServicioEditorial{
 		log.info("[editorial: "+editorial.toString()+"]");
 		
 		try{
+			Editorial editorialAux = editorialRepository.findByName(editorial.getNombre());
+			if(editorialAux!=null) throw new ServicioException(CodigoError.EDITORIAL_FOUND);
 			editorial =editorialRepository.save(editorial);
+		}catch(ServicioException se) {
+			log.error(se.getCodigo());
+			log.error("ServicioException", se);
+			throw se;	
 		}catch(Exception e) {
 			log.error("Exception", e);
 			throw new ServicioException(CodigoError.ERROR_GENERAL,e);

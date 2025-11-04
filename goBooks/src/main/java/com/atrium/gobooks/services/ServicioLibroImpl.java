@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.atrium.gobooks.entities.Autor;
 import com.atrium.gobooks.entities.Libro;
 import com.atrium.gobooks.exceptions.CodigoError;
 import com.atrium.gobooks.exceptions.ServicioException;
@@ -62,12 +63,25 @@ public class ServicioLibroImpl implements ServicioLibro{
 	}
 
 	@Override
-	public Libro guardarLibro(Libro libro) throws ServicioException {
+	public Libro guardarLibro(Libro registro) throws ServicioException {
 		log.info("[grabarLibro]");
-		log.info("[libro: "+libro.toString()+"]");
+		log.info("[libro: "+registro.toString()+"]");
+		
+		String titulo = registro.getNombre().trim();
+		titulo = titulo.substring(0,1).toUpperCase() + titulo.substring(1);
+		
+		Libro libro = new Libro(titulo,registro.getAutor(),registro.getIsbn().trim(),
+				registro.getEditorial(),registro.getSinopsis().trim(),registro.getPortada().trim(),
+				registro.getGenero());
 		
 		try{
-			libro =libroRepository.save(libro);
+			Libro libroAux = libroRepository.findByName(libro.getNombre());
+			if(libroAux!=null) throw new ServicioException(CodigoError.LIBRO_FOUND);
+			registro =libroRepository.save(libro);
+		}catch(ServicioException se) {
+			log.error(se.getCodigo());
+			log.error("ServicioException", se);
+			throw se;
 		}catch(Exception e) {
 			log.error("Exception", e);
 			throw new ServicioException(CodigoError.ERROR_GENERAL,e);

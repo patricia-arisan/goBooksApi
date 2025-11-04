@@ -12,7 +12,9 @@ public class CodigoError {
 	public static final String GENERO_NOT_FOUND = "00000008";
 	public static final String USUARIO_FOUND = "00000009";
 	public static final String AUTOR_FOUND = "00000010";
-	
+	public static final String EDITORIAL_FOUND = "00000011";
+	public static final String GENERO_FOUND = "00000012";
+	public static final String LIBRO_FOUND = "00000013";
 	
 
 }
