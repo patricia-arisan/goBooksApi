@@ -110,7 +110,7 @@ export class DeleteGenreComponent implements OnInit{
 
   deleteGenre(){
     this.genreService.deleteGenre(this.genero.id).subscribe((data:any) =>{
-        this.dialogRef.close();
+        this.dialogRef.close(true);
         
     })
   }

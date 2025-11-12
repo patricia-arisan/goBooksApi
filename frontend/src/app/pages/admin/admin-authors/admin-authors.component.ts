@@ -136,7 +136,9 @@ export class AdminAuthorsComponent implements OnInit, AfterViewInit {
           exitAnimationDuration,
           disableClose: true,
           data:autor.idAutor
-        })
+        }).afterClosed().subscribe((reloadView:boolean) => { 
+        if(reloadView) window.location.reload(); 
+      } )
       }
 
 }

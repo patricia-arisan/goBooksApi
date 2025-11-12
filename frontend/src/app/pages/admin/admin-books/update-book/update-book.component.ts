@@ -178,9 +178,15 @@ export class UpdateBookComponent implements OnInit{
     })
 
     update(){
+      if(this.formUpdate.value.portada==="" || this.formUpdate.value.portada===null){
+      this.formUpdate.patchValue({
+          portada: "/assets/icon/book.png",
+          
+    })
+      }
       this.bookService.updateBook(this.libro.id,this.formUpdate.value).subscribe((data:Libro) =>{
         
-        this.router.navigate(['/home']);
+        this.router.navigate(['/admin-home']);
     })
     
     }

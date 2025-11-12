@@ -15,6 +15,7 @@ public class CodigoError {
 	public static final String EDITORIAL_FOUND = "00000011";
 	public static final String GENERO_FOUND = "00000012";
 	public static final String LIBRO_FOUND = "00000013";
+	public static final String ISBN_FOUND = "00000014";
 	
 
 }

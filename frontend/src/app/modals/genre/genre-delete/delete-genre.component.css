@@ -18,3 +18,19 @@ p{
     padding-top: 15px;
     
 }
+
+.btn.btn-success {
+    background-color: rgb(253, 160, 54);
+    border: none;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.btn.btn-success:hover {
+    background-color: rgb(255, 141, 11);
+}
+
+.btn:first-child:active{
+    border: none;
+    background-color: rgb(240, 238, 238);
+ }

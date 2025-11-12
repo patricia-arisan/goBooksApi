@@ -27,15 +27,12 @@ constructor(
       nombre:[""],
       apellido:[""],
       username:["",[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-      password:["",[Validators.required]],
+      password:["",[Validators.required,Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&])(?!.*\\s).{4,}$")]],
       fechaNacimiento:[null],
       rol:[{id:2}]
-      //Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
-//       At least 8 characters in length
-// Lowercase letters
-// Uppercase letters
-// Numbers
-// Special characters
+      // (?!.*\\s) para evitar espacios, \\ doble con s para que funcione con comillas en vez 
+      // de / al principio y al final del pattern
+      // Acepta letras, numeros y simbolos sin obligar que se use uno de cada
     });
 
   }
@@ -69,7 +66,7 @@ constructor(
       this.router.navigate(['/login']);
     }, error=> {
       if(error){
-        this.formNewUser.setErrors({founduser: true})
+        this.formNewUser.setErrors({foundUser: true})
       }
     })
   };

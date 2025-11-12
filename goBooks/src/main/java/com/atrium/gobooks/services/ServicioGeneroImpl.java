@@ -25,9 +25,14 @@ public class ServicioGeneroImpl implements ServicioGenero{
 	GeneroRepository generoRepository;
 
 	@Override
-	public Genero guardarGenero(Genero genero) throws ServicioException {
+	public Genero guardarGenero(Genero registro) throws ServicioException {
 		log.info("[grabarGenero]");
-		log.info("[genero: "+genero.toString()+"]");
+		log.info("[genero: "+registro.toString()+"]");
+		
+		String nombre = registro.getNombre().trim();
+		nombre = nombre.substring(0,1).toUpperCase() + nombre.substring(1);
+		
+		Genero genero = new Genero(nombre);
 		
 		try{
 			Genero generoAux = generoRepository.findByName(genero.getNombre());

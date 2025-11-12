@@ -22,6 +22,14 @@ public class Autor {
 	public Autor() {
 		
 	}
+	
+	
+	public Autor(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
+
+
 
 	public Integer getId() {
 		return id;

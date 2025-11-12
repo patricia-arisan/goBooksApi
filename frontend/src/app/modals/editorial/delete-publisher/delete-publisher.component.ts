@@ -110,7 +110,7 @@ export class DeletePublisherComponent implements OnInit{
 
   deletePublisher(){
     this.publisherService.deletePublisher(this.editorial.id).subscribe((data:any) =>{
-        this.dialogRef.close();
+        this.dialogRef.close(true);
         
     })
   }

@@ -1,3 +1,12 @@
-<p>¿Estás seguro de eliminar este usuario?</p>
+<!-- <p>¿Estás seguro de eliminar este usuario?</p>
 <button type="submit"  class="btn btn-success" (click)="deleteUser()">Eliminar</button>
-<button>Cancelar</button>
+<button>Cancelar</button> -->
+
+<h2 mat-dialog-title>Eliminar usuario</h2>
+<mat-dialog-content>
+<p>¿Deseas eliminar esta cuenta?</p>
+<div class="buttons">
+<button type="button" class="btn" (click)="closeDialog()">Cancelar</button>
+<button type="submit" class="btn btn-success" (click)="deleteUser()">Eliminar</button>
+</div>
+</mat-dialog-content>

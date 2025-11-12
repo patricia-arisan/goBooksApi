@@ -25,9 +25,14 @@ public class ServicioEditorialImpl implements ServicioEditorial{
 	EditorialRepository editorialRepository;
 
 	@Override
-	public Editorial guardarEditorial(Editorial editorial) throws ServicioException {
+	public Editorial guardarEditorial(Editorial registro) throws ServicioException {
 		log.info("[grabarEditorial]");
-		log.info("[editorial: "+editorial.toString()+"]");
+		log.info("[editorial: "+registro.toString()+"]");
+		
+		String nombre = registro.getNombre().trim();
+		nombre = nombre.substring(0,1).toUpperCase() + nombre.substring(1);
+		
+		Editorial editorial = new Editorial(nombre);
 		
 		try{
 			Editorial editorialAux = editorialRepository.findByName(editorial.getNombre());

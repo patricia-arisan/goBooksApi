@@ -34,8 +34,8 @@ export class ProfilePasswordComponent implements OnInit{
 
       this.formPasswordUpdate = this.formBuilder.group ({
         id:[0],
-        password:["",[Validators.required]],
-        confirmPassword:["",[Validators.required]]
+        password:["",[Validators.required,Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&])(?!.*\\s).{4,}$")]],
+        confirmPassword:["",[Validators.required,Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&])(?!.*\\s).{4,}$")]]
       })
 
       this.fillForm();
@@ -76,6 +76,14 @@ export class ProfilePasswordComponent implements OnInit{
       
     })
 
+    get password(){
+    return this.formPasswordUpdate.get('password')!;
+  }
+
+  get confirmPassword(){
+    return this.formPasswordUpdate.get('confirmPassword')!;
+  }
+
     
     update(){
       if(this.formPasswordUpdate.value.password === this.formPasswordUpdate.value.confirmPassword){
@@ -103,7 +111,8 @@ export class ProfilePasswordComponent implements OnInit{
       })
     ////////////////////////////////////
     }else{
-      return console.log("No coinciden las contraseñas");
+    
+     this.formPasswordUpdate.setErrors({comparePassword: true})
     }
     };
 

@@ -151,7 +151,9 @@ getNumberOfBooksByPublisher(){
                 exitAnimationDuration,
                 disableClose: true,
                 data:editorial.idEditorial
-              })
+              }).afterClosed().subscribe((reloadView:boolean) => { 
+        if(reloadView) window.location.reload(); 
+      } )
             }
 
 }

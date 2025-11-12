@@ -109,7 +109,7 @@ export class DeleteAuthorComponent implements OnInit{
 
   deleteAuthor(){
     this.authorService.deleteAuthor(this.autor.id).subscribe((data:any) =>{
-        this.dialogRef.close();
+        this.dialogRef.close(true);
         
     })
   }

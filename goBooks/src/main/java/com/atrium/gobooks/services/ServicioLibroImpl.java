@@ -70,13 +70,28 @@ public class ServicioLibroImpl implements ServicioLibro{
 		String titulo = registro.getNombre().trim();
 		titulo = titulo.substring(0,1).toUpperCase() + titulo.substring(1);
 		
-		Libro libro = new Libro(titulo,registro.getAutor(),registro.getIsbn().trim(),
-				registro.getEditorial(),registro.getSinopsis().trim(),registro.getPortada().trim(),
+		String isbn = "";
+		if(registro.getIsbn()!=null) {
+			isbn = registro.getIsbn().trim();
+		}
+		
+		String sinopsis = "";
+		if(registro.getSinopsis()!=null) {
+			sinopsis = registro.getSinopsis().trim();
+		}
+		
+		Libro libro = new Libro(titulo,registro.getAutor(),isbn,
+				registro.getEditorial(),sinopsis,registro.getPortada().trim(),
 				registro.getGenero());
 		
 		try{
-			Libro libroAux = libroRepository.findByName(libro.getNombre());
-			if(libroAux!=null) throw new ServicioException(CodigoError.LIBRO_FOUND);
+			Libro libroNombre = libroRepository.findByName(libro.getNombre());
+			if(libroNombre!=null) throw new ServicioException(CodigoError.LIBRO_FOUND);
+			if(registro.getIsbn()!=null && !registro.getIsbn().isEmpty()) {
+				Libro libroIsbn = libroRepository.findByIsbn(libro.getIsbn());
+				if(libroIsbn!=null) throw new ServicioException(CodigoError.ISBN_FOUND);
+			}
+			
 			registro =libroRepository.save(libro);
 		}catch(ServicioException se) {
 			log.error(se.getCodigo());

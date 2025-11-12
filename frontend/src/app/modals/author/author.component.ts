@@ -42,15 +42,16 @@ export class AuthorComponent implements OnInit{
   
 
   registerAuthor(){
-      this.authorService.createAuthor(this.formNewAuthor.value).subscribe((data:Autor) =>{
+      this.authorService.createAuthor(this.formNewAuthor.value).subscribe({next:(data:Autor) =>{
           console.log(data);
           //this.ngOnInit();
           this.dialogRef.close(data);
-        }, error=> {
+        }, error: (error)=> {
       if(error){
-        this.formNewAuthor.setErrors({foundauthor: true})
+        this.formNewAuthor.setErrors({foundAuthor: true})
       }
-    })
+        }
+    });
     }
   closeForm(): void {
     this.dialogRef.close();

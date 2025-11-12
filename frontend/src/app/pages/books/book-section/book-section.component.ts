@@ -29,7 +29,7 @@ import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-a
 @Component({
   selector: 'app-book-section',
   standalone: true,
-  imports: [DecimalPipe,RouterLink,HeaderUserComponent,MatButtonModule,MatCardModule, MatRadioModule, MatSliderModule, MatProgressSpinnerModule],
+  imports: [DecimalPipe,RouterLink,HeaderUserComponent,HeaderAdminComponent,MatButtonModule,MatCardModule, MatRadioModule, MatSliderModule, MatProgressSpinnerModule],
   templateUrl: './book-section.component.html',
   styleUrl: './book-section.component.css',
   // changeDetection: ChangeDetectionStrategy.OnPush No????? Si se pone desaparece score

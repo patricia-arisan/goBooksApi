@@ -56,6 +56,7 @@ export class CreateBookComponent implements OnInit{
       sinopsis:["",[Validators.required]]
     });
     
+  // this.fillForm();
     
   }
 
@@ -69,6 +70,13 @@ export class CreateBookComponent implements OnInit{
     genero: new FormControl(0),
     sinopsis:new FormControl("")
   })
+
+  fillForm(){
+    this.formNewBook.patchValue({
+          portada: this.url,
+          
+    })
+  }
 
   getAuthors(){
     this.authorService.getAuthorsByNameOrder().subscribe((data:Autor[])=>{
@@ -141,15 +149,26 @@ export class CreateBookComponent implements OnInit{
   
 
   registerBook(){
-    this.bookService.createBook(this.formNewBook.value).subscribe((data:Libro) =>{
+    if(this.formNewBook.value.portada==="" || this.formNewBook.value.portada===null){
+      this.fillForm();
+      }
+    this.bookService.createBook(this.formNewBook.value).subscribe({next:(data:Libro) =>{
           console.log(data);
           this.router.navigate(['/admin-books']);
-        }, error=> {
-      if(error){
-        this.formNewBook.setErrors({foundbook: true})
-      }
-    })
-    };
+        }, error: (errorRes)=> {
+          const errorCode = errorRes.error?.codigo;
+
+          if(errorCode==="00000013"){
+            this.formNewBook.setErrors({foundBook: true})
+          }else if(errorCode==="00000014"){
+            this.formNewBook.setErrors({foundIsbn: true})
+          }
+
+        
+      
+    }
+    });
+    }
 
     
 
@@ -163,6 +182,7 @@ export class CreateBookComponent implements OnInit{
         if(this.url===null || this.url.trim().length === 0) {
         
         this.url="/assets/icon/book.png";
+       
         
       }
       

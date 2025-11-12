@@ -137,3 +137,7 @@ a{
     background-color: white;
     
 }
+
+.titulo,.autor,.editorial,.genero{
+    cursor: pointer;
+}

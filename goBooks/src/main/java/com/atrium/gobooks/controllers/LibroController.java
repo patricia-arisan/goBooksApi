@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.atrium.gobooks.entities.Libro;
+import com.atrium.gobooks.exceptions.CodigoError;
+import com.atrium.gobooks.exceptions.ErrorResponse;
 import com.atrium.gobooks.exceptions.ServicioException;
 import com.atrium.gobooks.services.ServicioLibro;
 
@@ -26,8 +28,24 @@ public class LibroController {
 	private ServicioLibro servicioLibro;
 	
 	@PostMapping(value="/registroLibro")
-	public Libro registrarNuevoLibro(@RequestBody Libro libro) throws ServicioException {
-		return servicioLibro.guardarLibro(libro);
+	public ResponseEntity<Object> registrarNuevoLibro(@RequestBody Libro libro) throws ServicioException {
+		Libro libroResponse = null;
+		try {
+			libroResponse = servicioLibro.guardarLibro(libro);
+		} catch(ServicioException e) {
+			String codigo = "";
+			String mensaje = "";
+			if(e.getCodigo().equals(CodigoError.LIBRO_FOUND)) {
+				codigo = CodigoError.LIBRO_FOUND;
+				mensaje = "El libro ya existe";
+			} else if(e.getCodigo().equals(CodigoError.ISBN_FOUND)) {
+				codigo = CodigoError.ISBN_FOUND;
+				mensaje = "El isbn ya existe";
+			}
+			ErrorResponse errorResponse = new ErrorResponse(codigo, mensaje);
+			return ResponseEntity.badRequest().body(errorResponse);
+		}
+		return ResponseEntity.ok(libroResponse);
 		 
 	}
 	

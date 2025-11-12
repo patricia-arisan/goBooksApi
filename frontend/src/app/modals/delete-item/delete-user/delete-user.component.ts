@@ -67,6 +67,10 @@ export class DeleteUserComponent implements OnInit{
       // }
   })
 }
+
+closeDialog(): void {
+    this.dialogRef.close();
+  }
   
 
 

@@ -22,6 +22,13 @@ public class Editorial {
 	public Editorial() {
 		
 	}
+	
+	public Editorial(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
+
+
 
 	public Integer getId() {
 		return id;

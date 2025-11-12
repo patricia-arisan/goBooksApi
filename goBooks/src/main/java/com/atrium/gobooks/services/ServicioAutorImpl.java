@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.atrium.gobooks.dto.AutorDTO;
 import com.atrium.gobooks.entities.Autor;
+import com.atrium.gobooks.entities.Libro;
 import com.atrium.gobooks.exceptions.CodigoError;
 import com.atrium.gobooks.exceptions.ServicioException;
 import com.atrium.gobooks.repositories.AutorRepository;
@@ -23,9 +24,14 @@ public class ServicioAutorImpl implements ServicioAutor{
 	AutorRepository autorRepository;
 	
 	@Override
-	public Autor guardarAutor(Autor autor) throws ServicioException {
+	public Autor guardarAutor(Autor registro) throws ServicioException {
 		log.info("[grabarAutor]");
-		log.info("[autor: "+autor.toString()+"]");
+		log.info("[autor: "+registro.toString()+"]");
+		
+		String nombre = registro.getNombre().trim();
+		nombre = nombre.substring(0,1).toUpperCase() + nombre.substring(1);
+		
+		Autor autor = new Autor(nombre);
 		
 		try{
 			Autor autorAux = autorRepository.findByName(autor.getNombre());

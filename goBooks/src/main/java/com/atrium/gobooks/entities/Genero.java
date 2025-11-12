@@ -23,6 +23,12 @@ public class Genero {
 	public Genero() {
 		
 	}
+	
+	public Genero(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
+
 
 
 	public Integer getId() {

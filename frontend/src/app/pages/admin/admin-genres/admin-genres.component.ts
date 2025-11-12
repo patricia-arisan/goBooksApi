@@ -147,7 +147,9 @@ getNumberOfBooksByGenre(){
                 exitAnimationDuration,
                 disableClose: true,
                 data:genero.idGenero
-              })
+              }).afterClosed().subscribe((reloadView:boolean) => { 
+        if(reloadView) window.location.reload(); 
+      } )
             }
 
 }

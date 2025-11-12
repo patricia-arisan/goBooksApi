@@ -44,6 +44,9 @@ public interface LibroRepository extends JpaRepository<Libro, Integer>{
 	
 	@Query(value="SELECT l FROM Libro l WHERE l.nombre LIKE :nombre")
 	Libro findByName(String nombre);
+	
+	@Query(value="SELECT l FROM Libro l WHERE l.isbn LIKE :isbn")
+	Libro findByIsbn(String isbn);
 	/////
 //	@Query(value="SELECT l FROM Libro l ORDER BY (SELECT AVG(puntuacion) FROM Lectura le, "
 //			+ "Libro l WHERE l.id=le.libro.id) DESC NULLS LAST")
