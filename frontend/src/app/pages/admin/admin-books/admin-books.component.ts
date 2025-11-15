@@ -131,7 +131,7 @@ applyFilterGalery(event: Event){
   readonly dialog = inject(MatDialog);
   openDialog(libro:Libro,enterAnimationDuration: string, exitAnimationDuration: string): void {
       this.dialog.open(UpdateBookComponent, {
-        width: '250px',
+        width: '330px',
         enterAnimationDuration,
         exitAnimationDuration,
         disableClose: true,

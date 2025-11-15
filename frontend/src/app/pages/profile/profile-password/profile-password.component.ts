@@ -90,7 +90,7 @@ export class ProfilePasswordComponent implements OnInit{
       //////////////////////////////////////  
       let username = this.user.username;
       let password = this.formPasswordUpdate.value.password;
-      let credentials:any ={username,password}
+      let credentials:any ={username,password};
         this.userService.updateUserPassword(this.user.id,this.formPasswordUpdate.value.password).subscribe((data:Usuario) =>{
           console.log(data);
           this.userService.sendUser(credentials).subscribe((data:Usuario) =>{

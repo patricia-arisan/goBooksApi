@@ -180,7 +180,7 @@ export class UpdateBookComponent implements OnInit{
     update(){
       this.bookService.updateBook(this.libro.id,this.formUpdate.value).subscribe((data:Libro) =>{
         
-        this.router.navigate(['/home']);
+        this.dialogRef.close(data);
     })
     
     }

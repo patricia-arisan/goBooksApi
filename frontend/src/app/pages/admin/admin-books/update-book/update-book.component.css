@@ -74,6 +74,8 @@ button:hover{
    width: 130px;
    height: 50px;
    margin-top: 20px;
+   --bs-btn-active-bg: #f59b1e;
+    --bs-btn-active-border-color: #f59b1e;
 } 
 .editButton{
     color:white;

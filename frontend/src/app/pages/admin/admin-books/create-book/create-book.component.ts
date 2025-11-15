@@ -56,7 +56,7 @@ export class CreateBookComponent implements OnInit{
       sinopsis:["",[Validators.required]]
     });
     
-  // this.fillForm();
+ 
     
   }
 

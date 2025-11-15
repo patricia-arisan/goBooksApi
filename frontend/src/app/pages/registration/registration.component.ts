@@ -61,14 +61,16 @@ constructor(
   // };
 
   register(){
-    this.userService.createUser(this.formNewUser.value).subscribe((data:Usuario) =>{
+    this.userService.createUser(this.formNewUser.value).subscribe({next:(data:Usuario) =>{
       console.log(data);
       this.router.navigate(['/login']);
-    }, error=> {
-      if(error){
+    }, error: (errorRes)=> {
+      if(errorRes){
         this.formNewUser.setErrors({foundUser: true})
       }
+    }
     })
+  
   };
   
 }

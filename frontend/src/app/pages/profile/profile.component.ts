@@ -112,24 +112,35 @@ export class ProfileComponent implements OnInit{
         id: 2,
         nombre:""
       };
+
+     get username(){
+    return this.formUpdate.get('username')!;
+  }  
     
     update(){
-      
       console.log(this.formUpdate.value);
       console.log(this.user.id)
+      let oldUsername = this.user.username;      
+      this.userService.updateUser(this.user.id,this.formUpdate.value).subscribe({next:(data:Usuario) =>{
       
-      this.userService.updateUser(this.user.id,this.formUpdate.value).subscribe((data:Usuario) =>{
-      //this.userService.updateUser(this.formUpdate.value).subscribe((data:Usuario) =>{
       console.log(data);
-      
-      localStorage.setItem('usuario', JSON.stringify(data));
-      
+      if(oldUsername===this.formUpdate.value.username){
+        localStorage.setItem('usuario', JSON.stringify(data));
         const idUsuario = data.id.toString();
-        
         this.userService.setItem('id',idUsuario);
-        
         this.router.navigate(['/home']);
+      }else{
+        this.logout();
+      }
+    
+      
+    }, error: (errorRes)=> {
+      if(errorRes){
+        this.formUpdate.setErrors({foundUser: true})
+      }
+    }
     })
+    
     };
 
     readonly dialog = inject(MatDialog);

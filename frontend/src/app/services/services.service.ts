@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { Usuario } from '../interfaces/usuario';
-import { BehaviorSubject, map, Observable, take } from 'rxjs';
+import { BehaviorSubject, map, Observable, take, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -34,11 +34,16 @@ constructor(private client: HttpClient) { }
         } : {});
         console.log(headers); 
         localStorage.setItem('token',headers.get('Authorization')|| '');
+        console.log(headers); 
         // return this.client.post<Usuario>(`${this.userServiceLoginUrl}`,'user', {headers: headers})
         return this.client.post<Usuario>(`${this.userServiceLoginUrl}`,user,{headers})
         
           
   }
+
+ 
+
+  
 
   setItem(key: string, value: string): void {
     localStorage.setItem(key, value);
@@ -82,6 +87,8 @@ constructor(private client: HttpClient) { }
     
     return this.client.put<Usuario>(`${this.userServiceLoggedUrl}/${id}`,user,{headers})
   }
+
+
    private readonly userServiceUpdatePassUrl = `${environment.proyectoUrl}api/usuario/cambiarPassword`; 
    updateUserPassword(id: number,password: string): Observable<Usuario>{
     //updateUser(user: Usuario): Observable<Usuario>{
@@ -135,6 +142,8 @@ constructor(private client: HttpClient) { }
 
     return this.client.post(`${this.userServiceLogoutUrl}`,null,{headers})
   }
+
+
   
  
 }

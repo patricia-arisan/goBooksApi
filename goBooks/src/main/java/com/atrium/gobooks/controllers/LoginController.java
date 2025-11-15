@@ -36,10 +36,10 @@ public class LoginController {
             .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 	
-	@ModelAttribute("usuario")
-	public Usuario retornarNuevoUsuarioRegistro() {
-		return new Usuario();
-	}
+//	@ModelAttribute("usuario")
+//	public Usuario retornarNuevoUsuarioRegistro() {
+//		return new Usuario();
+//	}
 	
 	@PostMapping(value="/registroUsuario")
 	public Usuario registrarCuentaDeUsuario(@RequestBody Usuario usuario) throws ServicioException {
