@@ -25,8 +25,8 @@
                 selectedOption=="2")) {
                 <mat-toolbar color="primary"></mat-toolbar>
                 @for (star of ratingArray; track star; let index = $index){
-                <mat-icon (mouseenter)="setStar(index)" [ngClass]="{checked:selectedStar>index}"
-                        (mouseleave)="unselectStar()" (click)="rating(index)">star</mat-icon>
+                <mat-icon [ngClass]="{checked:selectedStar>index}"
+                         (click)="rating(index)">star</mat-icon>
                 }
                 }
 

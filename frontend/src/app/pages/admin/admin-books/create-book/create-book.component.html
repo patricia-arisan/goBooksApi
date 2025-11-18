@@ -7,15 +7,7 @@
 <div class="row g-5">
             <form  [formGroup]="formNewBook" (submit)="registerBook()"> 
             
-                <!-- <div class="form-group">
-                    <label class="control-label" for="id"> </label> <input
-                        id="id" type="hidden" formControlName="id" class="form-control" 
-                        autofocus="autofocus"> 
-                </div> -->
-                 
-                        
-                
-                <div class="form-group">
+               <div class="form-group">
                     <label class="control-label" for="nombre">Título</label> 
                     <input id="nombre" type="text" formControlName="nombre" class="form-control">
                     @if(formNewBook.hasError('foundBook')){
@@ -26,15 +18,15 @@
         }
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group" formGroupName="autor">
                              
                     <!-- <div formGroupName="autor"> -->
-                    <label class="control-label" for="autor">Autor</label> <select formControlName="autor" id="autor">
+                    <label class="control-label" for="autor">Autor</label> <select formControlName="id" id="autor">
                         <!-- <select (change)="onChange()"> -->
-    		    <option [ngValue]="null">Elegir autor</option>
+    		    <option [value]="null" disabled>Elegir autor</option>
                 @for (autor of autores; track autor.id){
                     
-                    <option [ngValue]="autor" >
+                    <option [value]="autor.id" >
                     {{ autor.nombre}}
                     </option>
                     }
@@ -57,14 +49,14 @@
         }
                 </div>
                 
-               <div class="form-group">
+               <div class="form-group" formGroupName="editorial">
                    
                     <!-- <div formGroupName="editorial"> -->
-                    <label class="control-label" for="editorial">Editorial</label> <select formControlName="editorial" id="editorial">
-                    <option [ngValue]="null" >Elegir editorial</option>
+                    <label class="control-label" for="editorial">Editorial</label> <select formControlName="id" id="editorial">
+                    <option [value]="null" disabled>Elegir editorial</option>
                 @for (editorial of editoriales; track editorial){
                     
-                    <option [ngValue]="editorial">
+                    <option [value]="editorial.id">
                     {{ editorial.nombre}}
                     </option>
                     }
@@ -76,14 +68,14 @@
                     <!-- </div> -->
                 
                 
-                <div class="form-group">
+                <div class="form-group" formGroupName="genero">
                   
                     <!-- <div formGroupName="genero"> -->
-                    <label class="control-label" for="genero">Género</label> <select formControlName="genero" id="genero">
-                    <option [ngValue]="null" >Elegir género</option>
+                    <label class="control-label" for="genero">Género</label> <select formControlName="id" id="genero">
+                    <option [value]="null" disabled>Elegir género</option>
                     @for (genero of generos; track genero){
                     
-                    <option [ngValue]="genero">
+                    <option [value]="genero.id">
                     {{ genero.nombre}}
                     </option>
                     }

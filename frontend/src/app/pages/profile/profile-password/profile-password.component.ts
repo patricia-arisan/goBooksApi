@@ -34,8 +34,8 @@ export class ProfilePasswordComponent implements OnInit{
 
       this.formPasswordUpdate = this.formBuilder.group ({
         id:[0],
-        password:["",[Validators.required,Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&])(?!.*\\s).{4,}$")]],
-        confirmPassword:["",[Validators.required,Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&])(?!.*\\s).{4,}$")]]
+        password:["",[Validators.required,Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&()+-{|},;.:_^<=>~\"'`/])(?!.*\\s).{4,}$")]],
+        confirmPassword:["",[Validators.required,Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&()+-{|},;.:_^<=>~\"'`/])(?!.*\\s).{4,}$")]]
       })
 
       this.fillForm();

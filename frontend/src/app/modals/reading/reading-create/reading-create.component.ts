@@ -23,7 +23,7 @@ import { Lectura } from '../../../interfaces/lectura';
   imports: [CommonModule,MatIconModule,MatToolbarModule,MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
   templateUrl: './reading-create.component.html',
   styleUrl: './reading-create.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReadingCreateComponent implements OnInit{
   user!: Usuario;
@@ -142,11 +142,13 @@ export class ReadingCreateComponent implements OnInit{
   
 
       registerReading(){
+        if(this.formNewReading.value.idEstado!==1){
         this.readingService.saveReading(this.formNewReading.value).subscribe((data:LecturaDTO) =>{
                   console.log(data);
                   //this.ngOnInit();
                   this.dialogRef.close(data);
       });
+      }
     }
 
     setStar(index:number){

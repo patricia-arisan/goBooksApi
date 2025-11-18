@@ -18,11 +18,21 @@
                         <!-- <label class="control-label" for="estado">Estado: </label> -->
                         <select formControlName="idEstado" name="estado" class="estado" (change)="captureSelect($event)">
                                 
-                                @for (estado of estados; track estado){
+                                @for (estado of estados; track estado.id){
+                                       
                                 <!-- <option [ngValue]=""  [selected]="estado.id===1"> -->
-                                <option [value]="estado.id">
+                                        @if(estado.id===1){
+                                                <option [value]="estado.id" disabled>
+                                        
                                         {{ estado.situacion}}
                                 </option>
+                                        }@else{
+                                                <option [value]="estado.id">
+                                        
+                                        {{ estado.situacion}}
+                                </option>
+                                        }
+                                
 
                                 }
                         </select>
@@ -40,7 +50,10 @@
                 }
                 <div class="form-group">
                         <button type="button" class="btn " (click)="closeForm()">Atrás</button>
-                        <button type="submit" class="btn btn-success">Añadir</button>
+                        
+                           <button type="submit" class="btn btn-success">Añadir</button>     
+                        
+                        
 
                 </div>
                 

@@ -9,21 +9,26 @@ import { take } from 'rxjs';
 
 import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { DeleteUserComponent } from '../../modals/delete-item/delete-user/delete-user.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
   imports: [RouterLink,HeaderUserComponent,FormsModule, ReactiveFormsModule],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  styleUrl: './profile.component.css',
+  providers: [DatePipe]
 })
 export class ProfileComponent implements OnInit{
   user!: Usuario;
-  
+  fechaActual!:Date;
+  fechaFormat!:string | null;
+
   constructor(
     private formBuilder: FormBuilder,
     private userService: ServicesService,
-    private router: Router
+    private router: Router,
+    private transformDate: DatePipe
   ){}
 
   ngOnInit(): void {
@@ -46,6 +51,8 @@ export class ProfileComponent implements OnInit{
 
       this.fillForm();
       
+      this.fechaActual= new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate());
+    this.fechaFormat=this.transformDate.transform(this.fechaActual,"yyyy-MM-dd");
       
     }
     

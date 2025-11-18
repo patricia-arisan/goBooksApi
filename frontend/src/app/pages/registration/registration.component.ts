@@ -4,30 +4,40 @@ import { Router, RouterLink } from '@angular/router';
 import { Rol } from '../../interfaces/rol';
 import { Usuario } from '../../interfaces/usuario';
 import { ServicesService } from '../../services/services.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-registration',
   standalone: true,
   imports: [RouterLink,FormsModule, ReactiveFormsModule],
   templateUrl: './registration.component.html',
-  styleUrl: './registration.component.css'
+  styleUrl: './registration.component.css',
+  providers: [DatePipe]
+  
 })
 export class RegistrationComponent {
+  fechaActual!:Date;
+  fechaFormat!:string | null;
+
+
 
 constructor(
     private formBuilder: FormBuilder,
     private userService: ServicesService,
-    private router: Router
+    private router: Router,
+    private transformDate: DatePipe
   ){}
 
   ngOnInit(): void {
-    
+    this.fechaActual= new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate());
+    this.fechaFormat=this.transformDate.transform(this.fechaActual,"yyyy-MM-dd");
+    console.log(this.fechaActual)
     this.formNewUser = this.formBuilder.group ({
       id:[0],
       nombre:[""],
       apellido:[""],
       username:["",[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-      password:["",[Validators.required,Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&])(?!.*\\s).{4,}$")]],
+      password:["",[Validators.required,Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&()+-{|},;.:_^<=>~\"'`/])(?!.*\\s).{4,}$")]],
       fechaNacimiento:[null],
       rol:[{id:2}]
       // (?!.*\\s) para evitar espacios, \\ doble con s para que funcione con comillas en vez 

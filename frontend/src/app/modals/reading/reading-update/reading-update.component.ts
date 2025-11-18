@@ -21,7 +21,7 @@ import { Lectura } from '../../../interfaces/lectura';
   imports: [CommonModule, MatIconModule, MatToolbarModule, MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, FormsModule, ReactiveFormsModule],
   templateUrl: './reading-update.component.html',
   styleUrl: './reading-update.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReadingUpdateComponent implements OnInit {
   user!: Usuario;
@@ -31,7 +31,7 @@ export class ReadingUpdateComponent implements OnInit {
   rateStars: number = 5;
   ratingArray: any = [];
   selectedStar: number = 0;
-  previousSelection: number = 0;
+  
   selectedOption: string = "";
 
 
@@ -189,22 +189,20 @@ export class ReadingUpdateComponent implements OnInit {
 
   }
 
-  setStar(index: number) {
-    this.selectedStar = index + 1;
-  }
+  
 
-  unselectStar() {
-    if (this.previousSelection !== 0) {
-      this.selectedStar = this.previousSelection;
-    } else {
-      this.selectedStar = 0;
-    }
-  }
+  
 
   rating(index: number) {
 
     this.selectedStar = index + 1;
-    this.previousSelection = this.selectedStar;
+    
+
+    
+
+    
+    
+    
     console.log(this.selectedStar)
     this.fillRating();
 

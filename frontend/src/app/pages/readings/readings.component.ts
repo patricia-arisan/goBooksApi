@@ -21,6 +21,7 @@ export class ReadingsComponent implements OnInit {
   totalItems = 0;
   pageSize = 16;
   pageIndex = 0;
+  
 
   constructor(
     private userService: ServicesService,
@@ -87,5 +88,7 @@ export class ReadingsComponent implements OnInit {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
   }
+
+  
 
 }

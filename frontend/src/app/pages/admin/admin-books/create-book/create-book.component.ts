@@ -48,11 +48,20 @@ export class CreateBookComponent implements OnInit{
     this.formNewBook = this.formBuilder.group ({
       id:[null],
       nombre:["",[Validators.required]],
-      autor:[{id:0}],
+      autor:this.formBuilder.group({
+          id:[null],
+          nombre:["",[Validators.required]]
+        }),
       isbn:["",[Validators.required]],
-      editorial:[{id:0}],
+      editorial:this.formBuilder.group({
+          id:[null],
+          nombre:["",[Validators.required]]
+        }),
       portada:["",[Validators.required]],
-      genero:[{id:0}],
+      genero:this.formBuilder.group({
+          id:[null],
+          nombre:["",[Validators.required]]
+        }),
       sinopsis:["",[Validators.required]]
     });
     
@@ -63,11 +72,20 @@ export class CreateBookComponent implements OnInit{
   formNewBook:FormGroup = new FormGroup({
     id: new FormControl(null),
     nombre: new FormControl(""),
-    autor: new FormControl(0),
+    autor: new FormGroup({
+        id: new FormControl(null),
+        nombre: new FormControl("")
+      }),
     isbn: new FormControl(""),
-    editorial: new FormControl(0),
+    editorial:new FormGroup({
+        id: new FormControl(null),
+        nombre: new FormControl("")
+      }),
     portada: new FormControl(""),
-    genero: new FormControl(0),
+    genero:new FormGroup({
+        id: new FormControl(null),
+        nombre: new FormControl("")
+      }),
     sinopsis:new FormControl("")
   })
 
