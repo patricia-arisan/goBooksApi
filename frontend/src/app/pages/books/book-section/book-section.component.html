@@ -3,6 +3,17 @@
 }@if(user.rol.id==2){
 <app-header-user></app-header-user>
 }
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    @if(user.rol.id==1){
+    <li class="breadcrumb-item"><a routerLink="/admin-books">Libros</a></li>
+    }@else if(user.rol.id==2){
+        <li class="breadcrumb-item"><a routerLink="/books">Libros</a></li>
+    }
+    <!-- <li class="breadcrumb-item"><a routerLink="/admin-books">Libros</a></li> -->
+    <li class="breadcrumb-item active" aria-current="page">{{libro.nombre}}</li>
+  </ol>
+</nav>
 <div class="ficha">
     
     <div class="detalles">
@@ -59,7 +70,8 @@
 <!-- admin -->
 @if(user.rol.id==1){
 <div class="editar">    
-<button type="button" class="botonEditar"><a [routerLink]="['/book-section/editar/',libro.id]">Editar</a></button>
+<button type="button" class="botonEditar" (click)="visitEdit()">Editar</button>
+<!-- <button type="button" class="botonEditar"><a [routerLink]="['/book-section/editar/',libro.id]">Editar</a></button>-->
 </div>
 }
 

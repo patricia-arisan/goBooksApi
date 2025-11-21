@@ -6,16 +6,20 @@ import { HeaderUserComponent } from '../../shared/headers/header-user/header-use
 import { Libro } from '../../../interfaces/libro';
 import { BookService } from '../../../services/book-service';
 import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-admin.component';
+import { Usuario } from '../../../interfaces/usuario';
+import { ServicesService } from '../../../services/services.service';
 
 
 @Component({
   selector: 'app-results-publisher',
   standalone: true,
-  imports: [RouterLink,HeaderUserComponent,MatPaginatorModule],
+  imports: [RouterLink,HeaderUserComponent,HeaderAdminComponent,MatPaginatorModule],
   templateUrl: './results-publisher.component.html',
   styleUrl: './results-publisher.component.css'
 })
 export class ResultsPublisherComponent implements OnInit{
+  user!: Usuario;
   libros!: Libro[];
   id!: string;
   totalItems = 0;
@@ -25,7 +29,8 @@ export class ResultsPublisherComponent implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private bookService: BookService,
-    private paginator: MatPaginatorIntl
+    private paginator: MatPaginatorIntl,
+    private userService: ServicesService,
       
     ){}
 
@@ -35,9 +40,28 @@ export class ResultsPublisherComponent implements OnInit{
       
     
     });
+    this.retrieveFromLocalStorage();
     this.getBooksByPublisher();
     this.translatePaginator();
   }
+
+  retrieveFromLocalStorage() {
+            this.user = JSON.parse(localStorage.getItem('usuario') || '')
+            
+            let value = this.userService.getItem('id');
+               
+            let currentUser = 0;
+            if(value!=null){
+              currentUser = parseInt(value);
+                          
+              this.userService.getLoggedUser(currentUser).subscribe((data:Usuario)=>{
+                
+                this.user = data;
+                
+                    
+              });
+            }  
+          }
 
   getBooksByPublisher(){
     let idPublisher = parseInt(this.id)

@@ -103,7 +103,7 @@ export class AdminBooksComponent implements OnInit, AfterViewInit {
 applyFilterGalery(event: Event){
   const filterValue = (event.target as HTMLInputElement).value;
   
-  this.filteredBooks=this.libros.filter(libro=>libro.nombre.includes(filterValue));
+  this.filteredBooks=this.libros.filter(libro=>libro.nombre.toLowerCase().includes(filterValue));
   this.totalItems=this.filteredBooks.length;
 }
 

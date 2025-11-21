@@ -6,16 +6,20 @@ import { HeaderUserComponent } from '../../shared/headers/header-user/header-use
 import { Libro } from '../../../interfaces/libro';
 import { BookService } from '../../../services/book-service';
 import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { ServicesService } from '../../../services/services.service';
+import { Usuario } from '../../../interfaces/usuario';
+import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-admin.component';
 
 
 @Component({
   selector: 'app-results',
   standalone: true,
-  imports: [RouterLink,HeaderUserComponent,MatPaginatorModule],
+  imports: [RouterLink,HeaderUserComponent,HeaderAdminComponent,MatPaginatorModule],
   templateUrl: './results-genre.component.html',
   styleUrl: './results-genre.component.css'
 })
 export class ResultsGenreComponent implements OnInit{
+  user!: Usuario;
   libros!: Libro[];
   id!: string;
   totalItems = 0;
@@ -25,7 +29,8 @@ export class ResultsGenreComponent implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private bookService: BookService,
-    private paginator: MatPaginatorIntl
+    private paginator: MatPaginatorIntl,
+    private userService: ServicesService,
       
     ){}
 
@@ -35,9 +40,28 @@ export class ResultsGenreComponent implements OnInit{
       
     
     });
+    this.retrieveFromLocalStorage();
     this.getBooksByGenre();
     this.translatePaginator();
   }
+
+  retrieveFromLocalStorage() {
+          this.user = JSON.parse(localStorage.getItem('usuario') || '')
+          
+          let value = this.userService.getItem('id');
+             
+          let currentUser = 0;
+          if(value!=null){
+            currentUser = parseInt(value);
+                        
+            this.userService.getLoggedUser(currentUser).subscribe((data:Usuario)=>{
+              
+              this.user = data;
+              
+                  
+            });
+          }  
+        }
 
   getBooksByGenre(){
     let idGenero = parseInt(this.id)

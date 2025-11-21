@@ -40,6 +40,8 @@ export class BooksComponent implements OnInit{
     
     
   }
+
+  
   translatePaginator(){
     this.paginator.itemsPerPageLabel= "Resultados por página";
     this.paginator.getRangeLabel= (page: number, pageSize: number, length: number) =>{

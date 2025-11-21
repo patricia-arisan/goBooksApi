@@ -3,7 +3,7 @@ import { HeaderUserComponent } from '../../shared/headers/header-user/header-use
 import { BookService } from '../../../services/book-service';
 import { Libro } from '../../../interfaces/libro';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { StateService } from '../../../services/state-service';
 import { Estado } from '../../../interfaces/estado';
 
@@ -47,6 +47,7 @@ export class BookSectionComponent implements OnInit{
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private bookService: BookService,
     private readingService: ReadingService,
     private userService: ServicesService,
@@ -163,5 +164,9 @@ export class BookSectionComponent implements OnInit{
         })
   }
   
+  visitEdit(){
+    
+    this.router.navigate(["/book-section/editar/",this.libro.id]);
+  }
 
 }

@@ -8,7 +8,7 @@
     margin-left: 380px;
     position: absolute;
     width: 700px;
-    padding-bottom: 20px;
+    
     
     padding-bottom: 80px;
 }
@@ -92,7 +92,7 @@ span{
   
   
 }
-/* mostrar espacios gurdados en texto */
+/* mostrar espacios guardados en texto */
 .sinopsis{
     white-space: pre-wrap;
 }
@@ -142,14 +142,28 @@ a {
    height: 40px;
     font-weight: 500;
     font-size: 1.1em;
-    
+    color:white;
     border-radius: 2px;
+    margin-bottom: 40px; /* nuevo */
 }
 
 .botonEditar:hover{
     background-color: rgb(255, 141, 11);
 }
 
-.botonEditar a{
-    color:white;
+.breadcrumb{
+    margin-left: 110px;
+    margin-bottom: -30px;
+    margin-top: 40px;
+    
+}
+.breadcrumb-item{
+    
+    text-decoration: none;
+}
+
+.breadcrumb-item a{
+    color: black;
+    text-decoration: none;
+    
 }

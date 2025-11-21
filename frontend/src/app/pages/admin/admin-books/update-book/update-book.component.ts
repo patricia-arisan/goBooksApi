@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { HeaderAdminComponent } from '../../../shared/headers/header-admin/header-admin.component';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BookService } from '../../../../services/book-service';
 import { Libro } from '../../../../interfaces/libro';
 import { Autor } from '../../../../interfaces/autor';
@@ -27,7 +27,7 @@ import { DeleteBookComponent } from '../../../../modals/book/delete-book/delete-
 @Component({
   selector: 'app-update-book',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule,HeaderAdminComponent,MatButtonModule],
+  imports: [FormsModule, ReactiveFormsModule,HeaderAdminComponent,MatButtonModule,RouterLink],
   templateUrl: './update-book.component.html',
   styleUrl: './update-book.component.css',
   //changeDetection: ChangeDetectionStrategy.OnPush No cargan al principio las cosas, mejor quitar esto
