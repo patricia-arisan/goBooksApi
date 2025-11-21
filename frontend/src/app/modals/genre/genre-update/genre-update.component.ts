@@ -9,7 +9,8 @@ import { UpdateBookComponent } from '../../../pages/admin/admin-books/update-boo
 import { Usuario } from '../../../interfaces/usuario';
 import { Libro } from '../../../interfaces/libro';
 import { BookService } from '../../../services/book-service';
-import { ServicesService } from '../../../services/services.service';
+import { UserService } from '../../../services/user-service';
+
 
 
 @Component({
@@ -32,7 +33,7 @@ export class GenreUpdateComponent implements OnInit{
     private formBuilder: FormBuilder,
     private genreService: GenreService,
     private bookService: BookService,
-    private userService: ServicesService,
+    private userService: UserService,
   ){
     this.fromParentComponent = data;
   }

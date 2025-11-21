@@ -10,7 +10,7 @@ import { AuthorUpdateComponent } from '../author-update/author-update.component'
 import { UpdatePublisherComponent } from '../../editorial/update-publisher/update-publisher.component';
 import { GenreUpdateComponent } from '../../genre/genre-update/genre-update.component';
 import { Usuario } from '../../../interfaces/usuario';
-import { ServicesService} from '../../../services/services.service';
+
 import { HeaderAdminComponent } from '../../../pages/shared/headers/header-admin/header-admin.component';
 import { Libro } from '../../../interfaces/libro';
 import { Autor } from '../../../interfaces/autor';
@@ -23,6 +23,7 @@ import { GenreService } from '../../../services/genre-service';
 import { AdminBooksComponent } from '../../../pages/admin/admin-books/admin-books.component';
 import { UpdateBookComponent } from '../../../pages/admin/admin-books/update-book/update-book.component';
 import { AdminAuthorsComponent } from '../../../pages/admin/admin-authors/admin-authors.component';
+import { UserService } from '../../../services/user-service';
 
 
 
@@ -50,7 +51,7 @@ export class DeleteAuthorComponent implements OnInit{
     
     private authorService: AuthorService,
     
-    private userService: ServicesService,
+    private userService: UserService,
     
     private router: Router
   ){

@@ -8,7 +8,8 @@ import { BookService } from '../../../services/book-service';
 import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-admin.component';
 import { Usuario } from '../../../interfaces/usuario';
-import { ServicesService } from '../../../services/services.service';
+import { UserService } from '../../../services/user-service';
+
 
 
 @Component({
@@ -30,7 +31,7 @@ export class ResultsPublisherComponent implements OnInit{
     private route: ActivatedRoute,
     private bookService: BookService,
     private paginator: MatPaginatorIntl,
-    private userService: ServicesService,
+    private userService: UserService,
       
     ){}
 

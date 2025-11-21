@@ -9,7 +9,8 @@ import { Editorial } from '../../../interfaces/editorial';
 import { Usuario } from '../../../interfaces/usuario';
 import { Libro } from '../../../interfaces/libro';
 import { BookService } from '../../../services/book-service';
-import { ServicesService } from '../../../services/services.service';
+import { UserService } from '../../../services/user-service';
+
 
 
 
@@ -33,7 +34,7 @@ export class UpdatePublisherComponent implements OnInit{
     private formBuilder: FormBuilder,
     private publisherService: EditorialService,
     private bookService: BookService,
-    private userService: ServicesService,
+    private userService: UserService,
   ){
     this.fromParentComponent = data;
   }

@@ -10,10 +10,11 @@ import { Estado } from '../../../interfaces/estado';
 import { Libro } from '../../../interfaces/libro';
 import { BookService } from '../../../services/book-service';
 import { Usuario } from '../../../interfaces/usuario';
-import { ServicesService } from '../../../services/services.service';
+
 import { ReadingService } from '../../../services/reading-service';
 import { CommonModule } from "@angular/common"
 import { Lectura } from '../../../interfaces/lectura';
+import { UserService } from '../../../services/user-service';
 
 @Component({
   selector: 'app-reading-update',
@@ -44,7 +45,7 @@ export class ReadingUpdateComponent implements OnInit {
     private bookService: BookService,
     private formBuilder: FormBuilder,
     private stateService: StateService,
-    private userService: ServicesService,
+    private userService: UserService,
     private readingService: ReadingService,
 
 

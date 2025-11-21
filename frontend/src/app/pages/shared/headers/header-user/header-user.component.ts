@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { ServicesService } from '../../../../services/services.service';
+import { UserService } from '../../../../services/user-service';
+
 
 @Component({
   selector: 'app-header-user',
@@ -13,7 +14,7 @@ export class HeaderUserComponent {
   
   constructor(
     private router: Router,
-    private userService: ServicesService
+    private userService: UserService
     
   ){}
 

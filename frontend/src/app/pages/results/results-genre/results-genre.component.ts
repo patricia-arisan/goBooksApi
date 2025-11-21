@@ -6,9 +6,10 @@ import { HeaderUserComponent } from '../../shared/headers/header-user/header-use
 import { Libro } from '../../../interfaces/libro';
 import { BookService } from '../../../services/book-service';
 import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { ServicesService } from '../../../services/services.service';
+
 import { Usuario } from '../../../interfaces/usuario';
 import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-admin.component';
+import { UserService } from '../../../services/user-service';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class ResultsGenreComponent implements OnInit{
     private route: ActivatedRoute,
     private bookService: BookService,
     private paginator: MatPaginatorIntl,
-    private userService: ServicesService,
+    private userService: UserService,
       
     ){}
 

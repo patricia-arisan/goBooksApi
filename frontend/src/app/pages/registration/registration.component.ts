@@ -3,8 +3,9 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { Router, RouterLink } from '@angular/router';
 import { Rol } from '../../interfaces/rol';
 import { Usuario } from '../../interfaces/usuario';
-import { ServicesService } from '../../services/services.service';
+
 import { DatePipe } from '@angular/common';
+import { UserService } from '../../services/user-service';
 
 @Component({
   selector: 'app-registration',
@@ -23,7 +24,7 @@ export class RegistrationComponent {
 
 constructor(
     private formBuilder: FormBuilder,
-    private userService: ServicesService,
+    private userService: UserService,
     private router: Router,
     private transformDate: DatePipe
   ){}

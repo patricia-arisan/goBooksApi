@@ -10,7 +10,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialog
 import { UpdatePublisherComponent } from '../../editorial/update-publisher/update-publisher.component';
 import { GenreUpdateComponent } from '../../genre/genre-update/genre-update.component';
 import { Usuario } from '../../../interfaces/usuario';
-import { ServicesService} from '../../../services/services.service';
+
 import { HeaderAdminComponent } from '../../../pages/shared/headers/header-admin/header-admin.component';
 import { Libro } from '../../../interfaces/libro';
 import { Autor } from '../../../interfaces/autor';
@@ -24,6 +24,7 @@ import { AdminBooksComponent } from '../../../pages/admin/admin-books/admin-book
 import { UpdateBookComponent } from '../../../pages/admin/admin-books/update-book/update-book.component';
 import { AdminAuthorsComponent } from '../../../pages/admin/admin-authors/admin-authors.component';
 import { AdminGenresComponent } from '../../../pages/admin/admin-genres/admin-genres.component';
+import { UserService } from '../../../services/user-service';
 
 
 
@@ -51,7 +52,7 @@ export class DeleteGenreComponent implements OnInit{
     
     private genreService: GenreService,
     
-    private userService: ServicesService,
+    private userService: UserService,
     
     private router: Router
   ){

@@ -16,11 +16,12 @@ import { AuthorComponent } from '../../../../modals/author/author.component';
 import { EditorialComponent } from '../../../../modals/editorial/editorial.component';
 import { GenreComponent } from '../../../../modals/genre/genre.component';
 import { Usuario } from '../../../../interfaces/usuario';
-import { ServicesService } from '../../../../services/services.service';
+
 import { AuthorUpdateComponent } from '../../../../modals/author/author-update/author-update.component';
 import { UpdatePublisherComponent } from '../../../../modals/editorial/update-publisher/update-publisher.component';
 import { GenreUpdateComponent } from '../../../../modals/genre/genre-update/genre-update.component';
 import { DeleteBookComponent } from '../../../../modals/book/delete-book/delete-book.component';
+import { UserService } from '../../../../services/user-service';
 
 
 
@@ -45,7 +46,7 @@ export class UpdateBookComponent implements OnInit{
     private formBuilder: FormBuilder,
     private bookService: BookService,
     private route: ActivatedRoute,
-    private userService: ServicesService,
+    private userService: UserService,
     private authorService: AuthorService,
     private editorialService: EditorialService,
     private genreService: GenreService,

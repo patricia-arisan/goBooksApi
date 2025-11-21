@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ServicesService } from '../../services/services.service';
+
 import { Usuario } from '../../interfaces/usuario';
 import { ReadingService } from '../../services/reading-service';
 import { Lectura } from '../../interfaces/lectura';
 import { HeaderUserComponent } from '../shared/headers/header-user/header-user.component';
 import { RouterLink } from '@angular/router';
 import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { UserService } from '../../services/user-service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class ReadingsComponent implements OnInit {
   
 
   constructor(
-    private userService: ServicesService,
+    private userService: UserService,
     private readingService: ReadingService,
     private paginator: MatPaginatorIntl
 

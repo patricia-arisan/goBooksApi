@@ -7,10 +7,11 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule} 
 
 import { Usuario } from '../../../interfaces/usuario';
 import { Libro } from '../../../interfaces/libro';
-import { ServicesService } from '../../../services/services.service';
+
 import { BookService } from '../../../services/book-service';
 import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-admin.component';
 import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { UserService } from '../../../services/user-service';
 
 
 
@@ -34,7 +35,7 @@ export class AdminHomeComponent implements OnInit{
 constructor(
     
     private router: Router,
-    private userService: ServicesService,
+    private userService: UserService,
     private bookService: BookService,
     private paginator: MatPaginatorIntl,
     private formBuilder: FormBuilder,

@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { HeaderUserComponent } from '../shared/headers/header-user/header-user.component';
-import { ServicesService } from '../../services/services.service';
+
 import { Usuario } from '../../interfaces/usuario';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -10,6 +10,7 @@ import { take } from 'rxjs';
 import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { DeleteUserComponent } from '../../modals/delete-item/delete-user/delete-user.component';
 import { DatePipe } from '@angular/common';
+import { UserService } from '../../services/user-service';
 
 @Component({
   selector: 'app-profile',
@@ -26,7 +27,7 @@ export class ProfileComponent implements OnInit{
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: ServicesService,
+    private userService: UserService,
     private router: Router,
     private transformDate: DatePipe
   ){}

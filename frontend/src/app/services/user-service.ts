@@ -7,7 +7,7 @@ import { BehaviorSubject, map, Observable, take, tap } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ServicesService {
+export class UserService {
   //private readonly currentUserSubject: BehaviorSubject<Usuario> = new BehaviorSubject<Usuario>({} as Usuario);
 
 constructor(private client: HttpClient) { }

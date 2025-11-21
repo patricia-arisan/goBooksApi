@@ -11,11 +11,12 @@ import { Libro } from '../../../interfaces/libro';
 import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../../../services/book-service';
 import { Usuario } from '../../../interfaces/usuario';
-import { ServicesService } from '../../../services/services.service';
+
 import { ReadingService } from '../../../services/reading-service';
 import { LecturaDTO } from '../../../interfaces/lecturaDTO';
 import {CommonModule} from "@angular/common"
 import { Lectura } from '../../../interfaces/lectura';
+import { UserService } from '../../../services/user-service';
 
 @Component({
   selector: 'app-reading-create',
@@ -47,7 +48,7 @@ export class ReadingCreateComponent implements OnInit{
     private bookService: BookService,
     private formBuilder: FormBuilder,
     private stateService: StateService,
-    private userService: ServicesService,
+    private userService: UserService,
     private readingService: ReadingService,
     
     

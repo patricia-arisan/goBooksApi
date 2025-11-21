@@ -6,8 +6,9 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { Router } from '@angular/router';
 import { ProfileComponent } from '../../../pages/profile/profile.component';
-import { ServicesService } from '../../../services/services.service';
+
 import { Usuario } from '../../../interfaces/usuario';
+import { UserService } from '../../../services/user-service';
 
 @Component({
   selector: 'app-author',
@@ -23,7 +24,7 @@ export class DeleteUserComponent implements OnInit{
   readonly dialogRef = inject(MatDialogRef<ProfileComponent>);
   
   constructor(
-    private userService: ServicesService,
+    private userService: UserService,
     private router: Router
     
     

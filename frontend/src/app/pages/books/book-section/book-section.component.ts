@@ -19,12 +19,13 @@ import {ProgressSpinnerMode, MatProgressSpinnerModule} from '@angular/material/p
 import {MatSliderModule} from '@angular/material/slider';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCardModule} from '@angular/material/card';
-import { ServicesService } from '../../../services/services.service';
+
 import { Usuario } from '../../../interfaces/usuario';
 import { ReadingUpdateComponent } from '../../../modals/reading/reading-update/reading-update.component';
 
 import { DecimalPipe, formatNumber } from '@angular/common';
 import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-admin.component';
+import { UserService } from '../../../services/user-service';
 
 @Component({
   selector: 'app-book-section',
@@ -50,7 +51,7 @@ export class BookSectionComponent implements OnInit{
     private router: Router,
     private bookService: BookService,
     private readingService: ReadingService,
-    private userService: ServicesService,
+    private userService: UserService,
       
     ){}
 

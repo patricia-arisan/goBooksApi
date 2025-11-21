@@ -12,7 +12,8 @@ import { UpdateBookComponent } from '../../../pages/admin/admin-books/update-boo
 import { Libro } from '../../../interfaces/libro';
 import { BookService } from '../../../services/book-service';
 import { Usuario } from '../../../interfaces/usuario';
-import { ServicesService } from '../../../services/services.service';
+import { UserService } from '../../../services/user-service';
+
 
 @Component({
   selector: 'app-author-update',
@@ -33,7 +34,7 @@ export class AuthorUpdateComponent implements OnInit{
     private formBuilder: FormBuilder,
     private authorService: AuthorService,
     private bookService: BookService,
-    private userService: ServicesService,
+    private userService: UserService,
   ){
     this.fromParentComponent = data;
   }

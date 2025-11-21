@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { ServicesService } from '../../services/services.service';
+
 import { Usuario } from '../../interfaces/usuario';
 import { HeaderUserComponent } from '../shared/headers/header-user/header-user.component';
 import { BookService } from '../../services/book-service';
@@ -8,6 +8,7 @@ import { Libro } from '../../interfaces/libro';
 
 ////
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserService } from '../../services/user-service';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit {
   constructor(
 
     private router: Router,
-    private userService: ServicesService,
+    private userService: UserService,
     private bookService: BookService,
     ////
     private formBuilder: FormBuilder,
