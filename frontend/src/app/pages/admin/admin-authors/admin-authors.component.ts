@@ -1,13 +1,11 @@
 import { AfterViewInit, Component, inject, numberAttribute, OnInit, ViewChild } from '@angular/core';
 import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-admin.component';
 import { RouterLink } from '@angular/router';
-import { BookService } from '../../../services/book-service';
 import { Libro } from '../../../interfaces/libro';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginator, MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { UpdateBookComponent } from '../../../modals/book/update-book/update-book.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthorService } from '../../../services/author-service';
 import { Autor } from '../../../interfaces/autor';
@@ -24,7 +22,7 @@ import { DeleteAuthorComponent } from '../../../modals/author/author-delete/dele
   styleUrl: './admin-authors.component.css'
 })
 export class AdminAuthorsComponent implements OnInit, AfterViewInit {
-  libros!: Libro[];
+  // libros!: Libro[];
   showBooksTable: Boolean = true;
   totalItems = 0;
   pageSize = 16;

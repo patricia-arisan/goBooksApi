@@ -4,7 +4,6 @@ import { BookService } from '../../../services/book-service';
 import { Libro } from '../../../interfaces/libro';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { StateService } from '../../../services/state-service';
 import { Estado } from '../../../interfaces/estado';
 
 import { MatDialog } from '@angular/material/dialog';
@@ -165,7 +164,7 @@ export class BookSectionComponent implements OnInit{
         })
   }
   
-  visitEdit(){
+  goEdit(){
     
     this.router.navigate(["/book-section/editar/",this.libro.id]);
   }

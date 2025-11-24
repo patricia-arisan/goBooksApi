@@ -7,7 +7,7 @@ import { GenreService } from '../../services/genre-service';
 import { Genero } from '../../interfaces/genero';
 
 @Component({
-  selector: 'app-gender',
+  selector: 'app-genre',
   standalone: true,
   imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
   templateUrl: './genre.component.html',
@@ -40,13 +40,14 @@ export class GenreComponent implements OnInit{
   })
 
   registerGenre(){
-        this.genreService.createGenre(this.formNewGenre.value).subscribe((data:Genero) =>{
+        this.genreService.createGenre(this.formNewGenre.value).subscribe({next:(data:Genero) =>{
             console.log(data);
             this.dialogRef.close();
-          }, error=> {
+          }, error: (error)=>{
       if(error){
-        this.formNewGenre.setErrors({foundgenre: true})
+        this.formNewGenre.setErrors({foundGenre: true})
       }
+    }
     })
       }
       closeForm(): void {

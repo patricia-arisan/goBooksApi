@@ -1,12 +1,10 @@
 import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
 import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-admin.component';
 import { RouterLink } from '@angular/router';
-import { Libro } from '../../../interfaces/libro';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginator, MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { UpdateBookComponent } from '../../../modals/book/update-book/update-book.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Genero } from '../../../interfaces/genero';
 import { GenreService } from '../../../services/genre-service';

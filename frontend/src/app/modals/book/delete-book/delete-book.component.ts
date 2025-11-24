@@ -6,20 +6,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 
-import { AuthorUpdateComponent } from '../../author/author-update/author-update.component';
-import { UpdatePublisherComponent } from '../../editorial/update-publisher/update-publisher.component';
-import { GenreUpdateComponent } from '../../genre/genre-update/genre-update.component';
 import { Usuario } from '../../../interfaces/usuario';
 
 import { HeaderAdminComponent } from '../../../pages/shared/headers/header-admin/header-admin.component';
 import { Libro } from '../../../interfaces/libro';
-import { Autor } from '../../../interfaces/autor';
-import { Editorial } from '../../../interfaces/editorial';
-import { Genero } from '../../../interfaces/genero';
 import { BookService } from '../../../services/book-service';
-import { AuthorService } from '../../../services/author-service';
-import { EditorialService } from '../../../services/editorial-service';
-import { GenreService } from '../../../services/genre-service';
+
 import { AdminBooksComponent } from '../../../pages/admin/admin-books/admin-books.component';
 import { UpdateBookComponent } from '../../../pages/admin/admin-books/update-book/update-book.component';
 import { UserService } from '../../../services/user-service';

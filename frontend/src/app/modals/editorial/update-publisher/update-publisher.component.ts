@@ -3,13 +3,14 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 
-import { EditorialService } from '../../../services/editorial-service';
+
 import { UpdateBookComponent } from '../../../pages/admin/admin-books/update-book/update-book.component';
 import { Editorial } from '../../../interfaces/editorial';
 import { Usuario } from '../../../interfaces/usuario';
 import { Libro } from '../../../interfaces/libro';
 import { BookService } from '../../../services/book-service';
 import { UserService } from '../../../services/user-service';
+import { PublisherService } from '../../../services/publisher-service';
 
 
 
@@ -32,7 +33,7 @@ export class UpdatePublisherComponent implements OnInit{
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
-    private publisherService: EditorialService,
+    private publisherService: PublisherService,
     private bookService: BookService,
     private userService: UserService,
   ){

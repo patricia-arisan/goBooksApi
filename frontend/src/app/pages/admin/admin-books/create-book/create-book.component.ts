@@ -6,7 +6,7 @@ import { BookService } from '../../../../services/book-service';
 import { Libro } from '../../../../interfaces/libro';
 import { Autor } from '../../../../interfaces/autor';
 import { AuthorService } from '../../../../services/author-service';
-import { EditorialService } from '../../../../services/editorial-service';
+
 import { GenreService } from '../../../../services/genre-service';
 import { Editorial } from '../../../../interfaces/editorial';
 import { Genero } from '../../../../interfaces/genero';
@@ -16,6 +16,7 @@ import { AuthorComponent } from '../../../../modals/author/author.component';
 import { EditorialComponent } from '../../../../modals/editorial/editorial.component';
 import { GenreComponent } from '../../../../modals/genre/genre.component';
 import { take } from 'rxjs';
+import { PublisherService } from '../../../../services/publisher-service';
 
 @Component({
   selector: 'app-create-book',
@@ -35,14 +36,14 @@ export class CreateBookComponent implements OnInit{
     private formBuilder: FormBuilder,
     private bookService: BookService,
     private authorService: AuthorService,
-    private editorialService: EditorialService,
+    private publisherService: PublisherService,
     private genreService: GenreService,
     private router: Router
   ){}
 
   ngOnInit(): void {
     this.getAuthors();
-    this.getEditorials();
+    this.getPublishers();
     this.getGenres();
     
     this.formNewBook = this.formBuilder.group ({
@@ -105,8 +106,8 @@ export class CreateBookComponent implements OnInit{
 
     
 
-    getEditorials(){
-    this.editorialService.getEditorialsByNameOrder().subscribe((data:Editorial[])=>{
+    getPublishers(){
+    this.publisherService.getPublishersByNameOrder().subscribe((data:Editorial[])=>{
         this.editoriales = data;
       })
 
@@ -144,7 +145,7 @@ export class CreateBookComponent implements OnInit{
     }).afterClosed().subscribe((data: Editorial)=>{
       this.editoriales.push(data);
       console.log(this.editoriales)
-      this.getEditorials();
+      this.getPublishers();
     });
   }
 

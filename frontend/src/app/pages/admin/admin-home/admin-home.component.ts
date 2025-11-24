@@ -133,18 +133,6 @@ constructor(
       
     
   }
-  // search(){
-  //   let busqueda = this.formSearch.get('clave')?.value;
-    
-  //   this.bookService.searchByBookAuthorEditorial(busqueda).subscribe((data:Libro[]) =>{
-  //     this.libros=data;
-  //     this.router.navigate(['results/search']);
-  //   })
-//}
-  
-  //////////////////////////
-
-
   
   
 }

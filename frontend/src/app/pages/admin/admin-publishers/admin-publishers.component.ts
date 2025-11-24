@@ -1,22 +1,17 @@
 import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
 import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-admin.component';
 import { RouterLink } from '@angular/router';
-import { Libro } from '../../../interfaces/libro';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginator, MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { UpdateBookComponent } from '../../../modals/book/update-book/update-book.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Genero } from '../../../interfaces/genero';
-import { GenreService } from '../../../services/genre-service';
-import { GeneroDTO } from '../../../interfaces/generoDTO';
-import { GenreUpdateComponent } from '../../../modals/genre/genre-update/genre-update.component';
 import { EditorialDTO } from '../../../interfaces/editorialDTO';
-import { EditorialService } from '../../../services/editorial-service';
+
 import { UpdatePublisherComponent } from '../../../modals/editorial/update-publisher/update-publisher.component';
 import { Editorial } from '../../../interfaces/editorial';
 import { DeletePublisherComponent } from '../../../modals/editorial/delete-publisher/delete-publisher.component';
+import { PublisherService } from '../../../services/publisher-service';
 
 
 @Component({
@@ -40,14 +35,13 @@ export class AdminPublishersComponent implements OnInit, AfterViewInit {
 
   constructor(
     // private route: ActivatedRoute,
-    private publisherService: EditorialService,
+    private publisherService: PublisherService,
     private paginatorIn: MatPaginatorIntl
 
   ) { }
 
   ngOnInit(): void {
 
-    // this.getGenres();
     this.getNumberOfBooksByPublisher();
 
 
@@ -61,13 +55,6 @@ export class AdminPublishersComponent implements OnInit, AfterViewInit {
     
   }
 
-  // getGenres(){
-  //     this.genreService.getGenresByNameOrder().subscribe((data:Genero[])=>{
-  //         this.generos = data;
-  //         this.dataSource.data = this.generos;
-  //       })
-  
-  //     }
 getNumberOfBooksByPublisher(){
       this.publisherService.getListBookPublisherNumber().subscribe((data:EditorialDTO[])=>{
           this.editoriales = data;

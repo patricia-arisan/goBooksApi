@@ -6,7 +6,7 @@ import { BookService } from '../../../../services/book-service';
 import { Libro } from '../../../../interfaces/libro';
 import { Autor } from '../../../../interfaces/autor';
 import { AuthorService } from '../../../../services/author-service';
-import { EditorialService } from '../../../../services/editorial-service';
+
 import { GenreService } from '../../../../services/genre-service';
 import { Editorial } from '../../../../interfaces/editorial';
 import { Genero } from '../../../../interfaces/genero';
@@ -22,6 +22,7 @@ import { UpdatePublisherComponent } from '../../../../modals/editorial/update-pu
 import { GenreUpdateComponent } from '../../../../modals/genre/genre-update/genre-update.component';
 import { DeleteBookComponent } from '../../../../modals/book/delete-book/delete-book.component';
 import { UserService } from '../../../../services/user-service';
+import { PublisherService } from '../../../../services/publisher-service';
 
 
 
@@ -48,7 +49,7 @@ export class UpdateBookComponent implements OnInit{
     private route: ActivatedRoute,
     private userService: UserService,
     private authorService: AuthorService,
-    private editorialService: EditorialService,
+    private publisherService: PublisherService,
     private genreService: GenreService,
     private router: Router
   ){}
@@ -63,7 +64,7 @@ export class UpdateBookComponent implements OnInit{
     });
     this.retrieveFromLocalStorage();
      this.getAuthors();
-    this.getEditorials();
+    this.getPublishers();
     this.getGenres();
     
 
@@ -201,8 +202,8 @@ export class UpdateBookComponent implements OnInit{
 
     
 
-    getEditorials(){
-    this.editorialService.getEditorialsByNameOrder().subscribe((data:Editorial[])=>{
+    getPublishers(){
+    this.publisherService.getPublishersByNameOrder().subscribe((data:Editorial[])=>{
         this.editoriales = data;
       })
 
@@ -263,7 +264,7 @@ export class UpdateBookComponent implements OnInit{
 
       
       
-      this.getEditorials();
+      this.getPublishers();
     });
   }
 

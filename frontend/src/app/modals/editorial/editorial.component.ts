@@ -3,8 +3,9 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { CreateBookComponent } from '../../pages/admin/admin-books/create-book/create-book.component';
-import { EditorialService } from '../../services/editorial-service';
+
 import { Editorial } from '../../interfaces/editorial';
+import { PublisherService } from '../../services/publisher-service';
 
 @Component({
   selector: 'app-editorial',
@@ -19,7 +20,7 @@ export class EditorialComponent implements OnInit{
 
   constructor(
     private formBuilder: FormBuilder,
-    private editorialService: EditorialService,
+    private publisherService: PublisherService,
   ){}
 
   ngOnInit(): void {
@@ -39,13 +40,14 @@ export class EditorialComponent implements OnInit{
   })
 
   registerEditorial(){
-        this.editorialService.createEditorial(this.formNewEditorial.value).subscribe((data:Editorial) =>{
+        this.publisherService.createPublisher(this.formNewEditorial.value).subscribe({next:(data:Editorial) =>{
             console.log(data);
             this.dialogRef.close();
-          }, error=> {
+          }, error: (error)=> {
                 if(error){
-                  this.formNewEditorial.setErrors({foundpublisher: true})
+                  this.formNewEditorial.setErrors({foundPublisher: true})
                 }
+          }
               })
       }
 

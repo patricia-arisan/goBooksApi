@@ -8,14 +8,14 @@ import { EditorialDTO } from '../interfaces/editorialDTO';
 @Injectable({
   providedIn: 'root'
 })
-export class EditorialService {
+export class PublisherService {
 
 
   constructor(private client: HttpClient) { }
 
-  private readonly editorialServiceUrl = `${environment.proyectoUrl}api/editorial/registroEditorial`;
+  private readonly publisherServiceUrl = `${environment.proyectoUrl}api/editorial/registroEditorial`;
 
-  createEditorial(editorial: Editorial): Observable<Editorial> {
+  createPublisher(editorial: Editorial): Observable<Editorial> {
     const credentials = localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -28,12 +28,12 @@ export class EditorialService {
 
     })
 
-    return this.client.post<Editorial>(`${this.editorialServiceUrl}`, editorial, { headers })
+    return this.client.post<Editorial>(`${this.publisherServiceUrl}`, editorial, { headers })
   }
 
-  private readonly editorialListServiceUrl = `${environment.proyectoUrl}api/editorial/listadoEditoriales`;
+  private readonly publisherListServiceUrl = `${environment.proyectoUrl}api/editorial/listadoEditoriales`;
 
-  getEditorialsByNameOrder(): Observable<Editorial[]> {
+  getPublishersByNameOrder(): Observable<Editorial[]> {
     const credentials = localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ export class EditorialService {
 
     })
 
-    return this.client.get<Editorial[]>(`${this.editorialListServiceUrl}`, { headers })
+    return this.client.get<Editorial[]>(`${this.publisherListServiceUrl}`, { headers })
   }
 
   private readonly updatePublisherServiceUrl = `${environment.proyectoUrl}api/editorial`
@@ -86,7 +86,7 @@ export class EditorialService {
     return this.client.get<EditorialDTO[]>(`${this.numberBooksPublisherListServiceUrl}`, { headers })
   }
 
-  private readonly publisherServiceDeleteUrl = `${environment.proyectoUrl}api/editorial`;
+  private readonly deletePublisherServiceUrl = `${environment.proyectoUrl}api/editorial`;
    deletePublisher(id: number): Observable<any>{
     console.log("Service " + id);
     const credentials = localStorage.getItem('token');
@@ -98,7 +98,7 @@ export class EditorialService {
         })
     
     
-    return this.client.delete<any>(`${this.publisherServiceDeleteUrl}/${id}`,{headers})
+    return this.client.delete<any>(`${this.deletePublisherServiceUrl}/${id}`,{headers})
     
     
   }

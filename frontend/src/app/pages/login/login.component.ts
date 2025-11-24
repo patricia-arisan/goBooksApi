@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     console.log(localStorage)
 
 
-    this.userService.sendUser(this.formLogin.value).subscribe((data: Usuario) => {
+    this.userService.sendUser(this.formLogin.value).subscribe({next:(data: Usuario) => {
 
       //  localStorage.setItem('token',btoa(data.username + ':' + data.password))  
       //  let cred = localStorage.getItem('token')
@@ -74,10 +74,11 @@ export class LoginComponent implements OnInit {
         
         this.router.navigate(['/home']);
       }
-    }, error => {
+    }, error: (error)=>{
       if(error) {
-        this.formLogin.setErrors({unauthenticated: true})
+        this.formLogin.setErrors({unAuthenticated: true})
       }
+    }
     })
   };
 }

@@ -75,16 +75,6 @@ setTimeout(() => {
               }  
             }
 
-  // getCurrentBook(){
-    
-  //   this.bookService.getBookById(this.data).subscribe((data:Libro)=>{
-      
-  //         this.libro = data;
-  //         console.log(this.libro)
-          
-  //       })
-        
-  // }
 
   findCurrentGenre(){
       

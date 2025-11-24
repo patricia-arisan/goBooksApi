@@ -12,13 +12,10 @@ import { GenreUpdateComponent } from '../../genre/genre-update/genre-update.comp
 import { Usuario } from '../../../interfaces/usuario';
 
 import { HeaderAdminComponent } from '../../../pages/shared/headers/header-admin/header-admin.component';
-import { Libro } from '../../../interfaces/libro';
-import { Autor } from '../../../interfaces/autor';
-import { Editorial } from '../../../interfaces/editorial';
+
 import { Genero } from '../../../interfaces/genero';
-import { BookService } from '../../../services/book-service';
-import { AuthorService } from '../../../services/author-service';
-import { EditorialService } from '../../../services/editorial-service';
+
+
 import { GenreService } from '../../../services/genre-service';
 import { AdminBooksComponent } from '../../../pages/admin/admin-books/admin-books.component';
 import { UpdateBookComponent } from '../../../pages/admin/admin-books/update-book/update-book.component';
