@@ -6,9 +6,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 
-
-import { UpdatePublisherComponent } from '../../editorial/update-publisher/update-publisher.component';
-import { GenreUpdateComponent } from '../../genre/genre-update/genre-update.component';
 import { Usuario } from '../../../interfaces/usuario';
 
 import { HeaderAdminComponent } from '../../../pages/shared/headers/header-admin/header-admin.component';

@@ -4,26 +4,28 @@ import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 
 
-import { UpdateBookComponent } from '../../../pages/admin/admin-books/update-book/update-book.component';
+
 import { Editorial } from '../../../interfaces/editorial';
 import { Usuario } from '../../../interfaces/usuario';
 import { Libro } from '../../../interfaces/libro';
 import { BookService } from '../../../services/book-service';
 import { UserService } from '../../../services/user-service';
+
+import { UpdateBookComponent } from '../../../pages/admin/admin-books/update-book/update-book.component';
 import { PublisherService } from '../../../services/publisher-service';
 
 
 
 
 @Component({
-  selector: 'app-update-publisher',
+  selector: 'app-publisher-update',
   standalone: true,
   imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
-  templateUrl: './update-publisher.component.html',
-  styleUrl: './update-publisher.component.css',
+  templateUrl: './publisher-update.component.html',
+  styleUrl: './publisher-update.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UpdatePublisherComponent implements OnInit{
+export class PublisherUpdateComponent implements OnInit{
   user!: Usuario;
   libro!: Libro;
   editorial!:Editorial;

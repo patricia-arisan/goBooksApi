@@ -2,20 +2,22 @@ import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/cor
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
-import { CreateBookComponent } from '../../pages/admin/admin-books/create-book/create-book.component';
+import { CreateBookComponent } from '../../../pages/admin/admin-books/create-book/create-book.component';
+import { PublisherService } from '../../../services/publisher-service';
+import { Editorial } from '../../../interfaces/editorial';
 
-import { Editorial } from '../../interfaces/editorial';
-import { PublisherService } from '../../services/publisher-service';
+
+
 
 @Component({
-  selector: 'app-editorial',
+  selector: 'app-publisher-create',
   standalone: true,
   imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
-  templateUrl: './editorial.component.html',
-  styleUrl: './editorial.component.css',
+  templateUrl: './publisher-create.component.html',
+  styleUrl: './publisher-create.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EditorialComponent implements OnInit{
+export class PublisherCreateComponent implements OnInit{
   readonly dialogRef = inject(MatDialogRef<CreateBookComponent>);
 
   constructor(

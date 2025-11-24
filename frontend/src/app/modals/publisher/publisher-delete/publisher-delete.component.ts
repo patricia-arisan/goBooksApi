@@ -6,8 +6,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 
-
-import { UpdatePublisherComponent } from '../update-publisher/update-publisher.component';
 import { GenreUpdateComponent } from '../../genre/genre-update/genre-update.component';
 import { Usuario } from '../../../interfaces/usuario';
 
@@ -25,15 +23,15 @@ import { PublisherService } from '../../../services/publisher-service';
 
 
 @Component({
-  selector: 'app-delete-publisher',
+  selector: 'app-publisher-delete',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule,MatButtonModule,MatDialogTitle,MatDialogContent],
-  templateUrl: './delete-publisher.component.html',
-  styleUrl: './delete-publisher.component.css',
+  templateUrl: './publisher-delete.component.html',
+  styleUrl: './publisher-delete.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
   //changeDetection: ChangeDetectionStrategy.OnPush No cargan al principio las cosas, mejor quitar esto
 })
-export class DeletePublisherComponent implements OnInit{
+export class PublisherDeleteComponent implements OnInit{
   user!: Usuario;
  
   editorial!: Editorial;

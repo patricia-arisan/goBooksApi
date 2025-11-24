@@ -1,21 +1,23 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
-import { CreateBookComponent } from '../../pages/admin/admin-books/create-book/create-book.component';
+
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { Autor } from '../../interfaces/autor';
+
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthorService } from '../../services/author-service';
-import { Router } from '@angular/router';
+
+import { AuthorService } from '../../../services/author-service';
+import { CreateBookComponent } from '../../../pages/admin/admin-books/create-book/create-book.component';
+import { Autor } from '../../../interfaces/autor';
 
 @Component({
-  selector: 'app-author',
+  selector: 'app-author-create',
   standalone: true,
   imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
-  templateUrl: './author.component.html',
-  styleUrl: './author.component.css',
+  templateUrl: './author-create.component.html',
+  styleUrl: './author-create.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AuthorComponent implements OnInit{
+export class AuthorCreateComponent implements OnInit{
   readonly dialogRef = inject(MatDialogRef<CreateBookComponent>);
   
   constructor(

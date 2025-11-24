@@ -12,11 +12,13 @@ import { Editorial } from '../../../../interfaces/editorial';
 import { Genero } from '../../../../interfaces/genero';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
-import { AuthorComponent } from '../../../../modals/author/author.component';
-import { EditorialComponent } from '../../../../modals/editorial/editorial.component';
+
+
 import { GenreComponent } from '../../../../modals/genre/genre.component';
 import { take } from 'rxjs';
 import { PublisherService } from '../../../../services/publisher-service';
+import { AuthorCreateComponent } from '../../../../modals/author/author-create/author-create.component';
+import { PublisherCreateComponent } from '../../../../modals/publisher/publisher-create/publisher-create.component';
 
 @Component({
   selector: 'app-create-book',
@@ -124,7 +126,7 @@ export class CreateBookComponent implements OnInit{
     readonly dialog = inject(MatDialog);
     
     openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(AuthorComponent, {
+    this.dialog.open(AuthorCreateComponent, {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
@@ -137,7 +139,7 @@ export class CreateBookComponent implements OnInit{
   }
 
   openEditorialDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(EditorialComponent, {
+    this.dialog.open(PublisherCreateComponent, {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,

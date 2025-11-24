@@ -8,10 +8,12 @@ import { MatPaginator, MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@
 import { MatDialog } from '@angular/material/dialog';
 import { EditorialDTO } from '../../../interfaces/editorialDTO';
 
-import { UpdatePublisherComponent } from '../../../modals/editorial/update-publisher/update-publisher.component';
+
 import { Editorial } from '../../../interfaces/editorial';
-import { DeletePublisherComponent } from '../../../modals/editorial/delete-publisher/delete-publisher.component';
+
 import { PublisherService } from '../../../services/publisher-service';
+import { PublisherUpdateComponent } from '../../../modals/publisher/publisher-update/publisher-update.component';
+import { PublisherDeleteComponent } from '../../../modals/publisher/publisher-delete/publisher-delete.component';
 
 
 @Component({
@@ -113,7 +115,7 @@ getNumberOfBooksByPublisher(){
  readonly dialog = inject(MatDialog);
    openDialog(editorial:EditorialDTO,enterAnimationDuration: string, exitAnimationDuration: string): void {
      
-       this.dialog.open(UpdatePublisherComponent, {
+       this.dialog.open(PublisherUpdateComponent, {
          width: '250px',
          enterAnimationDuration,
          exitAnimationDuration,
@@ -132,7 +134,7 @@ getNumberOfBooksByPublisher(){
       }
 
       openDeleteDialog(editorial:EditorialDTO,enterAnimationDuration: string, exitAnimationDuration: string): void {
-              this.dialog.open(DeletePublisherComponent, {
+              this.dialog.open(PublisherDeleteComponent, {
                 width: '350px',
                 enterAnimationDuration,
                 exitAnimationDuration,

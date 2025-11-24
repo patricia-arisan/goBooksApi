@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 
 import { AuthorUpdateComponent } from '../../author/author-update/author-update.component';
-import { UpdatePublisherComponent } from '../../editorial/update-publisher/update-publisher.component';
+
 import { GenreUpdateComponent } from '../../genre/genre-update/genre-update.component';
 import { Usuario } from '../../../interfaces/usuario';
 
@@ -23,6 +23,8 @@ import { GenreService } from '../../../services/genre-service';
 import { AdminBooksComponent } from '../../../pages/admin/admin-books/admin-books.component';
 import { UserService } from '../../../services/user-service';
 import { PublisherService } from '../../../services/publisher-service';
+import { PublisherUpdateComponent } from '../../publisher/publisher-update/publisher-update.component';
+
 
 
 
@@ -33,7 +35,7 @@ import { PublisherService } from '../../../services/publisher-service';
   imports: [FormsModule, ReactiveFormsModule,MatButtonModule,MatDialogTitle,MatDialogContent],
   templateUrl: './update-book.component.html',
   styleUrl: './update-book.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
   //changeDetection: ChangeDetectionStrategy.OnPush No cargan al principio las cosas, mejor quitar esto
 })
 export class UpdateBookComponent implements OnInit{
@@ -234,7 +236,7 @@ export class UpdateBookComponent implements OnInit{
       enterAnimationDuration,
       exitAnimationDuration,
       disableClose: true,
-      data:this.libro.id
+      data:this.libro.autor.id
     }).afterClosed().subscribe((data: Libro)=>{
       this.autores.push(data);
      
@@ -246,12 +248,12 @@ export class UpdateBookComponent implements OnInit{
   }
   
   openUpdatePublisherDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(UpdatePublisherComponent, {
+    this.dialog.open(PublisherUpdateComponent, {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
       disableClose: true,
-      data:this.libro.id
+      data:this.libro.editorial.id
     }).afterClosed().subscribe((data: Libro)=>{
       this.editoriales.push(data);
      
@@ -268,7 +270,7 @@ export class UpdateBookComponent implements OnInit{
       enterAnimationDuration,
       exitAnimationDuration,
       disableClose: true,
-      data:this.libro.id
+      data:this.libro.genero.id
     }).afterClosed().subscribe((data: Libro)=>{
       this.generos.push(data);
      

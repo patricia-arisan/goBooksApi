@@ -87,20 +87,20 @@ export class PublisherService {
   }
 
   private readonly deletePublisherServiceUrl = `${environment.proyectoUrl}api/editorial`;
-   deletePublisher(id: number): Observable<any>{
+  deletePublisher(id: number): Observable<any> {
     console.log("Service " + id);
     const credentials = localStorage.getItem('token');
     const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            
-            'Authorization' : credentials || ''
-           
-        })
-    
-    
-    return this.client.delete<any>(`${this.deletePublisherServiceUrl}/${id}`,{headers})
-    
-    
+      'Content-Type': 'application/json',
+
+      'Authorization': credentials || ''
+
+    })
+
+
+    return this.client.delete<any>(`${this.deletePublisherServiceUrl}/${id}`, { headers })
+
+
   }
 
 }

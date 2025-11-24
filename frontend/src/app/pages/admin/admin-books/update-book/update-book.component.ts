@@ -12,17 +12,16 @@ import { Editorial } from '../../../../interfaces/editorial';
 import { Genero } from '../../../../interfaces/genero';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
-import { AuthorComponent } from '../../../../modals/author/author.component';
-import { EditorialComponent } from '../../../../modals/editorial/editorial.component';
-import { GenreComponent } from '../../../../modals/genre/genre.component';
+
 import { Usuario } from '../../../../interfaces/usuario';
 
 import { AuthorUpdateComponent } from '../../../../modals/author/author-update/author-update.component';
-import { UpdatePublisherComponent } from '../../../../modals/editorial/update-publisher/update-publisher.component';
+
 import { GenreUpdateComponent } from '../../../../modals/genre/genre-update/genre-update.component';
 import { DeleteBookComponent } from '../../../../modals/book/delete-book/delete-book.component';
 import { UserService } from '../../../../services/user-service';
 import { PublisherService } from '../../../../services/publisher-service';
+import { PublisherUpdateComponent } from '../../../../modals/publisher/publisher-update/publisher-update.component';
 
 
 
@@ -252,7 +251,7 @@ export class UpdateBookComponent implements OnInit{
   }
   
   openUpdatePublisherDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(UpdatePublisherComponent, {
+    this.dialog.open(PublisherUpdateComponent, {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
