@@ -7,8 +7,9 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginator, MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { UpdateBookComponent } from '../../../modals/book/update-book/update-book.component';
+
 import { MatDialog } from '@angular/material/dialog';
+import { BookUpdateComponent } from '../../../modals/book/book-update/book-update.component';
 
 
 @Component({
@@ -130,7 +131,7 @@ applyFilterGalery(event: Event){
 
   readonly dialog = inject(MatDialog);
   openDialog(libro:Libro,enterAnimationDuration: string, exitAnimationDuration: string): void {
-      this.dialog.open(UpdateBookComponent, {
+      this.dialog.open(BookUpdateComponent, {
         width: '330px',
         enterAnimationDuration,
         exitAnimationDuration,

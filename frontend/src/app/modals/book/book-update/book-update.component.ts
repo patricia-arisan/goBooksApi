@@ -30,15 +30,15 @@ import { PublisherUpdateComponent } from '../../publisher/publisher-update/publi
 
 
 @Component({
-  selector: 'app-update-book',
+  selector: 'app-book-update',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule,MatButtonModule,MatDialogTitle,MatDialogContent],
-  templateUrl: './update-book.component.html',
-  styleUrl: './update-book.component.css',
+  templateUrl: './book-update.component.html',
+  styleUrl: './book-update.component.css',
   // changeDetection: ChangeDetectionStrategy.OnPush
   //changeDetection: ChangeDetectionStrategy.OnPush No cargan al principio las cosas, mejor quitar esto
 })
-export class UpdateBookComponent implements OnInit{
+export class BookUpdateComponent implements OnInit{
   user!: Usuario;
   // autores!: Autor[];
   // editoriales!: Editorial[];
@@ -85,7 +85,7 @@ export class UpdateBookComponent implements OnInit{
           id:[null],
           nombre:["",[Validators.required]]
         }),
-        
+        isbn:[""],
         editorial:this.formBuilder.group({
           id:[null],
           nombre:["",[Validators.required]]
@@ -94,6 +94,8 @@ export class UpdateBookComponent implements OnInit{
           id:[null],
           nombre:["",[Validators.required]]
         }),
+        portada:[""],
+        sinopsis:[""],
         
       })
       
@@ -148,7 +150,7 @@ export class UpdateBookComponent implements OnInit{
           id: this.libro.autor.id,
           nombre:this.libro.autor.nombre,
         },
-        
+        isbn:this.libro.isbn,
         editorial:{
           id: this.libro.editorial.id,
           nombre:this.libro.editorial.nombre,
@@ -157,6 +159,8 @@ export class UpdateBookComponent implements OnInit{
           id: this.libro.genero.id,
           nombre:this.libro.genero.nombre,
         },
+        portada:this.libro.portada,
+        sinopsis:this.libro.sinopsis,
        
     });
       
@@ -169,7 +173,7 @@ export class UpdateBookComponent implements OnInit{
         id: new FormControl(null),
         nombre: new FormControl("")
       }),
-      
+      isbn: new FormControl(""),
       editorial:new FormGroup({
         id: new FormControl(null),
         nombre: new FormControl("")
@@ -178,6 +182,8 @@ export class UpdateBookComponent implements OnInit{
         id: new FormControl(null),
         nombre: new FormControl("")
       }),
+      portada:new FormControl(""),
+       sinopsis:new FormControl(""),
       
     })
 

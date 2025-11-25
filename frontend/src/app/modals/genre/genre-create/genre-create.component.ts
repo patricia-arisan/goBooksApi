@@ -2,20 +2,21 @@ import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/cor
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
-import { CreateBookComponent } from '../../pages/admin/admin-books/create-book/create-book.component';
-import { GenreService } from '../../services/genre-service';
-import { Genero } from '../../interfaces/genero';
+import { AdminBooksCreateComponent } from '../../../pages/admin/admin-books/admin-books-create/admin-books-create.component';
+import { GenreService } from '../../../services/genre-service';
+import { Genero } from '../../../interfaces/genero';
+
 
 @Component({
-  selector: 'app-genre',
+  selector: 'app-genre-create',
   standalone: true,
   imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
-  templateUrl: './genre.component.html',
-  styleUrl: './genre.component.css',
+  templateUrl: './genre-create.component.html',
+  styleUrl: './genre-create.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GenreComponent implements OnInit{
-  readonly dialogRef = inject(MatDialogRef<CreateBookComponent>);
+export class GenreCreateComponent implements OnInit{
+  readonly dialogRef = inject(MatDialogRef<AdminBooksCreateComponent>);
 
   constructor(
     private formBuilder: FormBuilder,

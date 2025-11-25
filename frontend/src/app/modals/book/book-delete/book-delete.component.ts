@@ -12,29 +12,29 @@ import { HeaderAdminComponent } from '../../../pages/shared/headers/header-admin
 import { Libro } from '../../../interfaces/libro';
 import { BookService } from '../../../services/book-service';
 
-import { AdminBooksComponent } from '../../../pages/admin/admin-books/admin-books.component';
-import { UpdateBookComponent } from '../../../pages/admin/admin-books/update-book/update-book.component';
+
 import { UserService } from '../../../services/user-service';
+import { AdminBooksUpdateComponent } from '../../../pages/admin/admin-books/admin-books-update/admin-books-update.component';
 
 
 
 
 @Component({
-  selector: 'app-delete-book',
+  selector: 'app-book-delete',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule,MatButtonModule,MatDialogTitle,MatDialogContent],
-  templateUrl: './delete-book.component.html',
-  styleUrl: './delete-book.component.css',
+  templateUrl: './book-delete.component.html',
+  styleUrl: './book-delete.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
   //changeDetection: ChangeDetectionStrategy.OnPush No cargan al principio las cosas, mejor quitar esto
 })
-export class DeleteBookComponent implements OnInit{
+export class BookDeleteComponent implements OnInit{
   user!: Usuario;
  
   libro!: Libro;
   
   
-  readonly dialogRef = inject(MatDialogRef<UpdateBookComponent>);
+  readonly dialogRef = inject(MatDialogRef<AdminBooksUpdateComponent>);
   fromParentComponent: number;
     
   constructor(

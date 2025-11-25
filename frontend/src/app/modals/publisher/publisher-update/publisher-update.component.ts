@@ -11,8 +11,9 @@ import { Libro } from '../../../interfaces/libro';
 import { BookService } from '../../../services/book-service';
 import { UserService } from '../../../services/user-service';
 
-import { UpdateBookComponent } from '../../../pages/admin/admin-books/update-book/update-book.component';
+
 import { PublisherService } from '../../../services/publisher-service';
+import { AdminBooksUpdateComponent } from '../../../pages/admin/admin-books/admin-books-update/admin-books-update.component';
 
 
 
@@ -30,7 +31,7 @@ export class PublisherUpdateComponent implements OnInit{
   libro!: Libro;
   editorial!:Editorial;
   fromParentComponent: number;
-  readonly dialogRef = inject(MatDialogRef<UpdateBookComponent>);
+  readonly dialogRef = inject(MatDialogRef<AdminBooksUpdateComponent>);
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,

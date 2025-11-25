@@ -5,14 +5,14 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { Router } from '@angular/router';
 import { AuthorService } from '../../../services/author-service';
 import { Autor } from '../../../interfaces/autor';
-import { UpdateBookComponent } from '../../../pages/admin/admin-books/update-book/update-book.component';
+
 import { Libro } from '../../../interfaces/libro';
 import { BookService } from '../../../services/book-service';
 import { Usuario } from '../../../interfaces/usuario';
 import { UserService } from '../../../services/user-service';
+import { AdminBooksUpdateComponent } from '../../../pages/admin/admin-books/admin-books-update/admin-books-update.component';
 
 
 @Component({
@@ -26,7 +26,7 @@ import { UserService } from '../../../services/user-service';
 export class AuthorUpdateComponent implements OnInit{
   user!: Usuario;
   libro!: Libro;
-  readonly dialogRef = inject(MatDialogRef<UpdateBookComponent>);
+  readonly dialogRef = inject(MatDialogRef<AdminBooksUpdateComponent>);
   fromParentComponent: number;
   autor!: Autor;
   constructor(

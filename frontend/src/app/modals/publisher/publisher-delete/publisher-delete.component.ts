@@ -13,8 +13,6 @@ import { HeaderAdminComponent } from '../../../pages/shared/headers/header-admin
 import { Editorial } from '../../../interfaces/editorial';
 
 import { AdminBooksComponent } from '../../../pages/admin/admin-books/admin-books.component';
-import { UpdateBookComponent } from '../../../pages/admin/admin-books/update-book/update-book.component';
-import { AdminAuthorsComponent } from '../../../pages/admin/admin-authors/admin-authors.component';
 import { AdminPublishersComponent } from '../../../pages/admin/admin-publishers/admin-publishers.component';
 import { UserService } from '../../../services/user-service';
 import { PublisherService } from '../../../services/publisher-service';

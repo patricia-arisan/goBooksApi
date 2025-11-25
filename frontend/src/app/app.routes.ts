@@ -189,8 +189,8 @@ export const routes: Routes = [
     {
     path: 'create-book',
         loadComponent: () =>
-            import('./pages/admin/admin-books/create-book/create-book.component').then(
-                (m) => m.CreateBookComponent
+            import('./pages/admin/admin-books/admin-books-create/admin-books-create.component').then(
+                (m) => m.AdminBooksCreateComponent
 
             ),
         title: 'Crear Libro'
@@ -198,8 +198,8 @@ export const routes: Routes = [
     {
     path: 'book-section/editar/:libro.id',
         loadComponent: () =>
-            import('./pages/admin/admin-books/update-book/update-book.component').then(
-                (m) => m.UpdateBookComponent
+            import('./pages/admin/admin-books/admin-books-update/admin-books-update.component').then(
+                (m) => m.AdminBooksUpdateComponent
 
             ),
         title: 'Editar Libro'

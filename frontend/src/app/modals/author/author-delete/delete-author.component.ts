@@ -18,7 +18,7 @@ import { BookService } from '../../../services/book-service';
 import { AuthorService } from '../../../services/author-service';
 
 import { AdminBooksComponent } from '../../../pages/admin/admin-books/admin-books.component';
-import { UpdateBookComponent } from '../../../pages/admin/admin-books/update-book/update-book.component';
+
 import { AdminAuthorsComponent } from '../../../pages/admin/admin-authors/admin-authors.component';
 import { UserService } from '../../../services/user-service';
 

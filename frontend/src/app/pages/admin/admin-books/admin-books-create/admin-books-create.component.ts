@@ -13,22 +13,20 @@ import { Genero } from '../../../../interfaces/genero';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 
-
-import { GenreComponent } from '../../../../modals/genre/genre.component';
-import { take } from 'rxjs';
 import { PublisherService } from '../../../../services/publisher-service';
 import { AuthorCreateComponent } from '../../../../modals/author/author-create/author-create.component';
 import { PublisherCreateComponent } from '../../../../modals/publisher/publisher-create/publisher-create.component';
+import { GenreCreateComponent } from '../../../../modals/genre/genre-create/genre-create.component';
 
 @Component({
-  selector: 'app-create-book',
+  selector: 'app-admin-books-create',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule,HeaderAdminComponent,MatButtonModule],
-  templateUrl: './create-book.component.html',
-  styleUrl: './create-book.component.css',
+  templateUrl: './admin-books-create.component.html',
+  styleUrl: './admin-books-create.component.css',
   //changeDetection: ChangeDetectionStrategy.OnPush No cargan al principio las cosas, mejor quitar esto
 })
-export class CreateBookComponent implements OnInit{
+export class AdminBooksCreateComponent implements OnInit{
   autores!: Autor[];
   editoriales!: Editorial[];
   generos!: Genero[];
@@ -152,7 +150,7 @@ export class CreateBookComponent implements OnInit{
   }
 
   openGenreDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(GenreComponent, {
+    this.dialog.open(GenreCreateComponent, {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,

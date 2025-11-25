@@ -5,11 +5,12 @@ import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, Ma
 
 import { GenreService } from '../../../services/genre-service';
 import { Genero } from '../../../interfaces/genero';
-import { UpdateBookComponent } from '../../../pages/admin/admin-books/update-book/update-book.component';
+
 import { Usuario } from '../../../interfaces/usuario';
 import { Libro } from '../../../interfaces/libro';
 import { BookService } from '../../../services/book-service';
 import { UserService } from '../../../services/user-service';
+import { AdminBooksUpdateComponent } from '../../../pages/admin/admin-books/admin-books-update/admin-books-update.component';
 
 
 
@@ -24,7 +25,7 @@ import { UserService } from '../../../services/user-service';
 export class GenreUpdateComponent implements OnInit{
   user!: Usuario;
     libro!: Libro;
-  readonly dialogRef = inject(MatDialogRef<UpdateBookComponent>);
+  readonly dialogRef = inject(MatDialogRef<AdminBooksUpdateComponent>);
   fromParentComponent: number;
   genero!:Genero;
 

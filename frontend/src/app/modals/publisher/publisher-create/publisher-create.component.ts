@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/cor
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
-import { CreateBookComponent } from '../../../pages/admin/admin-books/create-book/create-book.component';
+import { AdminBooksCreateComponent } from '../../../pages/admin/admin-books/admin-books-create/admin-books-create.component';
 import { PublisherService } from '../../../services/publisher-service';
 import { Editorial } from '../../../interfaces/editorial';
 
@@ -18,7 +18,7 @@ import { Editorial } from '../../../interfaces/editorial';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PublisherCreateComponent implements OnInit{
-  readonly dialogRef = inject(MatDialogRef<CreateBookComponent>);
+  readonly dialogRef = inject(MatDialogRef<AdminBooksCreateComponent>);
 
   constructor(
     private formBuilder: FormBuilder,

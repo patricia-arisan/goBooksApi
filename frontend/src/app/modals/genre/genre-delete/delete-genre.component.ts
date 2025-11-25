@@ -15,8 +15,7 @@ import { Genero } from '../../../interfaces/genero';
 
 import { GenreService } from '../../../services/genre-service';
 import { AdminBooksComponent } from '../../../pages/admin/admin-books/admin-books.component';
-import { UpdateBookComponent } from '../../../pages/admin/admin-books/update-book/update-book.component';
-import { AdminAuthorsComponent } from '../../../pages/admin/admin-authors/admin-authors.component';
+
 import { AdminGenresComponent } from '../../../pages/admin/admin-genres/admin-genres.component';
 import { UserService } from '../../../services/user-service';
 

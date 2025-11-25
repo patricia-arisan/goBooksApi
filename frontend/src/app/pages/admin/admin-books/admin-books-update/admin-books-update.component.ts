@@ -18,22 +18,23 @@ import { Usuario } from '../../../../interfaces/usuario';
 import { AuthorUpdateComponent } from '../../../../modals/author/author-update/author-update.component';
 
 import { GenreUpdateComponent } from '../../../../modals/genre/genre-update/genre-update.component';
-import { DeleteBookComponent } from '../../../../modals/book/delete-book/delete-book.component';
+
 import { UserService } from '../../../../services/user-service';
 import { PublisherService } from '../../../../services/publisher-service';
 import { PublisherUpdateComponent } from '../../../../modals/publisher/publisher-update/publisher-update.component';
+import { BookDeleteComponent } from '../../../../modals/book/book-delete/book-delete.component';
 
 
 
 @Component({
-  selector: 'app-update-book',
+  selector: 'app-admin-books-update',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule,HeaderAdminComponent,MatButtonModule,RouterLink],
-  templateUrl: './update-book.component.html',
-  styleUrl: './update-book.component.css',
+  templateUrl: './admin-books-update.component.html',
+  styleUrl: './admin-books-update.component.css',
   //changeDetection: ChangeDetectionStrategy.OnPush No cargan al principio las cosas, mejor quitar esto
 })
-export class UpdateBookComponent implements OnInit{
+export class AdminBooksUpdateComponent implements OnInit{
   user!: Usuario;
   libro!: Libro;
   id!: string; //para recuperar luego id en url
@@ -285,7 +286,7 @@ export class UpdateBookComponent implements OnInit{
   }
 
   openDeleteBookDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(DeleteBookComponent, {
+    this.dialog.open(BookDeleteComponent, {
       width: '350px',
       enterAnimationDuration,
       exitAnimationDuration,

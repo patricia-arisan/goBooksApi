@@ -11,14 +11,14 @@ import { Usuario } from '../../../interfaces/usuario';
 import { UserService } from '../../../services/user-service';
 
 @Component({
-  selector: 'app-author',
+  selector: 'app-user-delete',
   standalone: true,
   imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
-  templateUrl: './delete-user.component.html',
-  styleUrl: './delete-user.component.css',
+  templateUrl: './user-delete.component.html',
+  styleUrl: './user-delete.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DeleteUserComponent implements OnInit{
+export class UserDeleteComponent implements OnInit{
   user!: Usuario;
 
   readonly dialogRef = inject(MatDialogRef<ProfileComponent>);

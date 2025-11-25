@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { AuthorService } from '../../../services/author-service';
-import { CreateBookComponent } from '../../../pages/admin/admin-books/create-book/create-book.component';
+import { AdminBooksCreateComponent } from '../../../pages/admin/admin-books/admin-books-create/admin-books-create.component';
 import { Autor } from '../../../interfaces/autor';
 
 @Component({
@@ -18,7 +18,7 @@ import { Autor } from '../../../interfaces/autor';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthorCreateComponent implements OnInit{
-  readonly dialogRef = inject(MatDialogRef<CreateBookComponent>);
+  readonly dialogRef = inject(MatDialogRef<AdminBooksCreateComponent>);
   
   constructor(
     private formBuilder: FormBuilder,

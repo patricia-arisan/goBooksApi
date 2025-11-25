@@ -7,8 +7,9 @@ import { Router, RouterLink } from '@angular/router';
 import { Rol } from '../../../interfaces/rol';
 
 import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
-import { DeleteUserComponent } from '../../../modals/delete-item/delete-user/delete-user.component';
+
 import { UserService } from '../../../services/user-service';
+import { UserDeleteComponent } from '../../../modals/user/user-delete/user-delete.component';
 
 
 @Component({
@@ -120,7 +121,7 @@ export class ProfilePasswordComponent implements OnInit{
     readonly dialog = inject(MatDialog);
 
     openDeleteUserDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-        this.dialog.open(DeleteUserComponent, {
+        this.dialog.open(UserDeleteComponent, {
           width: '250px',
           enterAnimationDuration,
           exitAnimationDuration,
