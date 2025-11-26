@@ -50,20 +50,20 @@ export class AdminBooksCreateComponent implements OnInit{
       id:[null],
       nombre:["",[Validators.required]],
       autor:this.formBuilder.group({
-          id:[null],
-          nombre:["",[Validators.required]]
+          id:[null,[Validators.required]],
+          nombre:[""]
         }),
-      isbn:["",[Validators.required]],
+      isbn:[""],
       editorial:this.formBuilder.group({
-          id:[null],
-          nombre:["",[Validators.required]]
+          id:[null,[Validators.required]],
+          nombre:[""]
         }),
-      portada:["",[Validators.required]],
+      portada:[""],
       genero:this.formBuilder.group({
-          id:[null],
-          nombre:["",[Validators.required]]
+          id:[null,[Validators.required]],
+          nombre:[""]
         }),
-      sinopsis:["",[Validators.required]]
+      sinopsis:[""]
     });
     
  
@@ -214,7 +214,15 @@ export class AdminBooksCreateComponent implements OnInit{
     }
 
   
-  
+  get idEditorial(){
+    return this.formNewBook.get('editorial.id')!;
+  }
+  get idAutor(){
+    return this.formNewBook.get('autor.id')!;
+  }
+  get idGenero(){
+    return this.formNewBook.get('genero.id')!;
+  }
 
   
 

@@ -18,16 +18,15 @@
  } */
 
  .imagen{
-   margin-top: 32px;
+   
     margin-left: 110px;
     box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
     float: right;
-    margin-top: -720px;
-    /* height: 300px;
-    width: 220px; */
-    /* padding-top: 75px;
-    padding-left: 35px; */
+    margin-top: -718px;
+    
+    
  }
+
  img{
    /* height: 150px;
     width: 150px; */
@@ -135,6 +134,8 @@ button:hover{
    margin-top: 20px;
    --bs-btn-active-bg: #f59b1e;
     --bs-btn-active-border-color: #f59b1e;
+    --bs-btn-disabled-bg: rgb(252, 163, 40);
+    --bs-btn-disabled-border-color: rgb(252, 163, 40);
 } 
 
 .alert{
@@ -152,5 +153,21 @@ svg{
    height: 19px;
     width: 19px; 
     fill: #820000;
+    margin-top: -3px;
     
+}
+
+.alert-option{
+   height: 22px;
+    font-size: 0.8em;
+    text-align: left;
+    color: #820000;
+    
+    margin-left: 95px;
+    
+}
+.row.g-5{
+   height: 800px;
+   
+   
 }
