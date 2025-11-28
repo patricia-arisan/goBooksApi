@@ -3,7 +3,7 @@
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a routerLink="/admin-books">Libros</a></li>
-    <li class="breadcrumb-item" ><a [routerLink]="['/book-section',libro.id]">{{libro.nombre}}</a></li>
+    <li class="breadcrumb-item" ><a [routerLink]="['/admin-books/book-section',libro.id]">{{libro.nombre}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">Modificar</li>
   </ol>
 </nav>

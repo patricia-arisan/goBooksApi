@@ -9,8 +9,8 @@
 <div class="listadoLibros">
 @for(lectura of lecturas.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track lectura.id){
     <div class="libro">
-    <a [routerLink]="['/book-section',lectura.libro.id]" ><img src="{{lectura.libro.portada}}" id="portada"/></a>
-    <p class="nombre"><a [routerLink]="['/book-section',lectura.libro.id]" >{{lectura.libro.nombre}}</a></p>
+    <a [routerLink]="['/books/book-section',lectura.libro.id]" ><img src="{{lectura.libro.portada}}" id="portada"/></a>
+    <p class="nombre"><a [routerLink]="['/books/book-section',lectura.libro.id]" >{{lectura.libro.nombre}}</a></p>
     </div>
 }
 </div>

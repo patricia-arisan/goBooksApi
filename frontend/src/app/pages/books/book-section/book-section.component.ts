@@ -59,6 +59,7 @@ export class BookSectionComponent implements OnInit{
     this.route.params.subscribe(params => {
       this.id = params['libro.id'];
     console.log(this.id)
+    
     });
     
     this.getCurrentBook();
@@ -166,7 +167,7 @@ export class BookSectionComponent implements OnInit{
   
   goEdit(){
     
-    this.router.navigate(["/book-section/editar/",this.libro.id]);
+    this.router.navigate(["/admin-books/book-section/editar/",this.libro.id]);
   }
 
 }

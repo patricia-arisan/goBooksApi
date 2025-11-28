@@ -3,9 +3,20 @@
         <a routerLink="/home"><img src="/assets/logo/ibooks.png" alt="logo" id="logo"/></a>
         <h1>GoBooks</h1>
     </div>    
-    <div class="login">
+    <!-- <div class="login">
         <a routerLink="/profile"><button id="cuenta"><img src="/assets/user/user.png" alt="usuario" id="usuario"/>Mi cuenta</button></a>
-    </div>
+      
+      </div> -->
+      <div class="cuenta">
+        <img src="/assets/user/user.png" alt="usuario" id="usuario"/>
+        <div class="opciones">
+        <span class="nombre">{{user.nombre}}</span>
+        <ul class="links">
+          <li class="link"><a routerLink="/profile">Mi cuenta</a></li>
+          <li class="link" (click)="logout()">Cerrar sesión</li>
+        </ul>
+        </div>
+      </div>
 </div>
 <div class="container">
     <nav class="d-flex justify-content-center py-3">

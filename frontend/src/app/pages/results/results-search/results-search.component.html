@@ -1,12 +1,27 @@
+@if(user.rol.id==1){
+<app-header-admin></app-header-admin>
+}@else if(user.rol.id==2){
 <app-header-user></app-header-user>
+}
 <div class="libros">
 <h3>Listado de libros "{{busqueda}}"</h3>
 <div class="listadoLibros">  
 @for (libro of libros.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro){
     <div class="libro">
-
-    <a [routerLink]="['/book-section',libro.id]" ><img src="{{libro.portada}}" id="portada"/></a>
-    <p class="nombre"><a [routerLink]="['/book-section',libro.id]" >{{libro.nombre}}</a></p>
+     @if(user.rol.id==2){ 
+    <a [routerLink]="['/books/book-section',libro.id]" >
+      <img src="{{libro.portada}}" id="portada"/></a>
+    }@else if (user.rol.id==1){
+      <a [routerLink]="['/admin-books/book-section',libro.id]" >
+      <img src="{{libro.portada}}" id="portada"/></a>
+    }
+    <p class="nombre">
+      @if(user.rol.id==2){ 
+      <a [routerLink]="['/books/book-section',libro.id]" >{{libro.nombre}}</a>
+      }@else if (user.rol.id==1){
+        <a [routerLink]="['/admin-books/book-section',libro.id]" >{{libro.nombre}}</a>
+      }
+    </p>
   </div>
 }
 </div> 

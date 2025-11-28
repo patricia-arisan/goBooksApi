@@ -4,8 +4,8 @@
 <div class="listadoLibros">  
 @for (libro of libros.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro){
     <div class="libro">
-    <a [routerLink]="['/book-section',libro.id]" ><img src="{{libro.portada}}" id="portada" alt="{{libro.nombre}}"/></a>
-    <p class="nombre"><a [routerLink]="['/book-section',libro.id]" >{{libro.nombre}}</a></p>
+    <a [routerLink]="['/books/book-section',libro.id]" ><img src="{{libro.portada}}" id="portada" alt="{{libro.nombre}}"/></a>
+    <p class="nombre"><a [routerLink]="['/books/book-section',libro.id]" >{{libro.nombre}}</a></p>
   </div>
 }
 </div>  

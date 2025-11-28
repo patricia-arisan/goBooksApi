@@ -45,7 +45,7 @@
    <ng-container matColumnDef="edit">
     
     <th mat-header-cell *matHeaderCellDef> </th>
-    <td mat-cell *matCellDef="let libro" (click)="$event.stopPropagation()"><button type="button" class="edit-buttom" [routerLink]="['/book-section/editar/',libro.id]"><img src="/assets/update/edit.png" class="edit" alt="edit" /></button></td>
+    <td mat-cell *matCellDef="let libro" (click)="$event.stopPropagation()"><button type="button" class="edit-buttom" [routerLink]="['/admin-books/book-section/editar/',libro.id]"><img src="/assets/update/edit.png" class="edit" alt="edit" /></button></td>
     
   </ng-container>
   
@@ -76,16 +76,16 @@
 @if(!filteredBooks){
 @for (libro of libros.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro.id){
     <div class="libro">
-    <a [routerLink]="['/book-section',libro.id]" ><img src="{{libro.portada}}" id="portada" alt="{{libro.nombre}}"/></a>
-    <a [routerLink]="['/book-section',libro.id]" ><p class="nombre">{{libro.nombre}}</p></a>
+    <a [routerLink]="['/admin-books/book-section',libro.id]" ><img src="{{libro.portada}}" id="portada" alt="{{libro.nombre}}"/></a>
+    <a [routerLink]="['/admin-books/book-section',libro.id]" ><p class="nombre">{{libro.nombre}}</p></a>
   </div>
   
 }
 }@else{
  @for (libro of filteredBooks.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro.id){
     <div class="libro">
-    <a [routerLink]="['/book-section',libro.id]" ><img src="{{libro.portada}}" id="portada" alt="{{libro.nombre}}"/></a>
-    <a [routerLink]="['/book-section',libro.id]" ><p class="nombre">{{libro.nombre}}</p></a>
+    <a [routerLink]="['/admin-books/book-section',libro.id]" ><img src="{{libro.portada}}" id="portada" alt="{{libro.nombre}}"/></a>
+    <a [routerLink]="['/admin-books/book-section',libro.id]" ><p class="nombre">{{libro.nombre}}</p></a>
   </div>
 }
 

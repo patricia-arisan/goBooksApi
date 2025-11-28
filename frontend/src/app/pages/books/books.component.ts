@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HeaderUserComponent } from '../shared/headers/header-user/header-user.component';
 import { Libro } from '../../interfaces/libro';
 import { BookService } from '../../services/book-service';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink} from '@angular/router';
 
 import {MatPaginator, MatPaginatorModule, PageEvent,MatPaginatorIntl} from '@angular/material/paginator';
 

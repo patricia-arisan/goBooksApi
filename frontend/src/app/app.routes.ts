@@ -1,5 +1,6 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
+import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
     {
@@ -96,6 +97,7 @@ export const routes: Routes = [
     //         ),
     //     title: 'Results Search'
     // },
+    
     {
         path: 'books',
         loadComponent: () =>
@@ -106,7 +108,16 @@ export const routes: Routes = [
         title: 'Books'
     },
     {
-        path: 'book-section/:libro.id',
+        path: 'admin-books/book-section/:libro.id',
+        loadComponent: () =>
+            import('./pages/books/book-section/book-section.component').then(
+                (m) => m.BookSectionComponent
+
+            ),
+        title: 'Book Section'
+    },
+    {
+        path: 'books/book-section/:libro.id',
         loadComponent: () =>
             import('./pages/books/book-section/book-section.component').then(
                 (m) => m.BookSectionComponent
@@ -196,7 +207,7 @@ export const routes: Routes = [
         title: 'Crear Libro'
     },
     {
-    path: 'book-section/editar/:libro.id',
+    path: 'admin-books/book-section/editar/:libro.id',
         loadComponent: () =>
             import('./pages/admin/admin-books/admin-books-update/admin-books-update.component').then(
                 (m) => m.AdminBooksUpdateComponent
@@ -205,3 +216,5 @@ export const routes: Routes = [
         title: 'Editar Libro'
     }
 ];
+
+
