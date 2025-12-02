@@ -14,7 +14,7 @@
   <input matInput (keyup)="applyFilterGalery($event)" placeholder="Título" #input>
 </mat-form-field>
 }
-<span id="botonCrear"><a routerLink="/create-book" class="nav-link">Nuevo +</a></span>  
+<span id="botonCrear"><a routerLink="/admin-books/create-book" class="nav-link">Nuevo +</a></span>  
  @if(showBooksTable){ 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
    

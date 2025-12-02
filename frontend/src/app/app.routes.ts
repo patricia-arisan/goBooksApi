@@ -1,6 +1,78 @@
-import { RouterModule, Routes } from '@angular/router';
+import { ActivatedRouteSnapshot, ResolveFn, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
-import { NgModule } from '@angular/core';
+import { inject } from '@angular/core';
+import { BookService } from './services/book-service';
+import { map, Observable } from 'rxjs';
+import { Libro } from './interfaces/libro';
+import { Genero } from './interfaces/genero';
+import { GenreService } from './services/genre-service';
+import { AuthorService } from './services/author-service';
+import { Autor } from './interfaces/autor';
+import { PublisherService } from './services/publisher-service';
+import { Editorial } from './interfaces/editorial';
+
+const titleResolver: ResolveFn<string> = (
+  route: ActivatedRouteSnapshot,
+): Observable<string> | string => {
+  const bookId = route.paramMap.get('libro.id');
+  // Si es nulo devuelve vacio para evitar error
+  if (!bookId) {
+    return ''; 
+  }
+  return inject(BookService).getBookById(parseInt(bookId)).pipe(
+    map((libro:Libro)=>{
+        return libro.nombre || '';
+        })
+    );
+};
+
+const titleGenreResolver: ResolveFn<string> = (
+  route: ActivatedRouteSnapshot,
+): Observable<string> | string => {
+  const genreId = route.paramMap.get('id');
+  const titleSection = 'Resultados';
+  if (!genreId) {
+    return titleSection; 
+  }
+  return inject(GenreService).getGenreById(parseInt(genreId)).pipe(
+    map((genero:Genero)=>{
+        const genreName = genero.nombre || '';
+        return `${titleSection} - ${genreName}`;
+        })
+    );
+};
+
+const titleAuthorResolver: ResolveFn<string> = (
+  route: ActivatedRouteSnapshot,
+): Observable<string> | string => {
+  const authorId = route.paramMap.get('id');
+  const titleSection = 'Resultados';
+  if (!authorId) {
+    return titleSection; 
+  }
+  return inject(AuthorService).getAuthorById(parseInt(authorId)).pipe(
+    map((autor:Autor)=>{
+        const authorName = autor.nombre || '';
+        return `${titleSection} - ${authorName}`;
+        })
+    );
+};
+
+const titlePublisherResolver: ResolveFn<string> = (
+  route: ActivatedRouteSnapshot,
+): Observable<string> | string => {
+  const publisherId = route.paramMap.get('id');
+  const titleSection = 'Resultados';
+  if (!publisherId) {
+    return titleSection; 
+  }
+  return inject(PublisherService).getPublisherById(parseInt(publisherId)).pipe(
+    map((editorial:Editorial)=>{
+        const publisherName = editorial.nombre || '';
+        return `${titleSection} - ${publisherName}`;
+        })
+    );
+};
 
 export const routes: Routes = [
     {
@@ -40,7 +112,7 @@ export const routes: Routes = [
                 (m) => m.ResultsGenreComponent
 
             ),
-        title: 'Results Genre'
+        title: titleGenreResolver
     },
     {
         path: 'results/author/:id',
@@ -49,7 +121,7 @@ export const routes: Routes = [
                 (m) => m.ResultsAuthorComponent
 
             ),
-        title: 'Results Author'
+        title: titleAuthorResolver
     },
     {
         path: 'results/publisher/:id',
@@ -58,7 +130,7 @@ export const routes: Routes = [
                 (m) => m.ResultsPublisherComponent
 
             ),
-        title: 'Results Publisher'
+        title: titlePublisherResolver
     },
     {
         path: 'results/score',
@@ -67,7 +139,7 @@ export const routes: Routes = [
                 (m) => m.ResultsScoreComponent
 
             ),
-        title: 'Results Score'
+        title: 'Mejor valorados'
     },
     {
         path: 'results/lastBooks',
@@ -76,7 +148,7 @@ export const routes: Routes = [
                 (m) => m.ResultsLastComponent
 
             ),
-        title: 'Last Books'
+        title: 'Últimos libros'
     },
     {
         path: 'results/search/:busqueda',
@@ -86,17 +158,8 @@ export const routes: Routes = [
                 (m) => m.ResultsSearchComponent
 
             ),
-        title: 'Results Search'
+        title: 'Resultados - Libros'
     },
-    // {
-    //     path: 'results/search',
-    //     loadComponent: () =>
-    //         import('./pages/results/results-search/results-search.component').then(
-    //             (m) => m.ResultsSearchComponent
-
-    //         ),
-    //     title: 'Results Search'
-    // },
     
     {
         path: 'books',
@@ -105,7 +168,7 @@ export const routes: Routes = [
                 (m) => m.BooksComponent
 
             ),
-        title: 'Books'
+        title: 'Libros'
     },
     {
         path: 'admin-books/book-section/:libro.id',
@@ -114,7 +177,7 @@ export const routes: Routes = [
                 (m) => m.BookSectionComponent
 
             ),
-        title: 'Book Section'
+        title: titleResolver
     },
     {
         path: 'books/book-section/:libro.id',
@@ -123,7 +186,8 @@ export const routes: Routes = [
                 (m) => m.BookSectionComponent
 
             ),
-        title: 'Book Section'
+        title: titleResolver
+        
     },
     {
         path: 'readings',
@@ -132,7 +196,7 @@ export const routes: Routes = [
                 (m) => m.ReadingsComponent
 
             ),
-        title: 'Readings'
+        title: 'Lecturas'
     },
     {
         path: 'profile',
@@ -141,7 +205,7 @@ export const routes: Routes = [
                 (m) => m.ProfileComponent
 
             ),
-        title: 'Profile'
+        title: 'Perfil'
     },
     {
         path: 'profile/cambiar-password',
@@ -150,7 +214,7 @@ export const routes: Routes = [
                 (m) => m.ProfilePasswordComponent
 
             ),
-        title: 'Cambiar contraseña'
+        title: 'Perfil - Cambiar contraseña'
     },
     {
     path: 'admin-books',
@@ -159,7 +223,7 @@ export const routes: Routes = [
                 (m) => m.AdminBooksComponent
 
             ),
-        title: 'Administrar Libros'
+        title: 'Administrar libros'
     },
     {
     path: 'admin-authors',
@@ -168,7 +232,7 @@ export const routes: Routes = [
                 (m) => m.AdminAuthorsComponent
 
             ),
-        title: 'Administrar Autores'
+        title: 'Administrar autores'
     },
     {
     path: 'admin-genres',
@@ -177,7 +241,7 @@ export const routes: Routes = [
                 (m) => m.AdminGenresComponent
 
             ),
-        title: 'Administrar Géneros'
+        title: 'Administrar géneros'
     },
     {
     path: 'admin-publishers',
@@ -186,7 +250,7 @@ export const routes: Routes = [
                 (m) => m.AdminPublishersComponent
 
             ),
-        title: 'Administrar Editoriales'
+        title: 'Administrar editoriales'
     },
     {
     path: 'admin-home',
@@ -198,13 +262,13 @@ export const routes: Routes = [
         title: 'Home'
     },
     {
-    path: 'create-book',
+    path: 'admin-books/create-book',
         loadComponent: () =>
             import('./pages/admin/admin-books/admin-books-create/admin-books-create.component').then(
                 (m) => m.AdminBooksCreateComponent
 
             ),
-        title: 'Crear Libro'
+        title: 'Crear libro'
     },
     {
     path: 'admin-books/book-section/editar/:libro.id',
@@ -213,7 +277,7 @@ export const routes: Routes = [
                 (m) => m.AdminBooksUpdateComponent
 
             ),
-        title: 'Editar Libro'
+        title: 'Editar libro'
     }
 ];
 
