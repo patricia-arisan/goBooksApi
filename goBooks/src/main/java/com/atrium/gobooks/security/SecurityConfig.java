@@ -6,8 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
@@ -23,6 +27,7 @@ import com.atrium.gobooks.services.ServicioUsuario;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true) // Nuevoooooo
 
 public class SecurityConfig {
 //err too many redirects? se ha puesto extends websecurityconfiguration	
@@ -66,13 +71,7 @@ public class SecurityConfig {
 				.disable());
 		
 		return http.build();
-		
-//		http.authorizeHttpRequests().requestMatchers("/registro**", "/js/**", "/css/**", "/img/**").permitAll()
-//				.anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and().logout()
-//				.invalidateHttpSession(true).clearAuthentication(true)
-//				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
-//				.permitAll();
-//		return http.build();
+
 	}
 	
 	@Bean
@@ -103,26 +102,17 @@ public class SecurityConfig {
 
 	}
 
-
+//
 //	  @Bean public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception { return
 //	  authenticationConfiguration.getAuthenticationManager(); }
 	
-	@Autowired
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(usuarioServicio).passwordEncoder(passwordEncoder());
-    }
+
+//	@Autowired
+//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(usuarioServicio).passwordEncoder(passwordEncoder());
+//    } Estaba este
 	  
-//	  @Bean public DaoAuthenticationProvider authenticationProvider() {
-//	  DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-//	  auth.setUserDetailsService(usuarioServicio);
-//	  auth.setPasswordEncoder(passwordEncoder());
-//	  
-//	  return auth; }
-	  
-	  @Autowired public void configureGlobal(AuthenticationManagerBuilder auth)
-	  throws Exception {
-	  auth.userDetailsService(usuarioServicio).passwordEncoder(passwordEncoder());
-	  }
+
 	 
 
 }

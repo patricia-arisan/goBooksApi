@@ -10,6 +10,12 @@ import { AuthorService } from './services/author-service';
 import { Autor } from './interfaces/autor';
 import { PublisherService } from './services/publisher-service';
 import { Editorial } from './interfaces/editorial';
+import { authGuard } from './core/guards/auth.guard';
+import { adminGuard } from './core/guards/admin.guard';
+import { userGuard } from './core/guards/user.guard';
+
+
+
 
 const titleResolver: ResolveFn<string> = (
   route: ActivatedRouteSnapshot,
@@ -103,7 +109,8 @@ export const routes: Routes = [
                 (m) => m.HomeComponent
 
             ),
-        title: 'Home'
+        title: 'Home',
+        canActivate: [authGuard,userGuard]
     },
     {
         path: 'results/genre/:id',
@@ -112,7 +119,8 @@ export const routes: Routes = [
                 (m) => m.ResultsGenreComponent
 
             ),
-        title: titleGenreResolver
+        title: titleGenreResolver,
+        canActivate: [authGuard]
     },
     {
         path: 'results/author/:id',
@@ -121,7 +129,8 @@ export const routes: Routes = [
                 (m) => m.ResultsAuthorComponent
 
             ),
-        title: titleAuthorResolver
+        title: titleAuthorResolver,
+        canActivate: [authGuard]
     },
     {
         path: 'results/publisher/:id',
@@ -130,7 +139,8 @@ export const routes: Routes = [
                 (m) => m.ResultsPublisherComponent
 
             ),
-        title: titlePublisherResolver
+        title: titlePublisherResolver,
+        canActivate: [authGuard]
     },
     {
         path: 'results/score',
@@ -139,7 +149,8 @@ export const routes: Routes = [
                 (m) => m.ResultsScoreComponent
 
             ),
-        title: 'Mejor valorados'
+        title: 'Mejor valorados',
+        canActivate: [authGuard,userGuard]
     },
     {
         path: 'results/lastBooks',
@@ -148,7 +159,8 @@ export const routes: Routes = [
                 (m) => m.ResultsLastComponent
 
             ),
-        title: 'Últimos libros'
+        title: 'Últimos libros',
+        canActivate: [authGuard,userGuard]
     },
     {
         path: 'results/search/:busqueda',
@@ -158,7 +170,8 @@ export const routes: Routes = [
                 (m) => m.ResultsSearchComponent
 
             ),
-        title: 'Resultados - Libros'
+        title: 'Resultados - Libros',
+        canActivate: [authGuard]
     },
     
     {
@@ -168,7 +181,8 @@ export const routes: Routes = [
                 (m) => m.BooksComponent
 
             ),
-        title: 'Libros'
+        title: 'Libros',
+        canActivate: [authGuard,userGuard]
     },
     {
         path: 'admin-books/book-section/:libro.id',
@@ -177,7 +191,8 @@ export const routes: Routes = [
                 (m) => m.BookSectionComponent
 
             ),
-        title: titleResolver
+        title: titleResolver,
+        canActivate: [authGuard,adminGuard]
     },
     {
         path: 'books/book-section/:libro.id',
@@ -186,7 +201,8 @@ export const routes: Routes = [
                 (m) => m.BookSectionComponent
 
             ),
-        title: titleResolver
+        title: titleResolver,
+        canActivate: [authGuard,userGuard]
         
     },
     {
@@ -196,7 +212,8 @@ export const routes: Routes = [
                 (m) => m.ReadingsComponent
 
             ),
-        title: 'Lecturas'
+        title: 'Lecturas',
+        canActivate: [authGuard,userGuard]
     },
     {
         path: 'profile',
@@ -205,7 +222,8 @@ export const routes: Routes = [
                 (m) => m.ProfileComponent
 
             ),
-        title: 'Perfil'
+        title: 'Perfil',
+        canActivate: [authGuard,userGuard]
     },
     {
         path: 'profile/cambiar-password',
@@ -214,7 +232,8 @@ export const routes: Routes = [
                 (m) => m.ProfilePasswordComponent
 
             ),
-        title: 'Perfil - Cambiar contraseña'
+        title: 'Perfil - Cambiar contraseña',
+        canActivate: [authGuard,userGuard]
     },
     {
     path: 'admin-books',
@@ -223,7 +242,8 @@ export const routes: Routes = [
                 (m) => m.AdminBooksComponent
 
             ),
-        title: 'Administrar libros'
+        title: 'Administrar libros',
+        canActivate: [authGuard,adminGuard]
     },
     {
     path: 'admin-authors',
@@ -232,7 +252,8 @@ export const routes: Routes = [
                 (m) => m.AdminAuthorsComponent
 
             ),
-        title: 'Administrar autores'
+        title: 'Administrar autores',
+        canActivate: [authGuard,adminGuard]
     },
     {
     path: 'admin-genres',
@@ -241,7 +262,8 @@ export const routes: Routes = [
                 (m) => m.AdminGenresComponent
 
             ),
-        title: 'Administrar géneros'
+        title: 'Administrar géneros',
+        canActivate: [authGuard,adminGuard]
     },
     {
     path: 'admin-publishers',
@@ -250,7 +272,8 @@ export const routes: Routes = [
                 (m) => m.AdminPublishersComponent
 
             ),
-        title: 'Administrar editoriales'
+        title: 'Administrar editoriales',
+        canActivate: [authGuard,adminGuard]
     },
     {
     path: 'admin-home',
@@ -259,7 +282,8 @@ export const routes: Routes = [
                 (m) => m.AdminHomeComponent
 
             ),
-        title: 'Home'
+        title: 'Home',
+        canActivate: [authGuard,adminGuard]
     },
     {
     path: 'admin-books/create-book',
@@ -268,7 +292,8 @@ export const routes: Routes = [
                 (m) => m.AdminBooksCreateComponent
 
             ),
-        title: 'Crear libro'
+        title: 'Crear libro',
+        canActivate: [authGuard,adminGuard]
     },
     {
     path: 'admin-books/book-section/editar/:libro.id',
@@ -277,7 +302,8 @@ export const routes: Routes = [
                 (m) => m.AdminBooksUpdateComponent
 
             ),
-        title: 'Editar libro'
+        title: 'Editar libro',
+        canActivate: [authGuard,adminGuard]
     }
 ];
 

@@ -9,6 +9,8 @@ import { BehaviorSubject, map, Observable, take, tap } from 'rxjs';
 })
 export class UserService {
   //private readonly currentUserSubject: BehaviorSubject<Usuario> = new BehaviorSubject<Usuario>({} as Usuario);
+  // private readonly currentUserSubject: BehaviorSubject<Usuario> = new BehaviorSubject<Usuario>({} as Usuario);
+  // currentUser$ = this.currentUserSubject.asObservable();
 
 constructor(private client: HttpClient) { }
   
@@ -143,7 +145,29 @@ constructor(private client: HttpClient) { }
     return this.client.post(`${this.userServiceLogoutUrl}`,null,{headers})
   }
 
+ isAuthenticated():boolean{
+  const token = localStorage.getItem('token');
+  //true si devuelve el token porque exista
+  return !!token; //doble negacion para convertirlo en booleano
+ }
 
+ isAdmin():boolean{
+  const user = JSON.parse(localStorage.getItem('usuario') || '');
+  if(user){
+    let rol = user.rol.nombre;
+    return rol==='Administrador'
+  }
+  return false;
+ }
+
+ isUser():boolean{
+  const user = JSON.parse(localStorage.getItem('usuario') || '');
+  if(user){
+    let rol = user.rol.nombre;
+    return rol==='Usuario'
+  }
+  return false;
+ }
   
  
 }

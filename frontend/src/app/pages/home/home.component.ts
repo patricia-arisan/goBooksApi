@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
     //   let credentials = localStorage.getItem('token') || ''
     //let cred = JSON.stringify(credentials);
     console.log("Value antes de current: " + value)
-
+    
     let currentUser = 0;
     if (value !== null) { //en angular ===
       currentUser = parseInt(value);

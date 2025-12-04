@@ -49,12 +49,7 @@ export class LoginComponent implements OnInit {
 
     this.userService.sendUser(this.formLogin.value).subscribe({next:(data: Usuario) => {
 
-      //  localStorage.setItem('token',btoa(data.username + ':' + data.password))  
-      //  let cred = localStorage.getItem('token')
-      // console.log('cred: ' + cred)  
-
-
-      ////////////////////
+     
       console.log(data);
       localStorage.setItem('usuario', JSON.stringify(data));
       //////////////////
