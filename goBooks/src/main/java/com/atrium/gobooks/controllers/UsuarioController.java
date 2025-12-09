@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,6 +30,7 @@ public class UsuarioController {
 	@Autowired
 	private ServicioUsuario usuarioServicio;
 	
+	@PreAuthorize("hasAuthority('Usuario') || hasAuthority('Administrador')") // CUIDADO, pero parece que funciona
 	@GetMapping(value="/{id}")
 	public Usuario mostrar(@PathVariable Integer id) throws ServicioException {
 		
@@ -36,6 +38,7 @@ public class UsuarioController {
 
 	}
 	
+	@PreAuthorize("hasAuthority('Usuario')")
 	@PutMapping(value="/{id}")
 	public Usuario actualizarUsuario(@PathVariable Integer id, @RequestBody Usuario usuario) throws ServicioException {
 		
@@ -46,7 +49,7 @@ public class UsuarioController {
 	}
 
 	
-	
+	@PreAuthorize("hasAuthority('Usuario')")
 	@PutMapping(value="/cambiarPassword/{id}")
 	public Usuario actualizarPasswordUsuario(@PathVariable Integer id, @RequestParam String password) throws ServicioException {
 		return usuarioServicio.modificarPassword(password, id);
@@ -58,7 +61,7 @@ public class UsuarioController {
 	
 	
 	
-	
+	@PreAuthorize("hasAuthority('Usuario')")
 	@DeleteMapping(value="/{id}") 
 	public ResponseEntity<?> eliminar(@PathVariable Integer id) throws Exception{
 		usuarioServicio.eliminarUsuario(id);

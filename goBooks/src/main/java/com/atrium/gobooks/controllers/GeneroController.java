@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ public class GeneroController {
 	@Autowired
 	private ServicioGenero servicioGenero;
 	
+	@PreAuthorize("hasAuthority('Administrador')")
 	@PostMapping(value="/registroGenero")
 	public Genero registrarNuevoGenero(@RequestBody Genero genero) throws ServicioException {
 		return servicioGenero.guardarGenero(genero);
@@ -38,6 +40,7 @@ public class GeneroController {
 		return generos;
 	}
 	
+	@PreAuthorize("hasAuthority('Administrador')")
 	@PutMapping(value="/{id}")
 	public Genero actualizarGenero(@PathVariable Integer id, @RequestBody Genero genero) throws ServicioException {
 		return servicioGenero.modificarGenero(genero);
@@ -53,6 +56,7 @@ public class GeneroController {
 		return generos;
 	}
 	
+	@PreAuthorize("hasAuthority('Administrador')")
 	@DeleteMapping(value="/{id}") 
 	public ResponseEntity<?> eliminarGenero(@PathVariable Integer id) throws Exception{
 		servicioGenero.eliminarGenero(id);

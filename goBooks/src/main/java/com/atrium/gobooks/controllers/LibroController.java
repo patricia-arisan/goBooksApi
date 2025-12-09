@@ -28,6 +28,7 @@ public class LibroController {
 	@Autowired
 	private ServicioLibro servicioLibro;
 	
+	@PreAuthorize("hasAuthority('Administrador')")
 	@PostMapping(value="/registroLibro")
 	public ResponseEntity<Object> registrarNuevoLibro(@RequestBody Libro libro) throws ServicioException {
 		Libro libroResponse = null;
@@ -112,7 +113,8 @@ public class LibroController {
 		return libros;
 		
 	}
-
+	
+	@PreAuthorize("hasAuthority('Administrador')")
 	@PutMapping(value="/{id}")
 	public Libro actualizarLibro(@PathVariable Integer id, @RequestBody Libro libro) throws ServicioException {
 		return servicioLibro.modificarLibro(libro);

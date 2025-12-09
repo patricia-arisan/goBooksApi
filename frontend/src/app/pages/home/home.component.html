@@ -61,7 +61,7 @@
                 </div>
                 }
             </div>
-            <span id="botonLibros"><a [routerLink]="['/results/lastBooks']">Ver más libros</a></span>
+            <button type="button" id="botonLibros" (click)="goLastBooks()">Ver más libros</button>
         </section>
         <section id="mejorValorados">
             <h3>Mejor valorados</h3>
@@ -75,7 +75,7 @@
                 </div>
                 }
             </div>
-            <span id="botonLibros"><a [routerLink]="['/results/score']">Ver más libros</a></span>
+            <button type="button" id="botonLibros" (click)="goBooksScore()">Ver más libros</button>
         </section>
     
 </div>

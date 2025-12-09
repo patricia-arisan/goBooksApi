@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ public class EditorialController {
 	@Autowired
 	private ServicioEditorial servicioEditorial;
 	
+	@PreAuthorize("hasAuthority('Administrador')")
 	@PostMapping(value="/registroEditorial")
 	public Editorial registrarNuevoEditorial(@RequestBody Editorial editorial) throws ServicioException {
 		return servicioEditorial.guardarEditorial(editorial);
@@ -38,10 +40,12 @@ public class EditorialController {
 		return editoriales;
 	}
 	
+	@PreAuthorize("hasAuthority('Administrador')")
 	@PutMapping(value="/{id}")
 	public Editorial actualizarEditorial(@PathVariable Integer id, @RequestBody Editorial editorial) throws ServicioException {
 		return servicioEditorial.modificarEditorial(editorial);
 	}
+	
 	@GetMapping(value="/{id}")
 	public Editorial find(@PathVariable Integer id) throws ServicioException{
 		return servicioEditorial.obtenerEditorial(id);
@@ -53,6 +57,7 @@ public class EditorialController {
 		return editoriales;
 	}
 	
+	@PreAuthorize("hasAuthority('Administrador')")
 	@DeleteMapping(value="/{id}") 
 	public ResponseEntity<?> eliminarEditorial(@PathVariable Integer id) throws Exception{
 		servicioEditorial.eliminarEditorial(id);

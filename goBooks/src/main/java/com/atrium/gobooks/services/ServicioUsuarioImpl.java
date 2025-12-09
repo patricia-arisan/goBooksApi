@@ -112,7 +112,8 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 		try {
 			Usuario usuarioAux;
 			usuarioAux = usuarioRepository.findByUsername(usuario.getUsername());
-			if(usuarioAux!=null) throw new ServicioException(CodigoError.USUARIO_FOUND);
+			if(usuarioAux!=null && usuarioAux.getId()!=usuario.getId()) throw new ServicioException(CodigoError.USUARIO_FOUND);
+			
 			usuario= usuarioRepository.save(usuario);
 		}catch(ServicioException se) {
 			log.error(se.getCodigo());

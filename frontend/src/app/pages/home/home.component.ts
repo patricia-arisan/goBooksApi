@@ -108,4 +108,12 @@ export class HomeComponent implements OnInit {
 
     this.router.navigate(['results/search', busqueda]);
   }
+
+  goBooksScore(){
+    this.router.navigate(["/results/score"]);
+  }
+
+  goLastBooks(){
+    this.router.navigate(["/results/lastBooks"]);
+  }
 }

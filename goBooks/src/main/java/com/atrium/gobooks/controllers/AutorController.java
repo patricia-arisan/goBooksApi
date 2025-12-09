@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ public class AutorController {
 	@Autowired
 	private ServicioAutor servicioAutor;
 	
+	@PreAuthorize("hasAuthority('Administrador')")
 	@PostMapping(value="/registroAutor")
 	public Autor registrarNuevoAutor(@RequestBody Autor autor) throws ServicioException {
 		return servicioAutor.guardarAutor(autor);
@@ -39,6 +41,7 @@ public class AutorController {
 		return autores;
 	}
 	
+	@PreAuthorize("hasAuthority('Administrador')")
 	@PutMapping(value="/{id}")
 	public Autor actualizarAutor(@PathVariable Integer id, @RequestBody Autor autor) throws ServicioException {
 		return servicioAutor.modificarAutor(autor);
@@ -54,6 +57,7 @@ public class AutorController {
 		return autores;
 	}
 	
+	@PreAuthorize("hasAuthority('Administrador')")
 	@DeleteMapping(value="/{id}") 
 	public ResponseEntity<?> eliminarAutor(@PathVariable Integer id) throws Exception{
 		servicioAutor.eliminarAutor(id);
