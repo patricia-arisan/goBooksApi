@@ -18,10 +18,10 @@
     
     <div class="detalles">
         <p id="nombre">{{libro.nombre}}</p>
-<a [routerLink]="['/results/author',libro.autor.id]"><p class="autor">{{libro.autor.nombre}}</p></a>
-<a [routerLink]="['/results/publisher',libro.editorial.id]"><p class="editorial">{{libro.editorial.nombre}}</p></a>
+<p class="autor"><a [routerLink]="['/results/author',libro.autor.id]">{{libro.autor.nombre}}</a></p>
+<p class="editorial"><a [routerLink]="['/results/publisher',libro.editorial.id]">{{libro.editorial.nombre}}</a></p>
 <p class="isbn"> · {{libro.isbn}}</p>
-<a [routerLink]="['/results/genre',libro.genero.id]"><p class="genero">{{libro.genero.nombre}}</p></a>
+<p class="genero"><a [routerLink]="['/results/genre',libro.genero.id]">{{libro.genero.nombre}}</a></p>
 <span>Sinopsis:</span>
 <p class="sinopsis">{{libro.sinopsis }}</p>
 

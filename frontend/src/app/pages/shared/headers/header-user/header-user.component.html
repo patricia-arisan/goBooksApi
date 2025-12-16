@@ -1,31 +1,40 @@
-<div id="cabecera">
-    <div id="cabeceraBooks">    
-        <a routerLink="/home"><img src="/assets/logo/ibooks.png" alt="logo" id="logo"/></a>
-        <h1>GoBooks</h1>
-    </div>    
-    <!-- <div class="login">
-        <a routerLink="/profile"><button id="cuenta"><img src="/assets/user/user.png" alt="usuario" id="usuario"/>Mi cuenta</button></a>
-      
-      </div> -->
-      <div class="cuenta">
-        <img src="/assets/user/user.png" alt="usuario" id="usuario"/>
-        <div class="opciones">
-        <span class="nombre">{{user.nombre}}</span>
-        <ul class="links">
-          <li class="link"><a routerLink="/profile">Mi cuenta</a></li>
-          <li class="link" (click)="logout()">Cerrar sesión</li>
-        </ul>
-        </div>
-      </div>
-</div>
-<div class="container">
-    <nav class="d-flex justify-content-center py-3">
-      <ul class="nav nav-pills">
-        <li class="nav-item"><a routerLink="/home" class="nav-link active">Home</a></li>
-        <li class="nav-item"><a routerLink="/books" class="nav-link">Libros</a></li>
-        <li class="nav-item"><a routerLink="/readings" class="nav-link">Mis Libros</a></li>
-        <li class="nav-item"><a routerLink="/profile"  class="nav-link">Perfil</a></li>
-        <li class="nav-item"><button class="nav-link" (click)="logout()">Cerrar Sesión</button></li>
+<div class="header">
+  <div class="headerBooks">
+    <a routerLink="/home"><img src="/assets/logo/ibooks.png" alt="logo" id="logo" /></a>
+    <h1>GoBooks</h1>
+  </div>
+
+  <div class="account">
+    <img src="/assets/user/user.png" alt="usuario" id="user" />
+    <div class="options">
+      <span class="userName">{{user.nombre}}</span>
+      <ul class="links">
+        <li class="link"><a routerLink="/profile">Mi cuenta</a></li>
+        <li class="link" (click)="logout()">Cerrar sesión</li>
       </ul>
-    </nav>
+    </div>
+  </div>
+</div>
+<div class="menu">
+  <button type="button" (click)="toggleView()" class="view"><img src="/assets/icon/list-menu.png" alt="menu" id="menu" /></button>
+  @if(!showMenu){ 
+    <ul class="urls">
+      <li class="linkAdap"><a routerLink="/home" >Home</a></li>
+      <li class="linkAdap"><a routerLink="/books" >Libros</a></li>
+      <li class="linkAdap"><a routerLink="/readings" >Mis libros</a></li>
+      <li class="linkAdap"><a routerLink="/profile" >Perfil</a></li>
+      <li class="linkAdap"><button  (click)="logout()">Cerrar sesión</button></li>
+    </ul>
+}
+</div>
+<div class="routes">
+  <nav class="d-flex justify-content-center py-3">
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a routerLink="/home" class="nav-link active">Home</a></li>
+      <li class="nav-item"><a routerLink="/books" class="nav-link">Libros</a></li>
+      <li class="nav-item"><a routerLink="/readings" class="nav-link">Mis libros</a></li>
+      <li class="nav-item"><a routerLink="/profile" class="nav-link">Perfil</a></li>
+      <li class="nav-item"><button class="nav-link" (click)="logout()">Cerrar sesión</button></li>
+    </ul>
+  </nav>
 </div>

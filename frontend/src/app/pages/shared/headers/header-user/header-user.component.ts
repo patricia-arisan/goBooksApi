@@ -13,6 +13,8 @@ import { Usuario } from '../../../../interfaces/usuario';
 })
 export class HeaderUserComponent implements OnInit{
   user!: Usuario;
+  showMenu: Boolean = true;
+  
 
   constructor(
     private router: Router,
@@ -57,6 +59,14 @@ retrieveFromLocalStorage() {
       localStorage.clear();
       this.router.navigate(['/login']);
     });
+    
+  }
+
+  toggleView(){ 
+    this.showMenu = !this.showMenu;
+    
+    
+    
     
   }
 }

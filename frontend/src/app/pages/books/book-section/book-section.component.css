@@ -14,19 +14,25 @@
 }
 #nombre{
     font-weight: bold;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 1.9em;
     margin-bottom: 0px;
 }
 .autor,.editorial,.isbn{
-    color: grey;
+   
     margin-bottom: 0px;
 }
-.autor{
+.autor a,.editorial a{
+    color: grey;
+}
+.isbn{
+    color: grey;
+}
+.autor {
     width: max-content;
     border-bottom: 1px solid rgb(126, 126, 126);
 }
-.autor:hover,.editorial:hover{
+.autor a:hover,.editorial a:hover{
     color: #46434e;
 }
 .editorial{
@@ -36,17 +42,25 @@
 }
 .genero{
     background-color: rgb(253, 160, 54);
-	color: white;
-    width: max-content;
+	width: max-content;
     padding: 4px 7.5px ;
     margin-top: 3px;
     border-radius: 2px;
     font-weight: 500;
     font-size: 0.9em;
 }
+
+
 .genero:hover{
 	background-color: rgb(255, 141, 11);
 }
+.genero a{
+    color: white;
+}
+a {
+    text-decoration: none;
+}
+
 span{
     font-weight: bold;
 }
@@ -97,9 +111,7 @@ span{
     white-space: pre-wrap;
 }
 
-a {
-    text-decoration: none;
-}
+
 .seleccionEstado{
     float: right;
     position: absolute;

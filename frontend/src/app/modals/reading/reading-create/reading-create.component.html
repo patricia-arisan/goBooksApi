@@ -1,7 +1,7 @@
 
 <h2 mat-dialog-title>Añadir libro</h2>
 <div mat-dialog-content>
-       <p>{{libro.nombre}}</p>
+       <p class="name">{{libro.nombre}}</p>
         <form [formGroup]="formNewReading" (submit)="registerReading()"> <!--(submit)="registerReading()" -->
                 <div class="form-group">
                         <label class="control-label" for="id"> </label> <input id="id" type="hidden"
