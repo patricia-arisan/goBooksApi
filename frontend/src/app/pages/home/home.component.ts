@@ -116,4 +116,8 @@ export class HomeComponent implements OnInit {
   goLastBooks(){
     this.router.navigate(["/results/lastBooks"]);
   }
+
+
+
+
 }

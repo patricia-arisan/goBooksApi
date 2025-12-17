@@ -26,7 +26,7 @@ body{
 	
 }
 
-button {
+.searchButton {
 	border: none;
 	background-color: rgb(253, 160, 54);
 	position: absolute; 
@@ -115,6 +115,11 @@ button {
 	margin-left: 500px;
 	color: white;
 	font-weight: bold;
+	border: none;
+}
+
+#botonLibros:hover {
+	background-color: rgb(255, 141, 11);
 }
 
 
@@ -125,6 +130,10 @@ button {
 
 #ultimosLibros, #mejorValorados {
 	margin-top: 30px;
+}
+
+#carouselExample,#carouselExample2{
+  display: none;
 }
 
 @media (max-width: 480px){
@@ -146,7 +155,7 @@ button {
 		
 	}
 
-	button {
+	.searchButton {
 	
 	margin-left: -47px;
 	margin-top: 44px;
@@ -160,16 +169,20 @@ button {
 	h3{
 		font-size: 1.3em;
 		border-bottom: 1px solid #d0d4dd;
-		padding-bottom: 10px;
+		padding-bottom: 6px;
 	}
 
 	.listaCategorias{
 		grid-template-columns: repeat(2, 1fr);
+		width: 100%;
+		margin-left: 40px;
+		margin-bottom: 100px;
+		
 	}
-
 	.categoria {
-	height: 100px;
-	width: 100px;
+	height: 110px;
+	width: 110px;
+	margin-bottom: 20px;
 }
 
 .categoria img {
@@ -178,11 +191,32 @@ button {
 	margin-bottom: 10px;
 }
 
-.titulo a {
-	text-decoration: none;
-	color: rgb(99, 99, 99);
+.titulo {
+	font-size: 0.8em;
 	
-	font-weight: bold;
+	
+}
+.listadoLibros{
+	display: none;
+}
+#carouselExample,#carouselExample2{
+  display: block;	
+  height: 360px;
+	width: 250px;
+	margin: auto;
+	margin-top: 30px;
+}
+
+
+
+#portada {
+	height: 330px;
+	width: 240px;
+	
+}
+
+.nombre{
+	text-align: center;
 }
 
 }

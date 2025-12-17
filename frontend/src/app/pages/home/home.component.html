@@ -6,7 +6,7 @@
 <div id="seccionBuscador">
     <form [formGroup]="formSearch" (submit)="search()">
         <input type="text" formControlName="clave" id="buscador" placeholder="Título, autor, editorial o ISBN" />
-        <button type="submit"><img src="/assets/main-home/search.png" class="lupa" alt="buscar" /></button>
+        <button type="submit" class="searchButton"><img src="/assets/main-home/search.png" class="lupa" alt="buscar" /></button>
     </form>
 </div>
 <div id="apartados">
@@ -61,8 +61,30 @@
                 </div>
                 }
             </div>
+            <!--  -->
+        <div id="carouselExample" class="carousel slide">
+  <div class="carousel-inner">
+    @for (libro of libros; track libro; let first = $first){
+        <!-- First para que el primer elemento sea el activo -->
+    <div class="carousel-item active" [class.active]="first">
+      <img src="{{libro.portada}}" id="portada" alt="{{libro.nombre}}">
+      <p class="nombre"><a [routerLink]="['/books/book-section',libro.id]">{{libro.nombre}}</a></p>
+    </div>
+}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+        <!--  -->
             <button type="button" id="botonLibros" (click)="goLastBooks()">Ver más libros</button>
         </section>
+        
         <section id="mejorValorados">
             <h3>Mejor valorados</h3>
 
@@ -75,6 +97,27 @@
                 </div>
                 }
             </div>
+            <!--  -->
+        <div id="carouselExample2" class="carousel slide">
+  <div class="carousel-inner">
+    @for (libro of librosPuntuacion; track libro; let first = $first){
+        <!-- First para que el primer elemento sea el activo -->
+    <div class="carousel-item active" [class.active]="first">
+      <img src="{{libro.portada}}" id="portada" alt="{{libro.nombre}}">
+      <p class="nombre"><a [routerLink]="['/books/book-section',libro.id]">{{libro.nombre}}</a></p>
+    </div>
+}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample2" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample2" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+        <!--  -->
             <button type="button" id="botonLibros" (click)="goBooksScore()">Ver más libros</button>
         </section>
     
