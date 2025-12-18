@@ -14,6 +14,7 @@ body{
 	text-align: center;
 	margin-top: -70px;
 	
+	
 }
 
 #buscador {
@@ -23,6 +24,8 @@ body{
 	border-style: double;
 	border-color: rgb(165, 164, 164);
 	padding-left: 20px;
+	position: relative;
+	/* cuidado con lo ultimo */
 	
 }
 
@@ -46,6 +49,12 @@ body{
 #apartados {
 	margin: 70px 100px;
 	padding-bottom: 100px;
+}
+
+h3{
+	border-bottom: 1px solid #d0d4dd;
+	padding-bottom: 10px;
+	
 }
 
 .listaCategorias {
@@ -116,6 +125,7 @@ body{
 	color: white;
 	font-weight: bold;
 	border: none;
+	width: 150px;
 }
 
 #botonLibros:hover {
@@ -125,7 +135,7 @@ body{
 
 
 #ultimosLibros {
-	margin-bottom: 130px;
+	margin-bottom: 80px;
 }
 
 #ultimosLibros, #mejorValorados {
@@ -134,6 +144,120 @@ body{
 
 #carouselExample,#carouselExample2{
   display: none;
+}
+
+@media (min-width: 721px) and (max-width: 1024px){
+	#buscador{
+		height: 50px;
+		margin-top: 20px;
+		width: 60%;
+	}
+
+	.searchButton{
+		margin-top: 25.5px;
+		margin-left: -56px;
+	}
+
+	.lupa {
+	
+	height: 38px;
+	padding: 9px;
+	
+}
+}
+	
+
+@media (max-width: 720px){
+	#ilustracion {
+	margin-top: 30px;
+	
+	}
+
+	
+
+	#buscador{
+		margin-top: 34px;
+		height: 40px;
+		/* width: 550px; */
+		width: 78%;
+		
+	}
+
+	.lupa{
+		height: 30px;
+		padding: 7px;
+		
+	}
+
+	.searchButton {
+	
+	margin-left: -48px;
+	margin-top: 38.5px;
+	
+	}
+
+	#apartados{
+		margin: 80px 78px;
+	}
+
+	h3{
+		font-size: 1.4em;
+		
+		padding-bottom: 7px;
+	}
+
+	.listaCategorias{
+		width: 100%;
+		margin-top: 20px;
+		margin-left: 0px;
+		height: 300px;
+		/* margin-bottom: 100px; */
+		
+	}
+
+	.categoria {
+	height: 110px;
+	width: 110px;
+	
+	
+}
+
+.categoria img {
+	height: 75px;
+	width: 75px;
+	
+	
+}
+
+.titulo {
+	font-size: 0.8em;
+	
+	
+}
+
+.listadoLibros{
+	grid-template-columns: repeat(2, 1fr);
+	height: 720px;
+	width: 600px;
+	margin-left: 15px;
+	margin-top: 20px;
+	
+}
+
+#portada {
+	height: 290px;
+	width: 210px;
+	
+}
+
+#botonLibros {
+	
+	margin-left: 200px;
+	
+	
+}
+
+
 }
 
 @media (max-width: 480px){
@@ -150,7 +274,7 @@ body{
 	}
 
 	.lupa{
-		height: 30px;
+		/* height: 30px; */
 		padding: 8px;
 		
 	}
@@ -168,7 +292,7 @@ body{
 
 	h3{
 		font-size: 1.3em;
-		border-bottom: 1px solid #d0d4dd;
+		/* border-bottom: 1px solid #d0d4dd; */
 		padding-bottom: 6px;
 	}
 
@@ -177,25 +301,27 @@ body{
 		width: 100%;
 		margin-left: 40px;
 		margin-bottom: 100px;
+		height: 460px;
 		
 	}
 	.categoria {
-	height: 110px;
-	width: 110px;
+	/* height: 110px;
+	width: 110px; */
 	margin-bottom: 20px;
+	
 }
 
 .categoria img {
-	height: 75px;
-	width: 75px;
+	/* height: 75px;
+	width: 75px; */
 	margin-bottom: 10px;
 }
 
-.titulo {
+/* .titulo {
 	font-size: 0.8em;
 	
 	
-}
+} */
 .listadoLibros{
 	display: none;
 }
@@ -206,17 +332,33 @@ body{
 	margin: auto;
 	margin-top: 30px;
 }
-
+.carousel-control-next{
+	margin-right: 8px;
+}
 
 
 #portada {
 	height: 330px;
 	width: 240px;
 	
+	
 }
 
 .nombre{
 	text-align: center;
+}
+
+#botonLibros {
+	margin: 30px 115px;
+	
+}
+
+#ultimosLibros{
+	margin-bottom: -5px;
+}
+
+#mejorValorados{
+	margin-bottom: -50px;
 }
 
 }
