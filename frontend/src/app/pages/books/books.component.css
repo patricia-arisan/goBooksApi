@@ -1,10 +1,17 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
 .libros{
-    margin-top: 25px;
+    margin: auto;
+    margin-top: 45px;
     
+    width: 86%;
 }
 h3{
     margin-left: 80px;
-    
+    border-bottom: 1px solid #d0d4dd;
+	padding-bottom: 6px;
+    width: 91.5%;
 }
 .listadoLibros{
     display: grid;
@@ -12,10 +19,12 @@ h3{
     /* height: 750px; */
     /* height: 1500px; */
     height: max-content;
-    width: 1100px;
+    /* width: 1100px; */
+    width: 96%;
     text-align: center;
     /* border: 1px solid black; */
-    margin-left: 150px;
+    margin-left: 86px; 
+    
     margin-top: 30px;
     
 }
@@ -23,13 +32,14 @@ h3{
    height: 350px;
     width: 220px; 
     /* border: 1px solid black; */
-    margin-bottom: 15px;
+    margin-bottom: 38px;
 }
 
 #portada{
-    height: 300px;
-    width: 220px;
-    
+    /* height: 300px;
+    width: 220px; */
+    height: 85.5%;
+    width: 100%;
     box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
     
    
@@ -55,3 +65,35 @@ a{
 /* .mat-mdc-paginator-touch-target:focus-visible{
 background-color: red;
 } */
+
+@media (max-width: 1024px) {
+    .listadoLibros{
+    
+    grid-template-columns: repeat(3, 1fr);
+    }
+    
+}
+
+@media (max-width: 720px) {
+    .listadoLibros{
+    
+    grid-template-columns: repeat(2, 1fr);
+    
+    
+}
+
+@media (max-width: 480px) {
+    .listadoLibros{
+    
+    grid-template-columns: repeat(1, 1fr);
+    
+    
+}
+.libro{
+    margin-left: 50px;
+    margin-bottom: 15px;
+    height: max-content;
+}
+}
+
+}
