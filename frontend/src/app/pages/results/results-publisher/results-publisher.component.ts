@@ -9,6 +9,8 @@ import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/materi
 import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-admin.component';
 import { Usuario } from '../../../interfaces/usuario';
 import { UserService } from '../../../services/user-service';
+import { Editorial } from '../../../interfaces/editorial';
+import { PublisherService } from '../../../services/publisher-service';
 
 
 
@@ -22,6 +24,7 @@ import { UserService } from '../../../services/user-service';
 export class ResultsPublisherComponent implements OnInit{
   user!: Usuario;
   libros!: Libro[];
+  editorial!: Editorial;
   id!: string;
   totalItems = 0;
   pageSize = 16;
@@ -32,7 +35,7 @@ export class ResultsPublisherComponent implements OnInit{
     private bookService: BookService,
     private paginator: MatPaginatorIntl,
     private userService: UserService,
-      
+    private publisherService: PublisherService  
     ){}
 
   ngOnInit(): void {
@@ -42,6 +45,7 @@ export class ResultsPublisherComponent implements OnInit{
     
     });
     this.retrieveFromLocalStorage();
+    this.getPublisher();
     this.getBooksByPublisher();
     this.translatePaginator();
   }
@@ -65,12 +69,19 @@ export class ResultsPublisherComponent implements OnInit{
           }
 
   getBooksByPublisher(){
-    let idPublisher = parseInt(this.id)
+    let idPublisher = parseInt(this.id);
     this.bookService.getBookByPublisherId(idPublisher).subscribe((data:Libro[])=>{
           this.libros = data;
           this.totalItems=this.libros.length;
           
         })
+  }
+
+  getPublisher(){
+    let idPublisher = parseInt(this.id);
+    this.publisherService.getPublisherById(idPublisher).subscribe((data:Editorial)=>{
+      this.editorial = data;
+    })
   }
 
    translatePaginator() {

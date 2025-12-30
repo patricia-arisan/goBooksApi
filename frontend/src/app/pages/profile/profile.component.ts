@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit{
   user!: Usuario;
   fechaActual!:Date;
   fechaFormat!:string | null;
+  showMenu: Boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -168,6 +169,14 @@ export class ProfileComponent implements OnInit{
       localStorage.clear();
       this.router.navigate(['/login']);
     });
+    
+  }
+
+  toggleView(){ 
+    this.showMenu = !this.showMenu;
+    
+    
+    
     
   }
 }

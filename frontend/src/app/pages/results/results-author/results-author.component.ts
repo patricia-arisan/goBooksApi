@@ -10,6 +10,8 @@ import { Usuario } from '../../../interfaces/usuario';
 
 import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-admin.component';
 import { UserService } from '../../../services/user-service';
+import { Autor } from '../../../interfaces/autor';
+import { AuthorService } from '../../../services/author-service';
 
 
 @Component({
@@ -22,6 +24,7 @@ import { UserService } from '../../../services/user-service';
 export class ResultsAuthorComponent implements OnInit{
   user!: Usuario;
   libros!: Libro[];
+  autor!: Autor;
   id!: string;
   totalItems = 0;
   pageSize = 16;
@@ -32,6 +35,7 @@ export class ResultsAuthorComponent implements OnInit{
     private bookService: BookService,
     private paginator: MatPaginatorIntl,
     private userService: UserService,
+    private authorService: AuthorService,
       
     ){}
 
@@ -42,6 +46,7 @@ export class ResultsAuthorComponent implements OnInit{
     
     });
     this.retrieveFromLocalStorage();
+    this.getAuthor();
     this.getBooksByAuthor();
     this.translatePaginator();
   }
@@ -65,12 +70,19 @@ export class ResultsAuthorComponent implements OnInit{
         }
 
   getBooksByAuthor(){
-    let idAuthor = parseInt(this.id)
+    let idAuthor = parseInt(this.id);
     this.bookService.getBookByAuthorId(idAuthor).subscribe((data:Libro[])=>{
           this.libros = data;
           this.totalItems=this.libros.length;
           
         })
+  }
+
+  getAuthor(){
+    let idAuthor = parseInt(this.id);
+    this.authorService.getAuthorById(idAuthor).subscribe((data:Autor)=>{
+      this.autor = data;
+    })
   }
 
    translatePaginator() {

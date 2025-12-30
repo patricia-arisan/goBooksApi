@@ -1,22 +1,38 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
 .cs-page-wrapper{
     margin-top: 40px;
+    
 }
 
 .list-group.list-group-flush.border-top {
     border-radius: 5px;
+    
 }
 
 .list-group-item.active{
     background-color: rgb(255, 141, 11); 
     border-color: rgb(201, 198, 198); 
-    
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     font-weight: 500;
     
 }
 
+.list-group-item-action{
+    color: black;
+}
+
 .col-sm-6.form-group{
     margin-bottom: 5px;
+    /*  */
+    
 }
+
+/* .form-control.form-control-lg{
+    width: 100%; 
+} */
 
 .btn.btn-primary.btn-lg{
     background-color: rgb(255, 141, 11);
@@ -55,4 +71,109 @@ svg{
     width: 19px; 
     fill: #820000;
     padding-bottom: 2px;
+}
+
+.menu{
+    display: none;
+}
+
+
+@media (max-width: 1200px) and (min-width: 900px){
+    .col-xl-3{
+        /* width: 250px; */
+        width: 30%;
+        
+    }
+    .col-lg-8.ml-auto{
+        
+        width: 70%;
+    }
+    
+
+   #account-menu{
+    display: block;
+   }
+
+    
+}
+
+@media (max-width: 899px) and (min-width: 580px){
+    .col-xl-3{
+        display: none;
+    }
+    .align-items-center.justify-content-between.mb-4.pb-1.pb-sm-3{
+        display: inline-flex;
+    }
+    .h2.mb-0{
+        width: max-content;
+        
+    }
+    
+    .menu{
+        display: block;
+        margin-right: 565px;
+        margin-top: 5px;
+        position: relative;
+        
+    }
+
+    .view{
+		border: none;
+		background: none;
+		height: 18px;
+		width: 18px;
+		
+
+	}
+
+    #menu{
+		
+		filter: invert(20%);
+		height: 14px;
+		width: 14px;
+		
+	}
+
+    .urls{
+      position: absolute;
+  top: 100%;    
+  right: 0;
+  margin-top: 4px;
+  margin-right: -30px;
+		background-color: #f9f9f9;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        padding: 0;
+		
+		width: 160px;
+		border: 1px solid rgb(187, 185, 185);
+	}
+
+    .linkAdap button{
+		border: none;
+		background: none;
+		color: gray;
+		margin-left: -6px;
+	}
+
+	.linkAdap {
+	color: gray;
+	padding: 5px 0px 5px 15px;
+	text-decoration: none;
+	list-style-type: none;
+	text-align: left;
+    font-size: 0.9em;
+	/* margin-left: -30px; */
+	
+}
+
+.linkAdap a {
+	text-decoration: none;
+	color: gray;
+	
+}
+
+.linkAdap:hover {
+	background-color: #f1f1f1;
+	cursor: pointer;
+}
 }

@@ -10,6 +10,8 @@ import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/materi
 import { Usuario } from '../../../interfaces/usuario';
 import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-admin.component';
 import { UserService } from '../../../services/user-service';
+import { Genero } from '../../../interfaces/genero';
+import { GenreService } from '../../../services/genre-service';
 
 
 @Component({
@@ -22,6 +24,7 @@ import { UserService } from '../../../services/user-service';
 export class ResultsGenreComponent implements OnInit{
   user!: Usuario;
   libros!: Libro[];
+  genero!: Genero;
   id!: string;
   totalItems = 0;
   pageSize = 16;
@@ -32,6 +35,7 @@ export class ResultsGenreComponent implements OnInit{
     private bookService: BookService,
     private paginator: MatPaginatorIntl,
     private userService: UserService,
+    private genreService: GenreService
       
     ){}
 
@@ -42,6 +46,7 @@ export class ResultsGenreComponent implements OnInit{
     
     });
     this.retrieveFromLocalStorage();
+    this.getGenre();
     this.getBooksByGenre();
     this.translatePaginator();
   }
@@ -65,12 +70,19 @@ export class ResultsGenreComponent implements OnInit{
         }
 
   getBooksByGenre(){
-    let idGenero = parseInt(this.id)
+    let idGenero = parseInt(this.id);
     this.bookService.getBookByGenreId(idGenero).subscribe((data:Libro[])=>{
           this.libros = data;
           this.totalItems=this.libros.length;
           
         })
+  }
+
+  getGenre(){
+    let idGenero = parseInt(this.id);
+    this.genreService.getGenreById(idGenero).subscribe((data:Genero)=>{
+      this.genero = data;
+    })
   }
 
    translatePaginator() {
