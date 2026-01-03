@@ -1,5 +1,6 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
+    
 }
 .cs-page-wrapper{
     margin-top: 40px;
@@ -26,26 +27,43 @@ body {
 
 .col-sm-6.form-group{
     margin-bottom: 5px;
-    /*  */
+    
     
 }
 
-/* .form-control.form-control-lg{
-    width: 100%; 
-} */
+label{
+    color: rgb(92, 91, 91);
+    font-weight: bold;
+}
+
+input:focus {
+    box-shadow: 0px 0px 4px 4px rgb(252, 205, 148);
+    border-color: rgb(252, 205, 148);
+}
+
+.form-control.form-control-lg{
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
 
 .btn.btn-primary.btn-lg{
     background-color: rgb(255, 141, 11);
     border-color: rgb(255, 141, 11);
-    margin-top: -5px;
+    margin-top: -75px;
 }
 
 .btn.btn-primary.btn-lg:hover{
     background-color: rgb(240, 129, 1);
     border-color: rgb(240, 129, 1);
 }
+
+.list-group-item.list-group-item-action.d-flex.align-items-center.active:hover{
+    background-color: rgb(240, 129, 1);
+}
+
 .list-group-item.list-group-item-action.d-flex.align-items-center:hover{
     cursor: pointer;
+    
 }
 .list-group-item.list-group-item-action.d-flex.align-items-center>button{
     border: none;
@@ -60,10 +78,15 @@ body {
     font-size: 0.8em;
     text-align: left;
     color: #820000;
-    padding-top: 2px;
+    /* padding-top: 2px;
     margin-left: -19px;
     margin-bottom: -7px;
-    margin-top: 2px;
+    margin-top: 2px; */
+    padding-top: 0px;
+    margin-left: -19px;
+    margin-bottom: 0px;
+    margin-top: -10px;
+    width: max-content;
 } 
 
 svg{
@@ -80,7 +103,7 @@ svg{
 
 @media (max-width: 1200px) and (min-width: 900px){
     .col-xl-3{
-        /* width: 250px; */
+       
         width: 30%;
         
     }
@@ -97,21 +120,27 @@ svg{
     
 }
 
-@media (max-width: 899px) and (min-width: 580px){
+@media (max-width: 899px) {
+    
     .col-xl-3{
         display: none;
+        
     }
-    .align-items-center.justify-content-between.mb-4.pb-1.pb-sm-3{
+    
+    .align-items-center.justify-content-between.mb-4{
         display: inline-flex;
+        
     }
     .h2.mb-0{
         width: max-content;
         
+        
     }
     
     .menu{
+        
         display: block;
-        margin-right: 565px;
+        
         margin-top: 5px;
         position: relative;
         
@@ -162,7 +191,7 @@ svg{
 	list-style-type: none;
 	text-align: left;
     font-size: 0.9em;
-	/* margin-left: -30px; */
+	
 	
 }
 
@@ -176,4 +205,49 @@ svg{
 	background-color: #f1f1f1;
 	cursor: pointer;
 }
+}
+
+@media (max-width: 579px){
+   
+
+    .urls{
+      
+  margin-top: 2px;
+  margin-right: -42px;
+		
+	}
+
+.row.pb-3{
+    display: block;
+    margin-top: -14px;
+}
+
+.cs-page-wrapper{
+    margin-left: 42px;
+    margin-top: 30px;
+}
+
+.form-control.form-control-lg{
+    width: 430px;
+}
+.alert{
+    margin-bottom: 10px;
+}
+}
+
+@media (max-width: 480px){
+    .cs-page-wrapper{
+    margin-left: 26px;
+    margin-top: 40px;
+    
+}
+
+.row.pb-3{
+    margin-top: 0px;
+    
+}
+
+   .form-control.form-control-lg{
+    width: 390px;
+} 
 }

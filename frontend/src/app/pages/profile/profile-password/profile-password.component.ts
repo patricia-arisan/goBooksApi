@@ -21,7 +21,8 @@ import { UserDeleteComponent } from '../../../modals/user/user-delete/user-delet
 })
 export class ProfilePasswordComponent implements OnInit{
   user!: Usuario;
-  
+  showMenu: Boolean = true;
+
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -136,4 +137,12 @@ export class ProfilePasswordComponent implements OnInit{
     });
     
   }
+
+  toggleView(){ 
+      this.showMenu = !this.showMenu;
+      
+      
+      
+      
+    }
 }
