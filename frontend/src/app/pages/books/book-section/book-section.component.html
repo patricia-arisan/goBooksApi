@@ -3,81 +3,82 @@
 }@else if(user.rol.id==2){
 <app-header-user></app-header-user>
 }
-<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    @if(user.rol.id==1){
-    <li class="breadcrumb-item"><a routerLink="/admin-books">Libros</a></li>
-    }@else if(user.rol.id==2){
-        <li class="breadcrumb-item"><a routerLink="/books">Libros</a></li>
-    }
-    <!-- <li class="breadcrumb-item"><a routerLink="/admin-books">Libros</a></li> -->
-    <li class="breadcrumb-item active" aria-current="page">{{libro.nombre}}</li>
-  </ol>
-</nav>
-<div class="ficha">
-    
+<div class="containerBook">
+
+  <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      @if(user.rol.id==1){
+      <li class="breadcrumb-item"><a routerLink="/admin-books">Libros</a></li>
+      }@else if(user.rol.id==2){
+      <li class="breadcrumb-item"><a routerLink="/books">Libros</a></li>
+      }
+      <!-- <li class="breadcrumb-item"><a routerLink="/admin-books">Libros</a></li> -->
+      <li class="breadcrumb-item active" aria-current="page">{{libro.nombre}}</li>
+    </ol>
+  </nav>
+  <div class="ficha">
+    <img src="{{libro.portada}}" id="portada" />
     <div class="detalles">
-        <p id="nombre">{{libro.nombre}}</p>
-<p class="autor"><a [routerLink]="['/results/author',libro.autor.id]">{{libro.autor.nombre}}</a></p>
-<p class="editorial"><a [routerLink]="['/results/publisher',libro.editorial.id]">{{libro.editorial.nombre}}</a></p>
-<p class="isbn"> · {{libro.isbn}}</p>
-<p class="genero"><a [routerLink]="['/results/genre',libro.genero.id]">{{libro.genero.nombre}}</a></p>
-<span>Sinopsis:</span>
-<p class="sinopsis">{{libro.sinopsis }}</p>
+      <p id="nombre">{{libro.nombre}}</p>
+      <p class="autor"><a [routerLink]="['/results/author',libro.autor.id]">{{libro.autor.nombre}}</a></p>
+      <p class="editorial"><a [routerLink]="['/results/publisher',libro.editorial.id]">{{libro.editorial.nombre}}</a>
+      </p>
+      <p class="isbn"> · {{libro.isbn}}</p>
+      <p class="genero"><a [routerLink]="['/results/genre',libro.genero.id]">{{libro.genero.nombre}}</a></p>
+      <span>Sinopsis:</span>
+      <p class="sinopsis">{{libro.sinopsis }}</p>
 
     </div>
 
-<img src="{{libro.portada}}" id="portada"/>
-@if(user.rol.id===2){
-@if(puntuacion!=null){
+    <!-- <img src="{{libro.portada}}" id="portada"/> -->
+    @if(user.rol.id===2){
 <div class="score">
-<span class="valoracion">Valoración</span>    
-<p class="puntuacion">{{puntuacion | number: '1.0-1'}}</p> 
-<!-- da formato 0.0 numero y redondea hacia arriba. El 1.0 hace que solo salgan decimales cuando los haya -->
-<section class="example-section">
-  <mat-card-content>
+    @if(puntuacion!=null){
     
-<mat-progress-spinner
-        class="circle"
-        mode="determinate"
-        
-        [value]=100>
-    </mat-progress-spinner>
-    <mat-progress-spinner
-        class="example-margin"
-        mode="determinate"
-        
-        [value]="valor">
-    </mat-progress-spinner>
-  </mat-card-content>
+      <span class="valoracion">Valoración</span>
+      <p class="puntuacion">{{puntuacion | number: '1.0-1'}}</p>
+      <!-- da formato 0.0 numero y redondea hacia arriba. El 1.0 hace que solo salgan decimales cuando los haya -->
+      <section class="example-section">
+        <mat-card-content>
+
+          <mat-progress-spinner class="circle" mode="determinate" [value]=100>
+          </mat-progress-spinner>
+          <mat-progress-spinner class="example-margin" mode="determinate" [value]="valor">
+          </mat-progress-spinner>
+        </mat-card-content>
 
 
 
-</section>
+      </section>
+    
+    }
+    </div>
+    <div class="seleccionEstado">
+      @if(lectura===null || lectura.estado.id===1){
+      <button type="button" class="lectura" matButton="elevated"
+        (click)="openReadingDialog('0ms', '0ms')">Añadir</button>
+      }@else if(lectura.estado.id===2){
+      <button type="button" class="lectura" matButton="elevated"
+        (click)="openReadingUpdateDialog('0ms', '0ms')">{{lectura.estado.situacion}}</button>
+      }@else{
+      <button type="button" class="lectura" matButton="elevated"
+        (click)="openReadingUpdateDialog('0ms', '0ms')">{{lectura.estado.situacion}}</button>
+      }
+    </div>
+    }
+
+    <!-- admin -->
+    @if(user.rol.id==1){
+    <div class="editar">
+      <button type="button" class="botonEditar" (click)="goEdit()">Editar</button>
+      <!-- <button type="button" class="botonEditar"><a [routerLink]="['/book-section/editar/',libro.id]">Editar</a></button>-->
+    </div>
+    }
+
+
+
+  </div>
+
+
+
 </div>
-}
-<div class="seleccionEstado">
-    @if(lectura===null || lectura.estado.id===1){
-    <button type="button" class="lectura" matButton="elevated" (click)="openReadingDialog('0ms', '0ms')">Añadir</button>
-}@else if(lectura.estado.id===2){ 
-    <button type="button" class="lectura" matButton="elevated" (click)="openReadingUpdateDialog('0ms', '0ms')">{{lectura.estado.situacion}}</button>
-}@else{
-    <button type="button" class="lectura" matButton="elevated" (click)="openReadingUpdateDialog('0ms', '0ms')">{{lectura.estado.situacion}}</button>
-}
-</div>
-}
-
-<!-- admin -->
-@if(user.rol.id==1){
-<div class="editar">    
-<button type="button" class="botonEditar" (click)="goEdit()">Editar</button>
-<!-- <button type="button" class="botonEditar"><a [routerLink]="['/book-section/editar/',libro.id]">Editar</a></button>-->
-</div>
-}
-
-
-
-</div>
-
-
-

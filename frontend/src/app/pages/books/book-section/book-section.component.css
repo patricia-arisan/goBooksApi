@@ -1,3 +1,11 @@
+.containerBook{
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
+    
+    
+}
+
 .ficha{
     margin-top: 20px;
     
@@ -5,11 +13,11 @@
 }
 .detalles{
     margin-top: 20px;
-    margin-left: 380px;
-    position: absolute;
+    
+    /* position: absolute; */
     width: 700px;
-    
-    
+    float: left;
+    margin-left: 60px;
     padding-bottom: 80px;
 }
 #nombre{
@@ -69,19 +77,21 @@ span{
     height: 300px;
     width: 220px;
     margin-top: 32px;
-    margin-left: 110px;
+    /* margin-left: 110px; */
     box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
-   
+   float: left;
 }
-
 .score{
-    margin-right: 100px;
+    /* margin-right: 100px; */
     margin-top: 75px;
     width: 120px;
+    height: 136px;
     text-align: center;
-    float: right;
+    float: left;
+    margin-left: 50px;
     
 }
+
 .puntuacion{
     font-size: 2.6em;
     font-weight: bold;
@@ -94,6 +104,7 @@ span{
    
     
 }
+
 .circle{
    --mdc-circular-progress-active-indicator-color:rgb(197, 197, 195); 
    position: absolute;
@@ -106,28 +117,23 @@ span{
   
   
 }
+
+
+
 /* mostrar espacios guardados en texto */
 .sinopsis{
     white-space: pre-wrap;
 }
-
-
 .seleccionEstado{
-    float: right;
-    position: absolute;
-    margin-top: -100px;
-    margin-left: 1136px;
-    
+    float: left;
+    /* position: absolute; */
+    /* margin-top: -100px; */
+    /* margin-left: 1040px; */
+   /* margin-left: 1070px; */
+   margin-left: 55px;
+   margin-top: 25px;
+   
 }
-/* .seleccionEstado{
-    float: right;
-    margin-top: 265px;
-    margin-right: -130px; 
-    width: 120px;
-    
-    
-} */
-
 .lectura{
     border: none;
     color:white;
@@ -137,9 +143,13 @@ span{
     padding: 10px 15px;
     width: 110px;
     margin: auto;
+    /* float: left; */
+    /* margin-top: -90px;
+    margin-right: 5px; */
     border-radius: 2px;
         
 }
+
 .lectura:hover{
     background-color: rgb(255, 141, 11);
 }
@@ -164,7 +174,7 @@ span{
 }
 
 .breadcrumb{
-    margin-left: 110px;
+    /* margin-left: 110px; */
     margin-bottom: -30px;
     margin-top: 40px;
     
