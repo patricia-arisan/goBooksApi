@@ -17,7 +17,23 @@
     </ol>
   </nav>
   <div class="ficha">
+    <!-- <div class="seccionImagen" [style.--bg-portada]="'url(' + libro.portada + ')'">
     <img src="{{libro.portada}}" id="portada" />
+    </div> -->
+    <div class="seccionImagen">
+        <!-- Capa para el fondo difuminado -->
+        <div class="fondo-difuminado" style="background-image: url('{{libro.portada}}');"></div>
+        
+        <!-- Imagen de portada principal (miniatura) -->
+        <img src="{{libro.portada}}" id="portada" class="miniatura-frontal" />
+    </div>
+    <!-- admin -->
+    @if(user.rol.id==1){
+    <div class="editar">
+      <button type="button" class="botonEditar" (click)="goEdit()">Editar</button>
+      <!-- <button type="button" class="botonEditar"><a [routerLink]="['/book-section/editar/',libro.id]">Editar</a></button>-->
+    </div>
+    }
     <div class="detalles">
       <p id="nombre">{{libro.nombre}}</p>
       <p class="autor"><a [routerLink]="['/results/author',libro.autor.id]">{{libro.autor.nombre}}</a></p>
@@ -67,13 +83,7 @@
     </div>
     }
 
-    <!-- admin -->
-    @if(user.rol.id==1){
-    <div class="editar">
-      <button type="button" class="botonEditar" (click)="goEdit()">Editar</button>
-      <!-- <button type="button" class="botonEditar"><a [routerLink]="['/book-section/editar/',libro.id]">Editar</a></button>-->
-    </div>
-    }
+    
 
 
 

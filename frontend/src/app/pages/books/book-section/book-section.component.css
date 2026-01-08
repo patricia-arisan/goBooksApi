@@ -155,8 +155,8 @@ span{
 }
 
 .botonEditar{
-    margin-top: 16px;
-    margin-left: 110px;
+    margin-left: -220px;
+    margin-top: 352px;
     border: none;
     font-weight: 500;
     background-color: rgb(253, 160, 54);
@@ -166,7 +166,8 @@ span{
     font-size: 1.1em;
     color:white;
     border-radius: 2px;
-    margin-bottom: 40px; /* nuevo */
+    float: left;
+    
 }
 
 .botonEditar:hover{
@@ -188,4 +189,114 @@ span{
     color: black;
     text-decoration: none;
     
+}
+
+@media (max-width: 1200px) {
+    .containerBook{
+    
+    max-width: 880px;
+    
+    
+    
+}
+
+.detalles{
+    margin-left: 35px;
+    width: 440px;
+    
+}
+}
+
+@media (max-width: 899px) {
+    .containerBook{
+    
+    /* max-width: 600px; */
+    max-width: 690px;
+    
+    
+}
+    #portada{
+    height: 280px;
+    width: 200px;
+    
+}
+    .detalles{
+    margin-left: 25px;
+    width: 320px;
+    
+}
+
+#nombre{
+    margin-top: 5px;
+    font-size: 1.6em;
+}
+
+.score{
+    
+    margin-left: 25px;
+    
+}
+
+.seleccionEstado{
+    
+  
+   margin-left: 32px;
+   
+   
+}
+
+
+}
+
+@media (max-width: 699px) {
+    .containerBook{
+    
+    /* max-width: 600px; */
+    max-width: 600px;
+    
+    
+}
+
+ .ficha{
+    margin-top: 40px;
+ }
+ 
+ .seccionImagen {
+    
+    position: relative; /* Necesario para contener los elementos absolutos */
+    max-width: 600px;
+    height: 270px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;   /* Corta el exceso del desenfoque en los bordes */
+}
+
+.fondo-difuminado {
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px) brightness(0.8); /* Difumina y oscurece un poco para dar contraste */
+    transform: scale(1.1);              /* Evita bordes blancos por el efecto blur */
+    z-index: 1;
+}
+
+#portada {
+    /* #portada.miniatura-frontal { */
+    position: relative;
+    z-index: 2;         /* Coloca la imagen nítida sobre el fondo */
+    height: 220px;
+    width: 150px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5); /* Sombra para dar profundidad */
+    border: 1px solid rgba(255,255,255,0.2);
+    margin-top: 0px;
+    object-fit: cover; /* Rellena el contenedor, recorta exceso */
+    
+}
+
 }
