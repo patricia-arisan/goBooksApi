@@ -1,20 +1,15 @@
 .containerBook{
     width: 100%;
     max-width: 1150px;
-    margin: 0 auto;
-    
-    
+    margin: 0 auto;    
 }
 
 .ficha{
-    margin-top: 20px;
-    
-    
+    margin-top: 20px;    
 }
+
 .detalles{
     margin-top: 20px;
-    
-    /* position: absolute; */
     width: 700px;
     float: left;
     margin-left: 60px;
@@ -73,16 +68,18 @@ span{
     font-weight: bold;
 }
 
+.lecturaAdapt{
+    display: none;
+}
+
 #portada{
     height: 300px;
     width: 220px;
     margin-top: 32px;
-    /* margin-left: 110px; */
     box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
    float: left;
 }
 .score{
-    /* margin-right: 100px; */
     margin-top: 75px;
     width: 120px;
     height: 136px;
@@ -113,9 +110,7 @@ span{
 
 .example-margin {
   margin: 0 10px;
-  --mdc-circular-progress-active-indicator-color:rgb(221, 179, 40);
-  
-  
+  --mdc-circular-progress-active-indicator-color:rgb(221, 179, 40);  
 }
 
 
@@ -126,10 +121,6 @@ span{
 }
 .seleccionEstado{
     float: left;
-    /* position: absolute; */
-    /* margin-top: -100px; */
-    /* margin-left: 1040px; */
-   /* margin-left: 1070px; */
    margin-left: 55px;
    margin-top: 25px;
    
@@ -143,9 +134,6 @@ span{
     padding: 10px 15px;
     width: 110px;
     margin: auto;
-    /* float: left; */
-    /* margin-top: -90px;
-    margin-right: 5px; */
     border-radius: 2px;
         
 }
@@ -175,7 +163,6 @@ span{
 }
 
 .breadcrumb{
-    /* margin-left: 110px; */
     margin-bottom: -30px;
     margin-top: 40px;
     
@@ -237,12 +224,8 @@ span{
     
 }
 
-.seleccionEstado{
-    
-  
-   margin-left: 32px;
-   
-   
+.seleccionEstado{  
+   margin-left: 32px;   
 }
 
 
@@ -250,21 +233,16 @@ span{
 
 @media (max-width: 699px) {
     .containerBook{
-    
-    /* max-width: 600px; */
-    max-width: 600px;
-    
-    
+    max-width: 470px;    
 }
 
  .ficha{
     margin-top: 40px;
  }
  
- .seccionImagen {
-    
+ .seccionImagen {    
     position: relative; /* Necesario para contener los elementos absolutos */
-    max-width: 600px;
+    max-width: 470px;
     height: 270px;
     display: flex;
     justify-content: center;
@@ -281,22 +259,147 @@ span{
     height: 100%;
     background-size: cover;
     background-position: center;
-    filter: blur(5px) brightness(0.8); /* Difumina y oscurece un poco para dar contraste */
-    transform: scale(1.1);              /* Evita bordes blancos por el efecto blur */
+    /* Difuminar y oscurecer para contraste */
+    filter: blur(5px) brightness(0.8); 
+    /* Evitar bordes blancos por el blur */
+    transform: scale(1.1);              
     z-index: 1;
 }
 
-#portada {
-    /* #portada.miniatura-frontal { */
+#portada {    
     position: relative;
-    z-index: 2;         /* Coloca la imagen nítida sobre el fondo */
+    /* Imagen nitida sobre el fondo */
+    z-index: 2;         
     height: 220px;
     width: 150px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.5); /* Sombra para dar profundidad */
+    /* Sombra para dar profundidad */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5); 
     border: 1px solid rgba(255,255,255,0.2);
     margin-top: 0px;
-    object-fit: cover; /* Rellena el contenedor, recorta exceso */
+    /* Rellena el contenedor, recorta exceso */
+    object-fit: cover; 
     
 }
 
+.detalles{
+    
+    margin-left: 0px;
+    width: 320px;
+}
+
+#nombre{
+    width: 470px;
+    font-size: 1.5em;
+}
+
+.valoracion{
+    font-size: 0.8em;
+    margin: 0px;
+}
+
+.score{
+    float: right;
+    width: 100px;
+    height: 116px;
+margin-top: -260px;
+margin-right: -10px;
+position: relative;
+z-index: 2;
+}
+
+.circle{
+    zoom: 0.7;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);   
+    margin-left: 6px;
+    background-color: #b1b1b152;
+    border-radius: 50px;
+}
+
+.puntuacion{
+    text-shadow: 1px 1px 2px black;
+   color: rgb(241, 241, 241);
+   font-size: 2.1em;
+    margin-top: 10px;
+    margin-right: 23px;
+}
+
+.valoracion{
+    display: none;
+}
+
+.example-margin{
+    /* Encoger circulo */
+    zoom: 0.7;
+    margin: 0px 6px;
+    margin-top: 54px;
+}
+
+.lectura2{
+    width: 90px;
+    font-size: 0.9em;
+    
+    padding: 4px 7.5px ;
+   
+    border: none;
+    color:white;
+    background-color: rgb(255, 123, 0);
+    font-weight: 500;
+    border-radius: 2px;
+    
+    
+}
+.lectura{
+    display: none;
+}
+
+.lecturaAdapt{
+    display: block;
+    float: left;
+    
+    border-left: 1px solid rgb(126, 126, 126);
+    width: 140px;
+    
+    margin-top: 3px;
+    
+    
+    
+}
+
+.seleccionEstado{
+    margin: 0px;
+    margin-left: 7px;
+}
+
+
+.genero{
+    margin-right: 8px;
+    float: left;
+    margin-bottom: 0px;
+}
+
+span{
+    display: block;
+    margin-top: 60px;
+}
+
+.sinopsis{
+    width: 470px;
+}
+
+}
+
+@media (max-width: 480px){
+     .containerBook{
+        width: 440px;
+    }
+
+    #nombre{
+        width: 440px;
+    }
+
+    .sinopsis{
+        width: 440px;
+    }
+
+   
 }

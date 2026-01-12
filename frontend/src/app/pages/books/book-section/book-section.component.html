@@ -21,11 +21,11 @@
     <img src="{{libro.portada}}" id="portada" />
     </div> -->
     <div class="seccionImagen">
-        <!-- Capa para el fondo difuminado -->
-        <div class="fondo-difuminado" style="background-image: url('{{libro.portada}}');"></div>
-        
-        <!-- Imagen de portada principal (miniatura) -->
-        <img src="{{libro.portada}}" id="portada" class="miniatura-frontal" />
+      <!-- Capa para el fondo difuminado -->
+      <div class="fondo-difuminado" style="background-image: url('{{libro.portada}}');"></div>
+
+      <!-- Imagen de portada principal (miniatura) -->
+      <img src="{{libro.portada}}" id="portada" class="miniatura-frontal" />
     </div>
     <!-- admin -->
     @if(user.rol.id==1){
@@ -40,7 +40,28 @@
       <p class="editorial"><a [routerLink]="['/results/publisher',libro.editorial.id]">{{libro.editorial.nombre}}</a>
       </p>
       <p class="isbn"> · {{libro.isbn}}</p>
+
       <p class="genero"><a [routerLink]="['/results/genre',libro.genero.id]">{{libro.genero.nombre}}</a></p>
+
+
+      <div class="lecturaAdapt">
+        <div class="seleccionEstado">
+          @if(lectura===null || lectura.estado.id===1){
+          <button type="button" class="lectura2" matButton="elevated"
+            (click)="openReadingDialog('0ms', '0ms')">Añadir</button>
+          }@else if(lectura.estado.id===2){
+          <button type="button" class="lectura2" matButton="elevated"
+            (click)="openReadingUpdateDialog('0ms', '0ms')">{{lectura.estado.situacion}}</button>
+          }@else{
+          <button type="button" class="lectura2" matButton="elevated"
+            (click)="openReadingUpdateDialog('0ms', '0ms')">{{lectura.estado.situacion}}</button>
+          }
+        </div>
+      </div>
+
+
+
+
       <span>Sinopsis:</span>
       <p class="sinopsis">{{libro.sinopsis }}</p>
 
@@ -48,9 +69,9 @@
 
     <!-- <img src="{{libro.portada}}" id="portada"/> -->
     @if(user.rol.id===2){
-<div class="score">
-    @if(puntuacion!=null){
-    
+    <div class="score">
+      @if(puntuacion!=null){
+
       <span class="valoracion">Valoración</span>
       <p class="puntuacion">{{puntuacion | number: '1.0-1'}}</p>
       <!-- da formato 0.0 numero y redondea hacia arriba. El 1.0 hace que solo salgan decimales cuando los haya -->
@@ -66,8 +87,8 @@
 
 
       </section>
-    
-    }
+
+      }
     </div>
     <div class="seleccionEstado">
       @if(lectura===null || lectura.estado.id===1){
@@ -83,7 +104,7 @@
     </div>
     }
 
-    
+
 
 
 
