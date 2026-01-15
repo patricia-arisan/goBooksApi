@@ -32,6 +32,7 @@
     <div class="editar">
       <button type="button" class="botonEditar" (click)="goEdit()">Editar</button>
       <!-- <button type="button" class="botonEditar"><a [routerLink]="['/book-section/editar/',libro.id]">Editar</a></button>-->
+      <button type="button" class="edit-buttom" (click)="goEdit()"><img src="/assets/update/edit.png" class="edit" alt="edit" /></button>
     </div>
     }
     <div class="detalles">
@@ -43,7 +44,7 @@
 
       <p class="genero"><a [routerLink]="['/results/genre',libro.genero.id]">{{libro.genero.nombre}}</a></p>
 
-
+      @if(user.rol.id===2){
       <div class="lecturaAdapt">
         <div class="seleccionEstado">
           @if(lectura===null || lectura.estado.id===1){
@@ -58,7 +59,7 @@
           }
         </div>
       </div>
-
+    }
 
 
 
@@ -69,7 +70,7 @@
 
     <!-- <img src="{{libro.portada}}" id="portada"/> -->
     @if(user.rol.id===2){
-    <div class="score">
+      <div class="score">
       @if(puntuacion!=null){
 
       <span class="valoracion">Valoración</span>
@@ -89,8 +90,8 @@
       </section>
 
       }
-    </div>
-    <div class="seleccionEstado">
+      </div>
+      <div class="seleccionEstado">
       @if(lectura===null || lectura.estado.id===1){
       <button type="button" class="lectura" matButton="elevated"
         (click)="openReadingDialog('0ms', '0ms')">Añadir</button>
@@ -101,7 +102,7 @@
       <button type="button" class="lectura" matButton="elevated"
         (click)="openReadingUpdateDialog('0ms', '0ms')">{{lectura.estado.situacion}}</button>
       }
-    </div>
+      </div>
     }
 
 

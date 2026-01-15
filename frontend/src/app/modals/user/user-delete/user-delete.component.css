@@ -6,24 +6,20 @@ h2 {
     color: white;
 }
 
-
-
-.control-label {
-    font-size: 1.1em;
-    font-weight: 500;
-    color: black;
-    margin-bottom: 10px;
-}
 p{
     padding-top: 15px;
     
+    font-size: 1.1em;
+}
+.btn{
+    font-size: 1.1em;
 }
 
 .btn.btn-success {
     background-color: rgb(253, 160, 54);
     border: none;
     font-weight: 500;
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 .btn.btn-success:hover {
@@ -35,3 +31,7 @@ p{
     background-color: rgb(240, 238, 238);
  }
 
+ .buttons{
+    margin-top: 20px;
+    margin-left: -10px;
+ }

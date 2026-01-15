@@ -1,5 +1,7 @@
-body {
-	font-family: Arial, Helvetica, sans-serif;
+.home{
+	width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;	
 }
 
 #ilustracionLibro {
@@ -7,8 +9,8 @@ body {
 }
 
 #ilustracion {
-	width: 60%;
-	height: 60%;
+	width: 70%;
+	height: 70%;
 }
 
 #seccionBuscador {
@@ -43,7 +45,7 @@ body {
 }
 
 #apartados {
-	margin: 70px 100px;
+	margin: 70px 30px;
 	padding-bottom: 100px;
 }
 
@@ -54,12 +56,14 @@ h3 {
 
 .listaCategorias {	
 	height: 100%;
-	width: 100%;
+	width: 93%;
 	text-align: center;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-	margin-left: 40px;
+	column-gap: 4.1rem;
+	margin: auto;
 	margin-top: 20px;
+	
 }
 
 .categoria {
@@ -83,10 +87,11 @@ h3 {
 .listadoLibros {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);	
+	column-gap: 4.1rem;
 	height: 100%;
-	width: 100%;
+	width: 95%;
 	text-align: center;
-	margin-left: 30px;
+	margin: auto;
 	margin-top: 35px;
 	margin-bottom: 55px;
 }
@@ -140,15 +145,23 @@ h3 {
 	display: none;
 }
 
-@media (min-width: 721px) and (max-width: 1024px) {
+@media (max-width: 1200px) {
+	.home{
+		max-width: 1000px;
+	}
+
+	#ilustracionLibro{
+		margin-top: 20px;
+	}
+
 	#buscador {
 		height: 50px;
-		margin-top: 20px;
-		width: 60%;
+		margin-top: 10px;
+		width: 65%;
 	}
 
 	.searchButton {
-		margin-top: 25.5px;
+		margin-top: 15px;
 		margin-left: -56px;
 	}
 
@@ -162,9 +175,10 @@ h3 {
 	}
 
 	.listaCategorias {
-		width: 100%;
-		margin-left: 12px;
+		width: 98%;
+		column-gap: 4.3rem;
 		margin-bottom: 70px;
+		
 	}
 
 	.categoria {
@@ -180,7 +194,7 @@ h3 {
 
 	.listadoLibros {
 		width: 100%;
-		margin-left: 0px;
+		margin-bottom: 15px;
 	}
 
 	.libro {		
@@ -188,40 +202,38 @@ h3 {
 	}
 
 	#portada {
-		height: 260px;
-		width: 180px;
+		height: 70%;
+		width: 100%;
 	}
 
 	.nombre {
-		font-size: 0.90em;
-		width: 90%;
+		font-size: 0.9em;
 	}
 
 	#botonLibros {
-		margin-top: -20px;		
-		margin-left: 41%;
+		margin-left: 41%;		
 	}
 }
 
-@media (max-width: 720px) {
-	#ilustracion {
-		margin-top: 30px;
+@media (max-width: 899px) {
+	.home{
+		max-width: 800px;
 	}
 
 	#buscador {
-		margin-top: 34px;
-		height: 40px;		
-		width: 78%;
+		margin-top: 22px; 
+		height: 36px;		
+		width: 68%;
 	}
 
 	.lupa {
-		height: 30px;
-		padding: 7px;
+		height: 23px;
+		padding: 4px;
 	}
 
 	.searchButton {
-		margin-left: -48px;
-		margin-top: 38.5px;
+		margin-left: -40px;
+		margin-top: 26px;
 
 	}
 
@@ -236,10 +248,10 @@ h3 {
 
 	.listaCategorias {		
 		margin-top: 20px;
-		margin-left: 0px;
 		height: 300px;
+		column-gap: 1.4rem;
 	}
-
+	
 	.categoria {
 		height: 110px;
 		width: 110px;
@@ -256,7 +268,7 @@ h3 {
 
 	.listadoLibros {
 		grid-template-columns: repeat(2, 1fr);
-		margin-left: 25px;
+		column-gap: 2rem;
 		margin-top: 20px;
 		height: 750px;
 	}
@@ -266,36 +278,49 @@ h3 {
 		width: 210px;
 	}
 
+	.nombre{
+		width: 210px;
+		margin: auto;
+		margin-top: 5px;
+	}
+
+	.libro{
+		height: 360px;
+	}
+
 	#botonLibros {
-		margin-top: -20px;
-		margin-left: 200px;
+		margin-left: 36%;		
 	}
 }
 
-@media (max-width: 480px) {
-	#ilustracion {
-		margin-top: 50px;
-		width: 80%;
-		height: 80%;
+@media (max-width: 699px) {
+	.home{
+		max-width: 480px;
+	}
+
+	#ilustracion {		
+		width: 95%;
+		height: 95%;
 	}
 
 	#buscador {
-		margin-top: 40px;
+		margin-top: 30px;
 		height: 40px;
-		width: 400px;
+		width: 450px;
 	}
 
 	.lupa {
-		padding: 8px;
+		padding: 4px;
+		height: 28px;
 	}
 
 	.searchButton {
-		margin-left: -47px;
-		margin-top: 44px;
+		margin-left: -46px;
+		margin-top: 35px;
 	}
 
 	#apartados {
-		margin: 60px 40px;
+		margin: 80px 10px;
 	}
 
 	h3 {
@@ -306,17 +331,80 @@ h3 {
 	.listaCategorias {
 		grid-template-columns: repeat(2, 1fr);
 		margin-left: 40px;
-		margin-bottom: 100px;
+		margin-bottom: 280px;
 		height: 460px;
 	}
 
 	.categoria {
 		margin-bottom: 20px;
-
+		height: 150px;
+		width: 130px;
 	}
 
 	.categoria img {
-		margin-bottom: 10px;
+		height: 120px;
+		width: 120px;
+		margin-bottom: 5px;
+	}
+
+	#botonLibros {
+		margin-left: 34%;		
+	}
+}
+
+@media (max-width: 480px) {
+	.home{
+		max-width: 420px;
+	}
+
+	#ilustracion {
+		margin-top: 50px;
+		width: 80%;
+		height: 80%;
+	}
+
+	#buscador {
+		margin-top: 40px;
+		height: 34px;
+		width: 350px;
+	}
+
+	.lupa {
+		padding: 4px;
+		height: 24px;
+	}
+
+	.searchButton {
+		margin-left: -40px;
+		margin-top: 43px;
+	}
+
+	#apartados {
+		margin: 70px 20px;
+	}
+
+	h3 {
+		font-size: 1.2em;
+	}
+
+	.listaCategorias {
+		column-gap: 4.4rem;
+		margin: auto;
+		margin-top: 30px;
+		margin-bottom: 50px;
+		height: max-content;
+		width: 340px;
+	}
+
+	.categoria {
+		margin-bottom: 25px;
+		height: 130px;
+		width: 120px;
+	}
+
+	.categoria img {
+		height: 100px;
+		width: 100px;
 	}
 
 	.listadoLibros {
@@ -325,35 +413,42 @@ h3 {
 
 	#carouselExample, #carouselExample2 {
 		display: block;
-		height: 360px;
+		height: max-content;
 		width: 250px;
 		margin: auto;
 		margin-top: 30px;
 	}
+	.carousel-control-next, .carousel-control-prev {
+		background-color: rgba(59, 59, 59, 0.377);
+		border-radius: 100%;
+		height: 40px;
+		width: 40px;
+		padding: 5px;
+		margin-top: 165px;
+	}
 
-	.carousel-control-next {
+	.carousel-control-next{
 		margin-right: 8px;
 	}
 
+	.carousel-control-prev{
+		margin-left: 8px;
+	}
 
 	#portada {
+		margin: 5px;
 		height: 330px;
 		width: 240px;
 	}
 
 	.nombre {
 		text-align: center;
+		font-size: 1em;
+		margin-bottom: 40px;
 	}
 
 	#botonLibros {
-		margin: 60px 115px 40px;
-	}
-
-	#ultimosLibros {
-		margin-bottom: -5px;
-	}
-
-	#mejorValorados {
-		margin-bottom: -50px;
+		margin-left: 115px;
+		
 	}
 }

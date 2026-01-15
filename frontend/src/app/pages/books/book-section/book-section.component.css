@@ -162,6 +162,10 @@ span{
     background-color: rgb(255, 141, 11);
 }
 
+.edit-buttom{
+    display: none;
+}
+
 .breadcrumb{
     margin-bottom: -30px;
     margin-top: 40px;
@@ -228,8 +232,15 @@ span{
    margin-left: 32px;   
 }
 
+.botonEditar{
+    margin-top: 325px;
+    width: 200px;
+    margin-left: -200px;
+}
 
 }
+
+
 
 @media (max-width: 699px) {
     .containerBook{
@@ -386,7 +397,37 @@ span{
     width: 470px;
 }
 
+.botonEditar{
+    display: none;
 }
+
+.edit-buttom{
+    display: inline;
+    float: right;
+    background-color: rgb(253, 160, 54);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    margin-top: -45px;
+    margin-right: 5px;
+    position: relative;
+z-index: 2;
+    
+    
+}
+.edit{
+    filter: invert(100%);
+	width: 24px;
+    height: 24px;
+    
+	
+    
+}
+
+}
+
+
 
 @media (max-width: 480px){
      .containerBook{
@@ -399,6 +440,13 @@ span{
 
     .sinopsis{
         width: 440px;
+    }
+
+    .edit-buttom{
+    
+    margin-top: -50px;
+    margin-right: 10px;
+   
     }
 
    

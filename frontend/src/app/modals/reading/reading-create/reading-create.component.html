@@ -1,6 +1,6 @@
 
 <h2 mat-dialog-title>Añadir libro</h2>
-<div mat-dialog-content>
+<mat-dialog-content>
        <p class="name">{{libro.nombre}}</p>
         <form [formGroup]="formNewReading" (submit)="registerReading()"> <!--(submit)="registerReading()" -->
                 <div class="form-group">
@@ -42,21 +42,24 @@
                                 formControlName="puntuacion" class="form-control" autofocus="autofocus">
                 </div>
                 @if(selectedOption==="2"){
-                <mat-toolbar color="primary"></mat-toolbar>
+                <!-- <mat-toolbar color="primary"></mat-toolbar> -->
+                <div class="rating">
                 @for (star of ratingArray; track star; let index = $index){
                 <mat-icon (mouseenter)="setStar(index)" [ngClass]="{checked:selectedStar>index}"
-                        (mouseleave)="unselectStar()" (click)="rating(index)">star</mat-icon>
+                        (mouseleave)="unselectStar()" (click)="rating(index)" class="star">star</mat-icon>
                 }
+                </div>
                 }
                 <div class="form-group">
+                        <div class="buttons">
                         <button type="button" class="btn " (click)="closeForm()">Atrás</button>
                         
                            <button type="submit" class="btn btn-success">Añadir</button>     
                         
-                        
+                       </div> 
 
                 </div>
                 
         </form>
         
-</div>
+</mat-dialog-content>

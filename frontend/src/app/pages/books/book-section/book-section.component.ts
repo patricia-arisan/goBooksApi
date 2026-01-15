@@ -67,7 +67,10 @@ export class BookSectionComponent implements OnInit{
     // this.getStates(); 
     
     this.getPercentage();
-    this.getBookState();
+    if(this.user.rol.id===2){
+      this.getBookState();
+    }
+    
     
   }
 
