@@ -301,7 +301,7 @@ h3 {
 	#ilustracion {		
 		width: 95%;
 		height: 95%;
-	}
+	}	
 
 	#buscador {
 		margin-top: 30px;
@@ -330,9 +330,11 @@ h3 {
 
 	.listaCategorias {
 		grid-template-columns: repeat(2, 1fr);
+		column-gap: 6rem;
 		margin-left: 40px;
 		margin-bottom: 280px;
 		height: 460px;
+		width: 80%;
 	}
 
 	.categoria {

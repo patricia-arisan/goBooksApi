@@ -28,10 +28,13 @@ p{
 
 .btn:first-child:active{
     border: none;
-    background-color: rgb(240, 238, 238);
  }
 
+.btn:first-child:hover{
+    background-color: rgb(240, 238, 238);
+}
+
  .buttons{
-    margin-top: 20px;
-    margin-left: -10px;
+    margin-bottom: 5px;
+    margin-right: -20px;
  }

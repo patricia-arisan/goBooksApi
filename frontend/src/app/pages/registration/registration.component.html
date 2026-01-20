@@ -66,7 +66,8 @@
                 <input id="rol" type="hidden" formControlName="rol" class="form-control">
             </div>
             <div class="form-group">
-                <input id="fechaNacimiento" type="date" [max]="fechaFormat" formControlName="fechaNacimiento" class="form-control">
+                <!-- onfocus para cambiar el campo al pinchar y onblur para volver a cambiarlo al salir -->
+                <input id="fechaNacimiento" type="text" placeholder="Fecha de nacimento" onfocus="(this.type='date')" onblur="(this.type='text')" [max]="fechaFormat" formControlName="fechaNacimiento" class="form-control">
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-success" [disabled]="formNewUser.invalid">Registrar</button>

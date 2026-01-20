@@ -30,8 +30,11 @@ h2{
 
 .btn:first-child:active{
     border: none;
+}
+
+.btn:first-child:hover{
     background-color: rgb(240, 238, 238);
- }
+}
 
  .name{
     margin-top: 10px;
