@@ -1,13 +1,16 @@
-body {
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-#cabecera{
+.header{
 	height: 120px;
 	background-color: rgb(253, 211, 159);
 	box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
 	
 }
+
+.header-content{
+	width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
 #logo{
 	height: 50px;
 	width: 50px;
@@ -23,40 +26,41 @@ h1{
 	margin-top: 36px;
 	margin-left: 15px;
 }
-.cuenta {
-    
+.account {    
 	box-shadow: 0 0 3px 1px #ffffff;
 	margin-top: 38px;
 	margin-right: 50px;
 	background-color: rgba(248, 186, 110, 0.705);
     padding: 4px 16px;
     border-radius: 3px;
-	float: right;
 	min-width: max-content;
+	border: none;
 	
 }
-.opciones{
+
+.account-options{
+	float: right;
+	
+}
+
+.options{
 	position: relative;
 	display: inline-block;
 	margin-top: 5px;
 }
 
 .links{
-    display: none; /* Oculta el menú por defecto */
-    position: absolute; /* Posiciona el menú absolutamente respecto a .cuenta */
-    background-color: #f9f9f9;
-    min-width: 170px;
-	
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    list-style: none; 
-    padding: 0;
-    margin: 0;
-    /* Ajusta la posición (por ejemplo, debajo del nombre/imagen) */
-    top: 100%; 
-    left: 0;
-	margin-top: 11px;
-	margin-left: -59px;
+    position: absolute;
+	background-color: #f9f9f9;
+	min-width: 200px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 3;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	top: 100%;
+	left: 0;
+	margin-top: -2px;	
 	
 }
 
@@ -64,12 +68,13 @@ h1{
     color: gray;
     padding: 12px 16px;
     text-decoration: none;
-    display: block;
+    
     text-align: left;
 }
 .link a{
 	text-decoration: none;
-	color: gray
+	color: gray;
+	display: block;
 }
 
 
@@ -78,27 +83,24 @@ h1{
 	
 	cursor: pointer;
 }
-.cuenta:hover .links {
-    display: block; 
 
-}
-.nombre{
+.userName{
 	color: white;
 	font-size: 1.2em;
 	font-weight: bold;
-	/* margin-right: 3px;
-	margin-top: 10px; */
 	padding-right: 4px;
+	float: left;
+	margin-top: 2px;
 	
  }
-#usuario{
-	/* height: 20px;
-	width: 20px; */
+#user{
 	height: 30px;
 	width: 30px;
 	margin-right: 12px;
 	filter: invert(100%);
-	margin-bottom: 5px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	float: left;
 	
 }
 .nav{
@@ -108,4 +110,150 @@ h1{
 }
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link{
 	background-color: rgb(255, 141, 11);
+}
+
+.menu{
+	display: none;
+}
+
+@media (max-width: 1200px){
+	.header-content{
+    max-width: 1100px;
+	
+	}
+}
+
+@media (max-width: 1000px){
+	.header-content{
+    max-width: 900px;
+	}
+
+	#logo{
+		margin-left: 10px;
+	}
+
+	.account{
+		margin-right: 10px;
+	}
+}
+
+@media (max-width: 699px){
+	.container{
+		display: none;
+	}
+
+	.links{	
+		min-width: 130px;
+		margin-left: -90px;	
+		z-index: 4;		
+	}
+
+	.userName{
+		display: none;
+	}
+
+	.account{
+		border-radius: 50%;
+		padding: 5px;
+		margin-right: 20px;
+		margin-top: 38px;		
+	}
+
+	#user{
+		margin: auto;		
+	}
+
+	#logo{
+		display: none;
+	}
+
+	h1{
+		float: left;
+		margin-left: 86px;		
+	}
+
+	#menu{		
+		filter: invert(100%);
+		height: 24px;
+		width: 24px;		
+	}
+
+	.options{
+		z-index: 5;
+	}
+
+	.view{
+		border: none;
+		background: none;
+		height: 29px;
+		width: 29px;
+		margin-left: 38px;
+	}
+
+	.urls{
+		background-color: #f9f9f9;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+		list-style: none;		
+		/* padding: 0; */
+		/* margin: 0; */
+		/* top: 100%;	 */
+		padding-left: 60px;
+		/* left: 0; */
+		margin-top: 44px;
+		height: max-content;
+		margin-left: -40px;
+	}
+
+		.linkAdap button{
+		border: none;
+		background: none;
+		color: gray;
+		margin-left: -6px;
+		
+	}
+
+	.linkAdap {
+	color: gray;
+	padding: 12px 0px 12px 75px;
+	text-decoration: none;
+	list-style-type: none;
+	text-align: left;
+	margin-left: -30px;
+}
+
+.linkAdap a {
+	text-decoration: none;
+	color: gray;
+	display: block;
+	
+}
+
+.linkAdap:hover {
+	background-color: #f1f1f1;
+	cursor: pointer;
+}
+	
+.menu{ 
+	display: block;
+	position: absolute; 
+	/*ver si tocar, es para que quede por encima en la pagina*/
+	z-index: 3;	
+	margin-top: 49px;
+	max-width: 699px;
+	width: 100%;
+	height: max-content;
+}
+}
+
+@media (max-width: 480px){
+	.header-content{
+    	max-width: 480px;
+	}
+
+	.account{
+		margin-right: 40px;
+	}
+	
+	
+
 }

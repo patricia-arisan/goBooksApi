@@ -1,18 +1,41 @@
-<div id="cabecera">
-  <div id="cabeceraBooks">
+<div class="header">
+  <div class="header-content">
+  <div id="headerBooks">
     <a routerLink="/admin-home"><img src="/assets/logo/ibooks.png" alt="logo" id="logo" /></a>
+    <div class="menu">
+        <button type="button" (click)="toggleView()" class="view"><img src="/assets/icon/list-menu.png" alt="menu"
+            id="menu" /></button>
+        @if(!showMenu){
+        <ul class="urls">
+          <li class="linkAdap"><a routerLink="/admin-home">Home</a></li>
+          <li class="linkAdap"><a routerLink="/admin-books">Libros</a></li>
+          <li class="linkAdap"><a routerLink="/admin-authors">Autores</a></li>
+          <li class="linkAdap"><a routerLink="/admin-genres">Géneros</a></li>
+          <li class="linkAdap"><a routerLink="/admin-publishers">Editoriales</a></li>
+          <li class="linkAdap"><button (click)="logout()">Cerrar sesión</button></li>
+        </ul>
+        }
+      </div>
     <h1>GoBooks</h1>
   </div>
-  
-   <div class="cuenta">
-        <img src="/assets/user/user.png" alt="usuario" id="usuario"/>
-        <div class="opciones">
-        <span class="nombre">{{user.nombre}}</span>
+  <div class="account-options">
+      <div class="options">
+        <button type="button" (click)="toggleViewAccount()" class="account">
+          <img src="/assets/user/user.png" alt="usuario" id="user" />
+          <span class="userName">{{user.nombre}}</span>
+        </button>
+
+
+
+        @if(!showAccount){
         <ul class="links">
           <li class="link" (click)="logout()">Cerrar sesión</li>
         </ul>
-        </div>
+        }
       </div>
+    </div>
+   
+  </div>
 </div>
 <div class="container">
   <nav class="d-flex justify-content-center py-3">

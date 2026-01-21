@@ -239,7 +239,8 @@ h1 {
 		padding-left: 60px;
 		/* left: 0; */
 		margin-top: 44px;
-		height: 242px;
+		/* height: 242px; */
+		height: max-content;
 		margin-left: -40px;
 	}
 

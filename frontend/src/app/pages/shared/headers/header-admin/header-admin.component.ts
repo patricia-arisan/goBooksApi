@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../../../services/user-service';
 import { Usuario } from '../../../../interfaces/usuario';
@@ -13,10 +13,13 @@ import { Usuario } from '../../../../interfaces/usuario';
 })
 export class HeaderAdminComponent {
   user!: Usuario;
+  showMenu: Boolean = true;
+  showAccount: Boolean = true;
   
   constructor(
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private eRef: ElementRef
     
   ){}
 
@@ -59,5 +62,33 @@ export class HeaderAdminComponent {
       this.router.navigate(['/login']);
     });
     
+  }
+
+    toggleView(){ 
+    this.showMenu = !this.showMenu;
+    
+    
+    
+    
+  }
+
+  toggleViewAccount(){ 
+    this.showAccount = !this.showAccount;
+    
+    
+    
+    
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickOut(event: Event) {
+    // Cerrar deplegable al pinchar fuera de la lista
+    if (!this.eRef.nativeElement.contains(event.target)) {
+      this.showAccount = true;
+    }
+
+    if (!this.eRef.nativeElement.contains(event.target)) {
+      this.showMenu = true;
+    }
   }
 }

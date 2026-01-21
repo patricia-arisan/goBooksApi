@@ -1,15 +1,22 @@
 @if(user.rol.id==1){
 <app-header-admin></app-header-admin>
 }
-<div id="seccionBuscador">
+<div class="home">
+<!-- <div id="seccionBuscador">
+    <form [formGroup]="formSearch" (submit)="search()">
+        <input type="text" formControlName="clave" id="buscador" placeholder="Título, autor, editorial o ISBN" />
+        <button type="submit"><img src="/assets/main-home/search.png" class="lupa" alt="buscar" /></button>
+    </form>
+</div> -->
+<div id="apartados">
+<section id="ultimosLibros">
+    <h3>Últimos añadidos</h3>
+    <div id="seccionBuscador">
     <form [formGroup]="formSearch" (submit)="search()">
         <input type="text" formControlName="clave" id="buscador" placeholder="Título, autor, editorial o ISBN" />
         <button type="submit"><img src="/assets/main-home/search.png" class="lupa" alt="buscar" /></button>
     </form>
 </div>
-<div id="apartados">
-<section id="ultimosLibros">
-    <h3>Últimos añadidos</h3>
             <div class="listadoLibros">  
 @for (libro of libros.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro){
     <div class="libro">
@@ -29,5 +36,5 @@
         </section>
        
 </div>
-
+</div>
 
