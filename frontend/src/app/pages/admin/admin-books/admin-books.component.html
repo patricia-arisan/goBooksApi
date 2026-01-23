@@ -1,107 +1,105 @@
 <app-header-admin></app-header-admin>
 <div class="administracion">
 
-<h2>Administar libros</h2>
-<button type="button" (click)="toggleView()" class="vista"><img [src]="url" /></button>
-@if(showBooksTable){ 
-<mat-form-field>
-  <mat-label>Filtrar</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Título, autor, editorial, género" #input>
-</mat-form-field>
-}@else{
-<mat-form-field>
-  <mat-label>Filtrar</mat-label>
-  <input matInput (keyup)="applyFilterGalery($event)" placeholder="Título" #input>
-</mat-form-field>
-}
-<span id="botonCrear"><a routerLink="/admin-books/create-book" class="nav-link">Nuevo +</a></span>  
- @if(showBooksTable){ 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-   
-    <ng-container matColumnDef="name" >
-    <th mat-header-cell *matHeaderCellDef > Título </th>
-    
-    <td mat-cell class="titulo" *matCellDef="let libro"> {{libro.nombre}} </td>
-    
-  </ng-container>
-  <ng-container matColumnDef="author" >
-    <th mat-header-cell *matHeaderCellDef > Autor </th>
-    
-    <td mat-cell class="autor" *matCellDef="let libro"> {{libro.autor.nombre}} </td>
-    
-  </ng-container>
-  <ng-container matColumnDef="publisher">
-    <th mat-header-cell *matHeaderCellDef > Editorial </th>
-    
-    <td mat-cell class="editorial" *matCellDef="let libro"> {{libro.editorial.nombre}} </td>
-    
-  </ng-container>
-  <ng-container matColumnDef="genre" >
-    <th mat-header-cell *matHeaderCellDef > Género </th>
-    
-    <td mat-cell class="genero" *matCellDef="let libro"> {{libro.genero.nombre}} </td>
-    
-  </ng-container>
-   <ng-container matColumnDef="edit">
-    
-    <th mat-header-cell *matHeaderCellDef> </th>
-    <td mat-cell *matCellDef="let libro" (click)="$event.stopPropagation()"><button type="button" class="edit-buttom" [routerLink]="['/admin-books/book-section/editar/',libro.id]"><img src="/assets/update/edit.png" class="edit" alt="edit" /></button></td>
-    
-  </ng-container>
-  
-   
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row (click)="openDialog(libro,'0ms', '0ms')" *matRowDef="let libro; columns: displayedColumns;"></tr>
-  <!-- <tr mat-row *matRowDef="let libro; columns: displayedColumns;"></tr> -->
+  <h2>Administar libros</h2>
+  <button type="button" (click)="toggleView()" class="vista"><img [src]="url" /></button>
+  @if(showBooksTable){
+  <mat-form-field>
+    <mat-label>Filtrar</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Título, autor, editorial, género" #input>
+  </mat-form-field>
+  }@else{
+  <mat-form-field>
+    <mat-label>Filtrar</mat-label>
+    <input matInput (keyup)="applyFilterGalery($event)" placeholder="Título" #input>
+  </mat-form-field>
+  }
+  <span id="botonCrear"><a routerLink="/admin-books/create-book" class="nav-link">Nuevo +</a></span>
+  @if(showBooksTable){
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <!-- <tr class="mat-row" *matNoDataRow>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Título </th>
+
+      <td mat-cell class="titulo" *matCellDef="let libro"> {{libro.nombre}} </td>
+
+    </ng-container>
+    <ng-container matColumnDef="author">
+      <th mat-header-cell *matHeaderCellDef> Autor </th>
+
+      <td mat-cell class="autor" *matCellDef="let libro"> {{libro.autor.nombre}} </td>
+
+    </ng-container>
+    <ng-container matColumnDef="publisher">
+      <th mat-header-cell *matHeaderCellDef class="header-publisher"> Editorial </th>
+
+      <td mat-cell class="editorial" *matCellDef="let libro"> {{libro.editorial.nombre}} </td>
+
+    </ng-container>
+    <ng-container matColumnDef="genre">
+      <th mat-header-cell *matHeaderCellDef> Género </th>
+
+      <td mat-cell class="genero" *matCellDef="let libro"> {{libro.genero.nombre}} </td>
+
+    </ng-container>
+    <ng-container matColumnDef="edit">
+
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let libro" (click)="$event.stopPropagation()"><button type="button" class="edit-buttom"
+          [routerLink]="['/admin-books/book-section/editar/',libro.id]"><img src="/assets/update/edit.png" class="edit"
+            alt="edit" /></button></td>
+
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row (click)="openDialog(libro,'0ms', '0ms')" *matRowDef="let libro; columns: displayedColumns;"></tr>
+    <!-- <tr mat-row *matRowDef="let libro; columns: displayedColumns;"></tr> -->
+
+    <!-- <tr class="mat-row" *matNoDataRow>
     <td class="mat-cell" colspan="4">No hay resultados con la búsqueda "{{input.value}}"</td>
   </tr> -->
-  
+
   </table>
 
-  <mat-paginator class="paginator"
-              
-              [pageSize]="pageSize"
-              [pageIndex]="pageIndex"
-              [pageSizeOptions]="[16, 32, 40]"
-              aria-label="Select page"
-              (page)="onPageChange($event)">
-</mat-paginator> 
+  <mat-paginator class="paginator" [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="[16, 32, 40]"
+    aria-label="Select page" (page)="onPageChange($event)">
+  </mat-paginator>
 
-}@else{
+  }@else{
   <div class="libros">
-  
-  <div class="listadoLibros"> 
-@if(!filteredBooks){
-@for (libro of libros.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro.id){
-    <div class="libro">
-    <a [routerLink]="['/admin-books/book-section',libro.id]" ><img src="{{libro.portada}}" id="portada" alt="{{libro.nombre}}"/></a>
-    <a [routerLink]="['/admin-books/book-section',libro.id]" ><p class="nombre">{{libro.nombre}}</p></a>
-  </div>
-  
-}
-}@else{
- @for (libro of filteredBooks.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro.id){
-    <div class="libro">
-    <a [routerLink]="['/admin-books/book-section',libro.id]" ><img src="{{libro.portada}}" id="portada" alt="{{libro.nombre}}"/></a>
-    <a [routerLink]="['/admin-books/book-section',libro.id]" ><p class="nombre">{{libro.nombre}}</p></a>
-  </div>
-}
+
+    <div class="listadoLibros">
+      @if(!filteredBooks){
+      @for (libro of libros.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro.id){
+      <div class="libro">
+        <a [routerLink]="['/admin-books/book-section',libro.id]"><img src="{{libro.portada}}" id="portada"
+            alt="{{libro.nombre}}" /></a>
+        <a [routerLink]="['/admin-books/book-section',libro.id]">
+          <p class="nombre">{{libro.nombre}}</p>
+        </a>
+      </div>
+
+      }
+      }@else{
+      @for (libro of filteredBooks.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro.id){
+      <div class="libro">
+        <a [routerLink]="['/admin-books/book-section',libro.id]"><img src="{{libro.portada}}" id="portada"
+            alt="{{libro.nombre}}" /></a>
+        <a [routerLink]="['/admin-books/book-section',libro.id]">
+          <p class="nombre">{{libro.nombre}}</p>
+        </a>
+      </div>
+      }
 
 
-} 
-</div> 
-<mat-paginator class="paginator"
-              [length]="totalItems"
-              [pageSize]="pageSize"
-              [pageIndex]="pageIndex"
-              [pageSizeOptions]="[16, 32, 40]"
-              aria-label="Select page"
-              (page)="onPageChange($event)">
-</mat-paginator> 
+      }
+    </div>
+    <mat-paginator class="paginator" [length]="totalItems" [pageSize]="pageSize" [pageIndex]="pageIndex"
+      [pageSizeOptions]="[16, 32, 40]" aria-label="Select page" (page)="onPageChange($event)">
+    </mat-paginator>
+  </div>
+  }
+
 </div>
-}
-
-  </div>
-  <!-- <span id="editar"><a [routerLink]="['/book-section/editar/',libro.id]">Editar</a></span> -->
+<!-- <span id="editar"><a [routerLink]="['/book-section/editar/',libro.id]">Editar</a></span> -->

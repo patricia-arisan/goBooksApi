@@ -1,6 +1,9 @@
 .administracion{
-    width: 80%;
-    margin: auto;
+    /* width: 80%;
+    margin: auto; */
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
 }
 h2{
     margin-top: 40px;
@@ -35,7 +38,7 @@ h2{
 }
 .mat-mdc-table {
     background-color: white;
-    
+    margin-bottom: 25px;
     
 }
 
@@ -106,7 +109,7 @@ td{
    height: 350px;
     width: 220px; 
     /* border: 1px solid black; */
-    margin-bottom: 15px;
+    margin-bottom: 38px;
 }
 
 #portada{
@@ -140,4 +143,114 @@ a{
 
 .titulo,.autor,.editorial,.genero{
     cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+    .administracion{
+        max-width: 850px;  
+    }
+
+    h2{
+        margin-top: 50px;
+    }
+
+    .listadoLibros{    
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 5.8rem;
+        max-width: 850px;
+    }
+
+    
+}
+
+@media (max-width: 899px) {
+    .administracion{
+        max-width: 650px;  
+    }
+
+    h2{
+        margin-top: 60px;
+    }
+
+    .libros{
+        border-top: 1px solid #d0d4dd;
+    }
+
+    .listadoLibros{    
+        max-width: 520px;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 5rem;
+        margin: 40px auto 0px;
+    }
+}
+
+@media (max-width: 699px) {
+    .administracion{
+        max-width: 470px;
+    }
+
+    h2{
+        margin-top: 70px;
+    }
+
+    .editorial{
+        display: none;
+    }
+
+    .header-publisher{
+        display: none;
+    }
+    
+    .titulo{
+        padding: 10px  ;
+    }
+
+    .listadoLibros{
+        column-gap: 1rem;
+        max-width: 450px;
+    }
+
+    #portada{
+        height: 280px;
+        width: 200px;
+    }
+    
+}
+
+@media (max-width: 480px) {
+    .administracion{
+        max-width: 420px;
+    }
+
+    h2{
+        margin-top: 60px;
+    }
+
+    .mat-mdc-form-field {
+        width: 240px;
+    }
+
+    th{
+        font-size: 1em;
+    }
+
+    td{
+        font-size: 0.9em;
+    }
+
+    .listadoLibros{
+        max-width: 360px;
+        grid-template-columns: repeat(1, 1fr);    
+    }
+
+    .libro{
+        margin: auto;
+        width: 260px; 
+        margin-bottom: 58px;
+    }
+
+    #portada{
+        height: 340px;
+        width: 260px; 
+    }
 }
