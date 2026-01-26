@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { HeaderAdminComponent } from '../../../shared/headers/header-admin/header-admin.component';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { BookService } from '../../../../services/book-service';
 import { Libro } from '../../../../interfaces/libro';
 import { Autor } from '../../../../interfaces/autor';
@@ -21,7 +21,7 @@ import { GenreCreateComponent } from '../../../../modals/genre/genre-create/genr
 @Component({
   selector: 'app-admin-books-create',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule,HeaderAdminComponent,MatButtonModule],
+  imports: [FormsModule, ReactiveFormsModule,HeaderAdminComponent,MatButtonModule,RouterLink],
   templateUrl: './admin-books-create.component.html',
   styleUrl: './admin-books-create.component.css',
   //changeDetection: ChangeDetectionStrategy.OnPush No cargan al principio las cosas, mejor quitar esto
@@ -69,6 +69,8 @@ export class AdminBooksCreateComponent implements OnInit{
  
     
   }
+
+  
 
   formNewBook:FormGroup = new FormGroup({
     id: new FormControl(null),

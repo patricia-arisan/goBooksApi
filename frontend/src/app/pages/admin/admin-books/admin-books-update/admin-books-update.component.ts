@@ -35,7 +35,7 @@ import { BookDeleteComponent } from '../../../../modals/book/book-delete/book-de
   //changeDetection: ChangeDetectionStrategy.OnPush No cargan al principio las cosas, mejor quitar esto
 })
 export class AdminBooksUpdateComponent implements OnInit{
-  user!: Usuario;
+  // user!: Usuario;
   libro!: Libro;
   id!: string; //para recuperar luego id en url
   url!: string;
@@ -47,7 +47,7 @@ export class AdminBooksUpdateComponent implements OnInit{
     private formBuilder: FormBuilder,
     private bookService: BookService,
     private route: ActivatedRoute,
-    private userService: UserService,
+    // private userService: UserService,
     private authorService: AuthorService,
     private publisherService: PublisherService,
     private genreService: GenreService,
@@ -62,7 +62,7 @@ export class AdminBooksUpdateComponent implements OnInit{
    this.route.params.subscribe(params => {
       this.id = params['libro.id'];
     });
-    this.retrieveFromLocalStorage();
+    // this.retrieveFromLocalStorage();
      this.getAuthors();
     this.getPublishers();
     this.getGenres();
@@ -100,23 +100,23 @@ export class AdminBooksUpdateComponent implements OnInit{
     
   }
 
-  retrieveFromLocalStorage() {
-            this.user = JSON.parse(localStorage.getItem('usuario') || '')
+  // retrieveFromLocalStorage() {
+  //           this.user = JSON.parse(localStorage.getItem('usuario') || '')
             
-            let value = this.userService.getItem('id');
+  //           let value = this.userService.getItem('id');
                
-            let currentUser = 0;
-            if(value!=null){
-              currentUser = parseInt(value);
+  //           let currentUser = 0;
+  //           if(value!=null){
+  //             currentUser = parseInt(value);
                           
-              this.userService.getLoggedUser(currentUser).subscribe((data:Usuario)=>{
+  //             this.userService.getLoggedUser(currentUser).subscribe((data:Usuario)=>{
                 
-                this.user = data;
+  //               this.user = data;
                 
                     
-              });
-            }  
-          }
+  //             });
+  //           }  
+  //         }
 
   getCurrentBook(){
     let idLibro = parseInt(this.id)

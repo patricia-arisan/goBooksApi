@@ -6,47 +6,35 @@
     cursor: pointer;
 } */
  .container{
-    width: 70%;
+    width: 100%;
+    max-width: 945px;
+    margin: 0 auto;    
+    padding-bottom: 20px;
+    
     
  }
  h2{
     margin-top: 45px;
     margin-bottom: 40px;
+    
  }
- /* .form{
-    width: 75%;
- } */
+ 
 
- .imagen{
+ #imagen{
    
     margin-left: 110px;
     box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
     float: right;
     margin-top: -718px;
-    
+    height: 300px;
+    width: 220px;
     
  }
 
- img{
-   /* height: 150px;
-    width: 150px; */
-    height: 300px;
-    width: 220px;
- }
- 
- /* img{
-    height: 300px;
-    width: 220px;
+.row.g-5{
+   height: 800px;
+}
 
-
-    
-    margin-top: 32px;
-    margin-left: 110px;
-    box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
-    float: right;
-    margin-top: -720px;
-   
- } */
  .form-group{ 
     /* border: 1px solid black; */
     margin-bottom: 10px;
@@ -84,7 +72,7 @@
 
  input{
     margin-bottom: 20px;
-    
+    background-color: rgb(245, 243, 243);
  }
 
  input:focus,textarea:focus{
@@ -93,30 +81,20 @@
     
 }
 
-input{
-   background-color: rgb(245, 243, 243);
-   
-   
-}
 /* quitar background que pone por defecto al seleccionar */
 input:-webkit-autofill,input:-webkit-autofill:focus {
     transition: background-color 0s 600000s;
   }
 
- .createButton{
-    
-    
+ .createButton{    
     color:white;
-    height: 35px;
-    
+    height: 35px;    
     border-radius: 8px;
     width: 120px;
     float: right;
     margin-right: 280px;
-    
-    
-
  }
+
  button{
     background-color: rgb(253, 160, 54);
     border: none;
@@ -166,8 +144,194 @@ svg{
     margin-left: 95px;
     
 }
-.row.g-5{
-   height: 800px;
+
+
+.breadcrumb{
+    margin-bottom: -35px;
+    margin-top: 40px;
    
-   
+}
+
+.breadcrumb-item a{
+    color: black;
+    text-decoration: none;
+    
+}
+
+@media (max-width: 1000px){
+    .container {
+        max-width: 750px;
+    }
+
+    #nombre, #isbn, #portada, #sinopsis {
+        width: 460px;    
+    }
+
+    #autor, #editorial, #genero {
+            /* width: 240px;     */
+            width: 240px;
+    }
+
+    .createButton{
+        margin-right: 265px;
+    }
+
+}
+
+@media (max-width: 800px){
+    .container {
+        max-width: 650px;
+    }
+
+    #nombre, #isbn, #portada, #sinopsis {
+        width: 360px;
+    }
+
+    #autor, #editorial, #genero {
+            margin-left: -5px;
+            width: 180px;
+    }
+
+    .createButton{
+        width: 80px;
+        margin-right: 265px;
+    }
+
+
+}
+
+@media (max-width: 699px){
+    .container {
+        max-width: 470px;
+        padding-bottom: 760px;
+    }
+
+    h2{
+        font-size: 1.6em;
+    }
+
+    .row.g-5{
+        margin-top: 210px;
+    }
+
+    .seccionImagen {    
+    position: relative; /* Necesario para contener los elementos absolutos */
+    max-width: 470px;
+    height: 270px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;   /* Corta el exceso del desenfoque en los bordes */
+    margin-top: -996px;
+      
+   }
+
+.fondo-difuminado {
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    /* Difuminar y oscurecer para contraste */
+    filter: blur(5px) brightness(0.8); 
+    /* Evitar bordes blancos por el blur */
+    transform: scale(1.1);              
+    z-index: 1;
+}
+
+#imagen {    
+    position: relative;
+    /* Imagen nitida sobre el fondo */
+    z-index: 2;         
+    height: 220px;
+    width: 150px;
+    /* Sombra para dar profundidad */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5); 
+    border: 1px solid rgba(255,255,255,0.2);
+    margin: auto;
+    /* margin-top: 0px; */
+    /* Rellena el contenedor, recorta exceso */
+    object-fit: cover; 
+    
+}
+
+    .deleteButton{
+        display: none;
+    }
+
+    .delete-buttom{
+    display: inline;
+    float: right;
+    background-color: rgb(190, 57, 57);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    margin-top: -45px;
+    margin-right: 5px;
+    position: relative;
+z-index: 2;
+    
+    
+}
+
+.delete-buttom:hover{
+    background-color: rgb(230, 48, 48); 
+}
+
+.delete{
+    filter: invert(100%);
+	width: 24px;
+    height: 24px;
+    
+	
+    
+}
+#nombre{
+   margin-top: 5px;
+}
+
+#nombre, #isbn, #portada, #sinopsis {
+        width: 445px;
+    }
+
+#autor, #editorial, #genero {
+            margin-left: 5px;
+            width: 240px;
+    }
+
+.createButton{
+        width: 100px;
+        margin-right: 0px;
+        
+    }
+
+}
+
+@media (max-width: 480px){
+    .container {
+        max-width: 440px;
+    }
+
+    .seccionImagen{
+        margin-top: -999px;
+    }
+
+    #nombre, #isbn, #portada, #sinopsis {
+        width: 415px;
+    }
+
+#autor, #editorial, #genero {
+            margin-left: -5px;
+            width: 240px;
+    }
+
+    .createButton{
+        width: 85px;
+        font-size: 0.9em;
+        
+    }
 }
