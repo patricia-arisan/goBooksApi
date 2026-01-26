@@ -1,102 +1,115 @@
 <app-header-admin></app-header-admin>
 <div class="container">
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a routerLink="/admin-books">Libros</a></li>
-    <li class="breadcrumb-item" ><a [routerLink]="['/admin-books/book-section',libro.id]">{{libro.nombre}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Modificar</li>
-  </ol>
-</nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/admin-books">Libros</a></li>
+      <li class="breadcrumb-item"><a [routerLink]="['/admin-books/book-section',libro.id]">{{libro.nombre}}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Modificar</li>
+    </ol>
+  </nav>
   <h2>Modificar libro</h2>
   <div class="row g-5">
-<form [formGroup]="formUpdate" (submit)="update()">
-    
-          
-            <!-- <div class="col-sm-6 form-group">
+    <form [formGroup]="formUpdate" (submit)="update()">
+
+
+      <!-- <div class="col-sm-6 form-group">
               <label for="ac-fn">Id</label>
               <input type="text" id="id" class="form-control" formControlName="id">
 
               
             </div> -->
-            <div class="form-group">
-              <label class="control-label" for="ac-fn">Título</label>
-              <input type="text" id="nombre" class="form-control" formControlName="nombre">
+      <div class="form-group">
+        <label class="control-label" for="ac-fn">Título</label>
+        <input type="text" id="nombre" class="form-control" formControlName="nombre">
 
-              
-            </div>
-            <div class="form-group" formGroupName="autor">
-              <label class="control-label" for="ac-ln">Autor</label>
-              <select formControlName="id" id="autor">
-                @for (autor of autores; track autor.id){
-                    
-                    <option [value]="autor.id" >
-                    {{ autor.nombre}}
-                    </option>
-                    }
-    		    
-    	        </select>
-              
-              <button type="button" class="editButton" matButton="elevated" (click)="openUpdateAuthorDialog('0ms', '0ms')">Editar</button>
-            </div>
-            <div class="form-group">
-              <label class="control-label">ISBN</label>
-              <input id="isbn" type="text" formControlName="isbn" class="form-control">
-            </div>
-            
-            <div class="form-group" formGroupName="editorial">
-              <label class="control-label">Editorial</label>
-              <select formControlName="id" id="editorial">
-                    
-                @for (editorial of editoriales; track editorial){
-                    
-                    <option [value]="editorial.id">
-                    {{ editorial.nombre}}
-                    </option>
-                    }
-                    </select>
-              
-              
-              <button type="button" class="editButton" matButton="elevated" (click)="openUpdatePublisherDialog('0ms', '0ms')">Editar</button>
-            </div>
-            <div class="form-group" formGroupName="genero">
-              <label class="control-label">Género</label>
-              <select formControlName="id" id="genero">
-                    
-                    @for (genero of generos; track genero){
-                    
-                    <option [value]="genero.id">
-                    {{ genero.nombre}}
-                    </option>
-                    }
-                    </select> 
-              
-              <button type="button" class="editButton" matButton="elevated" (click)="openUpdateGenreDialog('0ms', '0ms')">Género</button>
-            </div>
-            <div class="form-group">
-              <label class="control-label">Portada</label>
-              <input type="text" id="portada" formControlName="portada" class="form-control" (input)="sendImage($event)">
-            </div>
-            <div class="form-group">
-              <label class="control-label">Sinópsis</label>
-              <textarea id="sinopsis" formControlName="sinopsis" class="form-control"></textarea>
-            </div>
 
-            
+      </div>
+      <div class="form-group" formGroupName="autor">
+        <label class="control-label" for="ac-ln">Autor</label>
+        <select formControlName="id" id="autor">
+          @for (autor of autores; track autor.id){
 
-            <div class="form-group">
-                    <button type="submit" class="btn btn-success">Actualizar</button>
-                    
-                </div>
-        
-          <!-- <button type="submit" class="btn btn-primary btn-lg">&nbsp;Actualizar&nbsp;</button> -->
-        </form>
-      
+          <option [value]="autor.id">
+            {{ autor.nombre}}
+          </option>
+          }
+
+        </select>
+
+        <button type="button" class="editButton" matButton="elevated"
+          (click)="openUpdateAuthorDialog('0ms', '0ms')">Editar</button>
+      </div>
+      <div class="form-group">
+        <label class="control-label">ISBN</label>
+        <input id="isbn" type="text" formControlName="isbn" class="form-control">
+      </div>
+
+      <div class="form-group" formGroupName="editorial">
+        <label class="control-label">Editorial</label>
+        <select formControlName="id" id="editorial">
+
+          @for (editorial of editoriales; track editorial){
+
+          <option [value]="editorial.id">
+            {{ editorial.nombre}}
+          </option>
+          }
+        </select>
+
+
+        <button type="button" class="editButton" matButton="elevated"
+          (click)="openUpdatePublisherDialog('0ms', '0ms')">Editar</button>
+      </div>
+      <div class="form-group" formGroupName="genero">
+        <label class="control-label">Género</label>
+        <select formControlName="id" id="genero">
+
+          @for (genero of generos; track genero){
+
+          <option [value]="genero.id">
+            {{ genero.nombre}}
+          </option>
+          }
+        </select>
+
+        <button type="button" class="editButton" matButton="elevated"
+          (click)="openUpdateGenreDialog('0ms', '0ms')">Género</button>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Portada</label>
+        <input type="text" id="portada" formControlName="portada" class="form-control" (input)="sendImage($event)">
+      </div>
+      <div class="form-group">
+        <label class="control-label">Sinópsis</label>
+        <textarea id="sinopsis" formControlName="sinopsis" class="form-control"></textarea>
+      </div>
+
+
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-success">Actualizar</button>
+
+      </div>
+
+      <!-- <button type="submit" class="btn btn-primary btn-lg">&nbsp;Actualizar&nbsp;</button> -->
+    </form>
+
+  </div>
+  <div class="seccionImagen">
+      <!-- Capa para el fondo difuminado -->
+      <div class="fondo-difuminado" style="background-image: url('{{libro.portada}}');"></div>
+
+      <!-- Imagen de portada principal (miniatura) -->
+      <img [src]="url" id="imagen" class="miniatura-frontal" />
+    </div>
+  <!-- <div class="imagen">
+    <img [src]="url" />
+
+  </div> -->
+  <button type="button" class="deleteButton" matButton="elevated"
+    (click)="openDeleteBookDialog('0ms', '0ms')">Eliminar</button>
+
+  <button type="button" class="delete-buttom" matButton="elevated"
+    (click)="openDeleteBookDialog('0ms', '0ms')"><img src="/assets/icon/bin.png" class="delete" alt="delete" /></button>
+    
 </div>
-<div class="imagen">
-<img [src]="url" />
-
-</div>
-<button type="button" class="deleteButton" matButton="elevated" (click)="openDeleteBookDialog('0ms', '0ms')">Eliminar</button>
-</div>
-
-   

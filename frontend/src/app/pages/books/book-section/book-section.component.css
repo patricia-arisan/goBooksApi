@@ -247,6 +247,13 @@ span{
     max-width: 470px;    
 }
 
+.breadcrumb-item{
+    max-width: 420px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
  .ficha{
     margin-top: 40px;
  }
@@ -416,6 +423,10 @@ z-index: 2;
     
     
 }
+
+.edit-buttom:hover{
+    background-color: rgb(255, 141, 11);
+}
 .edit{
     filter: invert(100%);
 	width: 24px;
@@ -432,6 +443,10 @@ z-index: 2;
 @media (max-width: 480px){
      .containerBook{
         width: 440px;
+    }
+
+    .breadcrumb-item{
+    max-width: 395px;
     }
 
     #nombre{
