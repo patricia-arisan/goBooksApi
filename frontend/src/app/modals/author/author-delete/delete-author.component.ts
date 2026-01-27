@@ -28,7 +28,7 @@ import { UserService } from '../../../services/user-service';
 @Component({
   selector: 'app-delete-author',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule,MatButtonModule,MatDialogTitle,MatDialogContent],
+  imports: [FormsModule, ReactiveFormsModule,MatButtonModule,MatDialogTitle,MatDialogContent,MatDialogActions],
   templateUrl: './delete-author.component.html',
   styleUrl: './delete-author.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush

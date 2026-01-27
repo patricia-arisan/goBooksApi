@@ -25,7 +25,7 @@ import { UserService } from '../../../services/user-service';
 @Component({
   selector: 'app-delete-genre',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule,MatButtonModule,MatDialogTitle,MatDialogContent],
+  imports: [FormsModule, ReactiveFormsModule,MatButtonModule,MatDialogTitle,MatDialogContent,MatDialogActions],
   templateUrl: './delete-genre.component.html',
   styleUrl: './delete-genre.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush

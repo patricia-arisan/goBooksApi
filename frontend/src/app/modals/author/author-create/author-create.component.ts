@@ -55,6 +55,10 @@ export class AuthorCreateComponent implements OnInit{
         }
     });
     }
+    get nombre(){
+    return this.formNewAuthor.get('nombre')!;
+  }  
+
   closeForm(): void {
     this.dialogRef.close();
   }

@@ -27,8 +27,11 @@ h2 {
 
 .btn:first-child:active{
     border: none;
-    background-color: rgb(240, 238, 238);
  }
+
+ .btn:first-child:hover{
+    background-color: rgb(240, 238, 238);
+}
 
 .form-group {
     margin-top: 11px;
@@ -72,13 +75,10 @@ input:-webkit-autofill,input:-webkit-autofill:focus {
 .edit{
     filter: invert(100%);
 	width: 23px;
-    height: 23px;
-    
-	
-    
+    height: 23px;    
 }
 
 .buttons{
-    margin-top: 20px;
-    margin-left: -10px;
+    margin-bottom: 5px;
+    margin-right: -20px;
 }

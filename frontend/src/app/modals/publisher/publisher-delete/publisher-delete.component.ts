@@ -23,7 +23,7 @@ import { PublisherService } from '../../../services/publisher-service';
 @Component({
   selector: 'app-publisher-delete',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule,MatButtonModule,MatDialogTitle,MatDialogContent],
+  imports: [FormsModule, ReactiveFormsModule,MatButtonModule,MatDialogTitle,MatDialogContent,MatDialogActions],
   templateUrl: './publisher-delete.component.html',
   styleUrl: './publisher-delete.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush

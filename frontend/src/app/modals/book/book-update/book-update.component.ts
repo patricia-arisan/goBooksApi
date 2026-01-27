@@ -32,7 +32,7 @@ import { PublisherUpdateComponent } from '../../publisher/publisher-update/publi
 @Component({
   selector: 'app-book-update',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule,MatButtonModule,MatDialogTitle,MatDialogContent],
+  imports: [FormsModule, ReactiveFormsModule,MatButtonModule,MatDialogTitle,MatDialogContent,MatDialogActions],
   templateUrl: './book-update.component.html',
   styleUrl: './book-update.component.css',
   // changeDetection: ChangeDetectionStrategy.OnPush

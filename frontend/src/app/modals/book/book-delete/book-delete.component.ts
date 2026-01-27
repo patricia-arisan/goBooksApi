@@ -22,7 +22,7 @@ import { AdminBooksUpdateComponent } from '../../../pages/admin/admin-books/admi
 @Component({
   selector: 'app-book-delete',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule,MatButtonModule,MatDialogTitle,MatDialogContent],
+  imports: [FormsModule, ReactiveFormsModule,MatButtonModule,MatDialogTitle,MatDialogContent,MatDialogActions],
   templateUrl: './book-delete.component.html',
   styleUrl: './book-delete.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush

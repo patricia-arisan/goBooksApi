@@ -27,7 +27,7 @@ export class PublisherCreateComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.formNewEditorial = this.formBuilder.group ({
+    this.formNewPublisher = this.formBuilder.group ({
       id:[null],
       nombre:["",[Validators.required]]
       
@@ -35,23 +35,27 @@ export class PublisherCreateComponent implements OnInit{
 
   }
 
-  formNewEditorial:FormGroup = new FormGroup({
+  formNewPublisher:FormGroup = new FormGroup({
     id: new FormControl(null),
     nombre: new FormControl(""),
     
   })
 
   registerEditorial(){
-        this.publisherService.createPublisher(this.formNewEditorial.value).subscribe({next:(data:Editorial) =>{
+        this.publisherService.createPublisher(this.formNewPublisher.value).subscribe({next:(data:Editorial) =>{
             console.log(data);
             this.dialogRef.close();
           }, error: (error)=> {
                 if(error){
-                  this.formNewEditorial.setErrors({foundPublisher: true})
+                  this.formNewPublisher.setErrors({foundPublisher: true})
                 }
           }
               })
       }
+
+      get nombre(){
+    return this.formNewPublisher.get('nombre')!;
+  }  
 
     closeForm(): void {
     this.dialogRef.close();

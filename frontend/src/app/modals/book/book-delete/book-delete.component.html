@@ -1,10 +1,10 @@
 <h2 mat-dialog-title>Eliminar libro</h2>
 <mat-dialog-content>
 <p>¿Deseas eliminar "{{libro.nombre}}"?</p>
-<div class="buttons">
+<mat-dialog-actions class="buttons">
 <button type="button" class="btn" (click)="closeDialog()">Cancelar</button>
 <button type="submit" class="btn btn-success" (click)="deleteBook()">Eliminar</button>
-</div>
+</mat-dialog-actions>
 </mat-dialog-content>
 
    

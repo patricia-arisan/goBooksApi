@@ -116,8 +116,24 @@ public class LibroController {
 	
 	@PreAuthorize("hasAuthority('Administrador')")
 	@PutMapping(value="/{id}")
-	public Libro actualizarLibro(@PathVariable Integer id, @RequestBody Libro libro) throws ServicioException {
-		return servicioLibro.modificarLibro(libro);
+	public ResponseEntity<Object> actualizarLibro(@PathVariable Integer id, @RequestBody Libro libro) throws ServicioException {
+		Libro libroResponse = null;
+		try {
+			libroResponse = servicioLibro.modificarLibro(libro);
+		} catch(ServicioException e) {
+			String codigo = "";
+			String mensaje = "";
+			if(e.getCodigo().equals(CodigoError.LIBRO_FOUND)) {
+				codigo = CodigoError.LIBRO_FOUND;
+				mensaje = "El libro ya existe";
+			} else if(e.getCodigo().equals(CodigoError.ISBN_FOUND)) {
+				codigo = CodigoError.ISBN_FOUND;
+				mensaje = "El isbn ya existe";
+			}
+			ErrorResponse errorResponse = new ErrorResponse(codigo, mensaje);
+			return ResponseEntity.badRequest().body(errorResponse);
+		}
+		return ResponseEntity.ok(libroResponse);
 	}
 	
 	@PreAuthorize("hasAuthority('Administrador')")

@@ -51,6 +51,10 @@ export class GenreCreateComponent implements OnInit{
     }
     })
       }
+
+    get nombre(){
+    return this.formNewGenre.get('nombre')!;
+  }  
       closeForm(): void {
     this.dialogRef.close();
   }

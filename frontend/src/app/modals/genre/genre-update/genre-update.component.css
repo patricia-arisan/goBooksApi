@@ -26,6 +26,11 @@ h2 {
     border-color: rgb(197, 196, 194);
 }
 
+.buttons{
+    margin-bottom: 5px;
+    margin-right: -20px;
+ }
+
 .btn.btn-success {
     background-color: rgb(253, 160, 54);
     border: none;
@@ -41,5 +46,8 @@ h2 {
 } */
  .btn:first-child:active{
     border: none;
-    background-color: rgb(240, 238, 238);
  }
+
+ .btn:first-child:hover{
+    background-color: rgb(240, 238, 238);
+}

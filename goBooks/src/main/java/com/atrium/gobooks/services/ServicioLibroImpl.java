@@ -253,19 +253,47 @@ List<Libro> libros;
 	
 	@Override
 	public Libro modificarLibro(Libro libro) throws ServicioException {
+		log.info("[actualizarLibro]");
+		log.info("[libro: "+libro.toString()+"]");
+		
 		Optional<Libro> libroOp = libroRepository.findById(libro.getId());
 		if (!libroOp.isPresent()) throw new ServicioException(CodigoError.LIBRO_NOT_FOUND);
 		
+		String titulo = libro.getNombre().trim();
+		titulo = titulo.substring(0,1).toUpperCase() + titulo.substring(1);
+		libro.setNombre(titulo);
+		
+		String isbn = "";
+		if(libro.getIsbn()!=null) {
+			isbn = libro.getIsbn().trim();
+			libro.setIsbn(isbn);
+		}
+		
+		String sinopsis = "";
+		if(libro.getSinopsis()!=null) {
+			sinopsis = libro.getSinopsis().trim();
+			libro.setSinopsis(sinopsis);
+		}
+		
 		try {
+			Libro libroNombre = libroRepository.findByName(libro.getNombre());
+			if(libroNombre!=null && libroNombre.getId()!=libro.getId()) throw new ServicioException(CodigoError.LIBRO_FOUND);
+			if(libro.getIsbn()!=null && !libro.getIsbn().isEmpty()) {
+				Libro libroIsbn = libroRepository.findByIsbn(libro.getIsbn());
+				if(libroIsbn!=null) throw new ServicioException(CodigoError.ISBN_FOUND);
+			}
 			libro= libroRepository.save(libro);
 			
-		} catch (Exception e) {
+		}catch(ServicioException se) {
+			log.error(se.getCodigo());
+			log.error("ServicioException", se);
+			throw se;
+		}catch(Exception e) {
 			log.error("Exception", e);
-			throw new ServicioException(CodigoError.ERROR_GENERAL, e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
 		}
 		return libro;
-	}
-	
+	}	
 	
 	
 }
