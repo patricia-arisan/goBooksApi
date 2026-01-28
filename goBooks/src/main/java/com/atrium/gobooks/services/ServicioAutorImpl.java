@@ -67,15 +67,29 @@ public class ServicioAutorImpl implements ServicioAutor{
 	
 	@Override
 	public Autor modificarAutor(Autor autor) throws ServicioException {
+		log.info("[actualizarAutor]");
+		log.info("[autor: "+autor.toString()+"]");
+		
 		Optional<Autor> autorOp = autorRepository.findById(autor.getId());
 		if (!autorOp.isPresent()) throw new ServicioException(CodigoError.AUTOR_NOT_FOUND);
 		
+		String nombre = autor.getNombre().trim();
+		nombre = nombre.substring(0,1).toUpperCase() + nombre.substring(1);
+		autor.setNombre(nombre);
+		
 		try {
+			Autor autorNombre = autorRepository.findByName(autor.getNombre());
+			if(autorNombre!=null && autorNombre.getId()!=autor.getId()) throw new ServicioException(CodigoError.AUTOR_FOUND);
+			
 			autor= autorRepository.save(autor);
 			
-		} catch (Exception e) {
+		} catch(ServicioException se) {
+			log.error(se.getCodigo());
+			log.error("ServicioException", se);
+			throw se;
+		}catch(Exception e) {
 			log.error("Exception", e);
-			throw new ServicioException(CodigoError.ERROR_GENERAL, e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
 		}
 		return autor;
 	}

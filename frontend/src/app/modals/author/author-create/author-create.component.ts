@@ -30,7 +30,7 @@ export class AuthorCreateComponent implements OnInit{
 
     this.formNewAuthor = this.formBuilder.group ({
       id:[null],
-      nombre:["",[Validators.required]]
+      nombre:["",[Validators.required,Validators.pattern(/^.*\S.*$/)]]
       
     });
 

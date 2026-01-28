@@ -67,15 +67,30 @@ public class ServicioGeneroImpl implements ServicioGenero{
 	
 	@Override
 	public Genero modificarGenero(Genero genero) throws ServicioException {
+		log.info("[actualizarGenero]");
+		log.info("[genero: "+genero.toString()+"]");
+		
 		Optional<Genero> generoOp = generoRepository.findById(genero.getId());
 		if (!generoOp.isPresent()) throw new ServicioException(CodigoError.GENERO_NOT_FOUND);
 		
+		String nombre = genero.getNombre().trim();
+		nombre = nombre.substring(0,1).toUpperCase() + nombre.substring(1);
+		genero.setNombre(nombre);
+		
 		try {
+			Genero generoNombre = generoRepository.findByName(genero.getNombre());
+			if(generoNombre!=null && generoNombre.getId()!=genero.getId()) throw new ServicioException(CodigoError.GENERO_FOUND);
+			
+			
 			genero= generoRepository.save(genero);
 			
-		} catch (Exception e) {
+		} catch(ServicioException se) {
+			log.error(se.getCodigo());
+			log.error("ServicioException", se);
+			throw se;
+		}catch(Exception e) {
 			log.error("Exception", e);
-			throw new ServicioException(CodigoError.ERROR_GENERAL, e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
 		}
 		return genero;
 	}

@@ -48,7 +48,7 @@ export class PublisherUpdateComponent implements OnInit{
 
     this.formUpdatePublisher = this.formBuilder.group ({
       id:[null],
-      nombre:["",[Validators.required]]
+      nombre:["",[Validators.required,,Validators.pattern(/^.*\S.*$/)]]
       
     });
 
@@ -123,12 +123,20 @@ setTimeout(() => {
      }
 
   updatePublisher(){
-      this.publisherService.updatePublisher(this.editorial.id,this.formUpdatePublisher.value).subscribe((data:Editorial) =>{
-        
-          this.dialogRef.close(data);
-          
+      this.publisherService.updatePublisher(this.editorial.id,this.formUpdatePublisher.value).subscribe({next:(data:Editorial) =>{
+                  console.log(data);
+                  this.dialogRef.close(data);
+                }, error: (error)=>{
+            if(error){
+              this.formUpdatePublisher.setErrors({foundPublisher: true})
+            }
+          }
           })
       }
+
+      get nombre(){
+    return this.formUpdatePublisher.get('nombre')!;
+  } 
 
     closeForm(): void {
     this.dialogRef.close();

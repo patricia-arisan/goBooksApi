@@ -80,7 +80,7 @@ export class BookUpdateComponent implements OnInit{
 
     this.formUpdate = this.formBuilder.group ({
         id:[null],
-        nombre:[""],
+        nombre:["",[Validators.required,Validators.pattern(/^.*\S.*$/)]],
         autor:this.formBuilder.group({
           id:[null],
           nombre:["",[Validators.required]]
@@ -188,10 +188,21 @@ export class BookUpdateComponent implements OnInit{
     })
 
     update(){
-      this.bookService.updateBook(this.libro.id,this.formUpdate.value).subscribe((data:Libro) =>{
+      this.bookService.updateBook(this.libro.id,this.formUpdate.value).subscribe({
+      next: (data: Libro) => {
         
         this.dialogRef.close(data);
-    })
+    }, error: (errorRes) => {
+        const errorCode = errorRes.error?.codigo;
+
+        if (errorCode === "00000013") {
+          this.formUpdate.setErrors({ foundBook: true })
+        }
+
+
+
+      }
+    });
     
     }
 
@@ -291,7 +302,9 @@ export class BookUpdateComponent implements OnInit{
     this.dialogRef.close();
   }
 
-  
+  get nombre() {
+    return this.formUpdate.get('nombre')!;
+  }
     
   
 }

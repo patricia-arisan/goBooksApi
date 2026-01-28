@@ -44,7 +44,7 @@ export class GenreUpdateComponent implements OnInit{
 
     this.formUpdateGenre = this.formBuilder.group ({
       id:[null],
-      nombre:["",[Validators.required]]
+      nombre:["",[Validators.required,Validators.pattern(/^.*\S.*$/)]]
       
     });
 
@@ -108,12 +108,20 @@ setTimeout(() => {
   })
 
   updateGenre(){
-      this.genreService.updateGenre(this.genero.id,this.formUpdateGenre.value).subscribe((data:Genero) =>{
-        
-          this.dialogRef.close(data);
-          
-          })
+      this.genreService.updateGenre(this.genero.id,this.formUpdateGenre.value).subscribe({next:(data:Genero) =>{
+            console.log(data);
+            this.dialogRef.close(data);
+          }, error: (error)=>{
+      if(error){
+        this.formUpdateGenre.setErrors({foundGenre: true})
       }
+    }
+    })
+      }
+
+      get nombre(){
+    return this.formUpdateGenre.get('nombre')!;
+  }  
       closeForm(): void {
     this.dialogRef.close();
   }

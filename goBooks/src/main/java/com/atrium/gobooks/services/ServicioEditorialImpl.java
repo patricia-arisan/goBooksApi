@@ -67,15 +67,29 @@ public class ServicioEditorialImpl implements ServicioEditorial{
 	
 	@Override
 	public Editorial modificarEditorial(Editorial editorial) throws ServicioException {
+		log.info("[actualizarEditorial]");
+		log.info("[editorial: "+editorial.toString()+"]");
+		
 		Optional<Editorial> editorialOp = editorialRepository.findById(editorial.getId());
 		if (!editorialOp.isPresent()) throw new ServicioException(CodigoError.EDITORIAL_NOT_FOUND);
 		
+		String nombre = editorial.getNombre().trim();
+		nombre = nombre.substring(0,1).toUpperCase() + nombre.substring(1);
+		editorial.setNombre(nombre);
+		
 		try {
+			Editorial editorialNombre = editorialRepository.findByName(editorial.getNombre());
+			if(editorialNombre!=null && editorialNombre.getId()!=editorial.getId()) throw new ServicioException(CodigoError.EDITORIAL_FOUND);
+			
 			editorial= editorialRepository.save(editorial);
 			
-		} catch (Exception e) {
+		} catch(ServicioException se) {
+			log.error(se.getCodigo());
+			log.error("ServicioException", se);
+			throw se;
+		}catch(Exception e) {
 			log.error("Exception", e);
-			throw new ServicioException(CodigoError.ERROR_GENERAL, e);
+			throw new ServicioException(CodigoError.ERROR_GENERAL,e);
 		}
 		return editorial;
 	}

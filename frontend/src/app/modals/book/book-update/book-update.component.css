@@ -12,6 +12,7 @@ h2 {
     color: black;
     margin-bottom: 8px;
     width: 200px;
+    
 }
 
 .btn.btn-success {
@@ -19,10 +20,14 @@ h2 {
     border: none;
     font-weight: 500;
     margin-left: 10px;
+    
 }
 
 .btn.btn-success:hover {
     background-color: rgb(255, 141, 11);
+    /* ver si esta bien */
+    --bs-btn-disabled-bg: rgb(252, 163, 40);
+    --bs-btn-disabled-border-color: rgb(252, 163, 40);
 }
 
 .btn:first-child:active{
@@ -45,7 +50,8 @@ h2 {
     width: 215px;
     outline: none;
     margin-bottom: 5px;
-    margin-right: 18px;
+    /* margin-right: 18px; */
+    
 }
 
 #nombre{
@@ -67,9 +73,8 @@ input:-webkit-autofill,input:-webkit-autofill:focus {
     width: 35px;
     height: 35px;
     border-radius: 40px;
-    position: fixed;
-    
-    
+    /* position: fixed; */
+    float: right;
 }
 
 .edit{
@@ -81,4 +86,25 @@ input:-webkit-autofill,input:-webkit-autofill:focus {
 .buttons{
     margin-bottom: 5px;
     margin-right: -20px;
+}
+
+.alert{
+    height: 22px;
+    font-size: 0.8em;
+    text-align: left;
+    color: #820000;
+    margin-top: -12px;
+    margin-left: -13px;
+    margin-bottom: -5px;
+    /* margin-top: -30px;
+    margin-left: -19px; */
+   
+} 
+
+svg{
+   height: 19px;
+    width: 19px; 
+    fill: #820000;
+    margin-top: -3px;
+    
 }

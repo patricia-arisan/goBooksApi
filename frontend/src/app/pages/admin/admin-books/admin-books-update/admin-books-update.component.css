@@ -10,6 +10,14 @@ h2 {
     margin-bottom: 40px;
 }
 
+.row.g-5{
+   height: 800px;
+}
+
+ .form-group{
+    margin-bottom: 10px;    
+ }
+
 .control-label {
     font-size: 1.1em;
     font-weight: 700;
@@ -18,7 +26,7 @@ h2 {
 }
 
 #imagen {
-    margin-top: 32px;
+    /* margin-top: 32px; */
     margin-left: 110px;
     box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
     float: right;
@@ -217,7 +225,7 @@ svg{
     justify-content: center;
     align-items: center;
     overflow: hidden;   /* Corta el exceso del desenfoque en los bordes */
-    margin-top: -996px;
+    margin-top: -1036px;
 }
 
 .fondo-difuminado {
@@ -311,9 +319,9 @@ z-index: 2;
     max-width: 275px;
     }
 
-    .seccionImagen{
+    /* .seccionImagen{
         margin-top: -999px;
-    }
+    } */
 
     #nombre, #isbn, #portada, #sinopsis {
         width: 415px;

@@ -1,10 +1,3 @@
-/* .iconoDeCierre{
-    position: relative;
-    top: -20px;
-    right: 0;
-    left: 97%;
-    cursor: pointer;
-} */
  .container{
     width: 100%;
     max-width: 945px;
@@ -21,7 +14,6 @@
  
 
  #imagen{
-   
     margin-left: 110px;
     box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
     float: right;
@@ -192,6 +184,10 @@ svg{
             width: 180px;
     }
 
+    .alert-option{
+        margin-left: 85px;
+    }
+
     .createButton{
         width: 80px;
         margin-right: 265px;
@@ -309,6 +305,10 @@ z-index: 2;
         
     }
 
+    .alert-option{
+        margin-left: 95px;
+    }
+
 }
 
 @media (max-width: 480px){
@@ -333,5 +333,9 @@ z-index: 2;
         width: 85px;
         font-size: 0.9em;
         
+    }
+
+    .alert-option{
+        margin-left: 85px;
     }
 }

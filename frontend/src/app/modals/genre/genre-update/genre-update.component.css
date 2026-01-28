@@ -26,6 +26,10 @@ h2 {
     border-color: rgb(197, 196, 194);
 }
 
+input:-webkit-autofill,input:-webkit-autofill:focus {
+    transition: background-color 0s 600000s;
+  }
+
 .buttons{
     margin-bottom: 5px;
     margin-right: -20px;
@@ -50,4 +54,22 @@ h2 {
 
  .btn:first-child:hover{
     background-color: rgb(240, 238, 238);
+}
+
+ .alert{
+    height: 22px;
+    font-size: 0.8em;
+    text-align: left;
+    color: #820000;
+    padding-top: 2px;
+    margin-left: -19px;
+    margin-bottom: -7px;
+    margin-top: 2px;
+} 
+
+svg{
+   height: 19px;
+    width: 19px; 
+    fill: #820000;
+    padding-bottom: 2px;
 }

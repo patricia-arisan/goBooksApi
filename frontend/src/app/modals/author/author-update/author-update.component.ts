@@ -44,22 +44,8 @@ export class AuthorUpdateComponent implements OnInit{
 
     this.formUpdateAuthor = this.formBuilder.group ({
        id:[null],
-        nombre:[""],
-        // autor:this.formBuilder.group({
-        //   id:[null],
-        //   nombre:[""]
-        // }),
-        // isbn:[""],
-        // editorial:this.formBuilder.group({
-        //   id:[null],
-        //   nombre:[""]
-        // }),
-        // genero:this.formBuilder.group({
-        //   id:[null],
-        //   nombre:[""]
-        // }),
-        // portada:[""],
-        // sinopsis:[""],
+        nombre:["",[Validators.required,Validators.pattern(/^.*\S.*$/)]],
+        
     });
     
     // this.getCurrentBook();
@@ -161,12 +147,21 @@ setTimeout(() => {
   
 
   updateAuthor(){
-    this.authorService.updateAuthor(this.autor.id,this.formUpdateAuthor.value).subscribe((data:Autor) =>{
+    this.authorService.updateAuthor(this.autor.id,this.formUpdateAuthor.value).subscribe({next:(data:Autor) =>{
       console.log(data);
         this.dialogRef.close(data);
         
-        })
+        }, error: (error)=> {
+      if(error){
+        this.formUpdateAuthor.setErrors({foundAuthor: true})
+      }
+        }
+    });
     }
+
+    get nombre(){
+    return this.formUpdateAuthor.get('nombre')!;
+  }  
   closeForm(): void {
     this.dialogRef.close();
   }
