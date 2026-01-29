@@ -2,7 +2,7 @@
 <mat-dialog-content>
     <form [formGroup]="formUpdatePublisher" (submit)="updatePublisher()">
         <div class="form-group">
-            <label class="control-label" for="nombre">Editorial</label>
+            <label class="control-label" for="nombre">Nombre*</label>
             <input id="nombre" type="text" formControlName="nombre" class="form-control">
             @if (nombre.invalid && (nombre.dirty || nombre.touched)) {
                 <div class="alert">

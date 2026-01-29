@@ -4,7 +4,6 @@ import { HeaderUserComponent } from '../../shared/headers/header-user/header-use
 import { Usuario } from '../../../interfaces/usuario';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { Rol } from '../../../interfaces/rol';
 
 import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 

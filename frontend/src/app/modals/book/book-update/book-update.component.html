@@ -3,7 +3,7 @@
   <form [formGroup]="formUpdate" (submit)="update()">
 
     <div class="form-group">
-      <label class="control-label" for="ac-fn">Título</label>
+      <label class="control-label" for="ac-fn">Título*</label>
       <input type="text" id="nombre" class="form-control" formControlName="nombre">
       @if (nombre.invalid && (nombre.dirty || nombre.touched)) {
       <div class="alert">

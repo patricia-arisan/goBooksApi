@@ -19,6 +19,7 @@ import { UserService } from '../../services/user-service';
 export class RegistrationComponent {
   fechaActual!:Date;
   fechaFormat!:string | null;
+  defaultName: string = "Usuario";
 
 
 
@@ -72,6 +73,10 @@ constructor(
   // };
 
   register(){
+    if (this.formNewUser.value.nombre === "" || this.formNewUser.value.nombre === null) {
+      this.fillForm();
+    }
+
     this.userService.createUser(this.formNewUser.value).subscribe({next:(data:Usuario) =>{
       console.log(data);
       this.router.navigate(['/login']);
@@ -83,6 +88,16 @@ constructor(
     })
   
   };
+
+
+
+  ///////////////////////////////////////
+  fillForm() {
+    this.formNewUser.patchValue({
+      nombre: this.defaultName,
+
+    })
+  }
   
 }
 

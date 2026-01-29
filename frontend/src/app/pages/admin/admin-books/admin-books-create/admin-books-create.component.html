@@ -12,7 +12,7 @@
         <form [formGroup]="formNewBook" (submit)="registerBook()">
 
             <div class="form-group">
-                <label class="control-label" for="nombre">Título</label>
+                <label class="control-label" for="nombre">Título*</label>
                 <input id="nombre" type="text" formControlName="nombre" class="form-control">
                 @if (nombre.invalid && (nombre.dirty || nombre.touched)) {
                 <div class="alert">
@@ -90,7 +90,7 @@
             <div class="form-group" formGroupName="autor">
 
                 <!-- <div formGroupName="autor"> -->
-                <label class="control-label" for="autor">Autor</label> <select formControlName="id" id="autor">
+                <label class="control-label" for="autor">Autor*</label> <select formControlName="id" id="autor">
                     <!-- <select (change)="onChange()"> -->
                     <option [value]="null" disabled>Elegir autor</option>
                     @for (autor of autores; track autor.id){
@@ -160,7 +160,7 @@
             <div class="form-group" formGroupName="editorial">
 
                 <!-- <div formGroupName="editorial"> -->
-                <label class="control-label" for="editorial">Editorial</label>
+                <label class="control-label" for="editorial">Editorial*</label>
 
                 <select formControlName="id" id="editorial">
                     <option [value]="null" disabled>Elegir editorial</option>
@@ -209,7 +209,7 @@
             <div class="form-group" formGroupName="genero">
 
                 <!-- <div formGroupName="genero"> -->
-                <label class="control-label" for="genero">Género</label> <select formControlName="id" id="genero">
+                <label class="control-label" for="genero">Género*</label> <select formControlName="id" id="genero">
                     <option [value]="null" disabled>Elegir género</option>
                     @for (genero of generos; track genero){
 

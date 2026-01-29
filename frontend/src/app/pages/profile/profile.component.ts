@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit{
 
       this.formUpdate = this.formBuilder.group ({
         id:[0],
-        nombre:["",[Validators.required]],
+        nombre:[""],
         apellido:[""],
         username:["",[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
         password:["",[Validators.required]],
@@ -130,7 +130,13 @@ export class ProfileComponent implements OnInit{
     update(){
       console.log(this.formUpdate.value);
       console.log(this.user.id)
-      let oldUsername = this.user.username;      
+      let oldUsername = this.user.username; 
+      if (this.formUpdate.value.nombre === "" || this.formUpdate.value.nombre === null) {
+      this.formUpdate.patchValue({
+        nombre: "Usuario",
+
+      })
+    }     
       this.userService.updateUser(this.user.id,this.formUpdate.value).subscribe({next:(data:Usuario) =>{
       
       console.log(data);
