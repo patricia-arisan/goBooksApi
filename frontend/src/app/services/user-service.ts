@@ -38,7 +38,8 @@ constructor(private client: HttpClient) { }
         localStorage.setItem('token',headers.get('Authorization')|| '');
         console.log(headers); 
         // return this.client.post<Usuario>(`${this.userServiceLoginUrl}`,'user', {headers: headers})
-        return this.client.post<Usuario>(`${this.userServiceLoginUrl}`,user,{headers})
+        return this.client.post<Usuario>(`${this.userServiceLoginUrl}`,user,{headers,withCredentials:true}) 
+        // return this.client.post<Usuario>(`${this.userServiceLoginUrl}`,user,{headers,withCredentials:true})
         
           
   }
@@ -87,7 +88,7 @@ constructor(private client: HttpClient) { }
            
         })
     
-    return this.client.put<Usuario>(`${this.userServiceLoggedUrl}/${id}`,user,{headers})
+    return this.client.put<Usuario>(`${this.userServiceLoggedUrl}/${id}`,user,{headers,withCredentials:true})
   }
 
 

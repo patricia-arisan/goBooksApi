@@ -39,8 +39,8 @@ public class SecurityConfig {
 
 		http
 			
-			.cors(Customizer.withDefaults()) 
-			
+//			.cors(Customizer.withDefaults()) 
+		.cors(cors -> cors.configurationSource(corsConfigurationSource()))
 			.authorizeHttpRequests((authz) -> authz
 					.requestMatchers("/","/api/login/**", "/api/registroUsuario/**", "/js/**", "/css/**", "/img/**").permitAll()
 					.anyRequest().authenticated())
@@ -81,6 +81,7 @@ public class SecurityConfig {
 		configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE","PATCH","OPTIONS","HEAD"));
 		configuration.setAllowCredentials(true);
 		configuration.setAllowedHeaders(List.of("*"));
+//		configuration.setExposedHeaders(List.of("Access-Control-Expose-Headers", "Authorization", "Set-Cookie"));
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

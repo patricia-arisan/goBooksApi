@@ -23,12 +23,20 @@ import com.atrium.gobooks.exceptions.ServicioException;
 import com.atrium.gobooks.repositories.UsuarioRepository;
 import com.atrium.gobooks.services.ServicioUsuario;
 
+import jakarta.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("/api/usuario")
 public class UsuarioController {
 	
 	@Autowired
 	private ServicioUsuario usuarioServicio;
+	
+//	@GetMapping("/test-session")
+//	public String test(HttpSession session) {
+//	    session.setAttribute("prueba", "funciona");
+//	    return "ID de sesión: " + session.getId();
+//	}
 	
 	@PreAuthorize("hasAuthority('Usuario') || hasAuthority('Administrador')") // CUIDADO, pero parece que funciona
 	@GetMapping(value="/{id}")

@@ -15,6 +15,9 @@ import com.atrium.gobooks.entities.Usuario;
 import com.atrium.gobooks.exceptions.ServicioException;
 import com.atrium.gobooks.services.ServicioUsuario;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @RestController
 //@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api")
@@ -29,8 +32,12 @@ public class LoginController {
     }
 	
 	@PostMapping("/login")
-    public ResponseEntity<Usuario> getCurrentUser() {
+    public ResponseEntity<Usuario> getCurrentUser(HttpServletRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        
+     // ESTO ES LA CLAVE: Crea la sesión si no existe y dispara el guardado en Redis
+        HttpSession session = request.getSession(true);
+        
         String currentUsername = authentication.getName();
         return servicio.findByUsername(currentUsername)
         		.map(ResponseEntity::ok)
