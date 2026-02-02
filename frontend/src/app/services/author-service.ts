@@ -28,7 +28,7 @@ constructor(private client: HttpClient) { }
            
         })
         
-      return this.client.post<Autor>(`${this.authorServiceUrl}`,autor,{headers})
+      return this.client.post<Autor>(`${this.authorServiceUrl}`,autor,{headers,withCredentials:true})
     }
 
     private readonly authorListServiceUrl = `${environment.proyectoUrl}api/autor/listadoAutores`;
@@ -42,7 +42,7 @@ constructor(private client: HttpClient) { }
            
         })
 
-        return this.client.get<Autor[]>(`${this.authorListServiceUrl}`,{headers})
+        return this.client.get<Autor[]>(`${this.authorListServiceUrl}`,{headers,withCredentials:true})
     }
 
     private readonly updateAuthorServiceUrl = `${environment.proyectoUrl}api/autor`
@@ -56,7 +56,7 @@ constructor(private client: HttpClient) { }
                        
                     })
                 
-                return this.client.put<Autor>(`${this.updateAuthorServiceUrl}/${id}`,autor,{headers})
+                return this.client.put<Autor>(`${this.updateAuthorServiceUrl}/${id}`,autor,{headers,withCredentials:true})
           }
 
           private readonly findAuthorServiceUrl = `${environment.proyectoUrl}api/autor`;
@@ -70,7 +70,7 @@ constructor(private client: HttpClient) { }
                          
                     })
               
-                    return this.client.get<Autor>(`${this.findAuthorServiceUrl}/${id}`,{headers})
+                    return this.client.get<Autor>(`${this.findAuthorServiceUrl}/${id}`,{headers,withCredentials:true})
                 }
  
 
@@ -84,7 +84,7 @@ constructor(private client: HttpClient) { }
                                
                           })
                     
-                          return this.client.get<AutorDTO[]>(`${this.numberBooksAuthorListServiceUrl}`,{headers})
+                          return this.client.get<AutorDTO[]>(`${this.numberBooksAuthorListServiceUrl}`,{headers,withCredentials:true})
                       }
 
                  private readonly authorServiceDeleteUrl = `${environment.proyectoUrl}api/autor`;
@@ -99,7 +99,7 @@ constructor(private client: HttpClient) { }
         })
     
     
-    return this.client.delete<any>(`${this.authorServiceDeleteUrl}/${id}`,{headers})
+    return this.client.delete<any>(`${this.authorServiceDeleteUrl}/${id}`,{headers,withCredentials:true})
     
     
   }

@@ -23,7 +23,7 @@ getStatesList(): Observable<Estado[]>{
                
           })
     
-          return this.client.get<Estado[]>(`${this.stateServiceUrl}`,{headers})
+          return this.client.get<Estado[]>(`${this.stateServiceUrl}`,{headers,withCredentials:true})
       }    
  
 }

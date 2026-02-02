@@ -39,7 +39,7 @@ constructor(private client: HttpClient) { }
                    
               })
         
-              return this.client.get<Lectura[]>(`${this.readingUserServiceUrl}/${id}`,{headers})
+              return this.client.get<Lectura[]>(`${this.readingUserServiceUrl}/${id}`,{headers,withCredentials:true})
 
    }
    private readonly readingUserStateServiceUrl = `${environment.proyectoUrl}api/lectura/listadoLecturasEstado`;
@@ -55,7 +55,7 @@ constructor(private client: HttpClient) { }
 
               let params = new HttpParams().set('idEstado', idEstado);
         
-              return this.client.get<Lectura[]>(`${this.readingUserStateServiceUrl}/${idUsuario}`,{headers, params:params}) 
+              return this.client.get<Lectura[]>(`${this.readingUserStateServiceUrl}/${idUsuario}`,{headers, params:params,withCredentials:true}) 
    }
 
    private readonly readingAverageServiceUrl =`${environment.proyectoUrl}api/lectura/mediaPuntuacionLibro`;
@@ -68,7 +68,7 @@ constructor(private client: HttpClient) { }
                   'Authorization' : credentials || ''
                    
               })
-              return this.client.get<number>(`${this.readingAverageServiceUrl}/${idLibro}`,{headers})
+              return this.client.get<number>(`${this.readingAverageServiceUrl}/${idLibro}`,{headers,withCredentials:true})
    }
 
    private readonly readingBookUserServiceUrl =`${environment.proyectoUrl}api/lectura/estadoLecturaUsuario`;
@@ -83,7 +83,7 @@ constructor(private client: HttpClient) { }
 
               let params = new HttpParams().set('idLibro', idLibro);
         
-              return this.client.get<Lectura>(`${this.readingBookUserServiceUrl}/${idUsuario}`,{headers, params:params}) 
+              return this.client.get<Lectura>(`${this.readingBookUserServiceUrl}/${idUsuario}`,{headers, params:params,withCredentials:true}) 
    }
 
    private readonly readingUpdateServiceUrl =`${environment.proyectoUrl}api/lectura`;
@@ -99,7 +99,7 @@ constructor(private client: HttpClient) { }
               
            })
        
-       return this.client.put<Lectura>(`${this.readingUpdateServiceUrl}/${id}`,lectura,{headers})
+       return this.client.put<Lectura>(`${this.readingUpdateServiceUrl}/${id}`,lectura,{headers,withCredentials:true})
      }
 
      private readonly readingBookServiceUrl =`${environment.proyectoUrl}api/lectura`;
@@ -114,7 +114,7 @@ constructor(private client: HttpClient) { }
 
               let params = new HttpParams().set('idLibro', idLibro);
         
-              return this.client.get<Lectura>(`${this.readingBookServiceUrl}/${idUsuario}`,{headers, params:params}) 
+              return this.client.get<Lectura>(`${this.readingBookServiceUrl}/${idUsuario}`,{headers, params:params,withCredentials:true}) 
    }
     
    private readonly readingServiceDeleteUrl = `${environment.proyectoUrl}api/lectura`;
@@ -129,7 +129,7 @@ constructor(private client: HttpClient) { }
         })
     
     
-    return this.client.delete<any>(`${this.readingServiceDeleteUrl}/${id}`,{headers})
+    return this.client.delete<any>(`${this.readingServiceDeleteUrl}/${id}`,{headers,withCredentials:true})
     
     
   }

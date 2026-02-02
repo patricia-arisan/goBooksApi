@@ -210,6 +210,10 @@ a{
         max-width: 450px;
     }
 
+    .libro{
+        margin-bottom: 20px;
+    }
+
     #portada{
         height: 280px;
         width: 200px;
@@ -246,7 +250,7 @@ a{
     .libro{
         margin: auto;
         width: 260px; 
-        margin-bottom: 58px;
+        margin-bottom: 78px;
     }
 
     #portada{

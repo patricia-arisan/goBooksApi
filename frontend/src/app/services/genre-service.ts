@@ -28,7 +28,7 @@ export class GenreService {
 
     })
 
-    return this.client.post<Genero>(`${this.genreServiceUrl}`, genero, { headers })
+    return this.client.post<Genero>(`${this.genreServiceUrl}`, genero, { headers,withCredentials:true})
   }
 
   private readonly genreListServiceUrl = `${environment.proyectoUrl}api/genero/listadoGeneros`;
@@ -42,7 +42,7 @@ export class GenreService {
 
     })
 
-    return this.client.get<Genero[]>(`${this.genreListServiceUrl}`, { headers })
+    return this.client.get<Genero[]>(`${this.genreListServiceUrl}`, { headers,withCredentials:true})
   }
 
   private readonly updateGenreServiceUrl = `${environment.proyectoUrl}api/genero`
@@ -56,7 +56,7 @@ export class GenreService {
 
     })
 
-    return this.client.put<Genero>(`${this.updateGenreServiceUrl}/${id}`, genero, { headers })
+    return this.client.put<Genero>(`${this.updateGenreServiceUrl}/${id}`, genero, { headers,withCredentials:true})
   }
 
   private readonly findGenreServiceUrl = `${environment.proyectoUrl}api/genero`;
@@ -70,7 +70,7 @@ export class GenreService {
 
     })
 
-    return this.client.get<Genero>(`${this.findGenreServiceUrl}/${id}`, { headers })
+    return this.client.get<Genero>(`${this.findGenreServiceUrl}/${id}`, { headers,withCredentials:true})
   }
 
   private readonly numberBooksGenreListServiceUrl = `${environment.proyectoUrl}api/genero/conteoLibros`;
@@ -83,7 +83,7 @@ export class GenreService {
 
     })
 
-    return this.client.get<GeneroDTO[]>(`${this.numberBooksGenreListServiceUrl}`, { headers })
+    return this.client.get<GeneroDTO[]>(`${this.numberBooksGenreListServiceUrl}`, { headers,withCredentials:true})
   }
 
   private readonly genreServiceDeleteUrl = `${environment.proyectoUrl}api/genero`;
@@ -98,7 +98,7 @@ export class GenreService {
     })
 
 
-    return this.client.delete<any>(`${this.genreServiceDeleteUrl}/${id}`, { headers })
+    return this.client.delete<any>(`${this.genreServiceDeleteUrl}/${id}`, { headers,withCredentials:true})
 
 
   }

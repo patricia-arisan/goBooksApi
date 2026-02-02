@@ -24,7 +24,7 @@ constructor(private client: HttpClient) { }
 
                        
         }:{})
-      return this.client.post<Libro>(`${this.bookServiceUrl}`,libro,{headers})
+      return this.client.post<Libro>(`${this.bookServiceUrl}`,libro,{headers,withCredentials:true})
     }
 
     private readonly bookListServiceUrl = `${environment.proyectoUrl}api/libro/listadoLibros`;
@@ -38,7 +38,7 @@ constructor(private client: HttpClient) { }
                
           })
     
-          return this.client.get<Libro[]>(`${this.bookListServiceUrl}`,{headers})
+          return this.client.get<Libro[]>(`${this.bookListServiceUrl}`,{headers,withCredentials:true})
       }
 
       private readonly bookSectionServiceUrl = `${environment.proyectoUrl}api/libro`;
@@ -52,7 +52,7 @@ constructor(private client: HttpClient) { }
                
           })
     
-          return this.client.get<Libro>(`${this.bookSectionServiceUrl}/${id}`,{headers})
+          return this.client.get<Libro>(`${this.bookSectionServiceUrl}/${id}`,{headers,withCredentials:true})
       }
 
       private readonly bookByGenderServiceUrl = `${environment.proyectoUrl}api/libro/categoria`;
@@ -67,7 +67,7 @@ constructor(private client: HttpClient) { }
                
           })
     
-          return this.client.get<Libro[]>(`${this.bookByGenderServiceUrl}/${id}`,{headers})
+          return this.client.get<Libro[]>(`${this.bookByGenderServiceUrl}/${id}`,{headers,withCredentials:true})
 
       }
 
@@ -83,7 +83,7 @@ constructor(private client: HttpClient) { }
                
           })
     
-          return this.client.get<Libro[]>(`${this.bookByAuthorServiceUrl}/${id}`,{headers})
+          return this.client.get<Libro[]>(`${this.bookByAuthorServiceUrl}/${id}`,{headers,withCredentials:true})
 
       }
 
@@ -99,7 +99,7 @@ constructor(private client: HttpClient) { }
                
           })
     
-          return this.client.get<Libro[]>(`${this.bookByPublisherServiceUrl}/${id}`,{headers})
+          return this.client.get<Libro[]>(`${this.bookByPublisherServiceUrl}/${id}`,{headers,withCredentials:true})
 
       }
 
@@ -114,7 +114,7 @@ constructor(private client: HttpClient) { }
                
           })
     
-          return this.client.get<Libro[]>(`${this.lastBooksListServiceUrl}`,{headers})
+          return this.client.get<Libro[]>(`${this.lastBooksListServiceUrl}`,{headers,withCredentials:true})
       }
 
       private readonly allLastBooksListServiceUrl = `${environment.proyectoUrl}api/libro/listaUltimosLibros`;
@@ -128,7 +128,7 @@ constructor(private client: HttpClient) { }
                
           })
     
-          return this.client.get<Libro[]>(`${this.allLastBooksListServiceUrl}`,{headers})
+          return this.client.get<Libro[]>(`${this.allLastBooksListServiceUrl}`,{headers,withCredentials:true})
       }
 
 //////////////////////
@@ -142,7 +142,7 @@ getListBookScore(): Observable<Libro[]>{
                
           })
     
-          return this.client.get<Libro[]>(`${this.scoreBooksListServiceUrl}`,{headers})
+          return this.client.get<Libro[]>(`${this.scoreBooksListServiceUrl}`,{headers,withCredentials:true})
       }
 
 private readonly bestScoreBooksServiceUrl = `${environment.proyectoUrl}api/libro/mejorPuntuacionLibros`;
@@ -155,7 +155,7 @@ getBooksBestScore(): Observable<Libro[]>{
                
           })
     
-          return this.client.get<Libro[]>(`${this.bestScoreBooksServiceUrl}`,{headers})
+          return this.client.get<Libro[]>(`${this.bestScoreBooksServiceUrl}`,{headers,withCredentials:true})
       }
 ////////////////
 ////////////////
@@ -169,7 +169,7 @@ searchByBookAuthorEditorial(busqueda: string): Observable<Libro[]>{
                
           })
     
-          return this.client.get<Libro[]>(`${this.searchServiceUrl}?clave=${busqueda}`,{headers})
+          return this.client.get<Libro[]>(`${this.searchServiceUrl}?clave=${busqueda}`,{headers,withCredentials:true})
       }
     
 /////////////////
@@ -185,7 +185,7 @@ searchByBookAuthorEditorial(busqueda: string): Observable<Libro[]>{
                    
                 })
             
-            return this.client.put<Libro>(`${this.updateBookServiceUrl}/${id}`,libro,{headers})
+            return this.client.put<Libro>(`${this.updateBookServiceUrl}/${id}`,libro,{headers,withCredentials:true})
       }
 
       private readonly bookServiceDeleteUrl = `${environment.proyectoUrl}api/libro`;
@@ -200,14 +200,10 @@ searchByBookAuthorEditorial(busqueda: string): Observable<Libro[]>{
         })
     
     
-    return this.client.delete<any>(`${this.bookServiceDeleteUrl}/${id}`,{headers})
+    return this.client.delete<any>(`${this.bookServiceDeleteUrl}/${id}`,{headers,withCredentials:true})
     
     
   }
-
-
-  ///////////////////////
-  /////////////////////////
 
 
 }

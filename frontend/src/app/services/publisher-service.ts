@@ -28,7 +28,7 @@ export class PublisherService {
 
     })
 
-    return this.client.post<Editorial>(`${this.publisherServiceUrl}`, editorial, { headers })
+    return this.client.post<Editorial>(`${this.publisherServiceUrl}`, editorial, { headers,withCredentials:true})
   }
 
   private readonly publisherListServiceUrl = `${environment.proyectoUrl}api/editorial/listadoEditoriales`;
@@ -42,7 +42,7 @@ export class PublisherService {
 
     })
 
-    return this.client.get<Editorial[]>(`${this.publisherListServiceUrl}`, { headers })
+    return this.client.get<Editorial[]>(`${this.publisherListServiceUrl}`, { headers,withCredentials:true})
   }
 
   private readonly updatePublisherServiceUrl = `${environment.proyectoUrl}api/editorial`
@@ -56,7 +56,7 @@ export class PublisherService {
 
     })
 
-    return this.client.put<Editorial>(`${this.updatePublisherServiceUrl}/${id}`, editorial, { headers })
+    return this.client.put<Editorial>(`${this.updatePublisherServiceUrl}/${id}`, editorial, { headers,withCredentials:true})
   }
 
   private readonly findPublisherServiceUrl = `${environment.proyectoUrl}api/editorial`;
@@ -70,7 +70,7 @@ export class PublisherService {
 
     })
 
-    return this.client.get<Editorial>(`${this.findPublisherServiceUrl}/${id}`, { headers })
+    return this.client.get<Editorial>(`${this.findPublisherServiceUrl}/${id}`, { headers,withCredentials:true})
   }
 
   private readonly numberBooksPublisherListServiceUrl = `${environment.proyectoUrl}api/editorial/conteoLibros`;
@@ -83,7 +83,7 @@ export class PublisherService {
 
     })
 
-    return this.client.get<EditorialDTO[]>(`${this.numberBooksPublisherListServiceUrl}`, { headers })
+    return this.client.get<EditorialDTO[]>(`${this.numberBooksPublisherListServiceUrl}`, { headers,withCredentials:true})
   }
 
   private readonly deletePublisherServiceUrl = `${environment.proyectoUrl}api/editorial`;
@@ -98,7 +98,7 @@ export class PublisherService {
     })
 
 
-    return this.client.delete<any>(`${this.deletePublisherServiceUrl}/${id}`, { headers })
+    return this.client.delete<any>(`${this.deletePublisherServiceUrl}/${id}`, { headers,withCredentials:true})
 
 
   }

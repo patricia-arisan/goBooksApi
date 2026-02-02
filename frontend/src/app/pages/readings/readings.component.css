@@ -60,7 +60,7 @@ button:focus{
 .libro{
    height: 350px;
     width: 220px; 
-    margin-bottom: 15px;
+    margin-bottom: 38px;
 }
 #portada{
     height: 300px;
@@ -113,7 +113,7 @@ button:focus{
     .libro{
    
     width: 240px; 
-    margin-bottom: 38px;
+    margin-bottom: 58px;
 }
 
     #portada{
@@ -151,7 +151,7 @@ h2{
 .libro{
    
     width: 260px; 
-    margin-bottom: 58px;
+    /* margin-bottom: 58px; */
 }
 #portada{
     height: 340px;

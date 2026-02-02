@@ -72,7 +72,7 @@ constructor(private client: HttpClient) { }
         })
     
     
-    return this.client.get<Usuario>(`${this.userServiceLoggedUrl}/${id}`,{headers})
+    return this.client.get<Usuario>(`${this.userServiceLoggedUrl}/${id}`,{headers,withCredentials:true})
     
     
   }
@@ -107,7 +107,7 @@ constructor(private client: HttpClient) { }
 
     
       
-    return this.client.put<Usuario>(`${this.userServiceUpdatePassUrl}/${id}`,password,{headers, params:params})
+    return this.client.put<Usuario>(`${this.userServiceUpdatePassUrl}/${id}`,password,{headers, params:params,withCredentials:true})
   }
 
    
@@ -127,7 +127,7 @@ constructor(private client: HttpClient) { }
         })
     
     
-    return this.client.delete<any>(`${this.userServiceDeleteUrl}/${id}`,{headers})
+    return this.client.delete<any>(`${this.userServiceDeleteUrl}/${id}`,{headers,withCredentials:true})
     
     
   }
@@ -143,7 +143,7 @@ constructor(private client: HttpClient) { }
            
         })
 
-    return this.client.post(`${this.userServiceLogoutUrl}`,null,{headers})
+    return this.client.post(`${this.userServiceLogoutUrl}`,null,{headers,withCredentials:true})
   }
 
  isAuthenticated():boolean{
