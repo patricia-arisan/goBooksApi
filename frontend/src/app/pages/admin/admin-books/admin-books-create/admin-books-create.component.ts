@@ -30,7 +30,7 @@ export class AdminBooksCreateComponent implements OnInit {
   autores!: Autor[];
   editoriales!: Editorial[];
   generos!: Genero[];
-  url: string = "/assets/icon/book.png";
+  url: string = "/assets/icons/book.png";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -203,7 +203,7 @@ export class AdminBooksCreateComponent implements OnInit {
 
     if (this.url === null || this.url.trim().length === 0) {
 
-      this.url = "/assets/icon/book.png";
+      this.url = "/assets/icons/book.png";
 
 
     }

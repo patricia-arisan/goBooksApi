@@ -29,7 +29,6 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private bookService: BookService,
-    ////
     private formBuilder: FormBuilder,
 
   ) { }
@@ -40,61 +39,33 @@ export class HomeComponent implements OnInit {
     this.getLastBooks();
     this.getBestScores();
 
-    //////
     this.formSearch = this.formBuilder.group({
-
       clave: [""],
-
-
     });
 
-
   }
 
-  ////
   formSearch: FormGroup = new FormGroup({
-
     clave: new FormControl(""),
-
-  })
-  /////
-
-
+  });
+ 
   retrieveFromLocalStorage() {
-
-    this.user = JSON.parse(localStorage.getItem('usuario') || '')
-    //this.user = JSON.parse(localStorage.getItem('usuario') || '')
-    let value = this.userService.getItem('id');
-    //let credentials = localStorage.getItem('token') || ''
-    //   let credentials = localStorage.getItem('token') || ''
-    //let cred = JSON.stringify(credentials);
-    console.log("Value antes de current: " + value)
-    
+    let value = this.userService.getItem('id');    
     let currentUser = 0;
-    if (value !== null) { //en angular ===
-      currentUser = parseInt(value);
-      console.log("STRING A INT" + currentUser);
 
-      //this.userService.getLoggedUser(currentUser,this.user).subscribe((data:Usuario)=>{
+    if (value !== null) { 
+      currentUser = parseInt(value);
 
       this.userService.getLoggedUser(currentUser).subscribe((data: Usuario) => {
-
         this.user = data;
-        console.log("DATOS HOME " + this.user);
-        console.log("Local" + this.user.id);
-
       });
-
     }
-
-    console.log(currentUser);
-
   }
+
   getLastBooks() {
     this.bookService.getLastBooks().subscribe((data: Libro[]) => {
       this.libros = data;
     })
-
   }
 
   getBestScores() {
@@ -116,8 +87,4 @@ export class HomeComponent implements OnInit {
   goLastBooks(){
     this.router.navigate(["/results/lastBooks"]);
   }
-
-
-
-
 }

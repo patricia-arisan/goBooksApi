@@ -31,7 +31,7 @@
    <ng-container matColumnDef="edit">
     
     <th mat-header-cell *matHeaderCellDef> </th>
-    <td mat-cell *matCellDef="let editorial" (click)="$event.stopPropagation()"><button type="button" (click)="openDialog(editorial,'0ms', '0ms')" class="edit-buttom" ><img src="/assets/update/edit.png" class="edit" alt="edit" /></button></td>
+    <td mat-cell *matCellDef="let editorial" (click)="$event.stopPropagation()"><button type="button" (click)="openDialog(editorial,'0ms', '0ms')" class="edit-buttom" ><img src="/assets/icons/edit.png" class="edit" alt="edit" /></button></td>
     
   </ng-container>
   <ng-container matColumnDef="delete">
@@ -43,7 +43,7 @@
       @if(editorial.numeroLibros===0){
 
       
-      <button type="button" class="edit-buttom" (click)="openDeleteDialog(editorial,'0ms', '0ms')"><img src="/assets/icon/bin.png" class="edit" alt="delete" />
+      <button type="button" class="edit-buttom" (click)="openDeleteDialog(editorial,'0ms', '0ms')"><img src="/assets/icons/bin.png" class="edit" alt="delete" />
       </button>
       }
     </td>

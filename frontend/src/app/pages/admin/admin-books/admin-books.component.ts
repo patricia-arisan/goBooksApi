@@ -29,8 +29,8 @@ export class AdminBooksComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name', 'author', 'publisher', 'genre', 'edit'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   filteredBooks!: any[];
-  url: string="/assets/icon/menu.png";
-  url2: string="/assets/icon/list.png";
+  url: string="/assets/icons/menu.png";
+  url2: string="/assets/icons/list.png";
 
   constructor(
     // private route: ActivatedRoute,
@@ -75,7 +75,7 @@ export class AdminBooksComponent implements OnInit, AfterViewInit {
       
       
     }else{
-      this.url="/assets/icon/menu.png";
+      this.url="/assets/icons/menu.png";
       
       // this.totalItems=this.dataSource.data.length;
       // console.log(this.dataSource.data)

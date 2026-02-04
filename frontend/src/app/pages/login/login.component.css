@@ -1,17 +1,17 @@
-.cabecera {
+.header {
     background-color: rgb(252, 163, 40);
     box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
     position: relative;
     height: 50px;
 }
 
-.cuerpo{
+.header-content {
     width: 100%;
     max-width: 1350px;
     margin: 0 auto;	
 }
 
-.titulo {
+.title {
     float: left;
     margin-top: 5px;
     margin-left: 15px;
@@ -22,19 +22,19 @@ h1 {
     color: rgb(255, 255, 255);
 }
 
-.registro {
+.registration {
     float: right;
     margin-top: 13px;
     margin-right: 22px;
 }
 
-.registro span {
+.registration span {
     color: white;
     font-weight: 600;
     margin-right: 22px;
 }
 
-.registro a {
+.registration a {
     background-color: white;
     padding: 5px 18px;
     border-radius: 3px;
@@ -43,13 +43,12 @@ h1 {
     font-size: 0.8em;
 }
 
-.registro a:hover {
+.registration a:hover {
     background-color: rgb(247, 241, 236);
 }
 
-.contenedor {
+.form-container {
     background-color: rgb(252, 205, 148);
-    /* height: 700px; */
     height: 100%;
     min-height: 700px;
 }
@@ -68,61 +67,44 @@ h2 {
     margin-bottom: 15px;
 }
 
-.formulario {
+.form-login {
     text-align: center;
     padding: 30px 50px 18px;
-    display: block;
     border-radius: 20px;
     background-color: rgba(243, 238, 233, 0.623);
     width: 500px;
-    /* height: 470px; */
     height: max-content;
-    margin: auto;
-    margin-top: 40px;
+    margin: 40px auto 0 auto;
 }
 
 .form-group {
     margin-top: 22px;
 }
 
-/* ver si quitar abajo colores */
+.form-control {
+    height: 50px;
+    transition: background-color 0s 600000s;
+}
+
+.form-control:focus {
+    box-shadow: 0px 0px 4px 4px rgb(252, 205, 148);
+    border-color: rgb(252, 205, 148);
+}
+
 .btn-primary {
     width: 400px;
     background-color: rgb(252, 163, 40);
-    border-color: rgb(252, 163, 40);
+    border-color: rgb(252, 163, 40); 
+    --bs-btn-disabled-bg: rgb(252, 163, 40);
+    --bs-btn-disabled-border-color: rgb(252, 163, 40);
+    --bs-btn-active-bg: #f59b1e;
+    --bs-btn-active-border-color: #f59b1e;
     margin-bottom: 5px;
     font-weight: 500;
 }
 
 .btn-primary:hover {
-    background-color: rgb(255, 141, 11);
     border-color: rgb(255, 141, 11);
-}
-
-.btn-check:checked+.btn,
-.btn.active,
-.btn.show,
-.btn:first-child:active,
-:not(.btn-check)+.btn:active {
-    color: var(--bs-btn-active-color);
-    background-color: #f59b1e;
-    border-color: #f59b1e;
-}
-
-.btn.disabled,
-.btn:disabled,
-fieldset:disabled .btn {
-    background-color: rgb(252, 163, 40);
-    border-color: rgb(252, 163, 40);
-}
-
-input {
-    height: 50px;
-}
-
-input:focus {
-    box-shadow: 0px 0px 4px 4px rgb(252, 205, 148);
-    border-color: rgb(252, 205, 148);
 }
 
 a {
@@ -144,9 +126,7 @@ p a:hover {
     text-align: left;
     color: #820000;
     padding-top: 2px;
-    margin-left: -19px;
-    margin-bottom: -7px;
-    margin-top: 2px;
+    margin: 2px 0 -7px -19px;
 }
 
 svg {
@@ -156,16 +136,12 @@ svg {
     padding-bottom: 2px;
 }
 
-.form-control {
-    transition: background-color 0s 600000s;
-}
-
 @media (max-width: 550px) {
-    .registro span{
+    .registration span{
         display: none;
     }
 
-    .formulario {    
+    .form-login {    
         width: 400px;   
     }
 

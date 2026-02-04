@@ -183,7 +183,7 @@ export class AdminBooksUpdateComponent implements OnInit {
   update() {
     if (this.formUpdate.value.portada === "" || this.formUpdate.value.portada === null) {
       this.formUpdate.patchValue({
-        portada: "/assets/icon/book.png",
+        portada: "/assets/icons/book.png",
 
       })
     }
@@ -239,7 +239,7 @@ export class AdminBooksUpdateComponent implements OnInit {
 
     if (this.url === null || this.url.trim().length === 0) {
 
-      this.url = "/assets/icon/book.png";
+      this.url = "/assets/icons/book.png";
 
     }
   }

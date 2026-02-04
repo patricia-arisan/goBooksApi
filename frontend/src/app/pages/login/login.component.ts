@@ -42,38 +42,25 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log(this.formLogin.value);
-
-    console.log(localStorage)
-
-
-    this.userService.sendUser(this.formLogin.value).subscribe({next:(data: Usuario) => {
-
-     
-      console.log(data);
-      localStorage.setItem('usuario', JSON.stringify(data));
-      //////////////////
-
-
-      /////////////////////
-
-      console.log("LOGIN " + data);
-      const idUsuario = data.id.toString();
-
-      this.userService.setItem('id', idUsuario);
-      console.log("LOGIN " + idUsuario);
-      
-         if(data.rol.id===1){
-        this.router.navigate(['/admin-home']);
-      }else{
+    this.userService.sendUser(this.formLogin.value).subscribe({
+      next: (data: Usuario) => {
+        localStorage.setItem('usuario', JSON.stringify(data));
         
-        this.router.navigate(['/home']);
+        const idUsuario = data.id.toString();
+
+        this.userService.setItem('id', idUsuario);
+
+        if (data.rol.id === 1) {
+          this.router.navigate(['/admin-home']);
+        } else {
+
+          this.router.navigate(['/home']);
+        }
+      }, error: (error) => {
+        if (error) {
+          this.formLogin.setErrors({ unAuthenticated: true })
+        }
       }
-    }, error: (error)=>{
-      if(error) {
-        this.formLogin.setErrors({unAuthenticated: true})
-      }
-    }
     })
   };
 }
