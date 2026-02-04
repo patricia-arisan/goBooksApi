@@ -1,7 +1,5 @@
 import { AfterViewInit, Component, inject, numberAttribute, OnInit, ViewChild } from '@angular/core';
 import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-admin.component';
-import { RouterLink } from '@angular/router';
-import { Libro } from '../../../interfaces/libro';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -17,7 +15,7 @@ import { DeleteAuthorComponent } from '../../../modals/author/author-delete/dele
 @Component({
   selector: 'app-admin-authors',
   standalone: true,
-  imports: [RouterLink, HeaderAdminComponent, MatTableModule, MatFormFieldModule, MatInputModule, MatPaginatorModule],
+  imports: [HeaderAdminComponent, MatTableModule, MatFormFieldModule, MatInputModule, MatPaginatorModule],
   templateUrl: './admin-authors.component.html',
   styleUrl: './admin-authors.component.css'
 })

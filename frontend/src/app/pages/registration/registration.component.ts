@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { Rol } from '../../interfaces/rol';
 import { Usuario } from '../../interfaces/usuario';
-
 import { DatePipe } from '@angular/common';
 import { UserService } from '../../services/user-service';
 
+/**
+ * Componente para registrar al usuario
+ */
 @Component({
   selector: 'app-registration',
   standalone: true,

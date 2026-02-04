@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 
-import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -12,7 +12,7 @@ import { Autor } from '../../../interfaces/autor';
 @Component({
   selector: 'app-author-create',
   standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
+  imports: [MatButtonModule, MatDialogActions, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
   templateUrl: './author-create.component.html',
   styleUrl: './author-create.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush

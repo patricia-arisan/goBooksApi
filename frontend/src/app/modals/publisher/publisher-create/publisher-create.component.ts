@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { AdminBooksCreateComponent } from '../../../pages/admin/admin-books/admin-books-create/admin-books-create.component';
 import { PublisherService } from '../../../services/publisher-service';
 import { Editorial } from '../../../interfaces/editorial';
@@ -12,7 +12,7 @@ import { Editorial } from '../../../interfaces/editorial';
 @Component({
   selector: 'app-publisher-create',
   standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
+  imports: [MatButtonModule, MatDialogActions, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
   templateUrl: './publisher-create.component.html',
   styleUrl: './publisher-create.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush

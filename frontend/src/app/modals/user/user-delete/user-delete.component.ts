@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 
-import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
 
@@ -13,7 +13,7 @@ import { UserService } from '../../../services/user-service';
 @Component({
   selector: 'app-user-delete',
   standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
+  imports: [MatButtonModule, MatDialogActions, MatDialogTitle, MatDialogContent],
   templateUrl: './user-delete.component.html',
   styleUrl: './user-delete.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush

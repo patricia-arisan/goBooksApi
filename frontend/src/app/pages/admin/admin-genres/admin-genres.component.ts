@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
 import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-admin.component';
-import { RouterLink } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,7 +15,7 @@ import { DeleteGenreComponent } from '../../../modals/genre/genre-delete/delete-
 @Component({
   selector: 'app-admin-genres',
   standalone: true,
-  imports: [RouterLink, HeaderAdminComponent, MatTableModule, MatFormFieldModule, MatInputModule, MatPaginatorModule],
+  imports: [HeaderAdminComponent, MatTableModule, MatFormFieldModule, MatInputModule, MatPaginatorModule],
   templateUrl: './admin-genres.component.html',
   styleUrl: './admin-genres.component.css'
 })

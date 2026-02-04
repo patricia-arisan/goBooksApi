@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, inject, OnInit } from '@angular/core';
 
-import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -18,7 +18,7 @@ import { AdminBooksUpdateComponent } from '../../../pages/admin/admin-books/admi
 @Component({
   selector: 'app-author-update',
   standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
+  imports: [MatButtonModule, MatDialogActions, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
   templateUrl: './author-update.component.html',
   styleUrl: './author-update.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -102,22 +102,6 @@ setTimeout(() => {
           
             id: this.autor.id,
           nombre:this.autor.nombre,
-        // autor:{
-        //   id: this.libro.autor.id,
-        //   nombre:this.libro.autor.nombre,
-        // },
-        // isbn:this.libro.isbn,
-        // editorial:{
-        //   id: this.libro.editorial.id,
-        //   nombre:this.libro.editorial.nombre,
-        // },
-        // genero:{
-        //   id: this.libro.genero.id,
-        //   nombre:this.libro.genero.nombre,
-        // },
-        // portada:this.libro.portada,
-        // sinopsis:this.libro.sinopsis,
-          
           
         
     });
@@ -127,21 +111,6 @@ setTimeout(() => {
   formUpdateAuthor:FormGroup = new FormGroup({
     id: new FormControl(null),
       nombre: new FormControl(""),
-      // autor: new FormGroup({
-      //   id: new FormControl(null),
-      //   nombre: new FormControl("")
-      // }),
-      // isbn: new FormControl(""),
-      // editorial:new FormGroup({
-      //   id: new FormControl(null),
-      //   nombre: new FormControl("")
-      // }),
-      // genero:new FormGroup({
-      //   id: new FormControl(null),
-      //   nombre: new FormControl("")
-      // }),
-      // portada:new FormControl(""),
-      //  sinopsis:new FormControl(""),
     
   })
   

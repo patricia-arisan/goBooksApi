@@ -1,3 +1,4 @@
+/* Apartado cabecera login */
 .header {
     background-color: rgb(252, 163, 40);
     box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
@@ -47,6 +48,7 @@ h1 {
     background-color: rgb(247, 241, 236);
 }
 
+/* Apartado formulario de login */
 .form-container {
     background-color: rgb(252, 205, 148);
     height: 100%;
@@ -67,6 +69,7 @@ h2 {
     margin-bottom: 15px;
 }
 
+/* Formulario login */
 .form-login {
     text-align: center;
     padding: 30px 50px 18px;
@@ -81,6 +84,7 @@ h2 {
     margin-top: 22px;
 }
 
+/* Estilo inputs del formulario */
 .form-control {
     height: 50px;
     transition: background-color 0s 600000s;
@@ -91,13 +95,13 @@ h2 {
     border-color: rgb(252, 205, 148);
 }
 
+/* Estilo boton de iniciar sesion */
 .btn-primary {
     width: 400px;
     background-color: rgb(252, 163, 40);
     border-color: rgb(252, 163, 40); 
     --bs-btn-disabled-bg: rgb(252, 163, 40);
     --bs-btn-disabled-border-color: rgb(252, 163, 40);
-    --bs-btn-active-bg: #f59b1e;
     --bs-btn-active-border-color: #f59b1e;
     margin-bottom: 5px;
     font-weight: 500;
@@ -107,6 +111,7 @@ h2 {
     border-color: rgb(255, 141, 11);
 }
 
+/* Estilo de enlaces */
 a {
     text-decoration: none;
 }
@@ -120,6 +125,7 @@ p a:hover {
     color: rgb(255, 141, 11);
 }
 
+/* Avisos de comprobaciones de formulario */
 .alert {
     height: 22px;
     font-size: 0.8em;
@@ -136,6 +142,7 @@ svg {
     padding-bottom: 2px;
 }
 
+/* Media query para pantallas pequeñas */
 @media (max-width: 550px) {
     .registration span{
         display: none;

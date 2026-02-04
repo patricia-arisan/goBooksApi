@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { AdminBooksCreateComponent } from '../../../pages/admin/admin-books/admin-books-create/admin-books-create.component';
 import { GenreService } from '../../../services/genre-service';
 import { Genero } from '../../../interfaces/genero';
@@ -10,7 +10,7 @@ import { Genero } from '../../../interfaces/genero';
 @Component({
   selector: 'app-genre-create',
   standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
+  imports: [MatButtonModule, MatDialogActions, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
   templateUrl: './genre-create.component.html',
   styleUrl: './genre-create.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, inject, OnInit } from '@angular/core';
 import { BookSectionComponent } from '../../../pages/books/book-section/book-section.component';
-import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,7 +19,7 @@ import { UserService } from '../../../services/user-service';
 @Component({
   selector: 'app-reading-update',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatToolbarModule, MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, MatIconModule, MatToolbarModule, MatButtonModule, MatDialogActions, MatDialogTitle, MatDialogContent, FormsModule, ReactiveFormsModule],
   templateUrl: './reading-update.component.html',
   styleUrl: './reading-update.component.css',
   // changeDetection: ChangeDetectionStrategy.OnPush

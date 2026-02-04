@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 
 
 
@@ -21,7 +21,7 @@ import { AdminBooksUpdateComponent } from '../../../pages/admin/admin-books/admi
 @Component({
   selector: 'app-publisher-update',
   standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
+  imports: [MatButtonModule, MatDialogActions, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
   templateUrl: './publisher-update.component.html',
   styleUrl: './publisher-update.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -86,16 +86,6 @@ setTimeout(() => {
               }  
             }
 
-  // getCurrentBook(){
-    
-  //   this.bookService.getBookById(this.data).subscribe((data:Libro)=>{
-      
-  //         this.libro = data;
-  //         console.log(this.libro)
-          
-  //       })
-        
-  // }
 
   findCurrentPublisher(){
       

@@ -1,17 +1,18 @@
-.cabecera {
+/* Apartado cabecera registro */
+.header {
     background-color: rgb(252, 163, 40);
     box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
     position: relative;
     height: 50px;
 }
 
-.cuerpo{
+.header-content {
     width: 100%;
     max-width: 1350px;
     margin: 0 auto;	
 }
 
-.titulo {
+.title {
     float: left;
     margin-top: 5px;
     margin-left: 15px;
@@ -47,7 +48,8 @@ h1 {
     background-color: rgb(247, 241, 236);
 }
 
-.contenedor {
+/* Apartado formulario de registro */
+.form-container {
     background-color: rgb(252, 205, 148);
     height: 100%;
     min-height: 700px;
@@ -61,7 +63,8 @@ h2 {
     color: rgb(255, 255, 255);
 }
 
-.formulario {
+/* Formulario registro */
+.form-registration {
     text-align: center;
     padding: 30px 50px 18px;
     display: block;
@@ -77,6 +80,18 @@ h2 {
     margin-top: 18px;
 }
 
+/* Estilo inputs del formulario */
+.form-control {
+    height: 50px;
+    transition: background-color 0s 600000s;
+}
+
+.form-control:focus {
+    box-shadow: 0px 0px 4px 4px rgb(252, 205, 148);
+    border-color: rgb(252, 205, 148);
+}
+
+/* Estilo boton de registrar */
 .btn-success {
     width: 400px;
     height: 52px;
@@ -96,15 +111,7 @@ h2 {
     border-color: rgb(255, 141, 11);
 }
 
-input {
-    height: 50px;
-}
-
-input:focus {
-    box-shadow: 0px 0px 4px 4px rgb(252, 205, 148);
-    border-color: rgb(252, 205, 148);
-}
-
+/* Estilo de enlaces */
 a {
     text-decoration: none;
 }
@@ -122,15 +129,14 @@ p a:hover {
     color: rgb(255, 141, 11);
 }
 
+/* Avisos de comprobaciones de formulario */
 .alert{
     height: 22px;
     font-size: 0.8em;
     text-align: left;
     color: #820000;
     padding-top: 2px;
-    margin-left: -19px;
-    margin-bottom: -7px;
-    margin-top: 2px;
+    margin: 2px 0 -7px -19px;
 } 
 
 svg{
@@ -140,16 +146,13 @@ svg{
     padding-bottom: 2px;
 }
 
-.form-control {
-    transition: background-color 0s 600000s;
-}
-
+/* Media query para pantallas pequeñas */
 @media (max-width: 550px) {
     .login span{
         display: none;
     }
 
-    .formulario {    
+    .form-registration {    
         width: 400px;   
     }
 

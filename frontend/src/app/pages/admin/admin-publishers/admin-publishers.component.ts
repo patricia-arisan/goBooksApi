@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
 import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-admin.component';
-import { RouterLink } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,7 +18,7 @@ import { PublisherDeleteComponent } from '../../../modals/publisher/publisher-de
 @Component({
   selector: 'app-admin-publishers',
   standalone: true,
-  imports: [RouterLink, HeaderAdminComponent, MatTableModule, MatFormFieldModule, MatInputModule, MatPaginatorModule],
+  imports: [HeaderAdminComponent, MatTableModule, MatFormFieldModule, MatInputModule, MatPaginatorModule],
   templateUrl: './admin-publishers.component.html',
   styleUrl: './admin-publishers.component.css'
 })
