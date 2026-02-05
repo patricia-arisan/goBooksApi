@@ -146,7 +146,7 @@ svg{
     padding-bottom: 2px;
 }
 
-/* Media query para pantallas pequeñas */
+/* Media query para pantallas de menor dimension */
 @media (max-width: 550px) {
     .login span{
         display: none;

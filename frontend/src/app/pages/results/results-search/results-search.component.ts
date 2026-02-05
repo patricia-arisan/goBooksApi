@@ -21,7 +21,7 @@ import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-a
 export class ResultsSearchComponent implements OnInit{
   libros!: Libro[];
   user!: Usuario;
-  busqueda!:string;
+  searchedWord!:string;
   totalItems = 0;
   pageSize = 16;
   pageIndex = 0;
@@ -38,7 +38,7 @@ export class ResultsSearchComponent implements OnInit{
     this.retrieveFromLocalStorage();
 
     this.route.params.subscribe(params => {
-      this.busqueda = params['busqueda'];
+      this.searchedWord = params['searchedWord'];
     
     });
     this.getCurrentSearch();
@@ -65,7 +65,7 @@ export class ResultsSearchComponent implements OnInit{
           }
 
   getCurrentSearch(){
-    this.bookService.searchByBookAuthorEditorial(this.busqueda).subscribe((data:Libro[]) =>{
+    this.bookService.searchByBookAuthorEditorial(this.searchedWord).subscribe((data:Libro[]) =>{
        this.libros=data;
        this.totalItems=this.libros.length;
        })

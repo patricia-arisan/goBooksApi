@@ -1,24 +1,25 @@
-.home{
+/* Estilo general de Home */
+.home {
 	width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;	
+	max-width: 1200px;
+	margin: 0 auto;
 }
-
-#ilustracionLibro {
+/* Estilo imagen principal de la Home */
+.home-illustration {
 	text-align: center;
 }
 
-#ilustracion {
+#illustration {
 	width: 70%;
 	height: 70%;
 }
-
-#seccionBuscador {
+/* Estilo del apartado del buscador */
+.search-section {
 	text-align: center;
 	margin-top: -70px;
 }
 
-#buscador {
+#search {
 	height: 60px;
 	width: 600px;
 	border-radius: 40px;
@@ -28,7 +29,7 @@
 	position: relative;
 }
 
-.searchButton {
+.search-button {
 	border: none;
 	background-color: rgb(253, 160, 54);
 	position: absolute;
@@ -38,13 +39,13 @@
 	border-radius: 40px;
 }
 
-.lupa {
+.lens {
 	filter: invert(100%);
 	height: 46px;
 	padding: 10px;
 }
-
-#apartados {
+/* Apartado de secciones */
+#sections {
 	margin: 70px 30px;
 	padding-bottom: 100px;
 }
@@ -53,119 +54,116 @@ h3 {
 	border-bottom: 1px solid #d0d4dd;
 	padding-bottom: 10px;
 }
-
-.listaCategorias {	
+/* Estilo de apartado de categorias */
+.list-categories {
 	height: 100%;
 	width: 93%;
 	text-align: center;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	column-gap: 4.1rem;
-	margin: auto;
-	margin-top: 20px;
-	
+	margin: 20px auto 0;
 }
 
-.categoria {
+.category {
 	height: 200px;
 	width: 200px;
 	margin-bottom: 15px;
 }
 
-.categoria img {
+.category img {
 	height: 150px;
 	width: 150px;
 	margin-bottom: 10px;
 }
 
-.titulo a {
+.title a {
 	text-decoration: none;
 	color: rgb(99, 99, 99);
 	font-weight: bold;
 }
+/* Estilo secciones ultimos libros y mejor valorados */
+.last-books {
+	margin-bottom: 80px;
+}
 
-.listadoLibros {
+.last-books, .scored-books {
+	margin-top: 30px;
+}
+/* Estilo para los listados de libros */
+.book-list {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);	
+	grid-template-columns: repeat(4, 1fr);
 	column-gap: 4.1rem;
 	height: 100%;
 	width: 95%;
 	text-align: center;
-	margin: auto;
-	margin-top: 35px;
-	margin-bottom: 55px;
+	margin: 35px auto 55px;
 }
 
-.libro {
+.book {
 	height: 350px;
 	width: 220px;
 }
 
-#portada {
+#cover {
 	height: 300px;
 	width: 220px;
 	box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
 }
 
-.nombre {
+.name {
 	margin-top: 5px;
 	font-size: 0.95em;
 }
 
-.nombre a {
+.name a {
 	text-decoration: none;
 	color: rgb(99, 99, 99);
 }
-
-#botonLibros {
+/* Estilo de los botones de acceso a los listados completos */
+.books-button {
 	background-color: rgb(253, 160, 54);
 	padding: 15px;
 	border-radius: 10px;
-	text-align: center;	
-	margin-left: 45%;
+	text-align: center;
+	display: block;
+	margin: 0 auto;
 	color: white;
 	font-weight: bold;
 	border: none;
 	width: 150px;
 }
 
-#botonLibros:hover {
+.books-button:hover {
 	background-color: rgb(255, 141, 11);
 }
-
-#ultimosLibros {
-	margin-bottom: 80px;
-}
-
-#ultimosLibros, #mejorValorados {
-	margin-top: 30px;
-}
-
-#carouselExample, #carouselExample2 {
+/* Carrusel para pantallas de menor dimension oculto */
+#carouselLast, #carouselScore {
 	display: none;
 }
-
+/* Media queries para pantallas grandes */
 @media (max-width: 1200px) {
-	.home{
+	.home {
 		max-width: 1000px;
 	}
 
-	#ilustracionLibro{
+	.home-illustration {
 		margin-top: 20px;
 	}
 
-	#buscador {
+	#search {
 		height: 50px;
 		margin-top: 10px;
 		width: 65%;
 	}
 
-	.searchButton {
+	.search-button {
 		margin-top: 15px;
 		margin-left: -56px;
 	}
 
-	.lupa {
+	.lens {
 		height: 38px;
 		padding: 9px;
 	}
@@ -174,70 +172,66 @@ h3 {
 		font-size: 1.5em;
 	}
 
-	.listaCategorias {
+	.list-categories {
 		width: 98%;
 		column-gap: 4.3rem;
 		margin-bottom: 70px;
-		
+
 	}
 
-	.categoria {
+	.category {
 		height: 160px;
 		width: 160px;
 		margin-bottom: 20px;
 	}
 
-	.categoria img {
+	.category img {
 		height: 120px;
 		width: 120px;
 	}
 
-	.listadoLibros {
+	.book-list {
 		width: 100%;
 		margin-bottom: 15px;
 	}
 
-	.libro {		
+	.book {
 		width: 100%;
 	}
 
-	#portada {
+	#cover {
 		height: 70%;
 		width: 100%;
 	}
 
-	.nombre {
+	.name {
 		font-size: 0.9em;
-	}
-
-	#botonLibros {
-		margin-left: 41%;		
 	}
 }
 
 @media (max-width: 899px) {
-	.home{
+	.home {
 		max-width: 800px;
 	}
 
-	#buscador {
-		margin-top: 22px; 
-		height: 36px;		
+	#search {
+		margin-top: 22px;
+		height: 36px;
 		width: 68%;
 	}
 
-	.lupa {
+	.lens {
 		height: 23px;
 		padding: 4px;
 	}
 
-	.searchButton {
+	.search-button {
 		margin-left: -40px;
 		margin-top: 26px;
 
 	}
 
-	#apartados {
+	#sections {
 		margin: 80px 78px;
 	}
 
@@ -246,80 +240,75 @@ h3 {
 		padding-bottom: 7px;
 	}
 
-	.listaCategorias {		
+	.list-categories {
 		margin-top: 20px;
 		height: 300px;
 		column-gap: 1.4rem;
 	}
-	
-	.categoria {
+
+	.category {
 		height: 110px;
 		width: 110px;
 	}
 
-	.categoria img {
+	.category img {
 		height: 75px;
 		width: 75px;
 	}
 
-	.titulo {
+	.title {
 		font-size: 0.8em;
 	}
 
-	.listadoLibros {
+	.book-list {
 		grid-template-columns: repeat(2, 1fr);
 		column-gap: 2rem;
 		margin-top: 20px;
 		height: 750px;
 	}
 
-	#portada {
+	#cover {
 		height: 290px;
 		width: 210px;
 	}
 
-	.nombre{
+	.name {
 		width: 210px;
-		margin: auto;
-		margin-top: 5px;
+		margin: 5px auto 0;
 	}
 
-	.libro{
+	.book {
 		height: 360px;
-	}
-
-	#botonLibros {
-		margin-left: 36%;		
 	}
 }
 
 @media (max-width: 699px) {
-	.home{
+	.home {
 		max-width: 480px;
 	}
 
-	#ilustracion {		
+	#illustration {
 		width: 95%;
 		height: 95%;
-	}	
+	}
 
-	#buscador {
+	#search {
 		margin-top: 30px;
 		height: 40px;
 		width: 450px;
 	}
 
-	.lupa {
-		padding: 4px;
-		height: 28px;
-	}
-
-	.searchButton {
+	.search-button {
 		margin-left: -46px;
 		margin-top: 35px;
 	}
 
-	#apartados {
+	.lens {
+		padding: 4px;
+		height: 28px;
+	}
+
+	#sections {
 		margin: 80px 10px;
 	}
 
@@ -328,7 +317,7 @@ h3 {
 		padding-bottom: 6px;
 	}
 
-	.listaCategorias {
+	.list-categories {
 		grid-template-columns: repeat(2, 1fr);
 		column-gap: 6rem;
 		margin-left: 40px;
@@ -337,51 +326,47 @@ h3 {
 		width: 80%;
 	}
 
-	.categoria {
+	.category {
 		margin-bottom: 20px;
 		height: 150px;
 		width: 130px;
 	}
 
-	.categoria img {
+	.category img {
 		height: 120px;
 		width: 120px;
 		margin-bottom: 5px;
 	}
-
-	#botonLibros {
-		margin-left: 34%;		
-	}
 }
-
+/* Media query para pantallas de menor dimension */
 @media (max-width: 480px) {
-	.home{
+	.home {
 		max-width: 420px;
 	}
 
-	#ilustracion {
+	#illustration {
 		margin-top: 50px;
 		width: 80%;
 		height: 80%;
 	}
 
-	#buscador {
+	#search {
 		margin-top: 40px;
 		height: 34px;
 		width: 350px;
 	}
 
-	.lupa {
-		padding: 4px;
-		height: 24px;
-	}
-
-	.searchButton {
+	.search-button {
 		margin-left: -40px;
 		margin-top: 43px;
 	}
 
-	#apartados {
+	.lens {
+		padding: 4px;
+		height: 24px;
+	}
+
+	#sections {
 		margin: 70px 20px;
 	}
 
@@ -389,68 +374,61 @@ h3 {
 		font-size: 1.2em;
 	}
 
-	.listaCategorias {
+	.list-categories {
 		column-gap: 4.4rem;
-		margin: auto;
-		margin-top: 30px;
-		margin-bottom: 50px;
+		margin: 30px auto 50px;
 		height: max-content;
 		width: 340px;
 	}
 
-	.categoria {
+	.category {
 		margin-bottom: 25px;
 		height: 130px;
 		width: 120px;
 	}
 
-	.categoria img {
+	.category img {
 		height: 100px;
 		width: 100px;
 	}
-
-	.listadoLibros {
+	/* Ocultacion de los listados de libros */
+	.book-list {
 		display: none;
 	}
-
-	#carouselExample, #carouselExample2 {
+	/* Estilo para los carruseles */
+	#carouselLast, #carouselScore {
 		display: block;
-		height: max-content;
+		height: 433px;
 		width: 250px;
-		margin: auto;
-		margin-top: 30px;
+		margin: 30px auto 0;
 	}
+
 	.carousel-control-next, .carousel-control-prev {
 		background-color: rgba(59, 59, 59, 0.377);
-		border-radius: 100%;
+		border-radius: 50%;
 		height: 40px;
 		width: 40px;
 		padding: 5px;
 		margin-top: 165px;
 	}
 
-	.carousel-control-next{
+	.carousel-control-next {
 		margin-right: 8px;
 	}
 
-	.carousel-control-prev{
+	.carousel-control-prev {
 		margin-left: 8px;
 	}
 
-	#portada {
+	#cover {
 		margin: 5px;
 		height: 330px;
 		width: 240px;
 	}
 
-	.nombre {
+	.name {
 		text-align: center;
 		font-size: 1em;
-		margin-bottom: 40px;
-	}
-
-	#botonLibros {
-		margin-left: 115px;
-		
+		margin-bottom: 15px;
 	}
 }

@@ -163,7 +163,7 @@ export const routes: Routes = [
         canActivate: [authGuard,userGuard]
     },
     {
-        path: 'results/search/:busqueda',
+        path: 'results/search/:searchedWord',
         
         loadComponent: () =>
             import('./pages/results/results-search/results-search.component').then(

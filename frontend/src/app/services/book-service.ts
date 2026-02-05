@@ -160,7 +160,7 @@ getBooksBestScore(): Observable<Libro[]>{
 ////////////////
 ////////////////
 private readonly searchServiceUrl = `${environment.proyectoUrl}api/libro/resultadosBusqueda`;
-searchByBookAuthorEditorial(busqueda: string): Observable<Libro[]>{
+searchByBookAuthorEditorial(searchedWord: string): Observable<Libro[]>{
         const credentials = localStorage.getItem('token');
         const headers = new HttpHeaders({
               'Content-Type': 'application/json',
@@ -169,7 +169,7 @@ searchByBookAuthorEditorial(busqueda: string): Observable<Libro[]>{
                
           })
     
-          return this.client.get<Libro[]>(`${this.searchServiceUrl}?clave=${busqueda}`,{headers,withCredentials:true})
+          return this.client.get<Libro[]>(`${this.searchServiceUrl}?clave=${searchedWord}`,{headers,withCredentials:true})
       }
     
 /////////////////

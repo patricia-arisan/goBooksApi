@@ -11,94 +11,88 @@ import { UserService } from '../../services/user-service';
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [RouterLink,FormsModule, ReactiveFormsModule],
+  imports: [RouterLink, FormsModule, ReactiveFormsModule],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.css',
   providers: [DatePipe]
-  
 })
 export class RegistrationComponent {
-  fechaActual!:Date;
-  fechaFormat!:string | null;
+  currentDate!: Date;
+  dateFormat!: string | null;
   defaultName: string = "Usuario";
 
-
-
-constructor(
+  constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router,
     private transformDate: DatePipe
-  ){}
-
+  ) { }
+  
+  /**
+   * Obtencion de la fecha actual formateda para fijar la fecha maxima a seleccionar
+   * Definicion de estructura y validaciones del formulario al iniciar el componente
+   */
   ngOnInit(): void {
-    this.fechaActual= new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate());
-    this.fechaFormat=this.transformDate.transform(this.fechaActual,"yyyy-MM-dd");
-    console.log(this.fechaActual)
-    this.formNewUser = this.formBuilder.group ({
-      id:[0],
-      nombre:[""],
-      apellido:[""],
-      username:["",[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-      password:["",[Validators.required,Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&()+-{|},;.:_^<=>~\"'`/])(?!.*\\s).{4,}$")]],
-      fechaNacimiento:[null],
-      rol:[{id:2}]
-      // (?!.*\\s) para evitar espacios, \\ doble con s para que funcione con comillas en vez 
-      // de / al principio y al final del pattern
-      // Acepta letras, numeros y simbolos sin obligar que se use uno de cada
+    this.currentDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+    this.dateFormat = this.transformDate.transform(this.currentDate, "yyyy-MM-dd");
+    
+    this.formNewUser = this.formBuilder.group({
+      id: [0],
+      nombre: [""],
+      apellido: [""],
+      username: ["", [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      // Patron de password sin espacios, que aceta numeros, letras y simbolos
+      password: ["", [Validators.required, Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&()+-{|},;.:_^<=>~\"'`/])(?!.*\\s).{4,}$")]],
+      fechaNacimiento: [null],
+      rol: [{id:2}]
     });
-
   }
 
-  formNewUser:FormGroup = new FormGroup({
+  // Inicializacion del formulario
+  formNewUser: FormGroup = new FormGroup({
     id: new FormControl(0),
     nombre: new FormControl(""),
     apellido: new FormControl(""),
     username: new FormControl(""),
-    password:new FormControl(""),
-    fechaNacimiento:new FormControl(new Date),
-    rol:new FormControl(0)
-  })
+    password: new FormControl(""),
+    fechaNacimiento: new FormControl(new Date),
+    rol: new FormControl(0)
+  });
 
-  get username(){
+  // Getters para acceder desde HTML a los controles del formulario
+  get username() {
     return this.formNewUser.get('username')!;
   }
 
-  get password(){
+  get password() {
     return this.formNewUser.get('password')!;
   }
-  
-  // rol: Rol = {
-  //   id: 2,
-  //   nombre:""
-  // };
 
-  register(){
+  // Funcion que ejecuta el registro del nuevo usuario
+  register() {
+    // Nombre de usuario por defecto para si el usuario no pone uno
     if (this.formNewUser.value.nombre === "" || this.formNewUser.value.nombre === null) {
       this.fillForm();
     }
-
-    this.userService.createUser(this.formNewUser.value).subscribe({next:(data:Usuario) =>{
-      console.log(data);
-      this.router.navigate(['/login']);
-    }, error: (errorRes)=> {
-      if(errorRes){
-        this.formNewUser.setErrors({foundUser: true})
+    // Envio de datos del formulario al servicio de usuario
+    this.userService.createUser(this.formNewUser.value).subscribe({
+      next: (data: Usuario) => {
+        // Redireccion a la pagina de login si el guardado de datos ha sido exitoso
+        this.router.navigate(['/login']);
+      }, error: (errorRes) => {
+        if (errorRes) {
+          // Mostrar error de registro si la direccion de correo ya se encuentra registrada en la bbdd
+          this.formNewUser.setErrors({foundUser: true});
+        }
       }
-    }
-    })
-  
-  };
+    });
+  }
 
-
-
-  ///////////////////////////////////////
+  // Funcion para rellenar el nombre del usuario
   fillForm() {
     this.formNewUser.patchValue({
       nombre: this.defaultName,
-
-    })
+    });
   }
-  
-}
 
+}
