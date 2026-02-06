@@ -5,7 +5,6 @@ import { HeaderUserComponent } from '../shared/headers/header-user/header-user.c
 import { BookService } from '../../services/book-service';
 import { Libro } from '../../interfaces/libro';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UserService } from '../../services/user-service';
 
 /**
  * Componente de la Home del usuario
@@ -18,14 +17,12 @@ import { UserService } from '../../services/user-service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
-  // user!: Usuario;
   lastBooks!: Libro[];
   booksScore!: Libro[];
   searchedWord!: string;
 
   constructor(
     private router: Router,
-    // private userService: UserService,
     private bookService: BookService,
     private formBuilder: FormBuilder,
 
@@ -36,7 +33,6 @@ export class HomeComponent implements OnInit {
    * Definicion de estructura del formulario de busqueda de palabras clave
    */
   ngOnInit(): void {
-    // this.retrieveFromLocalStorage();
     this.getLastBooks();
     this.getBestScores();
 
@@ -49,19 +45,6 @@ export class HomeComponent implements OnInit {
   formSearch: FormGroup = new FormGroup({
     clave: new FormControl(""),
   });
- 
-  // retrieveFromLocalStorage() {
-  //   let value = this.userService.getItem('id');    
-  //   let currentUser = 0;
-
-  //   if (value !== null) { 
-  //     currentUser = parseInt(value);
-
-  //     this.userService.getLoggedUser(currentUser).subscribe((data: Usuario) => {
-  //       this.user = data;
-  //     });
-  //   }
-  // }
 
   // Funcion para listar los cuatro ultimos libros incorporados
   getLastBooks() {

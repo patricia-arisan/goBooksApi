@@ -1,19 +1,19 @@
-.libros{
-    
+/* Estilo general de Libros */
+.books {    
     width: 100%;
     max-width: 1050px;
     margin: 0 auto;
 }
 
-h3{
+h3 {
     margin-top: 60px;
     border-bottom: 1px solid #d0d4dd;
 	padding-bottom: 6px;
     width: 100%;
     max-width: 1050px;
 }
-
-.listadoLibros{
+/* Estilo para el listado de libros */
+.book-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     column-gap: 3.5rem;
@@ -23,43 +23,39 @@ h3{
     margin-top: 30px;
 }
 
-.libro{
+.book {
     height: 350px;
     width: 220px;
     margin-bottom: 38px;
 }
 
-#portada{
+#cover {
     height: 300px;
     width: 220px;
     box-shadow: 0 1px 3px rgba(34, 25, 25, .4);   
 }
 
-.nombre{
+.name {
     margin-top: 5px;
     font-size: 0.95em;
 }
 
-a{
+a {
     text-decoration: none;
     color:rgb(99, 99, 99);   
 }
-
-.paginator{
+/* Estilo del paginador */
+.paginator {
     margin-top: 14px;    
     background-color: white;    
 }
-
+/* Media queries para pantallas grandes */
 @media (max-width: 1200px) {
-    .libros{
+    .books {
         max-width: 850px;  
     }
 
-    h2{    
-        max-width: 850px;    
-    }
-
-    .listadoLibros{    
+    .book-list {    
         grid-template-columns: repeat(3, 1fr);
         column-gap: 5.8rem;
         max-width: 850px;
@@ -67,81 +63,73 @@ a{
 }
 
 @media (max-width: 899px) {
-    .libros{    
-        max-width: 650px;    
-    }  
-
-    h2{    
-        max-width: 650px;    
+    .books {    
+        max-width: 650px; 
     }
 
-    .listadoLibros{    
+    .book-list {    
         max-width: 600px;
         grid-template-columns: repeat(2, 1fr);
         column-gap: 5rem;
-        margin:  30px auto;
+        margin: 30px auto;
     }
 
-    .libro{
+    .book {
         width: 260px; 
         margin-bottom: 58px;
     }
 
-    #portada{
+    #cover {
         height: 340px;
         width: 260px;   
     }
 }  
 
 @media (max-width: 699px) {
-    .libros{    
+    .books {    
         max-width: 470px;
     }
 
-    h2{
-        font-size: 2.6em;
-        max-width: 470px;
+    h3 {
+        font-size: 1.9em;
     }
 
-    .listadoLibros{    
+    .book-list {    
         max-width: 470px;
         column-gap: 2rem;
     }
 
-    .libro{    
+    .book {    
         width: 220px; 
         margin-bottom: 38px;
     }
 
-    #portada{
+    #cover {
         height: 300px;
         width: 220px;
     }
 }
-
+/* Media query para pantallas de menor dimension */
 @media (max-width: 480px){
-    .libros{
+    .books {
         max-width: 360px;
     }
 
-    h2{
-        font-size: 2.4em;
-        max-width: 360px;
+    h3 {
         margin-top: 50px;        
     }
 
-    .listadoLibros{
+    .book-list {
         max-width: 360px;
         grid-template-columns: repeat(1, 1fr);    
     }
 
-    .libro{
-        margin: auto;
+    .book {
+        margin: 0 auto 58px;
         width: 260px; 
-        margin-bottom: 58px;
     }
 
-    #portada{
+    #cover {
         height: 340px;
         width: 260px; 
     }

@@ -26,7 +26,7 @@ export class RegistrationComponent {
     private userService: UserService,
     private router: Router,
     private transformDate: DatePipe
-  ) { }
+  ) {}
   
   /**
    * Obtencion de la fecha actual formateda para fijar la fecha maxima a seleccionar
