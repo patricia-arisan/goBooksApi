@@ -1,116 +1,114 @@
 @if(user.rol.id==1){
+<!-- Header con navegacion para el administrador -->
 <app-header-admin></app-header-admin>
 }@else if(user.rol.id==2){
+<!-- Header con navegacion para el usuario -->
 <app-header-user></app-header-user>
 }
-<div class="containerBook">
-
+<!-- Cuerpo de pagina Libro -->
+<div class="container-book">
+  <!-- Breadcrumd para navegar hacia paginas anteriores -->
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
       @if(user.rol.id==1){
+      <!-- Navegacion a la pagina Libros del administrador -->
       <li class="breadcrumb-item"><a routerLink="/admin-books">Libros</a></li>
       }@else if(user.rol.id==2){
+      <!-- Navegacion a la pagina Libros del usuario -->
       <li class="breadcrumb-item"><a routerLink="/books">Libros</a></li>
       }
-      <!-- <li class="breadcrumb-item"><a routerLink="/admin-books">Libros</a></li> -->
-      <li class="breadcrumb-item active" aria-current="page">{{libro.nombre}}</li>
+      <!-- Pagina actual -->
+      <li class="breadcrumb-item active" aria-current="page">{{book.nombre}}</li>
     </ol>
   </nav>
-  <div class="ficha">
-    <!-- <div class="seccionImagen" [style.--bg-portada]="'url(' + libro.portada + ')'">
-    <img src="{{libro.portada}}" id="portada" />
-    </div> -->
-    <div class="seccionImagen">
-      <!-- Capa para el fondo difuminado -->
-      <div class="fondo-difuminado" style="background-image: url('{{libro.portada}}');"></div>
 
-      <!-- Imagen de portada principal (miniatura) -->
-      <img src="{{libro.portada}}" id="portada" class="miniatura-frontal" />
+  <div class="book">
+    <div class="image-section">
+      <!-- Capa con la imagen de portada como fondo para pantallas de menor dimension-->
+      <div class="blurred-background" style="background-image: url('{{book.portada}}');"></div>
+      <!-- Imagen de la portada -->
+      <img src="{{book.portada}}" id="cover" />
     </div>
-    <!-- admin -->
+    <!-- Seccion editar libro visible para el administrador -->
     @if(user.rol.id==1){
-    <div class="editar">
-      <button type="button" class="botonEditar" (click)="goEdit()">Editar</button>
-      <!-- <button type="button" class="botonEditar"><a [routerLink]="['/book-section/editar/',libro.id]">Editar</a></button>-->
-      <button type="button" class="edit-buttom" (click)="goEdit()"><img src="/assets/icons/edit.png" class="edit" alt="edit" /></button>
+    <div class="edit-section">
+      <!-- Boton editar para pantallas grandes -->
+      <button type="button" class="edit-buttom" (click)="goEdit()">Editar</button>
+      <!-- Boton editar para pantallas de menor dimension -->
+      <button type="button" class="edit-buttom-small" (click)="goEdit()"><img src="/assets/icons/edit.png" class="edit"
+          alt="Editar" /></button>
     </div>
     }
-    <div class="detalles">
-      <p id="nombre">{{libro.nombre}}</p>
-      <p class="autor"><a [routerLink]="['/results/author',libro.autor.id]">{{libro.autor.nombre}}</a></p>
-      <p class="editorial"><a [routerLink]="['/results/publisher',libro.editorial.id]">{{libro.editorial.nombre}}</a>
-      </p>
-      <p class="isbn"> · {{libro.isbn}}</p>
+    <div class="details">
+      <p class="name">{{book.nombre}}</p>
+      <p class="author"><a [routerLink]="['/results/author',book.autor.id]">{{book.autor.nombre}}</a></p>
+      <p class="publisher"><a [routerLink]="['/results/publisher',book.editorial.id]">{{book.editorial.nombre}}</a></p>
+      <p class="isbn"> · {{book.isbn}}</p>
+      <p class="genre"><a [routerLink]="['/results/genre',book.genero.id]">{{book.genero.nombre}}</a></p>
 
-      <p class="genero"><a [routerLink]="['/results/genre',libro.genero.id]">{{libro.genero.nombre}}</a></p>
-
+      <!-- Apartado para pantallas de menor dimension para agregar el usuario la lectura -->
       @if(user.rol.id===2){
-      <div class="lecturaAdapt">
-        <div class="seleccionEstado">
-          @if(lectura===null || lectura.estado.id===1){
-          <button type="button" class="lectura2" matButton="elevated"
-            (click)="openReadingDialog('0ms', '0ms')">Añadir</button>
-          }@else if(lectura.estado.id===2){
-          <button type="button" class="lectura2" matButton="elevated"
-            (click)="openReadingUpdateDialog('0ms', '0ms')">{{lectura.estado.situacion}}</button>
+      <div class="reading-adaptable">
+        <div class="state-selection">
+          @if(reading===null || reading.estado.id===1){
+          <!-- Boton para agregar una nueva lectura -->
+          <button type="button" class="reading-state-adapt" matButton="elevated"
+            (click)="openReadingCreateDialog('0ms', '0ms')">Añadir</button>
+          }@else if(reading.estado.id===2){
+          <!-- Boton para cambiar el estado de una lectura leida -->
+          <button type="button" class="reading-state-adapt" matButton="elevated"
+            (click)="openReadingUpdateDialog('0ms', '0ms')">{{reading.estado.situacion}}</button>
           }@else{
-          <button type="button" class="lectura2" matButton="elevated"
-            (click)="openReadingUpdateDialog('0ms', '0ms')">{{lectura.estado.situacion}}</button>
+          <!-- Boton para cambiar el estado de una lectura pendiente -->
+          <button type="button" class="reading-state-adapt" matButton="elevated"
+            (click)="openReadingUpdateDialog('0ms', '0ms')">{{reading.estado.situacion}}</button>
           }
         </div>
       </div>
-    }
-
-
+      }
 
       <span>Sinopsis:</span>
-      <p class="sinopsis">{{libro.sinopsis }}</p>
+      <p class="synopsis">{{book.sinopsis }}</p>
 
     </div>
 
-    <!-- <img src="{{libro.portada}}" id="portada"/> -->
+    <!-- Apartado para mostrar a los usuarios la puntuacion media de un libro, si existiera, y agregar lectura -->
     @if(user.rol.id===2){
-      <div class="score">
-      @if(puntuacion!=null){
-
-      <span class="valoracion">Valoración</span>
-      <p class="puntuacion">{{puntuacion | number: '1.0-1'}}</p>
-      <!-- da formato 0.0 numero y redondea hacia arriba. El 1.0 hace que solo salgan decimales cuando los haya -->
-      <section class="example-section">
+    <!-- Apartado de puntuacion -->
+    <div class="score">
+      @if(score!==null){
+      <span class="rating">Valoración</span>
+      <!-- Mostrar puntuacion con decimales, si los hubiera. Se redondea el decimal hacia arriba -->
+      <p class="score-number">{{score | number: '1.0-1'}}</p>
+      <!-- Apartado de diagrama de porcentaje de puntuacion -->
+      <section class="percentage-section">
         <mat-card-content>
-
-          <mat-progress-spinner class="circle" mode="determinate" [value]=100>
+          <!-- Circulo fijo de fondo -->
+          <mat-progress-spinner class="circle" [mode]="mode" [value]=100>
           </mat-progress-spinner>
-          <mat-progress-spinner class="example-margin" mode="determinate" [value]="valor">
+          <!-- Circulo fijo con porcentaje de progreso -->
+          <mat-progress-spinner class="circle-percentage" [mode]="mode" [value]="bookValue">
           </mat-progress-spinner>
         </mat-card-content>
-
-
-
       </section>
-
       }
-      </div>
-      <div class="seleccionEstado">
-      @if(lectura===null || lectura.estado.id===1){
-      <button type="button" class="lectura" matButton="elevated"
-        (click)="openReadingDialog('0ms', '0ms')">Añadir</button>
-      }@else if(lectura.estado.id===2){
-      <button type="button" class="lectura" matButton="elevated"
-        (click)="openReadingUpdateDialog('0ms', '0ms')">{{lectura.estado.situacion}}</button>
+    </div>
+    <!-- Apartado para agregar lectura en pantallas grandes -->
+    <div class="state-selection">
+      @if(reading===null || reading.estado.id===1){
+      <!-- Boton agregar nueva lectura -->
+      <button type="button" class="reading" matButton="elevated"
+        (click)="openReadingCreateDialog('0ms', '0ms')">Añadir</button>
+      }@else if(reading.estado.id===2){
+      <!-- Boton modificar lectura leida -->
+      <button type="button" class="reading" matButton="elevated"
+        (click)="openReadingUpdateDialog('0ms', '0ms')">{{reading.estado.situacion}}</button>
       }@else{
-      <button type="button" class="lectura" matButton="elevated"
-        (click)="openReadingUpdateDialog('0ms', '0ms')">{{lectura.estado.situacion}}</button>
+      <!-- Boton modificar lectura pendiente -->
+      <button type="button" class="reading" matButton="elevated"
+        (click)="openReadingUpdateDialog('0ms', '0ms')">{{reading.estado.situacion}}</button>
       }
-      </div>
+    </div>
     }
-
-
-
-
-
   </div>
-
-
-
 </div>

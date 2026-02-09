@@ -1,469 +1,423 @@
-.containerBook{
+/* Estilo general de Libro */
+.container-book {
     width: 100%;
     max-width: 1150px;
     min-height: 450px;
-    margin: 0 auto;    
+    margin: 0 auto;
+}
+/* Estilo de breadcrum de navegacion */
+.breadcrumb {
+    margin-bottom: -30px;
+    margin-top: 40px;
 }
 
-.ficha{
-    margin-top: 20px;    
-}
-
-.detalles{
-    margin-top: 20px;
-    width: 700px;
-    float: left;
-    margin-left: 60px;
-    padding-bottom: 80px;
-}
-#nombre{
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.9em;
-    margin-bottom: 0px;
-}
-.autor,.editorial,.isbn{
-   
-    margin-bottom: 0px;
-}
-.autor a,.editorial a{
-    color: grey;
-}
-.isbn{
-    color: grey;
-}
-.autor {
-    width: max-content;
-    border-bottom: 1px solid rgb(126, 126, 126);
-}
-.autor a:hover,.editorial a:hover{
-    color: #46434e;
-}
-.editorial{
-    width: max-content;
-    float: left;
-    padding-right: 5px;
-}
-.genero{
-    background-color: rgb(253, 160, 54);
-	width: max-content;
-    padding: 4px 7.5px ;
-    margin-top: 3px;
-    border-radius: 2px;
-    font-weight: 500;
-    font-size: 0.9em;
-}
-
-
-.genero:hover{
-	background-color: rgb(255, 141, 11);
-}
-.genero a{
-    color: white;
-}
-a {
+.breadcrumb-item a {
+    color: black;
     text-decoration: none;
 }
 
-span{
-    font-weight: bold;
+/* Estilo de la ficha del libro */
+.book {
+    margin-top: 20px;
 }
-
-.lecturaAdapt{
-    display: none;
-}
-
-#portada{
+/* Estilo portada */
+#cover {
     height: 300px;
     width: 220px;
     margin-top: 32px;
     box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
-   float: left;
-}
-.score{
-    margin-top: 75px;
-    width: 120px;
-    height: 136px;
-    text-align: center;
     float: left;
-    margin-left: 50px;
-    
 }
-
-.puntuacion{
-    font-size: 2.6em;
-    font-weight: bold;
-    color: gray;
-    margin-top: 30px;
-}
-
-.example-section{
-    margin-top: -97px;
-   
-    
-}
-
-.circle{
-   --mdc-circular-progress-active-indicator-color:rgb(197, 197, 195); 
-   position: absolute;
-   margin-left: 10px;
-}
-
-.example-margin {
-  margin: 0 10px;
-  --mdc-circular-progress-active-indicator-color:rgb(221, 179, 40);  
-}
-
-
-
-/* mostrar espacios guardados en texto */
-.sinopsis{
-    white-space: pre-wrap;
-}
-.seleccionEstado{
-    float: left;
-   margin-left: 55px;
-   margin-top: 25px;
-   
-}
-.lectura{
-    border: none;
-    color:white;
-    background-color: rgb(253, 160, 54);
-    font-weight: 500;
-    font-size: 1.1em;
-    padding: 10px 15px;
-    width: 110px;
-    margin: auto;
-    border-radius: 2px;
-        
-}
-
-.lectura:hover{
-    background-color: rgb(255, 141, 11);
-}
-
-.botonEditar{
+/* Estilos boton editar para pantalla grande del administrador */
+.edit-buttom {
     margin-left: -220px;
     margin-top: 352px;
     border: none;
     font-weight: 500;
     background-color: rgb(253, 160, 54);
     width: 220px;
-   height: 40px;
+    height: 40px;
     font-weight: 500;
     font-size: 1.1em;
-    color:white;
+    color: white;
     border-radius: 2px;
     float: left;
-    
 }
 
-.botonEditar:hover{
+.edit-buttom:hover {
+    background-color: rgb(255, 141, 11);
+}
+/* Estilo para ocultar el boton editar de pantallas de menor dimension */
+.edit-buttom-small {
+    display: none;
+}
+/* Estilo detalles del libro */
+.details {
+    margin-top: 20px;
+    width: 700px;
+    float: left;
+    margin-left: 60px;
+    padding-bottom: 80px;
+}
+
+.name {
+    font-weight: bold;
+    font-size: 1.9em;
+    margin-bottom: 0px;
+}
+
+.author, .publisher, .isbn {
+    margin-bottom: 0px;
+}
+
+.author a, .publisher a {
+    color: grey;
+}
+
+.isbn {
+    color: grey;
+}
+
+.author {
+    width: max-content;
+    border-bottom: 1px solid rgb(126, 126, 126);
+}
+
+.author a:hover, .publisher a:hover {
+    color: #46434e;
+}
+
+.publisher {
+    width: max-content;
+    float: left;
+    padding-right: 5px;
+}
+
+.genre {
+    background-color: rgb(253, 160, 54);
+    width: max-content;
+    padding: 4px 7.5px;
+    margin-top: 3px;
+    border-radius: 2px;
+    font-weight: 500;
+    font-size: 0.9em;
+}
+
+.genre:hover {
     background-color: rgb(255, 141, 11);
 }
 
-.edit-buttom{
+.genre a {
+    color: white;
+}
+
+a {
+    text-decoration: none;
+}
+
+span {
+    font-weight: bold;
+}
+/* Estilo para ocultar el apartado de lectura de pantallas de menor dimension */
+.reading-adaptable {
     display: none;
 }
 
-.breadcrumb{
-    margin-bottom: -30px;
-    margin-top: 40px;
-    
+/* Estilo para mostrar saltos de linea guardados en la sinopsis */
+.synopsis {
+    white-space: pre-wrap;
 }
-.breadcrumb-item{
-    
-    text-decoration: none;
-}
-
-.breadcrumb-item a{
-    color: black;
-    text-decoration: none;
-    
+/* Estilo apartado de puntuacion */
+.score {
+    margin-top: 75px;
+    width: 120px;
+    height: 136px;
+    text-align: center;
+    float: left;
+    margin-left: 50px;
 }
 
+.score-number {
+    font-size: 2.6em;
+    font-weight: bold;
+    color: gray;
+    margin-top: 30px;
+}
+
+.percentage-section {
+    margin-top: -97px;
+}
+
+.circle {
+    --mdc-circular-progress-active-indicator-color: rgb(197, 197, 195);
+    position: absolute;
+    margin-left: 10px;
+}
+
+.circle-percentage {
+    margin: 0 10px;
+    --mdc-circular-progress-active-indicator-color: rgb(221, 179, 40);
+}
+/* Estilo seccion de estado de lectura */
+.state-selection {
+    float: left;
+    margin-left: 55px;
+    margin-top: 25px;
+}
+
+.reading {
+    border: none;
+    border-radius: 2px;
+    color: white;
+    background-color: rgb(253, 160, 54);
+    font-weight: 500;
+    font-size: 1.1em;
+    padding: 10px 15px;
+    width: 110px;
+    margin: auto;    
+}
+
+.reading:hover {
+    background-color: rgb(255, 141, 11);
+}
+/* Media queries para pantallas grandes */
 @media (max-width: 1200px) {
-    .containerBook{
-    
-    max-width: 880px;
-    
-    
-    
-}
+    .container-book {
+        max-width: 880px;
+    }
 
-.detalles{
-    margin-left: 35px;
-    width: 440px;
-    
-}
+    .details {
+        margin-left: 35px;
+        width: 440px;
+    }
 }
 
 @media (max-width: 899px) {
-    .containerBook{
-    
-    /* max-width: 600px; */
-    max-width: 690px;
-    
-    
-}
-    #portada{
-    height: 280px;
-    width: 200px;
-    
-}
-    .detalles{
-    margin-left: 25px;
-    width: 320px;
-    
-}
+    .container-book {
+        max-width: 690px;
+    }
 
-#nombre{
-    margin-top: 5px;
-    font-size: 1.6em;
+    #cover {
+        height: 280px;
+        width: 200px;
+    }
+
+    .details {
+        margin-left: 25px;
+        width: 320px;
+    }
+
+    .name {
+        margin-top: 5px;
+        font-size: 1.6em;
+    }
+
+    .score {
+        margin-left: 25px;
+    }
+
+    .state-selection {
+        margin-left: 32px;
+    }
+
+    .edit-buttom {
+        margin-top: 325px;
+        width: 200px;
+        margin-left: -200px;
+    }
 }
-
-.score{
-    
-    margin-left: 25px;
-    
-}
-
-.seleccionEstado{  
-   margin-left: 32px;   
-}
-
-.botonEditar{
-    margin-top: 325px;
-    width: 200px;
-    margin-left: -200px;
-}
-
-}
-
-
 
 @media (max-width: 699px) {
-    .containerBook{
-    max-width: 470px;    
-}
+    .container-book {
+        max-width: 470px;
+    }
 
-.breadcrumb-item{
-    max-width: 420px;
+    .breadcrumb-item {
+        max-width: 420px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
 
- .ficha{
-    margin-top: 40px;
- }
- 
- .seccionImagen {    
-    position: relative; /* Necesario para contener los elementos absolutos */
-    max-width: 470px;
-    height: 270px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;   /* Corta el exceso del desenfoque en los bordes */
-}
+    .book {
+        margin-top: 40px;
+    }
+    /* Estilo contenedor de imagen de fondo y miniatura */
+    .image-section {
+        position: relative;
+        max-width: 470px;
+        height: 270px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    /* Estilo de fondo difuminado con imagen de portada */
+    .blurred-background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        filter: blur(5px) brightness(0.8);
+        transform: scale(1.1);
+        z-index: 1;
+    }
+    /* Estilo de miniatura de portada */
+    #cover {
+        position: relative;
+        z-index: 2;
+        height: 220px;
+        width: 150px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        margin-top: 0px;
+        object-fit: cover;
+    }
 
-.fondo-difuminado {
-    position: absolute;
-    top: 0;
-    left: 0;
+    .details {
+        margin-left: 0px;
+        width: 320px;
+    }
+
+    .name {
+        width: 470px;
+        font-size: 1.5em;
+    }    
+
+    .score {
+        float: right;
+        width: 100px;
+        height: 116px;
+        margin-top: -260px;
+        margin-right: -10px;
+        position: relative;
+        z-index: 2;
+    }
     
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    /* Difuminar y oscurecer para contraste */
-    filter: blur(5px) brightness(0.8); 
-    /* Evitar bordes blancos por el blur */
-    transform: scale(1.1);              
-    z-index: 1;
-}
+    .rating {
+        font-size: 0.8em;
+        margin: 0px;
+    }
 
-#portada {    
-    position: relative;
-    /* Imagen nitida sobre el fondo */
-    z-index: 2;         
-    height: 220px;
-    width: 150px;
-    /* Sombra para dar profundidad */
-    box-shadow: 0 8px 25px rgba(0,0,0,0.5); 
-    border: 1px solid rgba(255,255,255,0.2);
-    margin-top: 0px;
-    /* Rellena el contenedor, recorta exceso */
-    object-fit: cover; 
+    .rating {
+        display: none;
+    }
+
+    .score-number {
+        text-shadow: 1px 1px 2px black;
+        color: rgb(241, 241, 241);
+        font-size: 2.1em;
+        margin-top: 10px;
+        margin-right: 23px;
+    } 
+
+    .circle {
+        zoom: 0.7;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        margin-left: 6px;
+        background-color: #b1b1b152;
+        border-radius: 50px;
+    }
+
+    .circle-percentage {
+        zoom: 0.7;
+        margin: 0px 6px;
+        margin-top: 54px;
+    }    
+    /* Estilo apartado lectura para pantallas de menor dimension */
+    .reading-adaptable {
+        display: block;
+        float: left;
+        border-left: 1px solid rgb(126, 126, 126);
+        width: 140px;
+        margin-top: 3px;
+    }
+
+    .state-selection {
+        margin: 0 0 0 7px;
+    }
+
+    .reading-state-adapt {
+        width: 90px;
+        font-size: 0.9em;
+        padding: 4px 7.5px;
+        border: none;
+        color: white;
+        background-color: rgb(255, 123, 0);
+        font-weight: 500;
+        border-radius: 2px;
+    }
+    /* Ocultar botones para pantallas grandes */
+    .reading {
+        display: none;
+    }
     
-}
+    .genre {
+        margin-right: 8px;
+        float: left;
+        margin-bottom: 0px;
+    }
 
-.detalles{
-    
-    margin-left: 0px;
-    width: 320px;
-}
+    span {
+        display: block;
+        margin-top: 60px;
+    }
 
-#nombre{
-    width: 470px;
-    font-size: 1.5em;
-}
+    .synopsis {
+        width: 470px;
+    }
 
-.valoracion{
-    font-size: 0.8em;
-    margin: 0px;
-}
+    .edit-buttom {
+        display: none;
+    }
 
-.score{
-    float: right;
-    width: 100px;
-    height: 116px;
-margin-top: -260px;
-margin-right: -10px;
-position: relative;
-z-index: 2;
-}
+    .edit-buttom-small {
+        display: inline;
+        float: right;
+        background-color: rgb(253, 160, 54);
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+        margin-top: -45px;
+        margin-right: 5px;
+        position: relative;
+        z-index: 2;
+    }
 
-.circle{
-    zoom: 0.7;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.5);   
-    margin-left: 6px;
-    background-color: #b1b1b152;
-    border-radius: 50px;
-}
+    .edit-buttom-small:hover {
+        background-color: rgb(255, 141, 11);
+    }
 
-.puntuacion{
-    text-shadow: 1px 1px 2px black;
-   color: rgb(241, 241, 241);
-   font-size: 2.1em;
-    margin-top: 10px;
-    margin-right: 23px;
-}
-
-.valoracion{
-    display: none;
-}
-
-.example-margin{
-    /* Encoger circulo */
-    zoom: 0.7;
-    margin: 0px 6px;
-    margin-top: 54px;
-}
-
-.lectura2{
-    width: 90px;
-    font-size: 0.9em;
-    
-    padding: 4px 7.5px ;
-   
-    border: none;
-    color:white;
-    background-color: rgb(255, 123, 0);
-    font-weight: 500;
-    border-radius: 2px;
-    
-    
-}
-.lectura{
-    display: none;
-}
-
-.lecturaAdapt{
-    display: block;
-    float: left;
-    
-    border-left: 1px solid rgb(126, 126, 126);
-    width: 140px;
-    
-    margin-top: 3px;
-    
-    
-    
-}
-
-.seleccionEstado{
-    margin: 0px;
-    margin-left: 7px;
-}
-
-
-.genero{
-    margin-right: 8px;
-    float: left;
-    margin-bottom: 0px;
-}
-
-span{
-    display: block;
-    margin-top: 60px;
-}
-
-.sinopsis{
-    width: 470px;
-}
-
-.botonEditar{
-    display: none;
-}
-
-.edit-buttom{
-    display: inline;
-    float: right;
-    background-color: rgb(253, 160, 54);
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 40px;
-    margin-top: -45px;
-    margin-right: 5px;
-    position: relative;
-z-index: 2;
-    
-    
-}
-
-.edit-buttom:hover{
-    background-color: rgb(255, 141, 11);
-}
-.edit{
-    filter: invert(100%);
-	width: 24px;
-    height: 24px;
-    
-	
-    
-}
+    .edit {
+        filter: invert(100%);
+        width: 24px;
+        height: 24px;
+    }
 
 }
-
-
-
-@media (max-width: 480px){
-     .containerBook{
+/* Media query para pantallas de menor dimension */
+@media (max-width: 480px) {
+    .container-book {
         width: 440px;
     }
 
-    .breadcrumb-item{
-    max-width: 395px;
+    .breadcrumb-item {
+        max-width: 395px;
     }
 
-    #nombre{
+    .name {
         width: 440px;
     }
 
-    .sinopsis{
+    .synopsis {
         width: 440px;
     }
 
-    .edit-buttom{
-    
-    margin-top: -50px;
-    margin-right: 10px;
-   
+    .edit-buttom-small {
+        margin-top: -50px;
+        margin-right: 10px;
     }
 
-   
 }

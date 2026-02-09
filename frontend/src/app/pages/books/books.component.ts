@@ -16,8 +16,7 @@ import {MatPaginatorModule, PageEvent,MatPaginatorIntl} from '@angular/material/
   styleUrl: './books.component.css'
 })
 export class BooksComponent implements OnInit{
-  libros!: Libro[];
-  libro!: Libro;
+  books!: Libro[];
   // Controles del paginator
   totalItems = 0;
   pageSize = 16;
@@ -25,8 +24,7 @@ export class BooksComponent implements OnInit{
   
   constructor(
     private bookService: BookService,
-    private paginator: MatPaginatorIntl
-    
+    private paginator: MatPaginatorIntl    
   ){}
   /**
    * Obtencion del listado de libros al iniciar el componente
@@ -46,16 +44,16 @@ export class BooksComponent implements OnInit{
       if (length === 0) {
       return `Página 1 de 1`;
     }
-      const totalPaginas = Math.ceil(length / pageSize);
-      return `Página ${page + 1} de ${totalPaginas}`;
+      const totalPages = Math.ceil(length / pageSize);
+      return `Página ${page + 1} de ${totalPages}`;
     }
   }
 
   // Funcion para listar los libros existentes en la bbdd por orden alfabetico
   getBooks(){
     this.bookService.getBooksByNameOrder().subscribe((data:Libro[])=>{
-            this.libros = data;
-            this.totalItems=this.libros.length;  
+            this.books = data;
+            this.totalItems=this.books.length;  
           });    
   }
 

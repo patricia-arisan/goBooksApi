@@ -6,7 +6,7 @@
   <!-- Listado de libros por orden alfabetico -->
   <div class="book-list">
     <!-- Recorrido del array de libros mostrando la seleccion extraida de items del paginador-->
-    @for (libro of libros?.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro.id) {
+    @for (libro of books?.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro.id) {
     <div class="book">
       <a [routerLink]="['/books/book-section',libro.id]"><img src="{{libro.portada}}" id="cover"
           alt="{{libro.nombre}}" /></a>
