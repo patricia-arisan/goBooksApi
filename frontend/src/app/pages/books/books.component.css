@@ -12,6 +12,7 @@ h3 {
     width: 100%;
     max-width: 1050px;
 }
+
 /* Estilo para el listado de libros */
 .book-list {
     display: grid;
@@ -44,11 +45,13 @@ a {
     text-decoration: none;
     color:rgb(99, 99, 99);   
 }
+
 /* Estilo del paginador */
 .paginator {
     margin-top: 14px;    
     background-color: white;    
 }
+
 /* Media queries para pantallas grandes */
 @media (max-width: 1200px) {
     .books {
@@ -109,6 +112,7 @@ a {
         width: 220px;
     }
 }
+
 /* Media query para pantallas de menor dimension */
 @media (max-width: 480px){
     .books {

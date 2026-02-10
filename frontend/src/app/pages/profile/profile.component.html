@@ -1,11 +1,15 @@
+<!-- Header con navegacion para el usuario -->
 <app-header-user></app-header-user>
+<!-- Cuerpo de Perfil -->
 <div class="cs-page-wrapper">
   <section class="container pt-3 pt-lg-4 pb-5 pb-lg-6">
     <div class="row pb-2 pb-lg-0">
+
+      <!-- Seccion lateral con opciones relacionadas con el perfil del usuario -->
       <aside class="col-xl-3 ">
         <div class="sidebar-sticky-inner">
           <div class="card">
-            
+            <!-- Menu del perfil -->
             <div id="account-menu" class="collapse d-lg-block">
               <div class="list-group list-group-flush border-top">
                 <span><a routerLink="/profile"
@@ -14,109 +18,106 @@
                   </a></span>
                 <span><a routerLink="/profile/cambiar-password"
                     class="list-group-item list-group-item-action d-flex align-items-center">
-
                     Cambiar contraseña
-
                   </a></span>
                 <div class="list-group-item list-group-item-action d-flex align-items-center">
+                  <!-- Boton para abrir el dialog para eliminar el usuario -->
                   <button (click)="openDeleteUserDialog('0ms', '0ms')">Eliminar cuenta</button>
                 </div>
                 <div class="list-group-item list-group-item-action d-flex align-items-center">
-
                   <button (click)="logout()">Cerrar sesión</button>
                 </div>
-
-
               </div>
             </div>
           </div>
         </div>
-
       </aside>
 
-      <div class="col-lg-8 ml-auto">
+      <!-- Apartado con el menu para pantallas de menor dimension y con el formulario de actualizacion de datos -->
+      <div class="col-lg-8 ml-auto">        
         <div class="align-items-center justify-content-between mb-4 pb-1 pb-sm-3">
           <h2 class="h2 mb-0">Mi perfil</h2>
+          <!-- Menu para pantallas de menor dimension -->
           <div class="menu">
-          <button type="button" (click)="toggleView()" class="view"><img src="/assets/icons/triangle.png" alt="menu" id="menu" /></button>
-            @if(!showMenu){ 
-              <ul class="urls">
-                <li class="linkAdap"><a routerLink="/profile/cambiar-password" >Cambiar contraseña</a></li>                
-                <li class="linkAdap"><button (click)="openDeleteUserDialog('0ms', '0ms')">Eliminar cuenta</button></li>
-                <li class="linkAdap"><button  (click)="logout()">Cerrar sesión</button></li>
-              </ul>
-          }
+            <!-- Boton con imagen para desplegar y ocultar el menu -->
+            <button type="button" (click)="toggleView()" class="view"><img src="/assets/icons/triangle.png" alt="menu"
+                id="menu" /></button>
+            @if(!hideMenu) {
+            <!-- Listado de opciones -->
+            <ul class="options">
+              <li class="option"><a routerLink="/profile/cambiar-password">Cambiar contraseña</a></li>
+              <li class="option"><button (click)="openDeleteUserDialog('0ms', '0ms')">Eliminar cuenta</button></li>
+              <li class="option"><button (click)="logout()">Cerrar sesión</button></li>
+            </ul>
+            }
+          </div>
         </div>
-        </div>
+
+        <!-- Formulario para actualizar los datos del usuario -->
         <form [formGroup]="formUpdate" (submit)="update()">
           <div class="row pb-3">
             <div class="col-sm-6 form-group">
-              <label for="ac-fn">Nombre</label>
+              <label for="nombre">Nombre</label>
               <input type="text" id="nombre" class="form-control form-control-lg" formControlName="nombre">
-
-
             </div>
             <div class="col-sm-6 form-group">
-              <label for="ac-ln">Apellido</label>
-              <input type="text" class="form-control form-control-lg" formControlName="apellido">
+              <label for="apellido">Apellido</label>
+              <input type="text" id="apellido" class="form-control form-control-lg" formControlName="apellido">
             </div>
             <div class="col-sm-6 form-group">
-              <label>Correo electrónico*</label>
-              <input type="text" class="form-control form-control-lg" formControlName="username">
+              <label for="username">Correo electrónico*</label>
+              <input type="text" id="username" class="form-control form-control-lg" formControlName="username">
+              <!-- Comprobaciones del input -->
               @if (username.invalid && (username.dirty || username.touched)) {
-
               <div class="alert">
+                <!-- Comprobacion para evitar el campo vacio -->
                 @if(username.hasError('required')){
                 <svg fill="none" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                    <path id="error-circle"
-                                        d="M32.085,56.058c6.165,-0.059 12.268,-2.619 16.657,-6.966c5.213,-5.164 7.897,-12.803 6.961,-20.096c-1.605,-12.499 -11.855,-20.98 -23.772,-20.98c-9.053,0 -17.853,5.677 -21.713,13.909c-2.955,6.302 -2.96,13.911 0,20.225c3.832,8.174 12.488,13.821 21.559,13.908c0.103,0.001 0.205,0.001 0.308,0Zm-0.282,-4.003c-9.208,-0.089 -17.799,-7.227 -19.508,-16.378c-1.204,-6.452 1.07,-13.433 5.805,-18.015c5.53,-5.35 14.22,-7.143 21.445,-4.11c6.466,2.714 11.304,9.014 12.196,15.955c0.764,5.949 -1.366,12.184 -5.551,16.48c-3.672,3.767 -8.82,6.016 -14.131,6.068c-0.085,0 -0.171,0 -0.256,0Zm-12.382,-10.29l9.734,-9.734l-9.744,-9.744l2.804,-2.803l9.744,9.744l10.078,-10.078l2.808,2.807l-10.078,10.079l10.098,10.098l-2.803,2.804l-10.099,-10.099l-9.734,9.734l-2.808,-2.808Z">
-                                    </path>
-                        </svg>
+                  <path id="error-circle"
+                    d="M32.085,56.058c6.165,-0.059 12.268,-2.619 16.657,-6.966c5.213,-5.164 7.897,-12.803 6.961,-20.096c-1.605,-12.499 -11.855,-20.98 -23.772,-20.98c-9.053,0 -17.853,5.677 -21.713,13.909c-2.955,6.302 -2.96,13.911 0,20.225c3.832,8.174 12.488,13.821 21.559,13.908c0.103,0.001 0.205,0.001 0.308,0Zm-0.282,-4.003c-9.208,-0.089 -17.799,-7.227 -19.508,-16.378c-1.204,-6.452 1.07,-13.433 5.805,-18.015c5.53,-5.35 14.22,-7.143 21.445,-4.11c6.466,2.714 11.304,9.014 12.196,15.955c0.764,5.949 -1.366,12.184 -5.551,16.48c-3.672,3.767 -8.82,6.016 -14.131,6.068c-0.085,0 -0.171,0 -0.256,0Zm-12.382,-10.29l9.734,-9.734l-9.744,-9.744l2.804,-2.803l9.744,9.744l10.078,-10.078l2.808,2.807l-10.078,10.079l10.098,10.098l-2.803,2.804l-10.099,-10.099l-9.734,9.734l-2.808,-2.808Z">
+                  </path>
+                </svg>
                 Dirección de email requerida.
                 }
+                <!-- Comprobacion de la estructura del correo -->
                 @if(username.hasError('pattern')){
                 <svg fill="none" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                    <path id="error-circle"
-                                        d="M32.085,56.058c6.165,-0.059 12.268,-2.619 16.657,-6.966c5.213,-5.164 7.897,-12.803 6.961,-20.096c-1.605,-12.499 -11.855,-20.98 -23.772,-20.98c-9.053,0 -17.853,5.677 -21.713,13.909c-2.955,6.302 -2.96,13.911 0,20.225c3.832,8.174 12.488,13.821 21.559,13.908c0.103,0.001 0.205,0.001 0.308,0Zm-0.282,-4.003c-9.208,-0.089 -17.799,-7.227 -19.508,-16.378c-1.204,-6.452 1.07,-13.433 5.805,-18.015c5.53,-5.35 14.22,-7.143 21.445,-4.11c6.466,2.714 11.304,9.014 12.196,15.955c0.764,5.949 -1.366,12.184 -5.551,16.48c-3.672,3.767 -8.82,6.016 -14.131,6.068c-0.085,0 -0.171,0 -0.256,0Zm-12.382,-10.29l9.734,-9.734l-9.744,-9.744l2.804,-2.803l9.744,9.744l10.078,-10.078l2.808,2.807l-10.078,10.079l10.098,10.098l-2.803,2.804l-10.099,-10.099l-9.734,9.734l-2.808,-2.808Z">
-                                    </path>
-                        </svg>
+                  <path id="error-circle"
+                    d="M32.085,56.058c6.165,-0.059 12.268,-2.619 16.657,-6.966c5.213,-5.164 7.897,-12.803 6.961,-20.096c-1.605,-12.499 -11.855,-20.98 -23.772,-20.98c-9.053,0 -17.853,5.677 -21.713,13.909c-2.955,6.302 -2.96,13.911 0,20.225c3.832,8.174 12.488,13.821 21.559,13.908c0.103,0.001 0.205,0.001 0.308,0Zm-0.282,-4.003c-9.208,-0.089 -17.799,-7.227 -19.508,-16.378c-1.204,-6.452 1.07,-13.433 5.805,-18.015c5.53,-5.35 14.22,-7.143 21.445,-4.11c6.466,2.714 11.304,9.014 12.196,15.955c0.764,5.949 -1.366,12.184 -5.551,16.48c-3.672,3.767 -8.82,6.016 -14.131,6.068c-0.085,0 -0.171,0 -0.256,0Zm-12.382,-10.29l9.734,-9.734l-9.744,-9.744l2.804,-2.803l9.744,9.744l10.078,-10.078l2.808,2.807l-10.078,10.079l10.098,10.098l-2.803,2.804l-10.099,-10.099l-9.734,9.734l-2.808,-2.808Z">
+                  </path>
+                </svg>
                 Escribe una dirección de correo válida.
                 }
               </div>
               }
+              <!-- Comprobacion de la existencia de ese correo en un usuario de diferente id -->
               @if(formUpdate.hasError('foundUser')){
               <div class="alert">
                 <svg fill="none" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                    <path id="error-circle"
-                                        d="M32.085,56.058c6.165,-0.059 12.268,-2.619 16.657,-6.966c5.213,-5.164 7.897,-12.803 6.961,-20.096c-1.605,-12.499 -11.855,-20.98 -23.772,-20.98c-9.053,0 -17.853,5.677 -21.713,13.909c-2.955,6.302 -2.96,13.911 0,20.225c3.832,8.174 12.488,13.821 21.559,13.908c0.103,0.001 0.205,0.001 0.308,0Zm-0.282,-4.003c-9.208,-0.089 -17.799,-7.227 -19.508,-16.378c-1.204,-6.452 1.07,-13.433 5.805,-18.015c5.53,-5.35 14.22,-7.143 21.445,-4.11c6.466,2.714 11.304,9.014 12.196,15.955c0.764,5.949 -1.366,12.184 -5.551,16.48c-3.672,3.767 -8.82,6.016 -14.131,6.068c-0.085,0 -0.171,0 -0.256,0Zm-12.382,-10.29l9.734,-9.734l-9.744,-9.744l2.804,-2.803l9.744,9.744l10.078,-10.078l2.808,2.807l-10.078,10.079l10.098,10.098l-2.803,2.804l-10.099,-10.099l-9.734,9.734l-2.808,-2.808Z">
-                                    </path>
-                        </svg>                  
+                  <path id="error-circle"
+                    d="M32.085,56.058c6.165,-0.059 12.268,-2.619 16.657,-6.966c5.213,-5.164 7.897,-12.803 6.961,-20.096c-1.605,-12.499 -11.855,-20.98 -23.772,-20.98c-9.053,0 -17.853,5.677 -21.713,13.909c-2.955,6.302 -2.96,13.911 0,20.225c3.832,8.174 12.488,13.821 21.559,13.908c0.103,0.001 0.205,0.001 0.308,0Zm-0.282,-4.003c-9.208,-0.089 -17.799,-7.227 -19.508,-16.378c-1.204,-6.452 1.07,-13.433 5.805,-18.015c5.53,-5.35 14.22,-7.143 21.445,-4.11c6.466,2.714 11.304,9.014 12.196,15.955c0.764,5.949 -1.366,12.184 -5.551,16.48c-3.672,3.767 -8.82,6.016 -14.131,6.068c-0.085,0 -0.171,0 -0.256,0Zm-12.382,-10.29l9.734,-9.734l-9.744,-9.744l2.804,-2.803l9.744,9.744l10.078,-10.078l2.808,2.807l-10.078,10.079l10.098,10.098l-2.803,2.804l-10.099,-10.099l-9.734,9.734l-2.808,-2.808Z">
+                  </path>
+                </svg>
                 Ya existe una cuenta de usuario asociada a esta dirección.
               </div>
               }
             </div>
-
             <div class="col-sm-6 form-group">
-              <label>Fecha de nacimiento</label>
-              <input type="date" class="form-control form-control-lg" [max]="fechaFormat"
+              <label for="fechaNacimiento">Fecha de nacimiento</label>
+              <input type="date" id="fechaNacimiento" class="form-control form-control-lg" [max]="dateFormat"
                 formControlName="fechaNacimiento">
             </div>
-
             <div class="form-group">
-              <label class="control-label" for="id"> </label> <input id="id" type="hidden" formControlName="id"
-                class="form-control" autofocus="autofocus">
+              <input id="id" type="hidden" formControlName="id" class="form-control">
             </div>
-
-            <div class="form-group">
-              <label class="control-label" for="rol"> </label> <input id="rol" type="hidden" formControlName="rol"
-                class="form-control" autofocus="autofocus">
+            <div class="form-group" formGroupName="rol">
+              <input id="rol" type="hidden" formControlName="id" class="form-control">
             </div>
           </div>
-          <button type="submit" class="btn btn-primary btn-lg"
-            [disabled]="formUpdate.invalid">Actualizar</button>
+          <!-- Boton que se habilita al comprobar que estan rellenos los campos requeridos -->
+          <button type="submit" class="btn btn-primary btn-lg" [disabled]="formUpdate.invalid">Actualizar</button>
         </form>
       </div>
     </div>
   </section>
-
 </div>

@@ -5,6 +5,7 @@
     min-height: 450px;
     margin: 0 auto;
 }
+
 /* Estilo de breadcrum de navegacion */
 .breadcrumb {
     margin-bottom: -30px;
@@ -20,6 +21,7 @@
 .book {
     margin-top: 20px;
 }
+
 /* Estilo portada */
 #cover {
     height: 300px;
@@ -28,6 +30,7 @@
     box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
     float: left;
 }
+
 /* Estilos boton editar para pantalla grande del administrador */
 .edit-buttom {
     margin-left: -220px;
@@ -47,10 +50,12 @@
 .edit-buttom:hover {
     background-color: rgb(255, 141, 11);
 }
+
 /* Estilo para ocultar el boton editar de pantallas de menor dimension */
 .edit-buttom-small {
     display: none;
 }
+
 /* Estilo detalles del libro */
 .details {
     margin-top: 20px;
@@ -118,6 +123,7 @@ a {
 span {
     font-weight: bold;
 }
+
 /* Estilo para ocultar el apartado de lectura de pantallas de menor dimension */
 .reading-adaptable {
     display: none;
@@ -127,6 +133,7 @@ span {
 .synopsis {
     white-space: pre-wrap;
 }
+
 /* Estilo apartado de puntuacion */
 .score {
     margin-top: 75px;
@@ -158,6 +165,7 @@ span {
     margin: 0 10px;
     --mdc-circular-progress-active-indicator-color: rgb(221, 179, 40);
 }
+
 /* Estilo seccion de estado de lectura */
 .state-selection {
     float: left;
@@ -180,6 +188,7 @@ span {
 .reading:hover {
     background-color: rgb(255, 141, 11);
 }
+
 /* Media queries para pantallas grandes */
 @media (max-width: 1200px) {
     .container-book {
@@ -242,6 +251,7 @@ span {
     .book {
         margin-top: 40px;
     }
+
     /* Estilo contenedor de imagen de fondo y miniatura */
     .image-section {
         position: relative;
@@ -252,6 +262,7 @@ span {
         align-items: center;
         overflow: hidden;
     }
+
     /* Estilo de fondo difuminado con imagen de portada */
     .blurred-background {
         position: absolute;
@@ -263,6 +274,7 @@ span {
         transform: scale(1.1);
         z-index: 1;
     }
+
     /* Estilo de miniatura de portada */
     #cover {
         position: relative;
@@ -325,6 +337,7 @@ span {
         margin: 0px 6px;
         margin-top: 54px;
     }    
+
     /* Estilo apartado lectura para pantallas de menor dimension */
     .reading-adaptable {
         display: block;
@@ -348,6 +361,7 @@ span {
         font-weight: 500;
         border-radius: 2px;
     }
+
     /* Ocultar botones para pantallas grandes */
     .reading {
         display: none;
@@ -395,8 +409,8 @@ span {
         width: 24px;
         height: 24px;
     }
-
 }
+
 /* Media query para pantallas de menor dimension */
 @media (max-width: 480px) {
     .container-book {
@@ -419,5 +433,4 @@ span {
         margin-top: -50px;
         margin-right: 10px;
     }
-
 }

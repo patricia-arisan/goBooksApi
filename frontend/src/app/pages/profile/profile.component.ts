@@ -4,185 +4,166 @@ import { HeaderUserComponent } from '../shared/headers/header-user/header-user.c
 import { Usuario } from '../../interfaces/usuario';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { Rol } from '../../interfaces/rol';
-import { take } from 'rxjs';
 
-import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { DatePipe } from '@angular/common';
 import { UserService } from '../../services/user-service';
 import { UserDeleteComponent } from '../../modals/user/user-delete/user-delete.component';
 
+/**
+ * Componente para actualizar la informacion del usuario
+ */
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [RouterLink,HeaderUserComponent,FormsModule, ReactiveFormsModule],
+  imports: [RouterLink, HeaderUserComponent, FormsModule, ReactiveFormsModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
   providers: [DatePipe]
 })
-export class ProfileComponent implements OnInit{
+export class ProfileComponent implements OnInit {
   user!: Usuario;
-  fechaActual!:Date;
-  fechaFormat!:string | null;
-  showMenu: Boolean = true;
+  currentDate!: Date;
+  dateFormat!: string | null;
+  hideMenu: Boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private transformDate: DatePipe
-  ){}
+    private transformDate: DatePipe,    
+  ) {}
 
+  /**
+   * Definicion de estructura y validaciones del formulario al iniciar el componente
+   * Recuperacion del usuario y rellenado de formulario
+   * Obtencion de la fecha actual formateda para fijar la fecha maxima a seleccionar
+   */
   ngOnInit(): void {
-    
-      this.retrieveFromLocalStorage();
-
-      
-
-      this.formUpdate = this.formBuilder.group ({
-        id:[0],
-        nombre:[""],
-        apellido:[""],
-        username:["",[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-        password:["",[Validators.required]],
-        fechaNacimiento:[new Date],
-        rol:[{id:2}]
+    this.formUpdate = this.formBuilder.group({
+      id: [0],
+      nombre: [""],
+      apellido: [""],
+      username: ["", [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+      password: ["", [Validators.required]],
+      fechaNacimiento: [new Date],
+      rol: this.formBuilder.group({
+        id: [null]
       })
+    });
 
-    
+    this.retrieveFromLocalStorage();
+   
+    this.currentDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+    this.dateFormat = this.transformDate.transform(this.currentDate, "yyyy-MM-dd");
 
-      this.fillForm();
-      
-      this.fechaActual= new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate());
-    this.fechaFormat=this.transformDate.transform(this.fechaActual,"yyyy-MM-dd");
-      
+  }
+
+  // Funcion para recuperar al usuario y cargar sus datos en el formulario
+  retrieveFromLocalStorage() { 
+    // Recuperacion del usuario actual mediante el id guardado en el localstorage
+    let value = this.userService.getItem('id'); 
+    let currentUser = 0;
+    if (value !== null) {
+      currentUser = parseInt(value);
+      this.userService.getLoggedUser(currentUser).subscribe((data: Usuario) => {
+        this.user = data;
+        // Llamada a la funcion para rellenar el formulario con los datos obtenidos
+        this.fillForm();
+      });
     }
-    
-    
-    retrieveFromLocalStorage() {
-      console.log(localStorage)
-      this.user = JSON.parse(localStorage.getItem('usuario') || '')
-      //this.user = JSON.parse(localStorage.getItem('currentUser') || '')
-      console.log(this.user)
-      let value = this.userService.getItem('id');
-    // //   let credential1 = this.user.username;
-    // // let credential2 = this.user.password;
-    // // let credentials = {credential1,credential2};
+  }
 
-      console.log("Value antes de current: " + value)
-    
-      let currentUser = 0;
-      if(value!=null){
-        currentUser = parseInt(value);
-        console.log("dentro: " + currentUser)
-        // // this.userService.getLoggedUser(currentUser,credentials).subscribe((data:Usuario)=>{
-          
-        // //   this.user = data;
-          
-        // //   console.log("Local" + this.user.id);
-          
-        // // });
-
-        this.userService.getLoggedUser(currentUser).subscribe((data:Usuario)=>{
-          
-          this.user = data;
-          
-          console.log("Local" + this.user.id);
-          
-        });
+  // Funcion para rellenar los datos del usuario una vez retornado
+  fillForm() {
+    this.formUpdate.patchValue({
+      id: this.user.id,
+      nombre: this.user.nombre,
+      apellido: this.user.apellido,
+      username: this.user.username,
+      password: this.user.password,
+      fechaNacimiento: this.user.fechaNacimiento,
+      rol: {
+        id: this.user.rol.id        
       }
-      
-      
-    }
+    });
+  }
 
-    fillForm(){
-        this.formUpdate.patchValue({
-          id: this.user.id,
-          nombre: this.user.nombre,
-          apellido: this.user.apellido,
-          username : this.user.username,
-          password : this.user.password,
-          fechaNacimiento: this.user.fechaNacimiento
+  // Inicializacion del formulario
+  formUpdate: FormGroup = new FormGroup({
+    id: new FormControl(""),
+    nombre: new FormControl(""),
+    apellido: new FormControl(""),
+    username: new FormControl(""),
+    password: new FormControl(""),
+    fechaNacimiento: new FormControl(""),
+    rol: new FormGroup({
+      id: new FormControl(null)    
     })
-      
-    }
+  });
 
-    formUpdate:FormGroup = new FormGroup({
-      id: new FormControl(""),
-      nombre: new FormControl(""),
-      apellido: new FormControl(""),
-      username: new FormControl(""),
-      password:new FormControl(""),
-      fechaNacimiento:new FormControl(new Date),
-      rol:new FormControl(0)
-    })
-
-    rol: Rol = {
-        id: 2,
-        nombre:""
-      };
-
-     get username(){
+  // Getter para acceder desde HTML a los controles del formulario
+  get username() {
     return this.formUpdate.get('username')!;
-  }  
-    
-    update(){
-      console.log(this.formUpdate.value);
-      console.log(this.user.id)
-      let oldUsername = this.user.username; 
-      if (this.formUpdate.value.nombre === "" || this.formUpdate.value.nombre === null) {
+  }
+
+  // Funcion para actualizar los datos del usuario
+  update() {
+    // Nombre de usuario por defecto para si el usuario no pone uno
+    if (this.formUpdate.value.nombre === "" || this.formUpdate.value.nombre === null) {
       this.formUpdate.patchValue({
         nombre: "Usuario",
-
-      })
-    }     
-      this.userService.updateUser(this.user.id,this.formUpdate.value).subscribe({next:(data:Usuario) =>{
-      
-      console.log(data);
-      if(oldUsername===this.formUpdate.value.username){
-        localStorage.setItem('usuario', JSON.stringify(data));
-        const idUsuario = data.id.toString();
-        this.userService.setItem('id',idUsuario);
-        this.router.navigate(['/home']);
-      }else{
-        this.logout();
-      }
-    
-      
-    }, error: (errorRes)=> {
-      if(errorRes){
-        this.formUpdate.setErrors({foundUser: true})
-      }
+      });
     }
-    })
-    
-    };
 
-    readonly dialog = inject(MatDialog);
-
-    openDeleteUserDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-        this.dialog.open(UserDeleteComponent, {
-          width: '250px',
-          enterAnimationDuration,
-          exitAnimationDuration,
-        })
-      
+    let oldUsername = this.user.username;
+    // Envio de los nuevos datos del formulario al servicio de usuario
+    this.userService.updateUser(this.user.id, this.formUpdate.value).subscribe({
+      next: (data: Usuario) => {
+        // Si el username se mantiene y cambian los demas datos, estos se actualizan en el localStorage
+        if (oldUsername === this.formUpdate.value.username) {
+          localStorage.setItem('usuario', JSON.stringify(data));
+          // Tras los cambios se redirige a la home
+          this.router.navigate(['/home']);
+        } else {
+          // Si cambia el username, se redirige al login para iniciar sesion con el nuevo username
+          this.logout();
+        }
+      }, error: (errorRes) => {
+        if (errorRes) {
+          /**
+           * Mostrar error de registro si la direccion de correo ya se encuentra registrada en la bbdd
+           * con un usuario con distinto id
+           */
+          this.formUpdate.setErrors({foundUser: true});
+        }
       }
+    });
+  }
 
-      logout(){
-      this.userService.logoutUser().subscribe(()=>{
+  // Inyeccion de dependencias para usar MatDialog
+  readonly dialog = inject(MatDialog);
+  // Funcion para abrir el componente para eliminar la cuenta del usuario
+  openDeleteUserDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(UserDeleteComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+
+  // Funcion para cerrar sesion y limpiar los datos del usuario
+  logout() {
+    this.userService.logoutUser().subscribe(() => {
       localStorage.clear();
       this.router.navigate(['/login']);
     });
-    
   }
 
-  toggleView(){ 
-    this.showMenu = !this.showMenu;
-    
-    
-    
-    
+  // Funcion para mostrar u ocultar el menu desplegable
+  toggleView() {
+    this.hideMenu = !this.hideMenu;
   }
+
 }

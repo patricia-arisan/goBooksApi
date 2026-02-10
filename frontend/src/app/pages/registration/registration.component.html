@@ -1,3 +1,4 @@
+<!-- Cabecera de la pagina -->
 <div class="header">
     <div class="header-content">
         <div class="title">
@@ -10,6 +11,7 @@
     </div>
 </div>
 
+<!-- Apartado del formulario de registro -->
 <div class="form-container">
     <h2>Crea tu cuenta</h2>
     <div class="form-registration">
@@ -25,8 +27,10 @@
             </div>
             <div class="form-group">
                 <input type="email" id="email" formControlName="username" class="form-control" placeholder="Email*">
+                <!-- Comprobaciones del input -->
                 @if(username.invalid && (username.dirty || username.touched)) {
                 <div class="alert">
+                    <!-- Comprobacion para evitar el campo vacio -->
                     @if(username.hasError('required')){
                     <svg fill="none" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <path id="error-circle"
@@ -35,6 +39,7 @@
                     </svg>
                     Dirección de email requerida.
                     }
+                    <!-- Comprobacion de la estructura del correo -->
                     @if(username.hasError('pattern')){
                     <svg fill="none" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <path id="error-circle"
@@ -45,6 +50,7 @@
                     }
                 </div>
                 }
+                <!-- Comprobacion de la existencia de un usuario con el correo introducido -->
                 @if(formNewUser.hasError('foundUser')){
                 <div class="alert">
                     <svg fill="none" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -58,8 +64,10 @@
             </div>
             <div class="form-group">
                 <input type="password" id="password" formControlName="password" class="form-control" placeholder="Contraseña*">
+                <!-- Comprobaciones del input -->
                 @if(password.invalid && (password.dirty || password.touched)) {
                 <div class="alert">
+                    <!-- Comprobacion para evitar el campo vacio -->
                     @if(password.hasError('required')){
                     <svg fill="none" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <path id="error-circle"
@@ -68,6 +76,7 @@
                     </svg>
                     Contraseña requerida.
                     }
+                    <!-- Comprobacion de la estructura del password -->
                     @if(password.hasError('pattern')){
                     <svg fill="none" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <path id="error-circle"
@@ -83,11 +92,13 @@
                 <input id="rol" type="hidden" formControlName="rol" class="form-control">
             </div>
             <div class="form-group">
+                <!-- Cambio del tipo del input para mostrar el placeholder y al pinchar solo el elemento de calendario -->
                 <input id="fechaNacimiento" type="text" placeholder="Fecha de nacimento" onfocus="(this.type='date')"
                     onblur="(this.type='text')" [max]="dateFormat" formControlName="fechaNacimiento"
                     class="form-control">
             </div>
             <div class="form-group">
+                <!-- Boton que se habilita al comprobar que estan rellenos los campos requeridos -->
                 <button type="submit" class="btn btn-success" [disabled]="formNewUser.invalid">Registrar</button>
                 <p>Si ya tienes cuenta, inicia sesión <a routerLink="/login">aquí</a></p>
             </div>

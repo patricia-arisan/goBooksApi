@@ -1,3 +1,4 @@
+<!-- Cabecera de la pagina -->
 <div class="header">
     <div class="header-content">
         <div class="title">
@@ -10,6 +11,7 @@
     </div>
 </div>
 
+<!-- Apartado del formulario de login -->
 <div class="form-container">
     <h2>Inicia sesión</h2>
     <div class="form-login">
@@ -18,8 +20,10 @@
             <div class="form-group">
                 <input id="username" type="text" formControlName="username" class="form-control"
                     placeholder="Dirección de email">
+                <!-- Comprobaciones del input -->
                 @if(username.invalid && (username.dirty || username.touched)) {
                 <div class="alert">
+                    <!-- Comprobacion para evitar el campo vacio -->
                     @if(username.hasError('required')){
                     <svg fill="none" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <path id="error-circle"
@@ -42,8 +46,10 @@
             <div class="form-group">
                 <input id="password" type="password" formControlName="password" class="form-control"
                     placeholder="Contraseña">
+                <!-- Comprobaciones del input -->
                 @if(password.invalid && (password.dirty || password.touched)) {
                 <div class="alert">
+                    <!-- Comprobacion para evitar el campo vacio -->
                     @if(password.hasError('required')){
                     <svg fill="none" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <path id="error-circle"
@@ -54,6 +60,7 @@
                     }
                 </div>
                 }
+                <!-- Comprobacion de la autenticacion del usuario -->
                 @if(formLogin.hasError('unAuthenticated')) {
                 <div class="alert">
                     <svg fill="none" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -68,8 +75,9 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
-                        <input type="submit" class="form-control btn btn-primary" [disabled]="formLogin.invalid"
-                            name="login-submit" id="login-submit" value="Iniciar sesión" />
+                        <!-- Boton que se habilita al comprobar que estan rellenos los campos requeridos -->
+                        <button type="submit" class="form-control btn btn-primary"
+                            [disabled]="formLogin.invalid">Iniciar sesión</button>
                     </div>
                 </div>
             </div>
