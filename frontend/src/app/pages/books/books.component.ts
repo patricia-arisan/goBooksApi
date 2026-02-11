@@ -53,6 +53,7 @@ export class BooksComponent implements OnInit{
   getBooks(){
     this.bookService.getBooksByNameOrder().subscribe((data:Libro[])=>{
             this.books = data;
+            // Guardado del total de elementos del listado para la posterior paginacion
             this.totalItems=this.books.length;  
           });    
   }

@@ -1,29 +1,30 @@
+<!-- Header con navegacion para el usuario -->
 <app-header-user></app-header-user>
-<div class="libros">
-<h2>Lecturas</h2>
-
-<div class="opciones">
-<button type="button" class="inicial" (click)="getReadings()">Todos</button>
-<button type="button" (click)="getReadingsByState(2)">Leídos</button>
-<button type="button" (click)="getReadingsByState(3)">Pendientes</button>
-</div>
-<div class="listadoLibros">
-@for(lectura of lecturas.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track lectura.id){
-    <div class="libro">
-    <a [routerLink]="['/books/book-section',lectura.libro.id]" ><img src="{{lectura.libro.portada}}" id="portada"/></a>
-    <p class="nombre"><a [routerLink]="['/books/book-section',lectura.libro.id]" >{{lectura.libro.nombre}}</a></p>
+<!-- Cuerpo de pagina Lecturas -->
+<div class="books">
+    <h2>Lecturas</h2>
+    <!-- Opciones para obtener el listado de lecturas y por su estado -->
+    <div class="options">
+        <button type="button" (click)="getReadings()">Todos</button>
+        <button type="button" (click)="getReadingsByState(2)">Leídos</button>
+        <button type="button" (click)="getReadingsByState(3)">Pendientes</button>
     </div>
-}
-</div>
-@if(lecturas.length>0){
-<mat-paginator class="paginator"
-              [length]="totalItems"
-              [pageSize]="pageSize"
-              [pageIndex]="pageIndex"
-              [pageSizeOptions]="[16, 32, 40]"
-              aria-label="Select page"
-              (page)="onPageChange($event)">
-</mat-paginator> 
-}
-
+    <!-- Listado de libros -->
+    <div class="book-list">
+        <!-- Recorrido del array de libros mostrando la seleccion extraida de items del paginador-->
+        @for(lectura of readings?.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track lectura.id){
+        <div class="book">
+            <a [routerLink]="['/books/book-section',lectura.libro.id]"><img src="{{lectura.libro.portada}}"
+                    id="cover" alt="{{lectura.libro.nombre}}" /></a>
+            <p class="name"><a [routerLink]="['/books/book-section',lectura.libro.id]">{{lectura.libro.nombre}}</a>
+            </p>
+        </div>
+        }
+    </div>
+    <!-- Seccion de paginacion de la lista de libros -->
+    @if(readings && readings.length>0){
+    <mat-paginator class="paginator" [length]="totalItems" [pageSize]="pageSize" [pageIndex]="pageIndex"
+        [pageSizeOptions]="[16, 32, 40]" aria-label="Select page" (page)="onPageChange($event)">
+    </mat-paginator>
+    }
 </div>

@@ -5,143 +5,132 @@ import { Usuario } from '../../../interfaces/usuario';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
-import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { UserService } from '../../../services/user-service';
 import { UserDeleteComponent } from '../../../modals/user/user-delete/user-delete.component';
 
-
+/**
+ * Componente para actualizar el password del usuario
+ */
 @Component({
   selector: 'app-profile-password',
   standalone: true,
-  imports: [RouterLink,HeaderUserComponent,FormsModule, ReactiveFormsModule],
+  imports: [RouterLink, HeaderUserComponent, FormsModule, ReactiveFormsModule],
   templateUrl: './profile-password.component.html',
   styleUrl: './profile-password.component.css'
 })
-export class ProfilePasswordComponent implements OnInit{
+export class ProfilePasswordComponent implements OnInit {
   user!: Usuario;
-  showMenu: Boolean = true;
+  hideMenu: Boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router
-  ){}
+  ) { }
 
+  /**
+   * Definicion de estructura y validaciones del formulario al iniciar el componente
+   * Recuperacion del usuario y rellenado de formulario
+   */
   ngOnInit(): void {
-    
-      this.retrieveFromLocalStorage();
+    this.formPasswordUpdate = this.formBuilder.group({
+      id: [0],
+      // Patron de password sin espacios, que aceta numeros, letras y simbolos
+      password: ["", [Validators.required, Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&()+-{|},;.:_^<=>~\"'`/])(?!.*\\s).{4,}$")]],
+      confirmPassword: ["", [Validators.required, Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&()+-{|},;.:_^<=>~\"'`/])(?!.*\\s).{4,}$")]]
+    });
 
-      
+    this.retrieveFromLocalStorage();
+  }
 
-      this.formPasswordUpdate = this.formBuilder.group ({
-        id:[0],
-        password:["",[Validators.required,Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&()+-{|},;.:_^<=>~\"'`/])(?!.*\\s).{4,}$")]],
-        confirmPassword:["",[Validators.required,Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&()+-{|},;.:_^<=>~\"'`/])(?!.*\\s).{4,}$")]]
-      })
-
-      this.fillForm();
-      
-      
+  // Funcion para recuperar al usuario y cargar sus datos en el formulario
+  retrieveFromLocalStorage() {
+    // Recuperacion del usuario actual mediante el id guardado en el localstorage
+    let value = this.userService.getItem('id');
+    let currentUser = 0;
+    if (value !== null) {
+      currentUser = parseInt(value);
+      this.userService.getLoggedUser(currentUser).subscribe((data: Usuario) => {
+        this.user = data;
+        // Llamada a la funcion para rellenar el formulario con los datos obtenidos
+        this.fillForm();
+      });
     }
-    
-    
-    retrieveFromLocalStorage() {
-      this.user = JSON.parse(localStorage.getItem('usuario') || '')
-      console.log(this.user)
-      let value = this.userService.getItem('id');
-      let currentUser = 0;
-      if(value!=null){
-        currentUser = parseInt(value);
-        
-        this.userService.getLoggedUser(currentUser).subscribe((data:Usuario)=>{
-          
-          this.user = data;
-        });
-      }
-      
-      
-    }
+  }
 
-    fillForm(){
-        this.formPasswordUpdate.patchValue({
-          id: this.user.id,
-          
-    })
-      
-    }
+  // Funcion para rellenar los datos del usuario una vez retornado
+  fillForm() {
+    this.formPasswordUpdate.patchValue({
+      id: this.user.id
+    });
+  }
 
-    formPasswordUpdate:FormGroup = new FormGroup({
-      id: new FormControl(""),
-        password:new FormControl(""),
-        confirmPassword:new FormControl(""),
-      
-    })
+  // Inicializacion del formulario
+  formPasswordUpdate: FormGroup = new FormGroup({
+    id: new FormControl(""),
+    password: new FormControl(""),
+    confirmPassword: new FormControl(""),
+  });
 
-    get password(){
+  // Getters para acceder desde HTML a los controles del formulario
+  get password() {
     return this.formPasswordUpdate.get('password')!;
   }
 
-  get confirmPassword(){
+  get confirmPassword() {
     return this.formPasswordUpdate.get('confirmPassword')!;
   }
 
-    
-    update(){
-      if(this.formPasswordUpdate.value.password === this.formPasswordUpdate.value.confirmPassword){
-      //////////////////////////////////////  
+  // Funcion para actualizar el password del usuario
+  update() {
+    // Comparacion de las dos introducciones de password
+    if (this.formPasswordUpdate.value.password === this.formPasswordUpdate.value.confirmPassword) {
       let username = this.user.username;
       let password = this.formPasswordUpdate.value.password;
-      let credentials:any ={username,password};
-        this.userService.updateUserPassword(this.user.id,this.formPasswordUpdate.value.password).subscribe((data:Usuario) =>{
-          console.log(data);
-          this.userService.sendUser(credentials).subscribe((data:Usuario) =>{
-              console.log(localStorage);
-                  localStorage.setItem('usuario', JSON.stringify(data));
-                  console.log(localStorage);
-                
-                
-                  const idUsuario = data.id.toString();
-                  
-                  this.userService.setItem('id',idUsuario);
-            })
-        
-                    
-          this.router.navigate(['/profile']);
-          
-         
-      })
-    ////////////////////////////////////
-    }else{
-    
-     this.formPasswordUpdate.setErrors({comparePassword: true})
+      let credentials: any = {username, password};
+      // Envio del nuevo password del formulario al servicio de usuario
+      this.userService.updateUserPassword(this.user.id, this.formPasswordUpdate.value.password).subscribe((data: Usuario) => {
+        // Envio de las credenciales con el username y el nuevo password para relanzar el login y no perder la sesion
+        this.userService.sendUser(credentials).subscribe((data: Usuario) => {
+          // Guardado en el almacenamiento local del objeto Usuario actualizado
+          localStorage.setItem('usuario', JSON.stringify(data));
+
+          const idUsuario = data.id.toString();
+          this.userService.setItem('id', idUsuario);
+        });
+        // Navegacion a la pagina de Perfil tras realizar todas las acciones con exito
+        this.router.navigate(['/profile']);
+      });
+    } else {
+      // Mostrar error si la password nueva y su confirmacion no coinciden
+      this.formPasswordUpdate.setErrors({comparePassword: true});
     }
-    };
+  }
 
-    readonly dialog = inject(MatDialog);
+  // Inyeccion de dependencias para usar MatDialog
+  readonly dialog = inject(MatDialog);
+  // Funcion para abrir el componente para eliminar la cuenta del usuario
+  openDeleteUserDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(UserDeleteComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
 
-    openDeleteUserDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-        this.dialog.open(UserDeleteComponent, {
-          width: '250px',
-          enterAnimationDuration,
-          exitAnimationDuration,
-        })
-      
-      }
-
-      logout(){
-      this.userService.logoutUser().subscribe(()=>{
+  // Funcion para cerrar sesion y limpiar los datos del usuario
+  logout() {
+    this.userService.logoutUser().subscribe(() => {
       localStorage.clear();
       this.router.navigate(['/login']);
     });
-    
   }
 
-  toggleView(){ 
-      this.showMenu = !this.showMenu;
-      
-      
-      
-      
-    }
+  // Funcion para mostrar u ocultar el menu desplegable
+  toggleView() {
+    this.hideMenu = !this.hideMenu;
+  }
+
 }

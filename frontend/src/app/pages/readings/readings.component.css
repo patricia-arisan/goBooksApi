@@ -1,36 +1,28 @@
-
-
-.libros{
+/* Estilo general de Libros */
+.books {
     width: 100%;
     max-width: 1050px;
     margin: 0 auto;
-    /* font-family: Arial, Helvetica, sans-serif; */
 }
 
-h2{
-    margin: auto;
-    margin-top: 32px;
-    margin-bottom: 14px;
+h2 {
+    margin: 32px auto 14px;
     padding-bottom: 18px;
-    /* width: 1042px; */
     width: 100%;
     max-width: 1050px;
     text-align: center;
     font-size: 2.8em;
     border-bottom: 1px solid #d0d4dd;
     color: #46434e;
- 
 }
-.opciones{
-    
-   
-    /* margin-left: 156px; */
-    
+
+/* Estilos filtrado de lecturas */
+.options {
     margin-bottom: 20px;
     display: inline-block;
 }
 
-button{
+button {
     margin-right: 4px;
     border-radius: 5px;
     border: none;
@@ -38,204 +30,157 @@ button{
     font-weight: bold;
 }
 
-button:focus{
+button:focus {
     background: rgb(255, 141, 11);
     color: white;
     font-weight: bold;
-   
-    
 }
 
-.listadoLibros{
+/* Estilo para el listado de libros */
+.book-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     column-gap: 3rem;
     width: 1050px;
-    
     text-align: center;
     height: max-content;
-    /* margin-left: 150px; */
     margin-top: 30px;
 }
-.libro{
-   height: 350px;
-    width: 220px; 
+
+.book {
+    height: 350px;
+    width: 220px;
     margin-bottom: 38px;
 }
-#portada{
+
+#cover {
     height: 300px;
     width: 220px;
-    
     box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
-    
-   
 }
 
-
-
-.nombre{
+.name {
     margin-top: 5px;
     font-size: 0.95em;
 }
-.nombre a{
+
+.name a {
     text-decoration: none;
-    color:rgb(99, 99, 99);
-    
+    color: rgb(99, 99, 99);
+
 }
 
-.paginator{
+/* Estilo del paginador */
+.paginator {
     margin-top: 14px;
     background-color: white;
-    
 }
 
+/* Media queries para pantallas grandes */
 @media (max-width: 1200px) {
-    .libros{
-    
-    max-width: 850px;
-    
-    
-}
-
-    h2{
-    
-    max-width: 850px;
-    
-    
+    .books {
+        max-width: 850px;
     }
 
-    .listadoLibros{
-    
-    max-width: 850px;
-    column-gap: 3.5rem;
-    grid-template-columns: repeat(3, 1fr);
+    h2 {
+        max-width: 850px;
     }
-    .libro{
-   
-    width: 240px; 
-    margin-bottom: 58px;
-}
 
-    #portada{
-    height: 320px;
-    width: 240px;
-    
-    
-    
-   
-}
+    .book-list {
+        max-width: 850px;
+        column-gap: 3.5rem;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .book {
+        width: 240px;
+        margin-bottom: 58px;
+    }
+
+    #cover {
+        height: 320px;
+        width: 240px;
+    }
 }
 
 @media (max-width: 899px) {
-    .libros{
-    
-    max-width: 650px;
-    
-    
-}
+    .books {
+        max-width: 650px;
+    }
 
-h2{
-    
-    max-width: 650px;
-    
-    
-}
+    h2 {
+        max-width: 650px;
+    }
 
-.listadoLibros{
-    
-    max-width: 650px;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 7rem;
-}
+    .book-list {
+        max-width: 650px;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 7rem;
+    }
 
-.libro{
-   
-    width: 260px; 
-    /* margin-bottom: 58px; */
-}
-#portada{
-    height: 340px;
-    width: 260px;
-    
-    
-    
-   
-}
+    .book {
+        width: 260px;
+    }
 
+    #cover {
+        height: 340px;
+        width: 260px;
+    }
 }
 
 @media (max-width: 699px) {
+    .books {
+        max-width: 470px;
+    }
 
-    .libros{
-    
-    max-width: 470px;
-    
-    
-}
+    h2 {
+        font-size: 2.6em;
+        max-width: 470px;
+    }
 
-h2{
-    font-size: 2.6em;
-    max-width: 470px;
-    
-    
-}
+    .book-list {
+        max-width: 470px;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 2rem;
+    }
 
-.listadoLibros{
-    
-    max-width: 470px;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 2rem;
-}
+    .book {
+        width: 220px;
+        margin-bottom: 38px;
+    }
 
-.libro{
-   
-    width: 220px; 
-    margin-bottom: 38px;
-}
-#portada{
-    height: 300px;
-    width: 220px;
-    
-   
-    
-   
+    #cover {
+        height: 300px;
+        width: 220px;
+    }
 }
 
-}
+/* Media query para pantallas de menor dimension */
+@media (max-width: 480px) {
+    .books {
+        max-width: 360px;
+    }
 
-@media (max-width: 480px){
+    h2 {
+        font-size: 2.4em;
+        max-width: 360px;
+        margin-top: 50px;
+    }
 
-    .libros{
-    
-    max-width: 360px;
-    
-    
-}
+    .book-list {
+        max-width: 360px;
+        grid-template-columns: repeat(1, 1fr);
+    }
 
-h2{
-    font-size: 2.4em;
-    max-width: 360px;
-    margin-top: 50px;
-    
-}
-    .listadoLibros{
-    
-    max-width: 360px;
-    grid-template-columns: repeat(1, 1fr);
-    
-}
+    .book {
+        margin: auto;
+        width: 260px;
+        margin-bottom: 58px;
+    }
 
-.libro{
-   margin: auto;
-    width: 260px; 
-    margin-bottom: 58px;
-}
-#portada{
-    height: 340px;
-    width: 260px;
-    
-    
-    
-   
-}
+    #cover {
+        height: 340px;
+        width: 260px;
+
+    }
 }
