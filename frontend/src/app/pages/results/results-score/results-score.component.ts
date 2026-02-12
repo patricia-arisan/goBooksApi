@@ -10,7 +10,7 @@ import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/materi
  * Componente para mostrar los libros con puntuacion, ordenados de mayor a menor
  */
 @Component({
-  selector: 'app-results',
+  selector: 'app-results-score',
   standalone: true,
   imports: [RouterLink, HeaderUserComponent, MatPaginatorModule],
   templateUrl: './results-score.component.html',

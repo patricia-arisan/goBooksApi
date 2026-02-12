@@ -56,14 +56,14 @@ export class ReadingsComponent implements OnInit {
     }   
   }
 
-  getReadingsByState(idEstado: number) {
+  getReadingsByState(idState: number) {
     // Obtencion del id del usuario del localStorage
     let value = this.userService.getItem('id'); 
     let currentUser = 0;
     if (value !== null) {
       currentUser = parseInt(value);
       // Obtencion de las lecturas del usuario segun su estado con el servicio de lectura
-      this.readingService.getReadingsByUserState(currentUser, idEstado).subscribe((data: Lectura[]) => {
+      this.readingService.getReadingsByUserState(currentUser, idState).subscribe((data: Lectura[]) => {
         this.readings = data;
         // Guardado del total de elementos del listado para la posterior paginacion
         this.totalItems = this.readings.length;

@@ -21,11 +21,11 @@
         <img src="{{libro.portada}}" id="cover" alt="{{libro.nombre}}" /></a>
       }
       <p class="name">
-        @if(user.rol.id===2) {
-        <a [routerLink]="['/books/book-section',libro.id]">{{libro.nombre}}</a>
-        }@else if(user.rol.id===1) {
-        <a [routerLink]="['/admin-books/book-section',libro.id]">{{libro.nombre}}</a>
-        }
+      @if(user.rol.id===2) {
+      <a [routerLink]="['/books/book-section',libro.id]">{{libro.nombre}}</a>
+      }@else if(user.rol.id===1) {
+      <a [routerLink]="['/admin-books/book-section',libro.id]">{{libro.nombre}}</a>
+      }
       </p>
     </div>
     }

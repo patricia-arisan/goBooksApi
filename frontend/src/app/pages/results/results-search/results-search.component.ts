@@ -14,7 +14,7 @@ import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-a
  * Componente para mostrar los resultados de busqueda de libros
  */
 @Component({
-  selector: 'app-results',
+  selector: 'app-results-search',
   standalone: true,
   imports: [RouterLink, HeaderUserComponent, HeaderAdminComponent, MatPaginatorModule],
   templateUrl: './results-search.component.html',

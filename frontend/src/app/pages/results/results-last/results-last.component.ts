@@ -1,49 +1,56 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-
+import { RouterLink } from '@angular/router';
 
 import { HeaderUserComponent } from '../../shared/headers/header-user/header-user.component';
 import { Libro } from '../../../interfaces/libro';
 import { BookService } from '../../../services/book-service';
 import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
-
+/**
+ * Componente para mostrar los libros por orden de incorporacion, del mas nuevo al mas antiguo
+ */
 @Component({
-  selector: 'app-results',
+  selector: 'app-results-last',
   standalone: true,
-  imports: [RouterLink,HeaderUserComponent,MatPaginatorModule],
+  imports: [RouterLink, HeaderUserComponent, MatPaginatorModule],
   templateUrl: './results-last.component.html',
   styleUrl: './results-last.component.css'
 })
-export class ResultsLastComponent implements OnInit{
-  libros!: Libro[];
+export class ResultsLastComponent implements OnInit {
+  books!: Libro[];
+  // Controles del paginator
   totalItems = 0;
   pageSize = 16;
   pageIndex = 0;
 
   constructor(
-    
     private bookService: BookService,
     private paginator: MatPaginatorIntl
-      
-    ){}
+  ) {}
 
+  /**
+   * Listado de libros por orden de incorporacion al iniciar el componente
+   * Cambio de idioma a mostrar del paginator
+   */
   ngOnInit(): void {
-    
     this.getAllLastBooks();
     this.translatePaginator();
   }
 
-  getAllLastBooks(){
-      this.bookService.getAllLastBooks().subscribe((data:Libro[])=>{
-              this.libros = data;
-              this.totalItems=this.libros.length;
-            })
-      
-    }
-  
-    translatePaginator() {
+  // Funcion para recuperar el listado de libros, del mas actual al primero incorporado
+  getAllLastBooks() {
+    this.bookService.getAllLastBooks().subscribe((data: Libro[]) => {
+      this.books = data;
+      // Guardado del total de elementos del listado para la posterior paginacion
+      this.totalItems = this.books.length;
+    });
+  }
+
+  // Funcion para cambiar el idioma y personalizar el paginator
+  translatePaginator() {
+    // Cambio del texto del selector
     this.paginator.itemsPerPageLabel = "Resultados por página";
+    // Texto del conteo de paginas existentes en funcion de los elementos mostrados de la lista
     this.paginator.getRangeLabel = (page: number, pageSize: number, length: number) => {
       if (length === 0) {
         return `Página 1 de 1`;
@@ -53,6 +60,7 @@ export class ResultsLastComponent implements OnInit{
     }
   }
 
+  // Funcion para detectar los cambios de pagina y en los elementos a mostrar por el paginator
   onPageChange(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
