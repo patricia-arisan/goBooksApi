@@ -1,9 +1,11 @@
-import { Component, ElementRef, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../../../services/user-service';
 import { Usuario } from '../../../../interfaces/usuario';
 
-
+/**
+ * Componente para recuperar la informacion del usuario administrador para la navegacion
+ */
 @Component({
   selector: 'app-header-admin',
   standalone: true,
@@ -11,84 +13,62 @@ import { Usuario } from '../../../../interfaces/usuario';
   templateUrl: './header-admin.component.html',
   styleUrl: './header-admin.component.css'
 })
-export class HeaderAdminComponent {
+export class HeaderAdminComponent implements OnInit{
   user!: Usuario;
-  showMenu: Boolean = true;
-  showAccount: Boolean = true;
-  
+  hideMenu: Boolean = true;
+  hideAccount: Boolean = true;
+
   constructor(
     private router: Router,
     private userService: UserService,
     private eRef: ElementRef
-    
-  ){}
+  ) {}
 
+  // Recuperacion del administrador al iniciar el componente
   ngOnInit(): void {
-  
-      this.retrieveFromLocalStorage();
-    }
-  
-  retrieveFromLocalStorage() {
-  
-      this.user = JSON.parse(localStorage.getItem('usuario') || '')
-      //this.user = JSON.parse(localStorage.getItem('usuario') || '')
-      let value = this.userService.getItem('id');
-      //let credentials = localStorage.getItem('token') || ''
-      //   let credentials = localStorage.getItem('token') || ''
-      //let cred = JSON.stringify(credentials);
-      console.log("Value antes de current: " + value)
-  
-      let currentUser = 0;
-      if (value !== null) { //en angular ===
-        currentUser = parseInt(value);
-        console.log("STRING A INT" + currentUser);
-  
-        //this.userService.getLoggedUser(currentUser,this.user).subscribe((data:Usuario)=>{
-  
-        this.userService.getLoggedUser(currentUser).subscribe((data: Usuario) => {
-  
-          this.user = data;
-          console.log("DATOS HOME " + this.user);
-          console.log("Local" + this.user.id);
-  
-        });
-  
-      }
-    }
+    this.retrieveFromLocalStorage();
+  }
 
-  logout(){
-    this.userService.logoutUser().subscribe(()=>{
+  // Funcion para recuperar al usuario y cargar sus datos en el formulario
+  retrieveFromLocalStorage() {
+    // Recuperacion del usuario actual mediante el id guardado en el localstorage
+    let value = this.userService.getItem('id');
+    let currentUser = 0;
+    if (value !== null) {
+      currentUser = parseInt(value);
+      this.userService.getLoggedUser(currentUser).subscribe((data: Usuario) => {
+        this.user = data;
+      });
+    }
+  }
+
+  // Funcion para cerrar sesion y limpiar los datos del administrador
+  logout() {
+    this.userService.logoutUser().subscribe(() => {
       localStorage.clear();
       this.router.navigate(['/login']);
     });
-    
   }
 
-    toggleView(){ 
-    this.showMenu = !this.showMenu;
-    
-    
-    
-    
+  // Funcion para mostrar u ocultar el menu desplegable
+  toggleViewMenu() {
+    this.hideMenu = !this.hideMenu;
   }
 
-  toggleViewAccount(){ 
-    this.showAccount = !this.showAccount;
-    
-    
-    
-    
+  // Funcion para mostrar u ocultar las opciones del administrador
+  toggleViewAccount() {
+    this.hideAccount = !this.hideAccount;
   }
 
   @HostListener('document:click', ['$event'])
   clickOut(event: Event) {
-    // Cerrar deplegable al pinchar fuera de la lista
+    // Funcion para cerrar los desplegables al pinchar por la pantalla
     if (!this.eRef.nativeElement.contains(event.target)) {
-      this.showAccount = true;
+      this.hideAccount = true;
     }
 
     if (!this.eRef.nativeElement.contains(event.target)) {
-      this.showMenu = true;
+      this.hideMenu = true;
     }
   }
 }

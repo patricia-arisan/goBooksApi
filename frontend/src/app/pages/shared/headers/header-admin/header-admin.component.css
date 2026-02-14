@@ -1,58 +1,84 @@
-.header{
+/* Estilo general de Header de administrador */
+.header {
 	height: 120px;
 	background-color: rgb(253, 211, 159);
 	box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
-	
 }
 
-.header-content{
+/* Estilo del contenido de dentro del header */
+.header-content {
 	width: 100%;
-    max-width: 1300px;
-    margin: 0 auto;
+	max-width: 1300px;
+	margin: 0 auto;
 }
 
-#logo{
+#logo {
 	height: 50px;
 	width: 50px;
 	margin-top: 35px;
 	margin-left: 40px;
 }
-#logo,h1{
+
+#logo, h1 {
 	float: left;
 }
 
-h1{
-	color:rgb(255, 255, 255);
-	font-weight:bold;
+h1 {
+	color: rgb(255, 255, 255);
+	font-weight: bold;
 	margin-top: 36px;
 	margin-left: 15px;
 	font-size: 2.5em;
 }
-.account {    
-	box-shadow: 0 0 3px 1px #ffffff;
-	margin-top: 38px;
-	margin-right: 50px;
-	background-color: rgba(248, 186, 110, 0.705);
-    padding: 4px 16px;
-    border-radius: 3px;
-	min-width: max-content;
-	border: none;
-	
+
+/* Ocultacion de menu de navegacion para pantallas de menor dimension */
+.menu {
+	display: none;
 }
 
-.account-options{
+/* Estilo contenedor menu desplegable usuario */
+.account-options {
 	float: right;
-	
 }
 
-.options{
+.options {
 	position: relative;
 	display: inline-block;
 	margin-top: 5px;
 }
 
-.links{
-    position: absolute;
+/* Estilo boton del menu desplegable */
+.account {
+	box-shadow: 0 0 3px 1px #ffffff;
+	margin-top: 38px;
+	margin-right: 50px;
+	background-color: rgba(248, 186, 110, 0.705);
+	padding: 4px 16px;
+	border-radius: 3px;
+	min-width: max-content;
+	border: none;
+}
+
+#user {
+	height: 30px;
+	width: 30px;
+	margin: 3px 12px 3px 0;
+	filter: invert(100%);
+	float: left;
+}
+
+.username {
+	color: white;
+	font-size: 1.2em;
+	font-weight: bold;
+	padding-right: 4px;
+	float: left;
+	margin-top: 2px;
+}
+
+/* Estilo desplegable */
+.options-admin {
+	position: absolute;
 	background-color: #f9f9f9;
 	min-width: 200px;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -60,154 +86,119 @@ h1{
 	list-style: none;
 	padding: 0;
 	margin: 0;
-	top: 100%;
 	left: 0;
-	margin-top: -2px;	
-	
+	margin-top: -2px;
+
 }
 
-.link {
-    color: gray;
-    padding: 12px 16px;
-    text-decoration: none;
-    
-    text-align: left;
-}
-.link a{
-	text-decoration: none;
+/* Estilo de las opciones */
+/* .option-admin {
 	color: gray;
-	display: block;
+	padding: 12px 16px;
+	text-decoration: none;
+
+	text-align: left;
+} */
+
+.option-admin button {
+	border: none;
+	background: none;
+	text-align: left;
+	width: 100%;
+  	padding: 12px 16px;
+	color: gray;
 }
 
-
-.link:hover {
-    background-color: #f1f1f1;
-	
+.option-admin:hover {
+	background-color: #f1f1f1;
 	cursor: pointer;
 }
 
-.userName{
-	color: white;
-	font-size: 1.2em;
+/* Estilo apartado navegacion */
+.nav {
+	--bs-nav-link-color: gray;
 	font-weight: bold;
-	padding-right: 4px;
-	float: left;
-	margin-top: 2px;
-	
- }
-#user{
-	height: 30px;
-	width: 30px;
-	margin-right: 12px;
-	filter: invert(100%);
-	margin-top: 3px;
-	margin-bottom: 3px;
-	float: left;
-	
+	--bs-nav-link-hover-color: #46434e;
 }
-.nav{
-	--bs-nav-link-color:gray;
-	font-weight:bold;
-	--bs-nav-link-hover-color:#46434e;
-}
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+
+.nav-pills .nav-link.active {
 	background-color: rgb(255, 141, 11);
 }
 
-.menu{
-	display: none;
+.nav-pills .nav-link.active:hover {
+	background-color: rgb(252, 163, 40);
 }
 
-@media (max-width: 1200px){
-	.header-content{
-    max-width: 1100px;
-	
+/* Media queries para pantallas grandes */
+@media (max-width: 1200px) {
+	.header-content {
+		max-width: 1100px;
 	}
 }
 
-@media (max-width: 1000px){
-	.header-content{
-    max-width: 900px;
+@media (max-width: 1000px) {
+	.header-content {
+		max-width: 900px;
 	}
 
-	#logo{
+	#logo {
 		margin-left: 10px;
 	}
 
-	.account{
+	.account {
 		margin-right: 10px;
 	}
 }
 
-@media (max-width: 899px){
-	.header-content{
-    	max-width: 800px;
+@media (max-width: 899px) {
+	.header-content {
+		max-width: 800px;
 	}
 
-	#logo{
+	#logo {
 		margin-left: 20px;
 	}
 
-	.account{
+	.account {
 		margin-right: 20px;
 	}
 
-	.links {	
-		min-width: 171px;	
+	.options-admin {
+		min-width: 171px;
 	}
 
-	.container{
+	.routes {
 		width: max-content;
 		max-width: 800px;
 	}
 }
 
-@media (max-width: 699px){
-	.container{
+@media (max-width: 699px) {
+	.routes {
+		display: none;
+	}	
+
+	#logo {
 		display: none;
 	}
 
-	.links{	
-		min-width: 130px;
-		margin-left: -90px;	
-		z-index: 4;		
-	}
-
-	.userName{
-		display: none;
-	}
-
-	.account{
-		border-radius: 50%;
-		padding: 5px;
-		margin-right: 30px;
-		margin-top: 38px;		
-	}
-
-	#user{
-		margin: auto;		
-	}
-
-	#logo{
-		display: none;
-	}
-
-	h1{
+	h1 {
 		float: left;
-		margin-left: 86px;		
+		margin-left: 86px;
 	}
 
-	#menu{		
-		filter: invert(100%);
-		height: 24px;
-		width: 24px;		
+	/* Estilo menu de navegacion para pantallas de menor dimension */
+	.menu {
+		display: block;
+		position: absolute;
+		z-index: 3;
+		margin-top: 49px;
+		max-width: 699px;
+		width: 100%;
+		height: max-content;
 	}
 
-	.options{
-		z-index: 5;
-	}
-
-	.view{
+	.view {
 		border: none;
 		background: none;
 		height: 29px;
@@ -215,70 +206,84 @@ h1{
 		margin-left: 38px;
 	}
 
-	.urls{
+	#menu {
+		filter: invert(100%);
+		height: 24px;
+		width: 24px;
+	}
+
+	/* Estilo desplegable nevegacion */
+	.menu-options {
 		background-color: #f9f9f9;
 		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-		list-style: none;		
-		/* padding: 0; */
-		/* margin: 0; */
-		/* top: 100%;	 */
+		list-style: none;
 		padding-left: 60px;
-		/* left: 0; */
 		margin-top: 44px;
 		height: max-content;
 		margin-left: -40px;
 	}
 
-		.linkAdap button{
+	/* Estilos opciones de menu desplegable de navegacion */
+	.option {
+		list-style-type: none;		
+		margin-left: -30px;
+	}
+
+	.option button {
 		border: none;
 		background: none;
+		text-align: left;
+	}
+
+	.option a {
+		text-decoration: none;		
+		display: block;
+	}
+
+	.option a, .option button {
 		color: gray;
-		margin-left: -6px;
-		
+		width: 100%;
+		padding: 12px 0px 12px 75px;
 	}
 
-	.linkAdap {
-	color: gray;
-	padding: 12px 0px 12px 75px;
-	text-decoration: none;
-	list-style-type: none;
-	text-align: left;
-	margin-left: -30px;
-}
-
-.linkAdap a {
-	text-decoration: none;
-	color: gray;
-	display: block;
-	
-}
-
-.linkAdap:hover {
-	background-color: #f1f1f1;
-	cursor: pointer;
-}
-	
-.menu{ 
-	display: block;
-	position: absolute; 
-	/*ver si tocar, es para que quede por encima en la pagina*/
-	z-index: 3;	
-	margin-top: 49px;
-	max-width: 699px;
-	width: 100%;
-	height: max-content;
-}
-}
-
-@media (max-width: 480px){
-	.header-content{
-    	max-width: 480px;
+	.option:hover {
+		background-color: #f1f1f1;
+		cursor: pointer;
 	}
 
-	.account{
+	.account {
+		border-radius: 50%;
+		padding: 5px;
+		margin-right: 30px;
+		margin-top: 38px;
+	}
+
+	.username {
+		display: none;
+	}	
+
+	#user {
+		margin: auto;
+	}
+
+	.options {
+		z-index: 5;
+	}
+
+	.options-admin {
+		min-width: 130px;
+		margin-left: -90px;
+		z-index: 4;
+	}	
+}
+
+/* Media query para pantallas de menor dimension */
+@media (max-width: 480px) {
+	.header-content {
+		max-width: 480px;
+	}
+
+	.account {
 		margin-right: 40px;
 	}
-	
-	
-
 }
