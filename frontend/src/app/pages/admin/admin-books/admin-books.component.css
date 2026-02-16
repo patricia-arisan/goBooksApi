@@ -1,182 +1,155 @@
-.administracion{
-    /* width: 80%;
-    margin: auto; */
+/* Estilo general de Administrar libros */
+.administration {
     width: 100%;
     max-width: 1080px;
     margin: 0 auto;
 }
-h2{
+
+h2 {
     margin-top: 40px;
     margin-bottom: 20px;
     width: max-content;
-    
-    
 }
-.vista{
-    float: left;
-    /* margin-top: -53px;
-   margin-left: 256px; */
-   border: none;
-   background-color: rgb(253, 160, 54);
-   
-   /* width: 32px;
-   height: 32px; */
-   width: 56px;
-   height: 56px;
-   margin-right: 5px;
-   border-radius: 4px;
 
+/* Estilos cambio de vista */
+.view {
+    float: left;
+    border: none;
+    background-color: rgb(253, 160, 54);
+    width: 56px;
+    height: 56px;
+    margin-right: 5px;
+    border-radius: 4px;
 }
-.vista img{
+
+.view img {
     filter: invert(100%);
     width: 17px;
     margin-bottom: 3px;
 }
 
+/* Estilo del buscador */
 .mat-mdc-form-field {
     width: 260px;
 }
-.mat-mdc-table {
-    background-color: white;
-    margin-bottom: 25px;
-    
-}
 
-th{
-    font-weight: bolder;
-    font-size: 1.1em;
-    color: #46434e;
-
-    border-bottom: 2px solid rgb(165, 164, 164) ;
-}
-td{
-    border-bottom: 1px solid rgb(165, 164, 164) ;
-}
-
-
-.edit-buttom{
-    background-color: rgb(253, 160, 54);
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 40px;
-    
-    
-    
-}
-.edit{
-    filter: invert(100%);
-	width: 24px;
-    height: 24px;
-    
-	
-    
-}
-#botonCrear{
+.create-button {
     float: right;
     background-color: rgb(253, 160, 54);
     color: white;
     height: 56px;
     width: 100px;
-    
     padding: 15px;
     font-weight: 500;
     text-align: center;
     border-radius: 5px;
-    
-    /* width: 1139px; */
 }
 
-/* Todo nuevo */
-.libros{
-    
-    margin: auto;
-    
+a {
+    text-decoration: none;
 }
-.listadoLibros{
+
+/* Estilos de la tabla */
+.mat-mdc-table {
+    background-color: white;
+    margin-bottom: 25px;
+}
+
+th {
+    font-weight: bolder;
+    font-size: 1.1em;
+    color: #46434e;
+    border-bottom: 2px solid rgb(165, 164, 164);
+}
+
+td {
+    border-bottom: 1px solid rgb(165, 164, 164);
+}
+
+.edit-buttom {
+    background-color: rgb(253, 160, 54);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+}
+
+.edit {
+    filter: invert(100%);
+    width: 24px;
+    height: 24px;
+}
+
+/* Estilo para el listado de libros */
+.book-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    
     height: max-content;
     width: 1150px;
     text-align: center;
-    /* border: 1px solid black; */
-    
     margin-top: 30px;
-    
 }
-.libro{
-   height: 350px;
-    width: 220px; 
-    /* border: 1px solid black; */
+
+.book {
+    height: 350px;
+    width: 220px;
     margin-bottom: 38px;
 }
 
-#portada{
+#cover {
     height: 300px;
     width: 220px;
-    
     box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
-    
-   
-}
-.nombre{
-    margin-top: 5px;
-    font-size: 0.95em;
-    color:rgb(99, 99, 99);
-    
-}
-a{
-    text-decoration: none;
-    
-    
-    
-}
-.paginator{
-    
-    /* margin-top: 840px;  */
-    margin-top: 14px;
-    
-    background-color: white;
-    
 }
 
-.titulo,.autor,.editorial,.genero{
+.name {
+    margin-top: 5px;
+    font-size: 0.95em;
+    color: rgb(99, 99, 99);
+
+}
+
+/* Estilo del paginador */
+.paginator {
+    margin-top: 14px;
+    background-color: white;
+}
+
+.title, .author, .publisher, .genre {
     cursor: pointer;
 }
 
+/* Media queries para pantallas grandes */
 @media (max-width: 1200px) {
-    .administracion{
-        max-width: 850px;  
+    .administration {
+        max-width: 850px;
     }
 
-    h2{
+    h2 {
         margin-top: 50px;
     }
 
-    .listadoLibros{    
+    .book-list {
         grid-template-columns: repeat(3, 1fr);
         column-gap: 5.8rem;
         max-width: 850px;
     }
-
-    
 }
 
 @media (max-width: 899px) {
-    .administracion{
-        max-width: 650px;  
+    .administration {
+        max-width: 650px;
     }
 
-    h2{
+    h2 {
         margin-top: 60px;
     }
 
-    .libros{
+    .books {
         border-top: 1px solid #d0d4dd;
     }
 
-    .listadoLibros{    
+    .book-list {
         max-width: 520px;
         grid-template-columns: repeat(2, 1fr);
         column-gap: 5rem;
@@ -185,48 +158,47 @@ a{
 }
 
 @media (max-width: 699px) {
-    .administracion{
+    .administration {
         max-width: 470px;
     }
 
-    h2{
+    h2 {
         margin-top: 70px;
     }
 
-    .editorial{
+    .publisher {
         display: none;
     }
 
-    .header-publisher{
+    .header-publisher {
         display: none;
     }
-    
-    .titulo{
-        padding: 10px  ;
+
+    .title {
+        padding: 10px;
     }
 
-    .listadoLibros{
+    .book-list {
         column-gap: 1rem;
         max-width: 450px;
     }
 
-    .libro{
+    .book {
         margin-bottom: 20px;
     }
 
-    #portada{
+    #cover {
         height: 280px;
         width: 200px;
     }
-    
 }
 
 @media (max-width: 480px) {
-    .administracion{
+    .administration {
         max-width: 420px;
     }
 
-    h2{
+    h2 {
         margin-top: 60px;
     }
 
@@ -234,27 +206,27 @@ a{
         width: 240px;
     }
 
-    th{
+    th {
         font-size: 1em;
     }
 
-    td{
+    td {
         font-size: 0.9em;
     }
 
-    .listadoLibros{
+    .book-list {
         max-width: 360px;
-        grid-template-columns: repeat(1, 1fr);    
+        grid-template-columns: repeat(1, 1fr);
     }
 
-    .libro{
+    .book {
         margin: auto;
-        width: 260px; 
+        width: 260px;
         margin-bottom: 78px;
     }
 
-    #portada{
+    #cover {
         height: 340px;
-        width: 260px; 
+        width: 260px;
     }
 }

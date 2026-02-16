@@ -1,39 +1,32 @@
 <!-- Header con navegacion para el administrador -->
 <app-header-admin></app-header-admin>
+<!-- Cuerpo de Home del administrador -->
 <div class="home">
-<!-- <div id="seccionBuscador">
-    <form [formGroup]="formSearch" (submit)="search()">
-        <input type="text" formControlName="clave" id="buscador" placeholder="Título, autor, editorial o ISBN" />
-        <button type="submit"><img src="/assets/main-home/search.png" class="lupa" alt="buscar" /></button>
-    </form>
-</div> -->
-<div id="apartados">
-<section id="ultimosLibros">
-    <h3>Últimos añadidos</h3>
-    <div id="seccionBuscador">
-    <form [formGroup]="formSearch" (submit)="search()">
-        <input type="text" formControlName="clave" id="buscador" placeholder="Título, autor, editorial o ISBN" />
-        <button type="submit"><img src="/assets/main-home/search.png" class="lupa" alt="buscar" /></button>
-    </form>
-</div>
-            <div class="listadoLibros">  
-@for (libro of libros.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro){
-    <div class="libro">
-    <a [routerLink]="['/admin-books/book-section',libro.id]" ><img src="{{libro.portada}}" id="portada" alt="{{libro.nombre}}"/></a>
-    <p class="nombre"><a [routerLink]="['/admin-books/book-section',libro.id]" >{{libro.nombre}}</a></p>
-  </div>
-}
-</div>  
-<mat-paginator class="paginator"
-              [length]="totalItems"
-              [pageSize]="pageSize"
-              [pageIndex]="pageIndex"
-              [pageSizeOptions]="[16, 32, 40]"
-              aria-label="Select page"
-              (page)="onPageChange($event)">
-</mat-paginator>
+    <div class="content">
+        <section class="last-books">
+            <h3>Últimos añadidos</h3>
+            <!-- Apartado buscador -->
+            <div class="search-section">
+                <form [formGroup]="formSearch" (submit)="search()">
+                    <input type="text" formControlName="clave" id="search" placeholder="Título, autor, editorial o ISBN" />
+                    <button type="submit" class="search-button"><img src="/assets/main-home/search.png" class="lens" alt="Búsqueda" /></button>
+                </form>
+            </div>
+            <!-- Listado de ultimos libros incorporados -->
+            <div class="book-list">
+                <!-- Recorrido del array de libros mostrando la seleccion extraida de items del paginador-->
+                @for (libro of books?.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro){
+                <div class="book">
+                    <a [routerLink]="['/admin-books/book-section',libro.id]"><img src="{{libro.portada}}" id="cover"
+                            alt="{{libro.nombre}}" /></a>
+                    <p class="name"><a [routerLink]="['/admin-books/book-section',libro.id]">{{libro.nombre}}</a></p>
+                </div>
+                }
+            </div>
+            <!-- Seccion de paginacion de la lista de libros -->
+            <mat-paginator class="paginator" [length]="totalItems" [pageSize]="pageSize" [pageIndex]="pageIndex"
+                [pageSizeOptions]="[16, 32, 40]" aria-label="Select page" (page)="onPageChange($event)">
+            </mat-paginator>
         </section>
-       
+    </div>
 </div>
-</div>
-

@@ -166,11 +166,6 @@ h1 {
 	.options-admin {
 		min-width: 171px;
 	}
-
-	.routes {
-		width: max-content;
-		max-width: 800px;
-	}
 }
 
 @media (max-width: 699px) {

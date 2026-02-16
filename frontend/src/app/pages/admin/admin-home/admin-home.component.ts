@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 
-////
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { Usuario } from '../../../interfaces/usuario';
 import { Libro } from '../../../interfaces/libro';
@@ -11,103 +10,65 @@ import { Libro } from '../../../interfaces/libro';
 import { BookService } from '../../../services/book-service';
 import { HeaderAdminComponent } from '../../shared/headers/header-admin/header-admin.component';
 import { MatPaginatorIntl, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { UserService } from '../../../services/user-service';
 
-
-
+/**
+ * Componente de la Home del administrador
+ */
 @Component({
   selector: 'app-admin-home',
   standalone: true,
-  imports: [RouterLink,HeaderAdminComponent,FormsModule, ReactiveFormsModule,MatPaginatorModule], ///FormsModule, ReactiveFormsModule
+  imports: [RouterLink, HeaderAdminComponent, FormsModule, ReactiveFormsModule, MatPaginatorModule], 
   templateUrl: './admin-home.component.html',
   styleUrl: './admin-home.component.css'
 })
-export class AdminHomeComponent implements OnInit{
-  user!: Usuario;   
-  libros!: Libro[];
+export class AdminHomeComponent implements OnInit {
+  user!: Usuario;
+  books!: Libro[];
+  // Controles del paginator
   totalItems = 0;
   pageSize = 16;
   pageIndex = 0;
-  ///////////
-  // busqueda!: Search[]
-  busqueda!:string;
+  searchedWord!: string;
 
-constructor(
-    
+  constructor(
     private router: Router,
-    private userService: UserService,
     private bookService: BookService,
     private paginator: MatPaginatorIntl,
     private formBuilder: FormBuilder,
-   
-  ){}
+  ) {}
 
+  /**
+   * Carga de listado completo de ultimos libros al iniciar el componente
+   * Cambio de idioma a mostrar del paginator
+   * Definicion de estructura del formulario de busqueda de palabras clave
+   */
   ngOnInit(): void {
-   
-    this.retrieveFromLocalStorage();
     this.getAllLastBooks();
     this.translatePaginator();
 
-    //////
-    this.formSearch = this.formBuilder.group ({
-      
-      clave:[""],
-      
-      
+    this.formSearch = this.formBuilder.group({
+      clave: [""],
     });
-    
-
   }
 
-  ////
-  formSearch:FormGroup = new FormGroup({
-    
+  // Inicializacion del formulario de busqueda
+  formSearch: FormGroup = new FormGroup({
     clave: new FormControl(""),
-    
-  })
-  /////
+  });
   
-
-  retrieveFromLocalStorage() {
-    
-    this.user = JSON.parse(localStorage.getItem('usuario') || '')
-    //this.user = JSON.parse(localStorage.getItem('usuario') || '')
-    let value = this.userService.getItem('id');
-    //let credentials = localStorage.getItem('token') || ''
-  //   let credentials = localStorage.getItem('token') || ''
-  //let cred = JSON.stringify(credentials);
-    console.log("Value antes de current: " + value)
-   
-    let currentUser = 0;
-    if(value!==null){ //en angular ===
-      currentUser = parseInt(value);
-      console.log("STRING A INT" + currentUser);
-      
-      //this.userService.getLoggedUser(currentUser,this.user).subscribe((data:Usuario)=>{
-      
-      this.userService.getLoggedUser(currentUser).subscribe((data:Usuario)=>{
-        
-        this.user = data;
-        console.log("DATOS HOME " + this.user);
-        console.log("Local" + this.user.id);
-        
-      });
-      
-    }
-    
-    console.log(currentUser);
-    
+  // Funcion para listar ultimos libros incorporados
+  getAllLastBooks() {
+    this.bookService.getAllLastBooks().subscribe((data: Libro[]) => {
+      this.books = data;
+      // Guardado del total de elementos del listado para la posterior paginacion
+      this.totalItems = this.books.length;
+    });
   }
-  getAllLastBooks(){
-      this.bookService.getAllLastBooks().subscribe((data:Libro[])=>{
-              this.libros = data;
-              this.totalItems=this.libros.length;
-            })
-      
-    }
-  
-    translatePaginator() {
+
+  translatePaginator() {
+    // Cambio del texto del selector
     this.paginator.itemsPerPageLabel = "Resultados por página";
+    // Texto del conteo de paginas existentes en funcion de los elementos mostrados de la lista
     this.paginator.getRangeLabel = (page: number, pageSize: number, length: number) => {
       if (length === 0) {
         return `Página 1 de 1`;
@@ -117,22 +78,15 @@ constructor(
     }
   }
 
+  // Funcion para detectar los cambios de pagina y en los elementos a mostrar por el paginator
   onPageChange(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
   }
 
-  //////////////
-  search(){
-    let busqueda = this.formSearch.get('clave')?.value;
-    
-    this.router.navigate(['results/search',busqueda]); 
-   
-    
-  
-      
-    
+  // Redireccion a la pagina de resultados en la que se hara la busqueda del termino introducido
+  search() {
+    let searchedWord = this.formSearch.get('clave')?.value;
+    this.router.navigate(['results/search', searchedWord]);
   }
-  
-  
 }

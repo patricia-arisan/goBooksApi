@@ -1,18 +1,34 @@
-.home{
-    
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+/* Estilo general de Home */
+.home {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
 }
 
-#seccionBuscador {
+.content {
+	margin-top: 53px;
+}
+
+.last-books {
+	width: 100%;
+	max-width: 1100px;
+	margin: 0 auto;
+}
+
+h3 {
+	border-bottom: 1px solid #d0d4dd;
+	padding-bottom: 10px;
+	width: 100%;
+	max-width: 1200px;
+}
+
+/* Estilo del apartado del buscador */
+.search-section {
 	text-align: right;
 	margin-top: -58px;
-	/* margin-right: 20px; */
-	
 }
 
-#buscador {
+#search {
 	height: 40px;
 	width: 280px;
 	border-radius: 40px;
@@ -21,7 +37,7 @@
 	padding-left: 20px;
 }
 
-button {
+.search-button {
 	border: none;
 	background-color: rgb(253, 160, 54);
 	position: absolute;
@@ -30,201 +46,186 @@ button {
 	border-radius: 40px;
 }
 
-.lupa {
+.lens {
 	filter: invert(100%);
 	height: 30px;
 	padding: 8px;
 }
 
-#apartados {
-	margin-top: 53px;
-}
-
-h3{
-    /* margin-left: 80px; */
-	border-bottom: 1px solid #d0d4dd;
-	/* width: 82.5%; */
-	padding-bottom: 10px;
-    
-}
-#ultimosLibros{
-	width: 100%;
-	max-width: 1100px;
-	margin: 0 auto;
-}
-.listadoLibros{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+/* Estilo para el listado de libros */
+.book-list {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
 	column-gap: 4.4rem;
-    width: 1100px;
-    text-align: center;
-    height: max-content;
-    /* margin-left: 150px; */
-    margin-top: 30px;
-}
-.libro{
-   height: 350px;
-    width: 220px; 
-    margin-bottom: 38px;
+	width: 1100px;
+	text-align: center;
+	height: max-content;
+	margin-top: 30px;
 }
 
-#portada{
-    height: 300px;
-    width: 220px;
-    box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
+.book {
+	height: 350px;
+	width: 220px;
+	margin-bottom: 38px;
 }
 
-.nombre{
-    margin-top: 5px;
-    font-size: 0.95em;
+#cover {
+	height: 300px;
+	width: 220px;
+	box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
 }
 
-.nombre a{
-    text-decoration: none;
-    color:rgb(99, 99, 99);
+.name {
+	margin-top: 5px;
+	font-size: 0.95em;
 }
 
-.paginator{
-    margin-top: 14px;
-    background-color: white;
+.name a {
+	text-decoration: none;
+	color: rgb(99, 99, 99);
 }
 
+/* Estilo del paginador */
+.paginator {
+	margin-top: 14px;
+	background-color: white;
+}
+
+/* Media queries para pantallas grandes */
 @media (max-width: 1200px) {
-	.home{
-    max-width: 1050px;
+	.home {
+		max-width: 1050px;
 	}
 
-	#ultimosLibros{
-	max-width: 950px;
+	.last-books {
+		max-width: 950px;
 	}
 
-	.listadoLibros {
+	.book-list {
 		width: 100%;
-		/* margin-bottom: 15px; */
 	}
 
-	.libro {		
+	.book {
 		width: 100%;
 		margin-bottom: 15px;
 	}
 
-	#portada {
+	#cover {
 		height: 80%;
 		width: 100%;
 	}
 
-	.nombre {
+	.name {
 		font-size: 0.9em;
 	}
 }
 
 @media (max-width: 999px) {
-	.home{
-		max-width: 850px;
+	.home {
+		max-width: 850px;	
+		background-color: aqua;	
 	}
 
-	#ultimosLibros{
+	.last-books {
 		max-width: 670px;
+		background-color: blueviolet;
 	}
 
-	.listadoLibros{
-    grid-template-columns: repeat(3, 1fr);
-	column-gap: 1.2rem;
-    max-width: 670px;
+	.book-list {
+		grid-template-columns: repeat(3, 1fr);
+		column-gap: 1.3rem;
+		max-width:670px;
 	}
 
-	.libro{
-   height: 340px;
-    width: 210px;
-}
+	.book {
+		height: 340px;
+		width: 210px;
+	}
 
-#portada{
-    height: 270px;
-    width: 190px;
-}
+	#cover {
+		height: 270px;
+		width: 190px;
+	}
 
-.nombre{
-	padding-left: 8px;
-	padding-right: 8px;
-}
-
+	.name {
+		padding-left: 8px;
+		padding-right: 8px;
+	}
 }
 
 @media (max-width: 699px) {
-	.home{
+	.home {
 		max-width: 470px;
 	}
 
-	#ultimosLibros{
+	.last-books {
 		margin-top: 110px;
 		max-width: 470px;
 	}
 
-	h3{
+	h3 {
 		font-size: 1.7em;
 	}
 
-	#seccionBuscador{
+	.search-section {
 		margin-top: -135px;
 		margin-bottom: 110px;
 	}
 
-	#buscador {	
+	#search {
 		width: 250px;
-		padding-left: 15px;	
+		padding-left: 15px;
 		font-size: 0.9em;
 	}
-	
-	.listadoLibros{
+
+	.book-list {
 		grid-template-columns: repeat(2, 1fr);
-		column-gap: 3.2rem;
+		column-gap: 1.6rem;
 		max-width: 470px;
 	}
 
-	.libro{
-    	margin-bottom: 20px;
+	.book {
+		margin-bottom: 20px;
 	}
 }
 
+/* Media query para pantallas de menor dimension */
 @media (max-width: 480px) {
-	.home{
+	.home {
 		max-width: 360px;
 	}
 
-	#ultimosLibros{
+	.last-books {
 		max-width: 360px;
 	}
 
-	h3{
+	h3 {
 		font-size: 1.5em;
 	}
 
-	#seccionBuscador{
+	.search-section {
 		margin-right: -25px;
 	}
 
-	.listadoLibros{
+	.book-list {
 		margin-top: 120px;
 		grid-template-columns: repeat(1, 1fr);
 		column-gap: 1.2rem;
 		max-width: 360px;
 	}
 
-	.libro{
-        margin: auto;
-        width: 260px; 
-        margin-bottom: 88px;
-    }
+	.book {
+		margin: auto;
+		width: 260px;
+		margin-bottom: 88px;
+	}
 
-    #portada{
-        height: 340px;
-        width: 260px; 
-    }
+	#cover {
+		height: 340px;
+		width: 260px;
+	}
 
-	.nombre{
-    	font-size: 0.95em;
-		
-}
-
-	
+	.name {
+		font-size: 0.95em;
+	}
 }
