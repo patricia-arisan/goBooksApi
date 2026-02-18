@@ -11,7 +11,9 @@ import { GeneroDTO } from '../../../interfaces/generoDTO';
 import { GenreUpdateComponent } from '../../../modals/genre/genre-update/genre-update.component';
 import { DeleteGenreComponent } from '../../../modals/genre/genre-delete/delete-genre.component';
 
-
+/**
+ * Componente de Administrar generos 
+ */
 @Component({
   selector: 'app-admin-genres',
   standalone: true,
@@ -21,94 +23,76 @@ import { DeleteGenreComponent } from '../../../modals/genre/genre-delete/delete-
 })
 export class AdminGenresComponent implements OnInit, AfterViewInit {
   generos!: GeneroDTO[];
-  showBooksTable: Boolean = true;
+  // Controles del paginator
   totalItems = 0;
   pageSize = 16;
   pageIndex = 0;
+  // Configuraciones de la tabla y el paginador
   dataSource = new MatTableDataSource<GeneroDTO>();
-  displayedColumns: string[] = ['genre', 'books','edit','delete'];
+  displayedColumns: string[] = ['genre', 'books', 'edit', 'delete'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  filteredBooks!: any[];
-  
 
   constructor(
-    // private route: ActivatedRoute,
     private genreService: GenreService,
     private paginatorIn: MatPaginatorIntl
+  ) {}
 
-  ) { }
-
+  /**
+   * Obtencion del listado de generos y su numero de libros al iniciar el componente
+   * Definicion de la busqueda personalizada
+   */ 
   ngOnInit(): void {
-
-    // this.getGenres();
     this.getNumberOfBooksByGenre();
-
-
+    this.filterByItem();
   }
 
+  /**
+   * Vinculacion del paginator con el listado de generos del dataSource
+   * Cambio de idioma a mostrar del paginator 
+   */
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-    
+
     this.translatePaginator();
-    this.filterByItem();
-    
   }
 
-  // getGenres(){
-  //     this.genreService.getGenresByNameOrder().subscribe((data:Genero[])=>{
-  //         this.generos = data;
-  //         this.dataSource.data = this.generos;
-  //       })
-  
-  //     }
-getNumberOfBooksByGenre(){
-      this.genreService.getListBookGenreNumber().subscribe((data:GeneroDTO[])=>{
-          this.generos = data;
-          this.dataSource.data=this.generos;
-          
-          
-          
-        })
-    }
- 
+  // Funcion para listar los generos por orden alfabetico y con su numero de libros asociados
+  getNumberOfBooksByGenre() {
+    this.genreService.getListBookGenreNumber().subscribe((data: GeneroDTO[]) => {
+      this.generos = data;
+      this.dataSource.data = this.generos;
+    });
+  }
 
+  // Funcion para filtrar en tiempo real en el dataSource
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    //sin lo de abajo funciona
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-    
   }
-  //filtrar dataSource por cuatro campos y datos de tablas externas
-  filterByItem(){
+  
+  // Funcion para filtrar por algunos elementos
+  filterByItem() {
     this.dataSource.filterPredicate = function (data, filter: string): boolean {
       return data.nombre.toLowerCase().includes(filter) || data.numeroLibros.toString().includes(filter);
     }
   }
-//filtro para vista sin dataSource, busca en this.libros
-// applyFilterGalery(event: Event){
-//   const filterValue = (event.target as HTMLInputElement).value;
-  
-//   this.filteredBooks=this.generos.filter(genero=>genero.nombre.includes(filterValue));
-//   this.totalItems=this.filteredBooks.length;
-// }
 
+  // Funcion para detectar los cambios de pagina y en los elementos a mostrar por el paginator
   onPageChange(event: PageEvent): void {
-
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
-    
-
   }
-  
 
+  // Funcion para cambiar el idioma y personalizar el paginator
   translatePaginator() {
+    // Cambio del texto del selector
     this.paginatorIn.itemsPerPageLabel = "Resultados por página";
+    // Texto del conteo de paginas existentes en funcion de los elementos mostrados de la lista
     this.paginatorIn.getRangeLabel = (page: number, pageSize: number, length: number) => {
       if (length === 0) {
-        
         return `Página 1 de 1`;
       }
       const totalPaginas = Math.ceil(length / pageSize);
@@ -116,37 +100,35 @@ getNumberOfBooksByGenre(){
     }
   }
 
- readonly dialog = inject(MatDialog);
-   openDialog(genero:GeneroDTO,enterAnimationDuration: string, exitAnimationDuration: string): void {
-     
-       this.dialog.open(GenreUpdateComponent, {
-         width: '250px',
-         enterAnimationDuration,
-         exitAnimationDuration,
-         disableClose: true,
-         data:genero.idGenero
-         
-       }).afterClosed().subscribe((data: Genero)=>{
-         
-        
-   
-         
-         
-         // this.getBooks();
-         this.getNumberOfBooksByGenre();
-       });
-      }
+  // Inyeccion de dependencias para usar MatDialog
+  readonly dialog = inject(MatDialog);
 
-      openDeleteDialog(genero:GeneroDTO,enterAnimationDuration: string, exitAnimationDuration: string): void {
-              this.dialog.open(DeleteGenreComponent, {
-                width: '350px',
-                enterAnimationDuration,
-                exitAnimationDuration,
-                disableClose: true,
-                data:genero.idGenero
-              }).afterClosed().subscribe((reloadView:boolean) => { 
-        if(reloadView) window.location.reload(); 
-      } )
-            }
+  // Funcion para abrir el componente para editar al genero
+  openDialog(genero: GeneroDTO, enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(GenreUpdateComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      disableClose: true,
+      // Envio del id del genero
+      data: genero.idGenero
+    }).afterClosed().subscribe((data: Genero) => {
+      // Carga del listado de generos
+      this.getNumberOfBooksByGenre();
+    });
+  }
 
+  // Funcion para abrir el componente para eliminar al genero
+  openDeleteDialog(genero: GeneroDTO, enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(DeleteGenreComponent, {
+      width: '350px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      disableClose: true,
+      data: genero.idGenero
+    }).afterClosed().subscribe((reloadView: boolean) => {
+      // Si el dialog devuelve un true al cerrarse, la pagina se actualiza para mostrar el nuevo listado
+      if (reloadView) window.location.reload();
+    });
+  }
 }

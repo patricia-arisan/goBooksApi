@@ -48,9 +48,10 @@
     <ng-container matColumnDef="edit">
       <th mat-header-cell *matHeaderCellDef> </th>
       <!-- Boton para edicion completa del libro, se inhabilita la apertura del dialog de edicion rapida -->
-      <td mat-cell *matCellDef="let libro" (click)="$event.stopPropagation()"><button type="button" class="edit-buttom"
-          [routerLink]="['/admin-books/book-section/editar/',libro.id]"><img src="/assets/icons/edit.png" class="edit"
-            alt="Editar" /></button></td>
+      <td mat-cell *matCellDef="let libro" (click)="$event.stopPropagation()">
+        <button type="button" class="edit-button" [routerLink]="['/admin-books/book-section/editar/',libro.id]"><img
+            src="/assets/icons/edit.png" class="edit" alt="Editar" /></button>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

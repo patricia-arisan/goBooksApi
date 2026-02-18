@@ -38,17 +38,17 @@ export class AdminBooksComponent implements OnInit, AfterViewInit {
   url2: string = "/assets/icons/list.png";
 
   constructor(
-    // private route: ActivatedRoute,
     private bookService: BookService,
     private paginatorIn: MatPaginatorIntl
-
   ) {}
 
   /**
    * Obtencion del listado de libros al iniciar el componente
+   * Definicion de la busqueda personalizada
    */  
   ngOnInit(): void {
     this.getBooks();
+    this.filterByItem();
   }
 
   /**
@@ -59,8 +59,6 @@ export class AdminBooksComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
 
     this.translatePaginator();
-    this.filterByItem();
-
   }
 
   // Funcion para listar los libros existentes en la bbdd por orden alfabetico
@@ -112,7 +110,7 @@ export class AdminBooksComponent implements OnInit, AfterViewInit {
     this.totalItems = this.filteredBooks.length;
   }
 
-   // Funcion para detectar los cambios de pagina y en los elementos a mostrar por el paginator
+  // Funcion para detectar los cambios de pagina y en los elementos a mostrar por el paginator
   onPageChange(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;

@@ -1,85 +1,82 @@
-.administracion{
+/* Estilo general de Administrar autores */
+.administration {
     width: 100%;
     max-width: 810px;
     margin: 0 auto;
 }
-h2{
+
+h2 {
     margin-top: 40px;
     margin-bottom: 20px;
     width: max-content;
-    
-    
 }
 
+/* Estilo del buscador */
 .mat-mdc-form-field {
     width: 260px;
 }
+
+/* Estilos de la tabla */
 .mat-mdc-table {
     background-color: white;
     margin-bottom: 25px;
-    
 }
 
-th{
+th {
     font-weight: bolder;
     font-size: 1.1em;
     color: #46434e;
-
-    border-bottom: 2px solid rgb(165, 164, 164) ;
-}
-td{
-    border-bottom: 1px solid rgb(165, 164, 164) ;
+    border-bottom: 2px solid rgb(165, 164, 164);
 }
 
+td {
+    border-bottom: 1px solid rgb(165, 164, 164);
+}
 
-.edit-buttom{
+.edit-button, .delete-button {
     background-color: rgb(253, 160, 54);
     border: none;
     width: 40px;
     height: 40px;
     border-radius: 40px;
-    
-    
-    
-}
-.edit{
-    filter: invert(100%);
-	width: 24px;
-    height: 24px;
-    
-	
-    
 }
 
-.paginator{
+.edit, .delete {
+    filter: invert(100%);
+    width: 24px;
+    height: 24px;
+}
+
+/* Estilo del paginador */
+.paginator {
     margin-top: 14px;
     background-color: white;
-    
-    
 }
 
+/* Media queries para pantallas grandes */
 @media (max-width: 899px) {
-    .administracion{
+    .administration {
         max-width: 650px;
     }
 }
 
 @media (max-width: 699px) {
-    .administracion{
+    .administration {
         max-width: 460px;
     }
 
-    h2{
+    h2 {
         margin-top: 80px;
     }
 }
 
+/* Media query para pantallas de menor dimension */
 @media (max-width: 480px) {
-    .administracion{
+    .administration {
         max-width: 420px;
     }
 
-    h2{
+    h2 {
         margin-top: 60px;
     }
 }

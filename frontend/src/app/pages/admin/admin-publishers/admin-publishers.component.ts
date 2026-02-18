@@ -14,7 +14,9 @@ import { PublisherService } from '../../../services/publisher-service';
 import { PublisherUpdateComponent } from '../../../modals/publisher/publisher-update/publisher-update.component';
 import { PublisherDeleteComponent } from '../../../modals/publisher/publisher-delete/publisher-delete.component';
 
-
+/**
+ * Componente de Administrar editoriales 
+ */
 @Component({
   selector: 'app-admin-publishers',
   standalone: true,
@@ -24,86 +26,77 @@ import { PublisherDeleteComponent } from '../../../modals/publisher/publisher-de
 })
 export class AdminPublishersComponent implements OnInit, AfterViewInit {
   editoriales!: EditorialDTO[];
-  showBooksTable: Boolean = true;
+  // Configuraciones de la tabla y el paginador
   totalItems = 0;
   pageSize = 16;
   pageIndex = 0;
+  // Configuraciones de la tabla y el paginador
   dataSource = new MatTableDataSource<EditorialDTO>();
-  displayedColumns: string[] = ['publisher', 'books','edit','delete'];
+  displayedColumns: string[] = ['publisher', 'books', 'edit', 'delete'];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  filteredBooks!: any[];
-  
 
   constructor(
-    // private route: ActivatedRoute,
     private publisherService: PublisherService,
     private paginatorIn: MatPaginatorIntl
+  ) {}
 
-  ) { }
-
+  /**
+   * Obtencion del listado de editoriales y su numero de libros al iniciar el componente
+   * Definicion de la busqueda personalizada
+   */  
   ngOnInit(): void {
-
     this.getNumberOfBooksByPublisher();
-
-
+    this.filterByItem();
   }
 
+  /**
+   * Vinculacion del paginator con el listado de editoriales del dataSource
+   * Cambio de idioma a mostrar del paginator 
+   */
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-    
+
     this.translatePaginator();
-    this.filterByItem();
-    
   }
 
-getNumberOfBooksByPublisher(){
-      this.publisherService.getListBookPublisherNumber().subscribe((data:EditorialDTO[])=>{
-          this.editoriales = data;
-          this.dataSource.data=this.editoriales;
-          
-          
-          
-        })
-    }
- 
+  // Funcion para listar las editoriales por orden alfabetico y con su numero de libros asociados
+  getNumberOfBooksByPublisher() {
+    this.publisherService.getListBookPublisherNumber().subscribe((data: EditorialDTO[]) => {
+      this.editoriales = data;
+      this.dataSource.data = this.editoriales;
+    });
+  }
 
+  // Funcion para filtrar en tiempo real en el dataSource
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    //sin lo de abajo funciona
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-    
   }
-  //filtrar dataSource por cuatro campos y datos de tablas externas
-  filterByItem(){
+
+  // Funcion para filtrar por algunos elementos
+  filterByItem() {
     this.dataSource.filterPredicate = function (data, filter: string): boolean {
       return data.nombre.toLowerCase().includes(filter) || data.numeroLibros.toString().includes(filter);
     }
   }
-//filtro para vista sin dataSource, busca en this.libros
-// applyFilterGalery(event: Event){
-//   const filterValue = (event.target as HTMLInputElement).value;
-  
-//   this.filteredBooks=this.generos.filter(genero=>genero.nombre.includes(filterValue));
-//   this.totalItems=this.filteredBooks.length;
-// }
 
+  // Funcion para detectar los cambios de pagina y en los elementos a mostrar por el paginator
   onPageChange(event: PageEvent): void {
-
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
-    
-
   }
-  
 
+
+  // Funcion para cambiar el idioma y personalizar el paginator
   translatePaginator() {
+    // Cambio del texto del selector
     this.paginatorIn.itemsPerPageLabel = "Resultados por página";
+    // Texto del conteo de paginas existentes en funcion de los elementos mostrados de la lista
     this.paginatorIn.getRangeLabel = (page: number, pageSize: number, length: number) => {
       if (length === 0) {
-        
         return `Página 1 de 1`;
       }
       const totalPaginas = Math.ceil(length / pageSize);
@@ -111,37 +104,36 @@ getNumberOfBooksByPublisher(){
     }
   }
 
- readonly dialog = inject(MatDialog);
-   openDialog(editorial:EditorialDTO,enterAnimationDuration: string, exitAnimationDuration: string): void {
-     
-       this.dialog.open(PublisherUpdateComponent, {
-         width: '250px',
-         enterAnimationDuration,
-         exitAnimationDuration,
-         disableClose: true,
-         data:editorial.idEditorial
-         
-       }).afterClosed().subscribe((data: Editorial)=>{
-         
-        
-   
-         
-         
-         // this.getBooks();
-         this.getNumberOfBooksByPublisher();
-       });
-      }
+  // Inyeccion de dependencias para usar MatDialog
+  readonly dialog = inject(MatDialog);
 
-      openDeleteDialog(editorial:EditorialDTO,enterAnimationDuration: string, exitAnimationDuration: string): void {
-              this.dialog.open(PublisherDeleteComponent, {
-                width: '350px',
-                enterAnimationDuration,
-                exitAnimationDuration,
-                disableClose: true,
-                data:editorial.idEditorial
-              }).afterClosed().subscribe((reloadView:boolean) => { 
-        if(reloadView) window.location.reload(); 
-      } )
-            }
+  // Funcion para abrir el componente para editar la editorial
+  openDialog(editorial: EditorialDTO, enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(PublisherUpdateComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      disableClose: true,
+      // Envio del id del editorial
+      data: editorial.idEditorial
+    }).afterClosed().subscribe((data: Editorial) => {
+      // Carga del listado de editoriales
+      this.getNumberOfBooksByPublisher();
+    });
+  }
+
+  // Funcion para abrir el componente para eliminar la editorial
+  openDeleteDialog(editorial: EditorialDTO, enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(PublisherDeleteComponent, {
+      width: '350px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      disableClose: true,
+      data: editorial.idEditorial
+    }).afterClosed().subscribe((reloadView: boolean) => {
+      // Si el dialog devuelve un true al cerrarse, la pagina se actualiza para mostrar el nuevo listado
+      if (reloadView) window.location.reload();
+    });
+  }
 
 }
