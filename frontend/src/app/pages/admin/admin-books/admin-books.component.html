@@ -70,7 +70,7 @@
     <div class="book-list">
       @if (!filteredBooks) {
         <!-- Vista de la galeria sin filtrar por un termino -->
-        @for (libro of libros?.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro.id){
+        @for (libro of books?.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro.id){
         <div class="book">
           <a [routerLink]="['/admin-books/book-section',libro.id]"><img src="{{libro.portada}}" id="cover"
               alt="{{libro.nombre}}" /></a>

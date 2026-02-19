@@ -1,22 +1,28 @@
+<!-- Header con navegacion para el administrador -->
 <app-header-admin></app-header-admin>
+<!-- Cuerpo de pagina Crear libro -->
 <div class="container">
+    <!-- Breadcrumd para navegar hacia paginas anteriores -->
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a routerLink="/admin-books">Libros</a></li>
             <li class="breadcrumb-item active" aria-current="page">Nuevo libro</li>
         </ol>
     </nav>
+
     <h2>Registrar libro</h2>
-
+    <!-- Apartado del formulario -->
     <div class="row g-5">
+        <!-- Formulario para registrar el nuevo libro -->
         <form [formGroup]="formNewBook" (submit)="registerBook()">
-
             <div class="form-group">
-                <label class="control-label" for="nombre">Título*</label>
-                <input id="nombre" type="text" formControlName="nombre" class="form-control">
-                @if (nombre.invalid && (nombre.dirty || nombre.touched)) {
+                <label class="control-label" for="name">Título*</label>
+                <input id="name" type="text" formControlName="nombre" class="form-control">
+                <!-- Comprobaciones del input -->
+                @if (name.invalid && (name.dirty || name.touched)) {
                 <div class="alert">
-                    @if(nombre.hasError('required')){
+                    <!-- Comprobacion para evitar el campo vacio -->
+                    @if (name.hasError('required')) {
                     <svg fill="none" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <path id="error-circle"
                             d="M32.085,56.058c6.165,-0.059 12.268,-2.619 16.657,-6.966c5.213,-5.164 7.897,-12.803 6.961,-20.096c-1.605,-12.499 -11.855,-20.98 -23.772,-20.98c-9.053,0 -17.853,5.677 -21.713,13.909c-2.955,6.302 -2.96,13.911 0,20.225c3.832,8.174 12.488,13.821 21.559,13.908c0.103,0.001 0.205,0.001 0.308,0Zm-0.282,-4.003c-9.208,-0.089 -17.799,-7.227 -19.508,-16.378c-1.204,-6.452 1.07,-13.433 5.805,-18.015c5.53,-5.35 14.22,-7.143 21.445,-4.11c6.466,2.714 11.304,9.014 12.196,15.955c0.764,5.949 -1.366,12.184 -5.551,16.48c-3.672,3.767 -8.82,6.016 -14.131,6.068c-0.085,0 -0.171,0 -0.256,0Zm-12.382,-10.29l9.734,-9.734l-9.744,-9.744l2.804,-2.803l9.744,9.744l10.078,-10.078l2.808,2.807l-10.078,10.079l10.098,10.098l-2.803,2.804l-10.099,-10.099l-9.734,9.734l-2.808,-2.808Z">
@@ -24,21 +30,18 @@
                     </svg>
                     Título requerido.
                     }
-
-                    @if(nombre.hasError('pattern')){
-                    <!-- <div class="alert"> -->
+                    <!-- Comprobacion de espacios en el nombre -->
+                    @if (name.hasError('pattern')) {
                     <svg fill="none" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <path id="error-circle"
                             d="M32.085,56.058c6.165,-0.059 12.268,-2.619 16.657,-6.966c5.213,-5.164 7.897,-12.803 6.961,-20.096c-1.605,-12.499 -11.855,-20.98 -23.772,-20.98c-9.053,0 -17.853,5.677 -21.713,13.909c-2.955,6.302 -2.96,13.911 0,20.225c3.832,8.174 12.488,13.821 21.559,13.908c0.103,0.001 0.205,0.001 0.308,0Zm-0.282,-4.003c-9.208,-0.089 -17.799,-7.227 -19.508,-16.378c-1.204,-6.452 1.07,-13.433 5.805,-18.015c5.53,-5.35 14.22,-7.143 21.445,-4.11c6.466,2.714 11.304,9.014 12.196,15.955c0.764,5.949 -1.366,12.184 -5.551,16.48c-3.672,3.767 -8.82,6.016 -14.131,6.068c-0.085,0 -0.171,0 -0.256,0Zm-12.382,-10.29l9.734,-9.734l-9.744,-9.744l2.804,-2.803l9.744,9.744l10.078,-10.078l2.808,2.807l-10.078,10.079l10.098,10.098l-2.803,2.804l-10.099,-10.099l-9.734,9.734l-2.808,-2.808Z">
                         </path>
                     </svg>
                     El título no puede estar vacío.
-                    <!-- </div> -->
                     }
                 </div>
                 }
-
-
+                <!-- Comprobacion de la existencia de un libro con el mismo nombre -->
                 @if(formNewBook.hasError('foundBook')){
                 <div class="alert">
                     <svg fill="none" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -52,25 +55,21 @@
             </div>
 
             <div class="form-group" formGroupName="autor">
-
-                <!-- <div formGroupName="autor"> -->
-                <label class="control-label" for="autor">Autor*</label> <select formControlName="id" id="autor">
-                    <!-- <select (change)="onChange()"> -->
+                <label class="control-label" for="author">Autor*</label>
+                <select formControlName="id" id="author">
                     <option [value]="null" disabled>Elegir autor</option>
-                    @for (autor of autores; track autor.id){
-
-                    <option [value]="autor.id">
-                        {{ autor.nombre}}
-                    </option>
+                    @for (autor of authors; track autor.id) {
+                    <option [value]="autor.id">{{autor.nombre}}</option>
                     }
-
                 </select>
-
-                <button type="button" class="createButton" matButton="elevated" (click)="openDialog('0ms', '0ms')">Autor
-                    +</button>
-                @if (idAutor.invalid && (idAutor.dirty || idAutor.touched)) {
+                <!-- Boton para crear nuevo autor -->
+                <button type="button" class="create-button" matButton="elevated" (click)="openAuthorDialog('0ms', '0ms')">
+                    Autor +</button>
+                <!-- Comprobaciones del input -->
+                @if (idAuthor.invalid && (idAuthor.dirty || idAuthor.touched)) {
                 <div class="alert-option">
-                    @if(idAutor.hasError('required')){
+                    <!-- Comprobacion para evitar el campo vacio -->
+                    @if(idAuthor.hasError('required')){
                     <svg fill="none" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <path id="error-circle"
                             d="M32.085,56.058c6.165,-0.059 12.268,-2.619 16.657,-6.966c5.213,-5.164 7.897,-12.803 6.961,-20.096c-1.605,-12.499 -11.855,-20.98 -23.772,-20.98c-9.053,0 -17.853,5.677 -21.713,13.909c-2.955,6.302 -2.96,13.911 0,20.225c3.832,8.174 12.488,13.821 21.559,13.908c0.103,0.001 0.205,0.001 0.308,0Zm-0.282,-4.003c-9.208,-0.089 -17.799,-7.227 -19.508,-16.378c-1.204,-6.452 1.07,-13.433 5.805,-18.015c5.53,-5.35 14.22,-7.143 21.445,-4.11c6.466,2.714 11.304,9.014 12.196,15.955c0.764,5.949 -1.366,12.184 -5.551,16.48c-3.672,3.767 -8.82,6.016 -14.131,6.068c-0.085,0 -0.171,0 -0.256,0Zm-12.382,-10.29l9.734,-9.734l-9.744,-9.744l2.804,-2.803l9.744,9.744l10.078,-10.078l2.808,2.807l-10.078,10.079l10.098,10.098l-2.803,2.804l-10.099,-10.099l-9.734,9.734l-2.808,-2.808Z">
@@ -78,18 +77,15 @@
                     </svg>
                     Autor requerido.
                     }
-
                 </div>
                 }
             </div>
-            <!-- aqui antes <button></button>                 -->
-
-            <!-- </div> -->
 
             <div class="form-group">
                 <label class="control-label" for="isbn">ISBN</label>
                 <input id="isbn" type="text" formControlName="isbn" class="form-control">
-                @if(formNewBook.hasError('foundIsbn')){
+                <!-- Comprobacion de la existencia del ISBN -->
+                @if (formNewBook.hasError('foundIsbn')) {
                 <div class="alert">
                     <svg fill="none" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <path id="error-circle"
@@ -102,28 +98,22 @@
             </div>
 
             <div class="form-group" formGroupName="editorial">
-
-                <!-- <div formGroupName="editorial"> -->
-                <label class="control-label" for="editorial">Editorial*</label>
-
-                <select formControlName="id" id="editorial">
+                <label class="control-label" for="publisher">Editorial*</label>
+                <select formControlName="id" id="publisher">
                     <option [value]="null" disabled>Elegir editorial</option>
-                    @for (editorial of editoriales; track editorial){
-
-                    <option [value]="editorial.id">
-                        {{ editorial.nombre}}
-                    </option>
-
-
+                    @for (editorial of publishers; track editorial) {
+                    <option [value]="editorial.id">{{editorial.nombre}}</option>
                     }
-
                 </select>
-
-                <button type="button" class="createButton" matButton="elevated"
-                    (click)="openEditorialDialog('0ms', '0ms')">Editorial +</button>
-                @if (idEditorial.invalid && (idEditorial.dirty || idEditorial.touched)) {
+                <!-- Boton para crear nueva editorial -->
+                <button type="button" class="create-button" matButton="elevated"
+                    (click)="openPublisherDialog('0ms', '0ms')">
+                    Editorial +</button>
+                <!-- Comprobaciones del input -->
+                @if (idPublisher.invalid && (idPublisher.dirty || idPublisher.touched)) {
                 <div class="alert-option">
-                    @if(idEditorial.hasError('required')){
+                    <!-- Comprobacion para evitar el campo vacio -->
+                    @if(idPublisher.hasError('required')){
                     <svg fill="none" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <path id="error-circle"
                             d="M32.085,56.058c6.165,-0.059 12.268,-2.619 16.657,-6.966c5.213,-5.164 7.897,-12.803 6.961,-20.096c-1.605,-12.499 -11.855,-20.98 -23.772,-20.98c-9.053,0 -17.853,5.677 -21.713,13.909c-2.955,6.302 -2.96,13.911 0,20.225c3.832,8.174 12.488,13.821 21.559,13.908c0.103,0.001 0.205,0.001 0.308,0Zm-0.282,-4.003c-9.208,-0.089 -17.799,-7.227 -19.508,-16.378c-1.204,-6.452 1.07,-13.433 5.805,-18.015c5.53,-5.35 14.22,-7.143 21.445,-4.11c6.466,2.714 11.304,9.014 12.196,15.955c0.764,5.949 -1.366,12.184 -5.551,16.48c-3.672,3.767 -8.82,6.016 -14.131,6.068c-0.085,0 -0.171,0 -0.256,0Zm-12.382,-10.29l9.734,-9.734l-9.744,-9.744l2.804,-2.803l9.744,9.744l10.078,-10.078l2.808,2.807l-10.078,10.079l10.098,10.098l-2.803,2.804l-10.099,-10.099l-9.734,9.734l-2.808,-2.808Z">
@@ -131,33 +121,27 @@
                     </svg>
                     Editorial requerida.
                     }
-
                 </div>
                 }
             </div>
 
-
-            <!-- </div> -->
-
-
             <div class="form-group" formGroupName="genero">
-
-                <!-- <div formGroupName="genero"> -->
-                <label class="control-label" for="genero">Género*</label> <select formControlName="id" id="genero">
+                <label class="control-label" for="genre">Género*</label>
+                <select formControlName="id" id="genre">
                     <option [value]="null" disabled>Elegir género</option>
-                    @for (genero of generos; track genero){
-
-                    <option [value]="genero.id">
-                        {{ genero.nombre}}
+                    @for (genero of genres; track genero) {
+                    <option [value]="genero.id">{{genero.nombre}}
                     </option>
                     }
                 </select>
-
-                <button type="button" class="createButton" matButton="elevated"
-                    (click)="openGenreDialog('0ms', '0ms')">Género +</button>
-                @if (idGenero.invalid && (idGenero.dirty || idGenero.touched)) {
+                <!-- Boton para crear nuevo genero -->
+                <button type="button" class="create-button" matButton="elevated" (click)="openGenreDialog('0ms', '0ms')">
+                    Género +</button>
+                <!-- Comprobaciones del input -->
+                @if (idGenre.invalid && (idGenre.dirty || idGenre.touched)) {
                 <div class="alert-option">
-                    @if(idGenero.hasError('required')){
+                    <!-- Comprobacion para evitar el campo vacio -->
+                    @if(idGenre.hasError('required')){
                     <svg fill="none" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <path id="error-circle"
                             d="M32.085,56.058c6.165,-0.059 12.268,-2.619 16.657,-6.966c5.213,-5.164 7.897,-12.803 6.961,-20.096c-1.605,-12.499 -11.855,-20.98 -23.772,-20.98c-9.053,0 -17.853,5.677 -21.713,13.909c-2.955,6.302 -2.96,13.911 0,20.225c3.832,8.174 12.488,13.821 21.559,13.908c0.103,0.001 0.205,0.001 0.308,0Zm-0.282,-4.003c-9.208,-0.089 -17.799,-7.227 -19.508,-16.378c-1.204,-6.452 1.07,-13.433 5.805,-18.015c5.53,-5.35 14.22,-7.143 21.445,-4.11c6.466,2.714 11.304,9.014 12.196,15.955c0.764,5.949 -1.366,12.184 -5.551,16.48c-3.672,3.767 -8.82,6.016 -14.131,6.068c-0.085,0 -0.171,0 -0.256,0Zm-12.382,-10.29l9.734,-9.734l-9.744,-9.744l2.804,-2.803l9.744,9.744l10.078,-10.078l2.808,2.807l-10.078,10.079l10.098,10.098l-2.803,2.804l-10.099,-10.099l-9.734,9.734l-2.808,-2.808Z">
@@ -165,36 +149,33 @@
                     </svg>
                     Género requerido.
                     }
-
                 </div>
                 }
             </div>
 
-            <!-- </div> -->
-
             <div class="form-group">
-                <label class="control-label" for="portada">Portada</label> <input type="text" id="portada"
-                    formControlName="portada" class="form-control" (input)="sendImage($event)">
-
-            </div>
-            <div class="form-group">
-                <label class="control-label" for="sinopsis">Sinopsis</label> <textarea id="sinopsis"
-                    formControlName="sinopsis" class="form-control"></textarea>
+                <label class="control-label" for="cover">Portada</label>
+                <input type="text" id="cover" formControlName="portada" class="form-control"
+                    (input)="sendImage($event)">
             </div>
 
             <div class="form-group">
+                <label class="control-label" for="synopsis">Sinopsis</label> 
+                <textarea id="synopsis" formControlName="sinopsis" class="form-control"></textarea>
+            </div>
+
+            <div class="form-group">
+                <!-- Boton que se habilita al comprobar que estan rellenos los campos requeridos -->
                 <button type="submit" class="btn btn-success" [disabled]="formNewBook.invalid">Añadir</button>
-                <!-- [disabled]="formNewBook.invalid" -->
             </div>
         </form>
-
-
-
     </div>
-    <div class="seccionImagen">
+
+    <!-- Apartado de la imagen -->
+    <div class="image-section">
         <!-- Capa para el fondo difuminado con variable url del componente-->
-        <div class="fondo-difuminado" [style.background-image]="'url(' + url + ')'"></div>
+        <div class="blurred-background" [style.background-image]="'url(' + url + ')'"></div>
         <!-- Imagen de portada principal -->
-        <img [src]="url" id="imagen" class="miniatura-frontal" />
+        <img [src]="url" id="image" alt="Portada" />
     </div>
 </div>

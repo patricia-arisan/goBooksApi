@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { HeaderAdminComponent } from '../../../shared/headers/header-admin/header-admin.component';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -11,25 +11,27 @@ import { GenreService } from '../../../../services/genre-service';
 import { Editorial } from '../../../../interfaces/editorial';
 import { Genero } from '../../../../interfaces/genero';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { PublisherService } from '../../../../services/publisher-service';
 import { AuthorCreateComponent } from '../../../../modals/author/author-create/author-create.component';
 import { PublisherCreateComponent } from '../../../../modals/publisher/publisher-create/publisher-create.component';
 import { GenreCreateComponent } from '../../../../modals/genre/genre-create/genre-create.component';
 
+/**
+ * Componente de Crear libro
+ */
 @Component({
   selector: 'app-admin-books-create',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, HeaderAdminComponent, MatButtonModule, RouterLink],
   templateUrl: './admin-books-create.component.html',
   styleUrl: './admin-books-create.component.css',
-  //changeDetection: ChangeDetectionStrategy.OnPush No cargan al principio las cosas, mejor quitar esto
 })
 export class AdminBooksCreateComponent implements OnInit {
-  autores!: Autor[];
-  editoriales!: Editorial[];
-  generos!: Genero[];
+  authors!: Autor[];
+  publishers!: Editorial[];
+  genres!: Genero[];
   url: string = "/assets/icons/book.png";
 
   constructor(
@@ -39,8 +41,12 @@ export class AdminBooksCreateComponent implements OnInit {
     private publisherService: PublisherService,
     private genreService: GenreService,
     private router: Router
-  ) { }
+  ) {}
 
+  /**
+   * Recuperacion de los listados de autores, editoriales y generos para los selects al iniciar el componente
+   * Definicion de estructura y validaciones del formulario
+   */
   ngOnInit(): void {
     this.getAuthors();
     this.getPublishers();
@@ -48,7 +54,7 @@ export class AdminBooksCreateComponent implements OnInit {
 
     this.formNewBook = this.formBuilder.group({
       id: [null],
-      nombre: ["", [Validators.required,Validators.pattern(/^.*\S.*$/)]],
+      nombre: ["", [Validators.required, Validators.pattern(/^.*\S.*$/)]],
       autor: this.formBuilder.group({
         id: [null, [Validators.required]],
         nombre: [""]
@@ -65,13 +71,9 @@ export class AdminBooksCreateComponent implements OnInit {
       }),
       sinopsis: [""]
     });
-
-
-
   }
 
-
-
+  // Inicializacion del formulario
   formNewBook: FormGroup = new FormGroup({
     id: new FormControl(null),
     nombre: new FormControl(""),
@@ -92,65 +94,66 @@ export class AdminBooksCreateComponent implements OnInit {
     sinopsis: new FormControl("")
   })
 
+  // Funcion para rellenar temporalmente la portada con una imagen por defecto
   fillForm() {
     this.formNewBook.patchValue({
       portada: this.url,
-
-    })
+    });
   }
 
+  // Funcion para listar autores por orden alfabetico
   getAuthors() {
     this.authorService.getAuthorsByNameOrder().subscribe((data: Autor[]) => {
-      this.autores = data;
-    })
-
+      this.authors = data;
+    });
   }
 
-
-
+  // Funcion para listar editoriales por orden alfabetico
   getPublishers() {
     this.publisherService.getPublishersByNameOrder().subscribe((data: Editorial[]) => {
-      this.editoriales = data;
-    })
-
+      this.publishers = data;
+    });
   }
 
+  // Funcion para listar generos por orden alfabetico
   getGenres() {
     this.genreService.getGenresByNameOrder().subscribe((data: Genero[]) => {
-      this.generos = data;
-    })
-
+      this.genres = data;
+    });
   }
 
-  ////////////////////////
+  // Inyeccion de dependencias para usar MatDialog
   readonly dialog = inject(MatDialog);
 
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  // Funcion para abrir el componente crear un nuevo autor
+  openAuthorDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(AuthorCreateComponent, {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
       disableClose: true,
     }).afterClosed().subscribe((data: Autor) => {
-      this.autores.push(data);
-      console.log(this.autores)
+      // Se agrega el nuevo registro a la lista
+      this.authors.push(data);
       this.getAuthors();
     });
   }
 
-  openEditorialDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  // Funcion para abrir el componente crear una nueva editorial
+  openPublisherDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(PublisherCreateComponent, {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
       disableClose: true,
     }).afterClosed().subscribe((data: Editorial) => {
-      this.editoriales.push(data);
-      console.log(this.editoriales)
+      // Se agrega el nuevo registro a la lista
+      this.publishers.push(data);
       this.getPublishers();
     });
   }
 
+  // Funcion para abrir el componente crear un nuevo genero
   openGenreDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(GenreCreateComponent, {
       width: '250px',
@@ -158,77 +161,59 @@ export class AdminBooksCreateComponent implements OnInit {
       exitAnimationDuration,
       disableClose: true,
     }).afterClosed().subscribe((data: Genero) => {
-      this.generos.push(data);
-      console.log(this.generos)
+      // Se agrega el nuevo registro a la lista
+      this.genres.push(data);
       this.getGenres();
     });
   }
 
-  /////////////////////////
-
-
-
-
+  // Funcion para guardar el nuevo libro
   registerBook() {
+    // Condicion con la que se rellena la imagen de la portada si viene vacia
     if (this.formNewBook.value.portada === "" || this.formNewBook.value.portada === null) {
       this.fillForm();
     }
+    // Envio de los datos del formulario al servicio de libro
     this.bookService.createBook(this.formNewBook.value).subscribe({
       next: (data: Libro) => {
-        console.log(data);
         this.router.navigate(['/admin-books']);
       }, error: (errorRes) => {
         const errorCode = errorRes.error?.codigo;
-
         if (errorCode === "00000013") {
-          this.formNewBook.setErrors({ foundBook: true })
+          // Comprobacion de la existencia del libro
+          this.formNewBook.setErrors({foundBook: true});
         } else if (errorCode === "00000014") {
-          this.formNewBook.setErrors({ foundIsbn: true })
+          // Comprobacion de la existencia del ISBN
+          this.formNewBook.setErrors({foundIsbn: true});
         }
-
-
-
       }
     });
   }
 
-
-
+  // Funcion para cambiar la portada por defecto por la introducida por el administrador
   sendImage(event: Event) {
     let selectedUrl = (event.target as HTMLInputElement)!.value;
-    console.log(selectedUrl);
-    console.log(this.url)
     this.url = selectedUrl;
 
-
+    // Comprobacion de si esta vacio o con espacios el campo de la portada
     if (this.url === null || this.url.trim().length === 0) {
-
       this.url = "/assets/icons/book.png";
-
-
     }
-
-
-
-
-
-
-
   }
-  get nombre() {
+
+  // Getters para acceder desde HTML a los controles del formulario de nombre, autor, editorial y genero
+  get name() {
     return this.formNewBook.get('nombre')!;
   }
 
-  get idEditorial() {
+  get idPublisher() {
     return this.formNewBook.get('editorial.id')!;
   }
-  get idAutor() {
+  get idAuthor() {
     return this.formNewBook.get('autor.id')!;
   }
-  get idGenero() {
+  get idGenre() {
     return this.formNewBook.get('genero.id')!;
   }
-
-
 
 }

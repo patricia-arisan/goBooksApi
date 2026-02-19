@@ -1,7 +1,7 @@
-@if(user.rol.id===1) {
+@if (user.rol.id === 1) {
 <!-- Header con navegacion para el administrador -->
 <app-header-admin></app-header-admin>
-}@else if(user.rol.id===2) {
+} @else if (user.rol.id === 2) {
 <!-- Header con navegacion para el usuario -->
 <app-header-user></app-header-user>
 }
@@ -10,10 +10,10 @@
   <!-- Breadcrumd para navegar hacia paginas anteriores -->
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
-      @if(user.rol.id===1) {
+      @if (user.rol.id === 1) {
       <!-- Navegacion a la pagina Libros del administrador -->
       <li class="breadcrumb-item"><a routerLink="/admin-books">Libros</a></li>
-      }@else if(user.rol.id===2) {
+      } @else if (user.rol.id === 2) {
       <!-- Navegacion a la pagina Libros del usuario -->
       <li class="breadcrumb-item"><a routerLink="/books">Libros</a></li>
       }
@@ -30,7 +30,7 @@
       <img src="{{book.portada}}" id="cover" />
     </div>
     <!-- Seccion editar libro visible para el administrador -->
-    @if(user.rol.id===1) {
+    @if (user.rol.id === 1) {
     <div class="edit-section">
       <!-- Boton editar para pantallas grandes -->
       <button type="button" class="edit-buttom" (click)="goEdit()">Editar</button>
@@ -47,18 +47,18 @@
       <p class="genre"><a [routerLink]="['/results/genre',book.genero.id]">{{book.genero.nombre}}</a></p>
 
       <!-- Apartado para pantallas de menor dimension para agregar el usuario la lectura -->
-      @if(user.rol.id===2) {
+      @if (user.rol.id === 2) {
       <div class="reading-adaptable">
         <div class="state-selection">
-          @if(reading===null || reading.estado.id===1) {
+          @if (reading === null || reading.estado.id === 1) {
           <!-- Boton para agregar una nueva lectura -->
           <button type="button" class="reading-state-adapt" matButton="elevated"
             (click)="openReadingCreateDialog('0ms', '0ms')">Añadir</button>
-          }@else if(reading.estado.id===2) {
+          } @else if (reading.estado.id === 2) {
           <!-- Boton para cambiar el estado de una lectura leida -->
           <button type="button" class="reading-state-adapt" matButton="elevated"
             (click)="openReadingUpdateDialog('0ms', '0ms')">{{reading.estado.situacion}}</button>
-          }@else {
+          } @else {
           <!-- Boton para cambiar el estado de una lectura pendiente -->
           <button type="button" class="reading-state-adapt" matButton="elevated"
             (click)="openReadingUpdateDialog('0ms', '0ms')">{{reading.estado.situacion}}</button>
@@ -73,10 +73,10 @@
     </div>
 
     <!-- Apartado para mostrar a los usuarios la puntuacion media de un libro, si existiera, y agregar lectura -->
-    @if(user.rol.id===2) {
+    @if (user.rol.id === 2) {
     <!-- Apartado de puntuacion -->
     <div class="score">
-      @if(score!==null) {
+      @if (score !== null) {
       <span class="rating">Valoración</span>
       <!-- Mostrar puntuacion con decimales, si los hubiera. Se redondea el decimal hacia arriba -->
       <p class="score-number">{{score | number: '1.0-1'}}</p>
@@ -95,15 +95,15 @@
     </div>
     <!-- Apartado para agregar lectura en pantallas grandes -->
     <div class="state-selection">
-      @if(reading===null || reading.estado.id===1) {
+      @if (reading === null || reading.estado.id === 1) {
       <!-- Boton agregar nueva lectura -->
       <button type="button" class="reading" matButton="elevated"
         (click)="openReadingCreateDialog('0ms', '0ms')">Añadir</button>
-      }@else if(reading.estado.id===2) {
+      } @else if (reading.estado.id === 2) {
       <!-- Boton modificar lectura leida -->
       <button type="button" class="reading" matButton="elevated"
         (click)="openReadingUpdateDialog('0ms', '0ms')">{{reading.estado.situacion}}</button>
-      }@else {
+      } @else {
       <!-- Boton modificar lectura pendiente -->
       <button type="button" class="reading" matButton="elevated"
         (click)="openReadingUpdateDialog('0ms', '0ms')">{{reading.estado.situacion}}</button>

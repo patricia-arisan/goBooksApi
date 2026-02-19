@@ -1,8 +1,20 @@
+/* Estilo general de Editar libro */
 .container {
     width: 100%;
     max-width: 945px;
-    margin: 0 auto;    
+    margin: 0 auto;
     padding-bottom: 20px;
+}
+
+/* Estilo de breadcrum de navegacion */
+.breadcrumb {
+    margin-bottom: -35px;
+    margin-top: 40px;
+}
+
+.breadcrumb-item a {
+    color: black;
+    text-decoration: none;
 }
 
 h2 {
@@ -10,13 +22,15 @@ h2 {
     margin-bottom: 40px;
 }
 
-.row.g-5{
-   height: 800px;
+/* Estilo del apartado formulario */
+.row.g-5 {
+    height: 800px;
 }
 
- .form-group{
-    margin-bottom: 10px;    
- }
+/* Estilos del formulario */
+.form-group {
+    margin-bottom: 10px;
+}
 
 .control-label {
     font-size: 1.1em;
@@ -25,27 +39,30 @@ h2 {
     width: 90px;
 }
 
-#imagen {
-    /* margin-top: 32px; */
-    margin-left: 110px;
-    box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
-    float: right;
-    margin-top: -720px;
-    height: 300px;
-    width: 220px;
+input {
+    margin-bottom: 20px;
+    background-color: rgb(245, 243, 243);
 }
 
-#nombre, #isbn, #portada, #sinopsis {
+input:focus, textarea:focus {
+    box-shadow: 0px 0px 4px 4px rgb(197, 196, 194);
+    border-color: rgb(197, 196, 194);
+}
+
+input:-webkit-autofill, input:-webkit-autofill:focus {
+    transition: background-color 0s 600000s;
+}
+
+#name, #isbn, #cover, #synopsis {
     width: 640px;
     background-color: rgb(245, 243, 243);
 }
 
-#sinopsis {
+#synopsis {
     height: 200px;
-    
 }
 
-#autor, #editorial, #genero {
+#author, #publisher, #genre {
     height: 35px;
     border: 1px solid rgb(212, 211, 211);
     border-radius: 5px;
@@ -55,285 +72,244 @@ h2 {
     margin-left: 5px;
 }
 
-input{
-    margin-bottom: 20px;
-    background-color: rgb(245, 243, 243);
-}
-
- input:focus,textarea:focus{
-    box-shadow: 0px 0px 4px 4px rgb(197, 196, 194);
-    border-color: rgb(197, 196, 194);
-}
-
-input:-webkit-autofill,input:-webkit-autofill:focus {
-    transition: background-color 0s 600000s;
-}
-
-button{
+/* Estilo botones */
+button {
     background-color: rgb(253, 160, 54);
     border: none;
     font-weight: 500;
 }
 
-button:hover{
-   background-color: rgb(255, 141, 11);
+button:hover {
+    background-color: rgb(255, 141, 11);
 }
 
-.btn.btn-success{
-   width: 130px;
-   height: 50px;
-   margin-top: 20px;
-   --bs-btn-active-bg: #f59b1e;
+.btn.btn-success {
+    width: 130px;
+    height: 50px;
+    margin-top: 20px;
+    --bs-btn-active-bg: #f59b1e;
     --bs-btn-active-border-color: #f59b1e;
     --bs-btn-disabled-bg: rgb(252, 163, 40);
     --bs-btn-disabled-border-color: rgb(252, 163, 40);
-} 
-.editButton{
-    color:white;
+}
+
+.edit-button {
+    color: white;
     height: 35px;
-    
     border-radius: 8px;
     width: 120px;
     float: right;
     margin-right: 280px;
 }
 
-
-
-.deleteButton{
-    float: right;
-    margin-top: -400px;
-    color: white;
-    width: 220px;
-   height: 40px;
-    border-radius: 8px;
-    background-color: rgb(190, 57, 57);
-    position: relative;
-    
-}
-.deleteButton:hover{
-   background-color: rgb(230, 48, 48); 
-}
-
-.delete-buttom{
-    display: none;
-}
-
-.breadcrumb{
-    
-    margin-bottom: -35px;
-    margin-top: 40px;
-    
-}
-
-.breadcrumb-item a{
-    color: black;
-    text-decoration: none;
-}
-
-.alert{
+/* Avisos de comprobaciones de formulario */
+.alert {
     height: 22px;
     font-size: 0.8em;
     text-align: left;
     color: #820000;
     margin-top: -30px;
     margin-left: -19px;
-    
-    
-} 
-
-svg{
-   height: 19px;
-    width: 19px; 
-    fill: #820000;
-    margin-top: -3px;
-    
 }
 
-@media (max-width: 1000px){
+svg {
+    height: 19px;
+    width: 19px;
+    fill: #820000;
+    margin-top: -3px;
+}
+
+/* Estilo visualizacion de portada */
+#image {
+    margin-left: 110px;
+    box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
+    float: right;
+    margin-top: -720px;
+    height: 300px;
+    width: 220px;
+}
+
+/* Estilos boton eliminar */
+.delete-button {
+    float: right;
+    margin-top: -400px;
+    color: white;
+    width: 220px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: rgb(190, 57, 57);
+    position: relative;
+}
+
+.delete-button:hover {
+    background-color: rgb(230, 48, 48);
+}
+
+.delete-adaptable {
+    display: none;
+}
+
+/* Media queries para pantallas grandes */
+@media (max-width: 1000px) {
     .container {
         max-width: 750px;
     }
 
-    #nombre, #isbn, #portada, #sinopsis {
-        width: 460px;    
+    #name, #isbn, #cover, #synopsis {
+        width: 460px;
     }
 
-    #autor, #editorial, #genero {
-            /* width: 240px;     */
-            width: 240px;
+    #author, #publisher, #genre {
+        width: 240px;
     }
 
-    .editButton{
+    .edit-button {
         margin-right: 265px;
     }
-
-
 }
 
-@media (max-width: 800px){
+@media (max-width: 800px) {
     .container {
         max-width: 650px;
     }
 
-    #nombre, #isbn, #portada, #sinopsis {
+    #name, #isbn, #cover, #synopsis {
         width: 360px;
     }
 
-    #autor, #editorial, #genero {
-            margin-left: -5px;
-            width: 180px;
+    #author, #publisher, #genre {
+        margin-left: -5px;
+        width: 180px;
     }
 
-    .editButton{
+    .edit-button {
         width: 80px;
         margin-right: 265px;
     }
-
-
 }
 
-@media (max-width: 699px){
+@media (max-width: 699px) {
     .container {
         max-width: 470px;
         padding-bottom: 760px;
     }
 
-    .breadcrumb-item{
+    .breadcrumb-item {
         max-width: 305px;
-        /* Para que el texto este en una sola linea */
         white-space: nowrap;
-        /* Oculta lo desbordado */
         overflow: hidden;
-        /* Pone puntos suspensivos en el texto recortado */
         text-overflow: ellipsis;
     }
 
-    h2{
+    h2 {
         font-size: 1.6em;
     }
 
-    .row.g-5{
+    .row.g-5 {
         margin-top: 250px;
     }
 
-    .seccionImagen {    
-    position: relative; /* Necesario para contener los elementos absolutos */
-    max-width: 470px;
-    height: 270px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;   /* Corta el exceso del desenfoque en los bordes */
-    margin-top: -1036px;
-}
-
-.fondo-difuminado {
-    position: absolute;
-    top: 0;
-    left: 0;
-    
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    /* Difuminar y oscurecer para contraste */
-    filter: blur(5px) brightness(0.8); 
-    /* Evitar bordes blancos por el blur */
-    transform: scale(1.1);              
-    z-index: 1;
-}
-
-#imagen {    
-    position: relative;
-    /* Imagen nitida sobre el fondo */
-    z-index: 2;         
-    height: 220px;
-    width: 150px;
-    /* Sombra para dar profundidad */
-    box-shadow: 0 8px 25px rgba(0,0,0,0.5); 
-    border: 1px solid rgba(255,255,255,0.2);
-    margin: auto;
-    /* margin-top: 0px; */
-    /* Rellena el contenedor, recorta exceso */
-    object-fit: cover; 
-    
-}
-
-    .deleteButton{
-        display: none;
-    }
-
-    .delete-buttom{
-    display: inline;
-    float: right;
-    background-color: rgb(190, 57, 57);
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 40px;
-    margin-top: -45px;
-    margin-right: 5px;
-    position: relative;
-z-index: 2;
-    
-    
-}
-
-.delete-buttom:hover{
-    background-color: rgb(230, 48, 48); 
-}
-
-.delete{
-    filter: invert(100%);
-	width: 24px;
-    height: 24px;
-    
-	
-    
-}
-
-#nombre, #isbn, #portada, #sinopsis {
+    #name, #isbn, #cover, #synopsis {
         width: 445px;
     }
 
-#autor, #editorial, #genero {
-            margin-left: 5px;
-            width: 240px;
+    #author, #publisher, #genre {
+        margin-left: 5px;
+        width: 240px;
     }
 
-.editButton{
+    .edit-button {
         width: 90px;
         margin-right: 0px;
-        
     }
 
+    /* Estilo contenedor de imagen de fondo y portada */
+    .image-section {
+        position: relative;
+        max-width: 470px;
+        height: 270px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        margin-top: -1036px;
+    }
+
+    .blurred-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        filter: blur(5px) brightness(0.8);
+        transform: scale(1.1);
+        z-index: 1;
+    }
+
+    #image {
+        position: relative;
+        z-index: 2;
+        height: 220px;
+        width: 150px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        margin: auto;
+        object-fit: cover;
+
+    }
+
+    .delete-button {
+        display: none;
+    }
+
+    /* Estilo boton eliminar para pantallas de menor dimension */
+    .delete-adaptable {
+        display: inline;
+        float: right;
+        background-color: rgb(190, 57, 57);
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+        margin-top: -45px;
+        margin-right: 5px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .delete-adaptable:hover {
+        background-color: rgb(230, 48, 48);
+    }
+
+    .delete {
+        filter: invert(100%);
+        width: 24px;
+        height: 24px;
+    }
 }
 
-@media (max-width: 480px){
+/* Media query para pantallas de menor dimension */
+@media (max-width: 480px) {
     .container {
         max-width: 440px;
     }
 
-    .breadcrumb-item{
-    max-width: 275px;
+    .breadcrumb-item {
+        max-width: 275px;
     }
 
-    /* .seccionImagen{
-        margin-top: -999px;
-    } */
-
-    #nombre, #isbn, #portada, #sinopsis {
+    #name, #isbn, #cover, #synopsis {
         width: 415px;
     }
 
-#autor, #editorial, #genero {
-            margin-left: -5px;
-            width: 240px;
+    #author, #publisher, #genre {
+        margin-left: -5px;
+        width: 240px;
     }
 
-    .editButton{
+    .edit-button {
         width: 80px;
-        
     }
 }

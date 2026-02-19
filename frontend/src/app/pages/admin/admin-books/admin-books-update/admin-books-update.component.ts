@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { HeaderAdminComponent } from '../../../shared/headers/header-admin/header-admin.component';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -11,67 +11,60 @@ import { GenreService } from '../../../../services/genre-service';
 import { Editorial } from '../../../../interfaces/editorial';
 import { Genero } from '../../../../interfaces/genero';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
-
-import { Usuario } from '../../../../interfaces/usuario';
+import { MatDialog } from '@angular/material/dialog';
 
 import { AuthorUpdateComponent } from '../../../../modals/author/author-update/author-update.component';
 
 import { GenreUpdateComponent } from '../../../../modals/genre/genre-update/genre-update.component';
 
-import { UserService } from '../../../../services/user-service';
 import { PublisherService } from '../../../../services/publisher-service';
 import { PublisherUpdateComponent } from '../../../../modals/publisher/publisher-update/publisher-update.component';
 import { BookDeleteComponent } from '../../../../modals/book/book-delete/book-delete.component';
 
-
-
+/**
+ * Componente de Editar libro
+ */
 @Component({
   selector: 'app-admin-books-update',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, HeaderAdminComponent, MatButtonModule, RouterLink],
   templateUrl: './admin-books-update.component.html',
   styleUrl: './admin-books-update.component.css',
-  //changeDetection: ChangeDetectionStrategy.OnPush No cargan al principio las cosas, mejor quitar esto
 })
 export class AdminBooksUpdateComponent implements OnInit {
-  // user!: Usuario;
-  libro!: Libro;
-  id!: string; //para recuperar luego id en url
+  authors!: Autor[];
+  publishers!: Editorial[];
+  genres!: Genero[];
+  book!: Libro;
+  id!: string; 
   url!: string;
-  autores!: Autor[];
-  editoriales!: Editorial[];
-  generos!: Genero[];
+  
 
   constructor(
     private formBuilder: FormBuilder,
     private bookService: BookService,
     private route: ActivatedRoute,
-    // private userService: UserService,
     private authorService: AuthorService,
     private publisherService: PublisherService,
     private genreService: GenreService,
     private router: Router
-  ) { }
+  ) {}
 
+  /**
+   * Recuperacion del libro, autores, editoriales y generos al iniciar el componente
+   * Definicion de estructura y validaciones del formulario y rellenado
+   */
   ngOnInit(): void {
-
-
-
-
     this.route.params.subscribe(params => {
       this.id = params['libro.id'];
     });
-    // this.retrieveFromLocalStorage();
     this.getAuthors();
     this.getPublishers();
     this.getGenres();
 
-
     this.formUpdate = this.formBuilder.group({
       id: [null],
-      // pattern para que no puedan ser todo espacios
-      nombre: ["", [Validators.required,Validators.pattern(/^.*\S.*$/)]],
+      nombre: ["", [Validators.required, Validators.pattern(/^.*\S.*$/)]],
       autor: this.formBuilder.group({
         id: [null],
         nombre: ["", [Validators.required]]
@@ -91,75 +84,21 @@ export class AdminBooksUpdateComponent implements OnInit {
 
     this.getCurrentBook();
 
-
     setTimeout(() => {
       this.fillForm();
-
     }, 500);
-    // a veces falla??
-
-
   }
 
-  // retrieveFromLocalStorage() {
-  //           this.user = JSON.parse(localStorage.getItem('usuario') || '')
-
-  //           let value = this.userService.getItem('id');
-
-  //           let currentUser = 0;
-  //           if(value!=null){
-  //             currentUser = parseInt(value);
-
-  //             this.userService.getLoggedUser(currentUser).subscribe((data:Usuario)=>{
-
-  //               this.user = data;
-
-
-  //             });
-  //           }  
-  //         }
-
+  // Funcion para recuperar la informacion del libro actual
   getCurrentBook() {
+    // Recuperacion del id obtenido de los parametros de la url para buscar el libro con el servicio
     let idLibro = parseInt(this.id)
     this.bookService.getBookById(idLibro).subscribe((data: Libro) => {
-
-      this.libro = data;
-      console.log(this.libro)
-
-    })
-
-  }
-
-
-
-  fillForm() {
-
-    this.formUpdate.patchValue({
-
-      id: this.libro.id,
-      nombre: this.libro.nombre,
-      autor: {
-        id: this.libro.autor.id,
-        nombre: this.libro.autor.nombre,
-      },
-      isbn: this.libro.isbn,
-      editorial: {
-        id: this.libro.editorial.id,
-        nombre: this.libro.editorial.nombre,
-      },
-      genero: {
-        id: this.libro.genero.id,
-        nombre: this.libro.genero.nombre,
-      },
-      portada: this.libro.portada,
-      sinopsis: this.libro.sinopsis,
-
-
-
+      this.book = data;
     });
-    this.url = this.libro.portada;
   }
 
+  // Inicializacion del formulario
   formUpdate: FormGroup = new FormGroup({
     id: new FormControl(null),
     nombre: new FormControl(""),
@@ -180,138 +119,147 @@ export class AdminBooksUpdateComponent implements OnInit {
     sinopsis: new FormControl(""),
   })
 
+    //Funcion para rellenar los datos del libro en el formulario
+    fillForm() {
+    this.formUpdate.patchValue({
+      id: this.book.id,
+      nombre: this.book.nombre,
+      autor: {
+        id: this.book.autor.id,
+        nombre: this.book.autor.nombre,
+      },
+      isbn: this.book.isbn,
+      editorial: {
+        id: this.book.editorial.id,
+        nombre: this.book.editorial.nombre,
+      },
+      genero: {
+        id: this.book.genero.id,
+        nombre: this.book.genero.nombre,
+      },
+      portada: this.book.portada,
+      sinopsis: this.book.sinopsis,
+    });
+    // Rellenado de la previsualizacion de la imagen de portada
+    this.url = this.book.portada;
+  }
+
+  // Funcion para actualizar el libro
   update() {
+    // Condicion por la que se rellena la portada con imagen por defecto si se vacia
     if (this.formUpdate.value.portada === "" || this.formUpdate.value.portada === null) {
       this.formUpdate.patchValue({
-        portada: "/assets/icons/book.png",
-
-      })
+        portada: "/assets/icons/book.png"
+      });
     }
-    this.bookService.updateBook(this.libro.id, this.formUpdate.value).subscribe({
+    // Envio de los datos del formulario al servicio de libro
+    this.bookService.updateBook(this.book.id, this.formUpdate.value).subscribe({
       next: (data: Libro) => {
-        console.log(data);
         this.router.navigate(['/admin-books']);
       }, error: (errorRes) => {
-        const errorCode = errorRes.error?.codigo;
-
+        const errorCode = errorRes.error?.codigo;        
         if (errorCode === "00000013") {
-          this.formUpdate.setErrors({ foundBook: true })
-        }else if (errorCode === "00000014") {
-          this.formUpdate.setErrors({ foundIsbn: true })
-        } 
-
-
-
+          // Comprobacion de la existencia del libro
+          this.formUpdate.setErrors({foundBook: true});
+        } else if (errorCode === "00000014") {
+          // Comprobacion de la existencia del ISBN
+          this.formUpdate.setErrors({foundIsbn: true});
+        }
       }
     });
-
   }
 
+  // Funcion para listar autores por orden alfabetico
   getAuthors() {
     this.authorService.getAuthorsByNameOrder().subscribe((data: Autor[]) => {
-      this.autores = data;
-    })
-
+      this.authors = data;
+    });
   }
 
-
-
+  // Funcion para listar editoriales por orden alfabetico
   getPublishers() {
     this.publisherService.getPublishersByNameOrder().subscribe((data: Editorial[]) => {
-      this.editoriales = data;
-    })
-
+      this.publishers = data;
+    });
   }
 
+  // Funcion para listar generos por orden alfabetico
   getGenres() {
     this.genreService.getGenresByNameOrder().subscribe((data: Genero[]) => {
-      this.generos = data;
-    })
-
+      this.genres = data;
+    });
   }
 
+  // Funcion para cambiar la portada por inicial por la introducida por el administrador o por defecto
   sendImage(event: Event) {
     let selectedUrl = (event.target as HTMLInputElement)!.value;
-    console.log(selectedUrl);
-    console.log(this.url)
     this.url = selectedUrl;
 
-
+    // Comprobacion de si esta vacio o con espacios el campo de la portada
     if (this.url === null || this.url.trim().length === 0) {
-
       this.url = "/assets/icons/book.png";
-
     }
   }
 
-
-
+  // Inyeccion de dependencias para usar MatDialog
   readonly dialog = inject(MatDialog);
 
+  // Funcion para abrir el componente para actualizar el autor
   openUpdateAuthorDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(AuthorUpdateComponent, {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
       disableClose: true,
-      data: this.libro.autor.id
+      data: this.book.autor.id
     }).afterClosed().subscribe((data: Libro) => {
-      this.autores.push(data);
-
-
-
-      console.log(this.autores)
+      this.authors.push(data);
       this.getAuthors();
     });
   }
 
+  // Funcion para abrir el componente para actualizar la editorial
   openUpdatePublisherDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(PublisherUpdateComponent, {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
       disableClose: true,
-      data: this.libro.editorial.id
+      data: this.book.editorial.id
     }).afterClosed().subscribe((data: Libro) => {
-      this.editoriales.push(data);
-
-
-
-
+      this.publishers.push(data);
       this.getPublishers();
     });
   }
 
+  // Funcion para abrir el componente para actualizar el genero
   openUpdateGenreDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(GenreUpdateComponent, {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
       disableClose: true,
-      data: this.libro.genero.id
+      data: this.book.genero.id
     }).afterClosed().subscribe((data: Libro) => {
-      this.generos.push(data);
-
-
-
-
+      this.genres.push(data);
       this.getGenres();
     });
   }
 
+  // Funcion para abrir el componente para eliminar el libro
   openDeleteBookDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(BookDeleteComponent, {
       width: '350px',
       enterAnimationDuration,
       exitAnimationDuration,
       disableClose: true,
-      data: this.libro.id
-    })
+      data: this.book.id
+    });
   }
 
-  get nombre() {
+  // Getter para acceder desde HTML a los controles del formulario
+  get name() {
     return this.formUpdate.get('nombre')!;
   }
-
 
 }

@@ -22,7 +22,7 @@ import { BookUpdateComponent } from '../../../modals/book/book-update/book-updat
   styleUrl: './admin-books.component.css'
 })
 export class AdminBooksComponent implements OnInit, AfterViewInit {
-  libros!: Libro[];
+  books!: Libro[];
   showBooksTable: Boolean = true;
   // Controles del paginator
   totalItems = 0;
@@ -64,11 +64,11 @@ export class AdminBooksComponent implements OnInit, AfterViewInit {
   // Funcion para listar los libros existentes en la bbdd por orden alfabetico
   getBooks() {
     this.bookService.getBooksByNameOrder().subscribe((data: Libro[]) => {
-      this.libros = data;
+      this.books = data;
       // Guardado del total de elementos del listado para la posterior paginacion
-      this.totalItems = this.libros.length;
+      this.totalItems = this.books.length;
       // Almacenamiento de los libros en el dataSource
-      this.dataSource.data = this.libros;
+      this.dataSource.data = this.books;
     });
   }
 
@@ -105,7 +105,7 @@ export class AdminBooksComponent implements OnInit, AfterViewInit {
   applyFilterGalery(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     // Filtrado por titulo de libro
-    this.filteredBooks = this.libros.filter(libro => libro.nombre.toLowerCase().includes(filterValue));
+    this.filteredBooks = this.books.filter(libro => libro.nombre.toLowerCase().includes(filterValue));
     // Guardado del total de elementos del listado para la posterior paginacion
     this.totalItems = this.filteredBooks.length;
   }
