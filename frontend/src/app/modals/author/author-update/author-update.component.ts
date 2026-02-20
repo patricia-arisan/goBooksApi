@@ -8,130 +8,89 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { AuthorService } from '../../../services/author-service';
 import { Autor } from '../../../interfaces/autor';
 
-import { Libro } from '../../../interfaces/libro';
-import { BookService } from '../../../services/book-service';
-import { Usuario } from '../../../interfaces/usuario';
-import { UserService } from '../../../services/user-service';
-import { AdminBooksUpdateComponent } from '../../../pages/admin/admin-books/admin-books-update/admin-books-update.component';
-
-
+/**
+ * Componente para actualizar autor
+ */
 @Component({
   selector: 'app-author-update',
   standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
+  imports: [MatButtonModule, MatDialogActions, MatDialogTitle, MatDialogContent, FormsModule, ReactiveFormsModule],
   templateUrl: './author-update.component.html',
   styleUrl: './author-update.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AuthorUpdateComponent implements OnInit{
-  user!: Usuario;
-  libro!: Libro;
-  readonly dialogRef = inject(MatDialogRef<AdminBooksUpdateComponent>);
+export class AuthorUpdateComponent implements OnInit {
+  readonly dialogRef = inject(MatDialogRef<AuthorUpdateComponent>);
   fromParentComponent: number;
-  autor!: Autor;
+  author!: Autor;
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: number,
     private formBuilder: FormBuilder,
     private authorService: AuthorService,
-    private bookService: BookService,
-    private userService: UserService,
-  ){
+  ) {
+    // Almacenamiento del id de autor del componente AdminBooksUpdateComponent
     this.fromParentComponent = data;
   }
 
+  /**
+   * Definicion de estructura y validaciones del formulario al iniciar el componente
+   * Recuperacion del autor y rellenado de formulario
+   */
   ngOnInit(): void {
-    this.retrieveFromLocalStorage();
-
-    this.formUpdateAuthor = this.formBuilder.group ({
-       id:[null],
-        nombre:["",[Validators.required,Validators.pattern(/^.*\S.*$/)]],
-        
+    this.formUpdateAuthor = this.formBuilder.group({
+      id: [null],
+      nombre: ["", [Validators.required, Validators.pattern(/^.*\S.*$/)]],
     });
-    
-    // this.getCurrentBook();
-setTimeout(() => {
+
     this.findCurrentAuthor();
-    }, 500);
-    setTimeout(() => {
-    this.fillForm();
-      }, 600);
   }
 
-  retrieveFromLocalStorage() {
-              this.user = JSON.parse(localStorage.getItem('usuario') || '')
-              
-              let value = this.userService.getItem('id');
-                 
-              let currentUser = 0;
-              if(value!=null){
-                currentUser = parseInt(value);
-                            
-                this.userService.getLoggedUser(currentUser).subscribe((data:Usuario)=>{
-                  
-                  this.user = data;
-                  
-                      
-                });
-              }  
-            }
-
-  // getCurrentBook(){
-    
-  //   this.bookService.getBookById(this.data).subscribe((data:Libro)=>{
-      
-  //         this.libro = data;
-  //         console.log(this.libro)
-          
-  //       })
-        
-  // }
-
-  findCurrentAuthor(){
-    console.log(this.data)
+  // Funcion para recuperar la informacion del autor a actualizar y enviarla al formulario
+  findCurrentAuthor() {
     this.authorService.getAuthorById(this.data).subscribe((data: Autor) => {
-    
-          this.autor = data;
-          console.log(this.autor)
-    
-        })
+      this.author = data;
+      this.fillForm();
+    });
   }
 
-  fillForm(){
-    
-        this.formUpdateAuthor.patchValue({
-          
-            id: this.autor.id,
-          nombre:this.autor.nombre,
-          
-        
+  // Funcion para rellenar los datos del autor
+  fillForm() {
+    this.formUpdateAuthor.patchValue({
+      id: this.author.id,
+      nombre: this.author.nombre,
     });
-      
-   }
+  }
 
-  formUpdateAuthor:FormGroup = new FormGroup({
+  // Inicializacion del formulario
+  formUpdateAuthor: FormGroup = new FormGroup({
     id: new FormControl(null),
-      nombre: new FormControl(""),
-    
+    nombre: new FormControl(""),
   })
-  
 
-  updateAuthor(){
-    this.authorService.updateAuthor(this.autor.id,this.formUpdateAuthor.value).subscribe({next:(data:Autor) =>{
-      console.log(data);
+  // Funcion para actualizar el autor
+  updateAuthor() {
+    // Envio de los datos del formulario al servicio de autor
+    this.authorService.updateAuthor(this.author.id, this.formUpdateAuthor.value).subscribe({
+      next: (data: Autor) => {
+        // Almacenamiento de los datos y cierre del dialog
         this.dialogRef.close(data);
-        
-        }, error: (error)=> {
-      if(error){
-        this.formUpdateAuthor.setErrors({foundAuthor: true})
-      }
+      }, error: (error) => {
+        if (error) {
+          // Si se encuentra un autor con el mismo nombre, se lanza un error
+          this.formUpdateAuthor.setErrors({foundAuthor: true});
         }
+      }
     });
-    }
+  }
 
-    get nombre(){
+  // Getter para acceder desde HTML al control del formulario
+  get name() {
     return this.formUpdateAuthor.get('nombre')!;
-  }  
+  }
+
+  // Funcion para cerrar el dialog
   closeForm(): void {
     this.dialogRef.close();
   }
+
 }
