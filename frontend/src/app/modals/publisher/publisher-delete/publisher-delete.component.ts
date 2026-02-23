@@ -1,119 +1,60 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Inject, inject, OnInit, Output } from '@angular/core';
-
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, Inject, inject, OnInit } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 
-import { GenreUpdateComponent } from '../../genre/genre-update/genre-update.component';
-import { Usuario } from '../../../interfaces/usuario';
-
-import { HeaderAdminComponent } from '../../../pages/shared/headers/header-admin/header-admin.component';
 import { Editorial } from '../../../interfaces/editorial';
-
-import { AdminBooksComponent } from '../../../pages/admin/admin-books/admin-books.component';
-import { AdminPublishersComponent } from '../../../pages/admin/admin-publishers/admin-publishers.component';
-import { UserService } from '../../../services/user-service';
 import { PublisherService } from '../../../services/publisher-service';
 
-
-
-
+/**
+ * Componente para eliminar el registro de la editorial
+ */
 @Component({
   selector: 'app-publisher-delete',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule,MatButtonModule,MatDialogTitle,MatDialogContent,MatDialogActions],
+  imports: [MatButtonModule, MatDialogTitle, MatDialogContent, MatDialogActions],
   templateUrl: './publisher-delete.component.html',
   styleUrl: './publisher-delete.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
-  //changeDetection: ChangeDetectionStrategy.OnPush No cargan al principio las cosas, mejor quitar esto
 })
-export class PublisherDeleteComponent implements OnInit{
-  user!: Usuario;
- 
-  editorial!: Editorial;
-  
-  
-  readonly dialogRef = inject(MatDialogRef<AdminPublishersComponent>);
+export class PublisherDeleteComponent implements OnInit {
+  publisher!: Editorial;
+  readonly dialogRef = inject(MatDialogRef<PublisherDeleteComponent>);
   fromParentComponent: number;
-    
+
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    
+    @Inject(MAT_DIALOG_DATA) public data: number,
     private publisherService: PublisherService,
-    
-    private userService: UserService,
-    
-    private router: Router
-  ){
+  ) {
+    // Almacenamiento del id de la editorial del componente AdminPublishersComponent
     this.fromParentComponent = data;
   }
 
+  /**
+   * Recuperacion de la informacion de la editorial al iniciar el componente
+   */
   ngOnInit(): void {
-
-       
-    
-
-   
-    this.retrieveFromLocalStorage();
-    
-
-   
-      
-      setTimeout(() => {
-    this.findCurrentPublisher();
-    }, 500);
-       
-      
-    
-
-     
-    
+      this.findCurrentPublisher();    
   }
 
-  retrieveFromLocalStorage() {
-            this.user = JSON.parse(localStorage.getItem('usuario') || '')
-            
-            let value = this.userService.getItem('id');
-               
-            let currentUser = 0;
-            if(value!=null){
-              currentUser = parseInt(value);
-                          
-              this.userService.getLoggedUser(currentUser).subscribe((data:Usuario)=>{
-                
-                this.user = data;
-                
-                    
-              });
-            }  
-          }
-
-  findCurrentPublisher(){
-    
+  // Funcion para recuperar la informacion de la editorial
+  findCurrentPublisher() {
     this.publisherService.getPublisherById(this.data).subscribe((data: Editorial) => {
-    
-          this.editorial = data;
-          
-    
-        })
+      this.publisher = data;
+    });
   }
 
-  deletePublisher(){
-    this.publisherService.deletePublisher(this.editorial.id).subscribe((data:any) =>{
-        this.dialogRef.close(true);
-        
-    })
+  // Funcion para eliminar editorial
+  deletePublisher() {
+    this.publisherService.deletePublisher(this.publisher.id).subscribe((data: any) => {
+      // Si se realiza, devuelve true al cerrar para la actualizacion de la pagina
+      this.dialogRef.close(true);
+    });
   }
 
-  
-
+  // Funcion para cerrar el dialog
   closeDialog(): void {
     this.dialogRef.close();
   }
 
-  
-    
-  
 }

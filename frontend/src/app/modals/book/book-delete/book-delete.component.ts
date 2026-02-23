@@ -1,117 +1,63 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Inject, inject, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, inject, OnInit } from '@angular/core';
 
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 
-import { Usuario } from '../../../interfaces/usuario';
-
-import { HeaderAdminComponent } from '../../../pages/shared/headers/header-admin/header-admin.component';
 import { Libro } from '../../../interfaces/libro';
 import { BookService } from '../../../services/book-service';
 
-
-import { UserService } from '../../../services/user-service';
-import { AdminBooksUpdateComponent } from '../../../pages/admin/admin-books/admin-books-update/admin-books-update.component';
-
-
-
-
+/**
+ * Componente para eliminar el registro del libro
+ */
 @Component({
   selector: 'app-book-delete',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule,MatButtonModule,MatDialogTitle,MatDialogContent,MatDialogActions],
+  imports: [MatButtonModule, MatDialogTitle, MatDialogContent, MatDialogActions],
   templateUrl: './book-delete.component.html',
   styleUrl: './book-delete.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
-  //changeDetection: ChangeDetectionStrategy.OnPush No cargan al principio las cosas, mejor quitar esto
 })
-export class BookDeleteComponent implements OnInit{
-  user!: Usuario;
- 
-  libro!: Libro;
-  
-  
-  readonly dialogRef = inject(MatDialogRef<AdminBooksUpdateComponent>);
+export class BookDeleteComponent implements OnInit {
+  book!: Libro;
+  readonly dialogRef = inject(MatDialogRef<BookDeleteComponent>);
   fromParentComponent: number;
-    
+
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    
+    @Inject(MAT_DIALOG_DATA) public data: number,
     private bookService: BookService,
-    
-    private userService: UserService,
-    
     private router: Router
-  ){
+  ) {
+    // Almacenamiento del id del libro del componente AdminBooksUpdateComponent
     this.fromParentComponent = data;
   }
-
+  /**
+   * Recuperacion de la informacion del libro al iniciar el componente
+   */
   ngOnInit(): void {
+    this.getCurrentBook();
+  }  
 
-       
-    
-
-   
-    this.retrieveFromLocalStorage();
-    
-
-   
-      
-      this.getCurrentBook();
-       
-      
-    
-
-     
-    
+  // Funcion para recuperar el libro con el id del componente padre
+  getCurrentBook() {
+    this.bookService.getBookById(this.data).subscribe((data: Libro) => {
+      this.book = data;
+    });
   }
 
-  retrieveFromLocalStorage() {
-            this.user = JSON.parse(localStorage.getItem('usuario') || '')
-            
-            let value = this.userService.getItem('id');
-               
-            let currentUser = 0;
-            if(value!=null){
-              currentUser = parseInt(value);
-                          
-              this.userService.getLoggedUser(currentUser).subscribe((data:Usuario)=>{
-                
-                this.user = data;
-                
-                    
-              });
-            }  
-          }
-
-  getCurrentBook(){
-    console.log(this.data)
-    this.bookService.getBookById(this.data).subscribe((data:Libro)=>{
-      
-          this.libro = data;
-          console.log(this.libro)
-          
-        })
-        
+  // Funcion para eliminar el libro
+  deleteBook() {
+    this.bookService.deleteBook(this.book.id).subscribe((data: any) => {
+      this.dialogRef.close();
+      // Retorno a la pagina de administar libros al desaparecer la del libro eliminado
+      this.router.navigate(['/admin-books']);
+    });
   }
 
-  deleteBook(){
-    this.bookService.deleteBook(this.libro.id).subscribe((data:any) =>{
-        this.dialogRef.close();
-        this.router.navigate(['/admin-books']);
-    })
-  }
-
-  
-
+  // Funcion para cerrar el dialog
   closeDialog(): void {
     this.dialogRef.close();
   }
 
-  
-    
-  
 }

@@ -57,7 +57,7 @@
         <section class="last-books">
             <h3>Últimos libros</h3>
             <div class="book-list">
-                @for (libro of lastBooks; track libro){
+                @for (libro of lastBooks; track libro) {
                 <div class="book">
                     <a [routerLink]="['/books/book-section',libro.id]"><img src="{{libro.portada}}" id="cover"
                             alt="{{libro.nombre}}" /></a>
@@ -68,7 +68,7 @@
             <!-- Carrusel con ultimos libros para pantallas de menor dimension -->
             <div id="carouselLast" class="carousel slide">
                 <div class="carousel-inner">
-                    @for (libro of lastBooks; track libro; let first = $first){
+                    @for (libro of lastBooks; track libro; let first = $first) {
                     <!-- First fija el primer elemento activo -->
                     <div class="carousel-item active" [class.active]="first">
                         <img src="{{libro.portada}}" id="cover" alt="{{libro.nombre}}">
@@ -95,7 +95,7 @@
         <section class="scored-books">
             <h3>Mejor valorados</h3>
             <div class="book-list">
-                @for (libro of booksScore; track libro){
+                @for (libro of booksScore; track libro) {
                 <div class="book">
                     <a [routerLink]="['/books/book-section',libro.id]"><img src="{{libro.portada}}" id="cover"
                             alt="{{libro.nombre}}" /></a>
@@ -106,7 +106,7 @@
             <!-- Carrusel con libros mejor puntuados para pantallas de menor dimension -->
             <div id="carouselScore" class="carousel slide">
                 <div class="carousel-inner">
-                    @for (libro of booksScore; track libro; let first = $first){
+                    @for (libro of booksScore; track libro; let first = $first) {
                     <div class="carousel-item active" [class.active]="first">
                         <img src="{{libro.portada}}" id="cover" alt="{{libro.nombre}}">
                         <p class="name"><a [routerLink]="['/books/book-section',libro.id]">{{libro.nombre}}</a></p>

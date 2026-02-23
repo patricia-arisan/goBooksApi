@@ -6,123 +6,92 @@ import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef, MatD
 import { GenreService } from '../../../services/genre-service';
 import { Genero } from '../../../interfaces/genero';
 
-import { Usuario } from '../../../interfaces/usuario';
-import { Libro } from '../../../interfaces/libro';
-import { BookService } from '../../../services/book-service';
-import { UserService } from '../../../services/user-service';
-import { AdminBooksUpdateComponent } from '../../../pages/admin/admin-books/admin-books-update/admin-books-update.component';
-
-
-
+/**
+ * Componente para actualizar genero
+ */
 @Component({
   selector: 'app-genre-update',
   standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
+  imports: [MatButtonModule, MatDialogActions, MatDialogTitle, MatDialogContent, FormsModule, ReactiveFormsModule],
   templateUrl: './genre-update.component.html',
   styleUrl: './genre-update.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GenreUpdateComponent implements OnInit{
-  user!: Usuario;
-    libro!: Libro;
-  readonly dialogRef = inject(MatDialogRef<AdminBooksUpdateComponent>);
+export class GenreUpdateComponent implements OnInit {
+  readonly dialogRef = inject(MatDialogRef<GenreUpdateComponent>);
   fromParentComponent: number;
-  genero!:Genero;
+  genre!: Genero;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: number,
     private formBuilder: FormBuilder,
     private genreService: GenreService,
-    private bookService: BookService,
-    private userService: UserService,
-  ){
+  ) {
+    /**
+     * Almacenamiento del id de genero del componente que viene de AdminGenresComponent,
+     * BookUpdateComponent o AdminBooksUpdateComponent
+     */
     this.fromParentComponent = data;
   }
 
+  /**
+   * Definicion de estructura y validaciones del formulario al iniciar el componente
+   * Recuperacion del genero y rellenado de formulario
+   */
   ngOnInit(): void {
-    this.retrieveFromLocalStorage();
-
-    this.formUpdateGenre = this.formBuilder.group ({
-      id:[null],
-      nombre:["",[Validators.required,Validators.pattern(/^.*\S.*$/)]]
-      
+    this.formUpdateGenre = this.formBuilder.group({
+      id: [null],
+      nombre: ["", [Validators.required, Validators.pattern(/^.*\S.*$/)]]
     });
 
-    // this.getCurrentBook();
-setTimeout(() => {
     this.findCurrentGenre();
-    }, 500);
-    setTimeout(() => {
-    this.fillForm();
-      }, 600);
-
   }
 
-  retrieveFromLocalStorage() {
-              this.user = JSON.parse(localStorage.getItem('usuario') || '')
-              
-              let value = this.userService.getItem('id');
-                 
-              let currentUser = 0;
-              if(value!=null){
-                currentUser = parseInt(value);
-                            
-                this.userService.getLoggedUser(currentUser).subscribe((data:Usuario)=>{
-                  
-                  this.user = data;
-                  
-                      
-                });
-              }  
-            }
-
-
-  findCurrentGenre(){
-      
-      this.genreService.getGenreById(this.data).subscribe((data: Genero) => {
-      
-            this.genero = data;
-          //  console.log(this.genero)
-      
-          })
-    }
-
-    fillForm(){
-    
-        this.formUpdateGenre.patchValue({
-          
-            id: this.genero.id,
-          nombre:this.genero.nombre,
-        
-        
-          
-        
+  // Funcion para recuperar la informacion del genero a actualizar y enviarla al formulario
+  findCurrentGenre() {
+    this.genreService.getGenreById(this.data).subscribe((data: Genero) => {
+      this.genre = data;
+      this.fillForm();
     });
-      
-   }
+  }
 
-  formUpdateGenre:FormGroup = new FormGroup({
+  // Funcion para rellenar los datos del genero
+  fillForm() {
+    this.formUpdateGenre.patchValue({
+      id: this.genre.id,
+      nombre: this.genre.nombre,
+    });
+  }
+
+  // Inicializacion del formulario
+  formUpdateGenre: FormGroup = new FormGroup({
     id: new FormControl(null),
     nombre: new FormControl(""),
-    
   })
 
-  updateGenre(){
-      this.genreService.updateGenre(this.genero.id,this.formUpdateGenre.value).subscribe({next:(data:Genero) =>{
-            console.log(data);
-            this.dialogRef.close(data);
-          }, error: (error)=>{
-      if(error){
-        this.formUpdateGenre.setErrors({foundGenre: true})
+  // Funcion para actualizar el genero
+  updateGenre() {
+    // Envio de los datos del formulario al servicio de genero
+    this.genreService.updateGenre(this.genre.id, this.formUpdateGenre.value).subscribe({
+      next: (data: Genero) => {
+        // Almacenamiento de los datos y cierre del dialog
+        this.dialogRef.close(data);
+      }, error: (error) => {
+        if (error) {
+          // Si se encuentra un genero con el mismo nombre, se lanza un error
+          this.formUpdateGenre.setErrors({foundGenre: true});
+        }
       }
-    }
-    })
-      }
+    });
+  }
 
-      get nombre(){
+  // Getter para acceder desde HTML al control del formulario
+  get name() {
     return this.formUpdateGenre.get('nombre')!;
-  }  
-      closeForm(): void {
+  }
+
+  // Funcion para cerrar el dialog
+  closeForm(): void {
     this.dialogRef.close();
   }
 

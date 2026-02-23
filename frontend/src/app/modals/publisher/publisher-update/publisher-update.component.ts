@@ -3,134 +3,96 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 
-
-
 import { Editorial } from '../../../interfaces/editorial';
-import { Usuario } from '../../../interfaces/usuario';
-import { Libro } from '../../../interfaces/libro';
-import { BookService } from '../../../services/book-service';
-import { UserService } from '../../../services/user-service';
-
-
 import { PublisherService } from '../../../services/publisher-service';
-import { AdminBooksUpdateComponent } from '../../../pages/admin/admin-books/admin-books-update/admin-books-update.component';
 
-
-
-
+/**
+ * Componente para actualizar la editorial
+ */
 @Component({
   selector: 'app-publisher-update',
   standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
+  imports: [MatButtonModule, MatDialogActions, MatDialogTitle, MatDialogContent, FormsModule, ReactiveFormsModule],
   templateUrl: './publisher-update.component.html',
   styleUrl: './publisher-update.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PublisherUpdateComponent implements OnInit{
-  user!: Usuario;
-  libro!: Libro;
-  editorial!:Editorial;
+export class PublisherUpdateComponent implements OnInit {
+  publisher!: Editorial;
   fromParentComponent: number;
-  readonly dialogRef = inject(MatDialogRef<AdminBooksUpdateComponent>);
+  readonly dialogRef = inject(MatDialogRef<PublisherUpdateComponent>);
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: number,
     private formBuilder: FormBuilder,
     private publisherService: PublisherService,
-    private bookService: BookService,
-    private userService: UserService,
-  ){
+  ) {
+    /**
+     * Almacenamiento del id de la editorial del componente que viene de AdminPublishersComponent,
+     * BookUpdateComponent o AdminBooksUpdateComponent
+     */
     this.fromParentComponent = data;
   }
 
+  /**
+   * Definicion de estructura y validaciones del formulario al iniciar el componente
+   * Recuperacion de la editorial y rellenado de formulario
+   */
   ngOnInit(): void {
-    this.retrieveFromLocalStorage();
-
-    this.formUpdatePublisher = this.formBuilder.group ({
-      id:[null],
-      nombre:["",[Validators.required,,Validators.pattern(/^.*\S.*$/)]]
-      
+    this.formUpdatePublisher = this.formBuilder.group({
+      id: [null],
+      nombre: ["", [Validators.required, , Validators.pattern(/^.*\S.*$/)]]
     });
 
-    // this.getCurrentBook();
-setTimeout(() => {
     this.findCurrentPublisher();
-    }, 500);
-    setTimeout(() => {
-    this.fillForm();
-      }, 600);
-
   }
 
-  formUpdatePublisher:FormGroup = new FormGroup({
+  // Inicializacion del formulario
+  formUpdatePublisher: FormGroup = new FormGroup({
     id: new FormControl(null),
     nombre: new FormControl(""),
-    
   })
 
-  retrieveFromLocalStorage() {
-              this.user = JSON.parse(localStorage.getItem('usuario') || '')
-              
-              let value = this.userService.getItem('id');
-                 
-              let currentUser = 0;
-              if(value!=null){
-                currentUser = parseInt(value);
-                            
-                this.userService.getLoggedUser(currentUser).subscribe((data:Usuario)=>{
-                  
-                  this.user = data;
-                  
-                      
-                });
-              }  
-            }
-
-
-  findCurrentPublisher(){
-      
-      this.publisherService.getPublisherById(this.data).subscribe((data: Editorial) => {
-      
-            this.editorial = data;
-           
-      
-          })
-    }
-  
-    fillForm(){
-      
-          this.formUpdatePublisher.patchValue({
-            
-              id: this.editorial.id,
-            nombre:this.editorial.nombre,
-         
-        
-            
-            
-          
-      });
-        
-     }
-
-  updatePublisher(){
-      this.publisherService.updatePublisher(this.editorial.id,this.formUpdatePublisher.value).subscribe({next:(data:Editorial) =>{
-                  console.log(data);
-                  this.dialogRef.close(data);
-                }, error: (error)=>{
-            if(error){
-              this.formUpdatePublisher.setErrors({foundPublisher: true})
-            }
-          }
-          })
-      }
-
-      get nombre(){
-    return this.formUpdatePublisher.get('nombre')!;
-  } 
-
-    closeForm(): void {
-    this.dialogRef.close();
+  // Funcion para recuperar la informacion de la editorial a actualizar y enviarla al formulario
+  findCurrentPublisher() {
+    this.publisherService.getPublisherById(this.data).subscribe((data: Editorial) => {
+      this.publisher = data;
+      this.fillForm();
+    });
   }
 
+  // Funcion para rellenar los datos de la editorial
+  fillForm() {
+    this.formUpdatePublisher.patchValue({
+      id: this.publisher.id,
+      nombre: this.publisher.nombre,
+    });
+  }
+
+  // Funcion para actualizar la editorial
+  updatePublisher() {
+    // Envio de los datos del formulario al servicio editorial
+    this.publisherService.updatePublisher(this.publisher.id, this.formUpdatePublisher.value).subscribe({
+      next: (data: Editorial) => {
+        // Almacenamiento de los datos y cierre del dialog
+        this.dialogRef.close(data);
+      }, error: (error) => {
+        if (error) {
+          // Si se encuentra una editorial con el mismo nombre, se lanza un error
+          this.formUpdatePublisher.setErrors({foundPublisher: true});
+        }
+      }
+    });
+  }
+
+  // Getter para acceder desde HTML al control del formulario
+  get name() {
+    return this.formUpdatePublisher.get('nombre')!;
+  }
+
+  // Funcion para cerrar el dialog
+  closeForm(): void {
+    this.dialogRef.close();
+  }
 
 }

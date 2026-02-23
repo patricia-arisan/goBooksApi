@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>Añadir libro</h2>
+<h2 mat-dialog-title class="title">Añadir libro</h2>
 <mat-dialog-content>
-       <p class="name">{{libro.nombre}}</p>
+        <p class="name">{{libro.nombre}}</p>
         <form [formGroup]="formNewReading" (submit)="registerReading()"> <!--(submit)="registerReading()" -->
                 <div class="form-group">
                         <label class="control-label" for="id"> </label> <input id="id" type="hidden"
@@ -13,25 +13,26 @@
                                 formControlName="idUsuario" class="form-control" autofocus="autofocus">
                 </div>
                 <div class="form-group">
-                        
+
                         <!-- <label class="control-label" for="estado">Estado: </label> -->
-                        <select formControlName="idEstado" name="estado" class="estado" (change)="captureSelect($event)">
-                                
+                        <select formControlName="idEstado" name="estado" class="estado"
+                                (change)="captureSelect($event)">
+
                                 @for (estado of estados; track estado.id){
-                                       
+
                                 <!-- <option [ngValue]=""  [selected]="estado.id===1"> -->
-                                        @if(estado.id===1){
-                                                <option [value]="estado.id" disabled>
-                                        
+                                @if(estado.id===1){
+                                <option [value]="estado.id" disabled>
+
                                         {{ estado.situacion}}
                                 </option>
-                                        }@else{
-                                                <option [value]="estado.id">
-                                        
+                                }@else{
+                                <option [value]="estado.id">
+
                                         {{ estado.situacion}}
                                 </option>
-                                        }
-                                
+                                }
+
 
                                 }
                         </select>
@@ -43,22 +44,22 @@
                 @if(selectedOption==="2"){
                 <!-- <mat-toolbar color="primary"></mat-toolbar> -->
                 <div class="rating">
-                @for (star of ratingArray; track star; let index = $index){
-                <mat-icon (mouseenter)="setStar(index)" [ngClass]="{checked:selectedStar>index}"
-                        (mouseleave)="unselectStar()" (click)="rating(index)" class="star">star</mat-icon>
-                }
+                        @for (star of ratingArray; track star; let index = $index){
+                        <mat-icon (mouseenter)="setStar(index)" [ngClass]="{checked:selectedStar>index}"
+                                (mouseleave)="unselectStar()" (click)="rating(index)" class="star">star</mat-icon>
+                        }
                 </div>
                 }
                 <div class="form-group">
                         <mat-dialog-actions class="buttons">
-                        <button type="button" class="btn " (click)="closeForm()">Atrás</button>
-                        
-                           <button type="submit" class="btn btn-success">Añadir</button>     
-                        
-                       </mat-dialog-actions> 
+                                <button type="button" class="btn " (click)="closeForm()">Atrás</button>
+
+                                <button type="submit" class="btn btn-success">Añadir</button>
+
+                        </mat-dialog-actions>
 
                 </div>
-                
+
         </form>
-        
+
 </mat-dialog-content>

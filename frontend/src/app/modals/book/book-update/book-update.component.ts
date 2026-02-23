@@ -1,310 +1,230 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Inject, inject, OnInit, Output } from '@angular/core';
+import { Component, Inject, inject, OnInit } from '@angular/core';
 
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 
 import { AuthorUpdateComponent } from '../../author/author-update/author-update.component';
-
+import { PublisherUpdateComponent } from '../../publisher/publisher-update/publisher-update.component';
 import { GenreUpdateComponent } from '../../genre/genre-update/genre-update.component';
-import { Usuario } from '../../../interfaces/usuario';
 
-import { HeaderAdminComponent } from '../../../pages/shared/headers/header-admin/header-admin.component';
 import { Libro } from '../../../interfaces/libro';
 import { Autor } from '../../../interfaces/autor';
 import { Editorial } from '../../../interfaces/editorial';
 import { Genero } from '../../../interfaces/genero';
 import { BookService } from '../../../services/book-service';
 import { AuthorService } from '../../../services/author-service';
-
 import { GenreService } from '../../../services/genre-service';
-import { AdminBooksComponent } from '../../../pages/admin/admin-books/admin-books.component';
-import { UserService } from '../../../services/user-service';
 import { PublisherService } from '../../../services/publisher-service';
-import { PublisherUpdateComponent } from '../../publisher/publisher-update/publisher-update.component';
 
-
-
-
-
+/**
+ * Componente para actualizacion rapida de algunos elementos del libro
+ */
 @Component({
   selector: 'app-book-update',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule,MatButtonModule,MatDialogTitle,MatDialogContent,MatDialogActions],
+  imports: [FormsModule, ReactiveFormsModule, MatButtonModule, MatDialogTitle, MatDialogContent, MatDialogActions],
   templateUrl: './book-update.component.html',
   styleUrl: './book-update.component.css',
-  // changeDetection: ChangeDetectionStrategy.OnPush
-  //changeDetection: ChangeDetectionStrategy.OnPush No cargan al principio las cosas, mejor quitar esto
 })
-export class BookUpdateComponent implements OnInit{
-  user!: Usuario;
-  // autores!: Autor[];
-  // editoriales!: Editorial[];
-  // generos!: Genero[];
-  libro!: Libro;
-  
-  url!: string;
-  autores!: Autor[];
-  editoriales!: Editorial[];
-  generos!: Genero[];
-  readonly dialogRef = inject(MatDialogRef<AdminBooksComponent>);
+export class BookUpdateComponent implements OnInit {
+  book!: Libro;
+  authors!: Autor[];
+  publishers!: Editorial[];
+  genres!: Genero[];
+  readonly dialogRef = inject(MatDialogRef<BookUpdateComponent>);
   fromParentComponent: number;
-    
+
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: number,
     private formBuilder: FormBuilder,
     private bookService: BookService,
-    
-    private userService: UserService,
     private authorService: AuthorService,
     private publisherService: PublisherService,
     private genreService: GenreService,
-    private router: Router
-  ){
+  ) {
+    // Almacenamiento del id del libro del componente AdminBooksComponent
     this.fromParentComponent = data;
   }
 
+  /**
+   * Recuperacion del libro, autores, editoriales y generos al iniciar el componente
+   * Definicion de estructura y validaciones del formulario y rellenado
+   */
   ngOnInit(): void {
-
-       
-    
-
-   
-    this.retrieveFromLocalStorage();
-     this.getAuthors();
+    this.getAuthors();
     this.getPublishers();
     this.getGenres();
-    
+    this.getCurrentBook();
 
-    this.formUpdate = this.formBuilder.group ({
-        id:[null],
-        nombre:["",[Validators.required,Validators.pattern(/^.*\S.*$/)]],
-        autor:this.formBuilder.group({
-          id:[null],
-          nombre:["",[Validators.required]]
-        }),
-        isbn:[""],
-        editorial:this.formBuilder.group({
-          id:[null],
-          nombre:["",[Validators.required]]
-        }),
-        genero:this.formBuilder.group({
-          id:[null],
-          nombre:["",[Validators.required]]
-        }),
-        portada:[""],
-        sinopsis:[""],
-        
-      })
-      
-      this.getCurrentBook();
-       
-      
+    this.formUpdate = this.formBuilder.group({
+      id: [null],
+      nombre: ["", [Validators.required, Validators.pattern(/^.*\S.*$/)]],
+      autor: this.formBuilder.group({
+        id: [null],
+        nombre: ["", [Validators.required]]
+      }),
+      isbn: [""],
+      editorial: this.formBuilder.group({
+        id: [null],
+        nombre: ["", [Validators.required]]
+      }),
+      genero: this.formBuilder.group({
+        id: [null],
+        nombre: ["", [Validators.required]]
+      }),
+      portada: [""],
+      sinopsis: [""],
+    });    
+
     setTimeout(() => {
       this.fillForm();
-      
     }, 900);
+  }  
 
-     
-    
-  }
-
-  retrieveFromLocalStorage() {
-            this.user = JSON.parse(localStorage.getItem('usuario') || '')
-            
-            let value = this.userService.getItem('id');
-               
-            let currentUser = 0;
-            if(value!=null){
-              currentUser = parseInt(value);
-                          
-              this.userService.getLoggedUser(currentUser).subscribe((data:Usuario)=>{
-                
-                this.user = data;
-                
-                    
-              });
-            }  
-          }
-
-  getCurrentBook(){
-    console.log(this.data)
-    this.bookService.getBookById(this.data).subscribe((data:Libro)=>{
-      
-          this.libro = data;
-          console.log(this.libro)
-          
-        })
-        
-  }
-
-  fillForm(){
-    
-        this.formUpdate.patchValue({
-          
-            id: this.libro.id,
-          nombre:this.libro.nombre,
-        autor:{
-          id: this.libro.autor.id,
-          nombre:this.libro.autor.nombre,
-        },
-        isbn:this.libro.isbn,
-        editorial:{
-          id: this.libro.editorial.id,
-          nombre:this.libro.editorial.nombre,
-        },
-        genero:{
-          id: this.libro.genero.id,
-          nombre:this.libro.genero.nombre,
-        },
-        portada:this.libro.portada,
-        sinopsis:this.libro.sinopsis,
-       
+  // Funcion para recuperar la informacion del libro
+  getCurrentBook() {
+    this.bookService.getBookById(this.data).subscribe((data: Libro) => {
+      this.book = data;
     });
-      
-   }
+  }
 
-    formUpdate:FormGroup = new FormGroup({
+  // Funcion para rellenar el formulario
+  fillForm() {
+    this.formUpdate.patchValue({
+      id: this.book.id,
+      nombre: this.book.nombre,
+      autor: {
+        id: this.book.autor.id,
+        nombre: this.book.autor.nombre,
+      },
+      isbn: this.book.isbn,
+      editorial: {
+        id: this.book.editorial.id,
+        nombre: this.book.editorial.nombre,
+      },
+      genero: {
+        id: this.book.genero.id,
+        nombre: this.book.genero.nombre,
+      },
+      portada: this.book.portada,
+      sinopsis: this.book.sinopsis,
+    });
+  }
+
+  // Inicializacion del formulario
+  formUpdate: FormGroup = new FormGroup({
+    id: new FormControl(null),
+    nombre: new FormControl(""),
+    autor: new FormGroup({
       id: new FormControl(null),
-      nombre: new FormControl(""),
-      autor: new FormGroup({
-        id: new FormControl(null),
-        nombre: new FormControl("")
-      }),
-      isbn: new FormControl(""),
-      editorial:new FormGroup({
-        id: new FormControl(null),
-        nombre: new FormControl("")
-      }),
-      genero:new FormGroup({
-        id: new FormControl(null),
-        nombre: new FormControl("")
-      }),
-      portada:new FormControl(""),
-       sinopsis:new FormControl(""),
-      
-    })
+      nombre: new FormControl("")
+    }),
+    isbn: new FormControl(""),
+    editorial: new FormGroup({
+      id: new FormControl(null),
+      nombre: new FormControl("")
+    }),
+    genero: new FormGroup({
+      id: new FormControl(null),
+      nombre: new FormControl("")
+    }),
+    portada: new FormControl(""),
+    sinopsis: new FormControl(""),
+  })
 
-    update(){
-      this.bookService.updateBook(this.libro.id,this.formUpdate.value).subscribe({
+  // Funcion para actualizar el libro
+  update() {
+    // Envio de los datos del formulario al servicio de libro
+    this.bookService.updateBook(this.book.id, this.formUpdate.value).subscribe({
       next: (data: Libro) => {
-        
+        // Almacenamiento de los datos y cierre del dialog
         this.dialogRef.close(data);
-    }, error: (errorRes) => {
+      }, error: (errorRes) => {
         const errorCode = errorRes.error?.codigo;
-
         if (errorCode === "00000013") {
-          this.formUpdate.setErrors({ foundBook: true })
+          // Comprobacion de la existencia del libro
+          this.formUpdate.setErrors({foundBook: true});
         }
-
-
-
       }
     });
-    
-    }
+  }
 
-    getAuthors(){
-    this.authorService.getAuthorsByNameOrder().subscribe((data:Autor[])=>{
-        this.autores = data;
-      })
+  // Funcion para listar autores por orden alfabetico
+  getAuthors() {
+    this.authorService.getAuthorsByNameOrder().subscribe((data: Autor[]) => {
+      this.authors = data;
+    });
+  }
 
-    }
+  // Funcion para listar editoriales por orden alfabetico
+  getPublishers() {
+    this.publisherService.getPublishersByNameOrder().subscribe((data: Editorial[]) => {
+      this.publishers = data;
+    });
+  }
 
-    
+  // Funcion para listar generos por orden alfabetico
+  getGenres() {
+    this.genreService.getGenresByNameOrder().subscribe((data: Genero[]) => {
+      this.genres = data;
+    });
+  }
 
-    getPublishers(){
-    this.publisherService.getPublishersByNameOrder().subscribe((data:Editorial[])=>{
-        this.editoriales = data;
-      })
+  // Inyeccion de dependencias para usar MatDialog
+  readonly dialog = inject(MatDialog);
 
-    }
-
-    getGenres(){
-    this.genreService.getGenresByNameOrder().subscribe((data:Genero[])=>{
-        this.generos = data;
-      })
-
-    }
-
-    sendImage(event: Event){
-      let selectedUrl = (event.target as HTMLInputElement)!.value;
-      console.log(selectedUrl);
-      console.log(this.url)
-      this.url=selectedUrl;
-      
-      
-        if(this.url===null || this.url.trim().length === 0) {
-        
-        this.url="/assets/icon/book.png";
-        
-      }
-    }
-
-    
-
-    readonly dialog = inject(MatDialog);
-    
-    openUpdateAuthorDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  // Funcion para abrir el componente para actualizar el autor
+  openUpdateAuthorDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(AuthorUpdateComponent, {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
       disableClose: true,
-      data:this.libro.autor.id
-    }).afterClosed().subscribe((data: Libro)=>{
-      this.autores.push(data);
-     
-
-      
-      console.log(this.autores)
+      data: this.book.autor.id
+    }).afterClosed().subscribe((data: Libro) => {
+      this.authors.push(data);
       this.getAuthors();
     });
   }
-  
+
+  // Funcion para abrir el componente para actualizar la editorial
   openUpdatePublisherDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(PublisherUpdateComponent, {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
       disableClose: true,
-      data:this.libro.editorial.id
-    }).afterClosed().subscribe((data: Libro)=>{
-      this.editoriales.push(data);
-     
-
-      
-      
+      data: this.book.editorial.id
+    }).afterClosed().subscribe((data: Libro) => {
+      this.publishers.push(data);
       this.getPublishers();
     });
   }
 
-   openUpdateGenreDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  // Funcion para abrir el componente para actualizar el genero
+  openUpdateGenreDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(GenreUpdateComponent, {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
       disableClose: true,
-      data:this.libro.genero.id
-    }).afterClosed().subscribe((data: Libro)=>{
-      this.generos.push(data);
-     
-
-      
-      
+      data: this.book.genero.id
+    }).afterClosed().subscribe((data: Libro) => {
+      this.genres.push(data);
       this.getGenres();
     });
   }
 
-  closeForm(): void {
-    this.dialogRef.close();
-  }
-
-  get nombre() {
+  // Getter para acceder desde HTML a los controles del formulario
+  get name() {
     return this.formUpdate.get('nombre')!;
   }
-    
-  
+
+  // Funcion para cerrar el dialog
+  closeForm(): void {
+    this.dialogRef.close();
+  }  
+
 }

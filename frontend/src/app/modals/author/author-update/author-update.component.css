@@ -35,9 +35,7 @@ input:-webkit-autofill, input:-webkit-autofill:focus {
     text-align: left;
     color: #820000;
     padding-top: 2px;
-    margin-left: -19px;
-    margin-bottom: -7px;
-    margin-top: 2px;
+    margin: 2px 0 -7px -19px;
 }
 
 svg {

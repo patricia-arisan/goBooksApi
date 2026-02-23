@@ -6,7 +6,7 @@
       <div class="menu">
         <button type="button" (click)="toggleViewMenu()" class="view"><img src="/assets/icons/list-menu.png" alt="Menu"
             id="menu" /></button>
-        @if(!hideMenu){
+        @if (!hideMenu) {
         <ul class="menu-options">
           <li class="option"><a routerLink="/admin-home">Home</a></li>
           <li class="option"><a routerLink="/admin-books">Libros</a></li>
@@ -29,7 +29,7 @@
             <img src="/assets/user/user.png" alt="Usuario" id="user" />
             <span class="username">{{user.nombre}}</span>
           </button>
-          @if(!hideAccount){
+          @if (!hideAccount) {
           <ul class="options-admin">
             <li class="option-admin"><button (click)="logout()">Cerrar sesión</button></li>
           </ul>

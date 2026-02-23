@@ -1,28 +1,17 @@
-h2 {
+.title {
+    color: white;
     background-color: rgb(253, 197, 127);
 }
 
-.mat-mdc-dialog-title {
-    color: white;
-}
-
-
-
-.control-label {
-    font-size: 1.1em;
-    font-weight: 500;
-    color: black;
-    margin-bottom: 10px;
-}
-p{
+p {
     padding-top: 15px;
-    
 }
 
-.buttons{
+/* Estilo botones */
+.buttons {
     margin-bottom: 5px;
     margin-right: -20px;
- }
+}
 
 .btn.btn-success {
     background-color: rgb(253, 160, 54);
@@ -35,12 +24,10 @@ p{
     background-color: rgb(255, 141, 11);
 }
 
-.btn:first-child:active{
+.btn:first-child:active {
     border: none;
- }
-
-.btn:first-child:hover{
-    background-color: rgb(240, 238, 238);
 }
 
- 
+.btn:first-child:hover {
+    background-color: rgb(240, 238, 238);
+}

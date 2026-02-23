@@ -9,7 +9,7 @@ import { Genero } from '../../../interfaces/genero';
 import { GenreService } from '../../../services/genre-service';
 import { GeneroDTO } from '../../../interfaces/generoDTO';
 import { GenreUpdateComponent } from '../../../modals/genre/genre-update/genre-update.component';
-import { DeleteGenreComponent } from '../../../modals/genre/genre-delete/delete-genre.component';
+import { GenreDeleteComponent } from '../../../modals/genre/genre-delete/genre-delete.component';
 
 /**
  * Componente de Administrar generos 
@@ -120,7 +120,7 @@ export class AdminGenresComponent implements OnInit, AfterViewInit {
 
   // Funcion para abrir el componente para eliminar al genero
   openDeleteDialog(genero: GeneroDTO, enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(DeleteGenreComponent, {
+    this.dialog.open(GenreDeleteComponent, {
       width: '350px',
       enterAnimationDuration,
       exitAnimationDuration,

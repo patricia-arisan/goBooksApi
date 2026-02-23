@@ -1,7 +1,7 @@
-@if(user.rol.id===1){
+@if (user.rol.id===1) {
 <!-- Header con navegacion para el administrador -->
 <app-header-admin></app-header-admin>
-}@if(user.rol.id===2){
+} @if (user.rol.id===2) {
 <!-- Header con navegacion para el usuario -->
 <app-header-user></app-header-user>
 }
@@ -11,19 +11,19 @@
   <!-- Listado de libros del autor -->
   <div class="book-list">
     <!-- Recorrido del array de libros mostrando la seleccion extraida de items del paginador-->
-    @for (libro of books?.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro){
+    @for (libro of books?.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro) {
     <div class="book">
-      @if(user.rol.id===2) {
+      @if (user.rol.id===2) {
       <a [routerLink]="['/books/book-section',libro.id]">
         <img src="{{libro.portada}}" id="cover" alt="{{libro.nombre}}" /></a>
-      }@else if(user.rol.id===1) {
+      } @else if (user.rol.id===1) {
       <a [routerLink]="['/admin-books/book-section',libro.id]">
         <img src="{{libro.portada}}" id="cover" alt="{{libro.nombre}}" /></a>
       }
       <p class="name">
-        @if(user.rol.id===2) {
+        @if (user.rol.id===2) {
         <a [routerLink]="['/books/book-section',libro.id]">{{libro.nombre}}</a>
-        }@else if(user.rol.id===1) {
+        } @else if (user.rol.id===1) {
         <a [routerLink]="['/admin-books/book-section',libro.id]">{{libro.nombre}}</a>
         }
       </p>

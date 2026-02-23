@@ -1,9 +1,11 @@
-h2 {
+.title {
+    color: white;
     background-color: rgb(253, 197, 127);
 }
 
-.mat-mdc-dialog-title {
-    color: white;
+/* Estilos del formulario */
+.form-group {
+    margin-top: 11px;
 }
 
 .control-label {
@@ -12,37 +14,10 @@ h2 {
     color: black;
     margin-bottom: 8px;
     width: 200px;
-    
+
 }
 
-.btn.btn-success {
-    background-color: rgb(253, 160, 54);
-    border: none;
-    font-weight: 500;
-    margin-left: 10px;
-    
-}
-
-.btn.btn-success:hover {
-    background-color: rgb(255, 141, 11);
-    /* ver si esta bien */
-    --bs-btn-disabled-bg: rgb(252, 163, 40);
-    --bs-btn-disabled-border-color: rgb(252, 163, 40);
-}
-
-.btn:first-child:active{
-    border: none;
- }
-
- .btn:first-child:hover{
-    background-color: rgb(240, 238, 238);
-}
-
-.form-group {
-    margin-top: 11px;
-}
-
-#autor, #editorial, #genero {
+#author, #publisher, #genre {
     height: 35px;
     border: 1px solid rgb(212, 211, 211);
     border-radius: 5px;
@@ -50,61 +25,75 @@ h2 {
     width: 215px;
     outline: none;
     margin-bottom: 5px;
-    /* margin-right: 18px; */
-    
 }
 
-#nombre{
+#name {
     width: 215px;
 }
 
-#nombre:focus {
+#name:focus {
     box-shadow: 0px 0px 4px 4px rgb(197, 196, 194);
     border-color: rgb(197, 196, 194);
 }
 
-input:-webkit-autofill,input:-webkit-autofill:focus {
+input:-webkit-autofill, input:-webkit-autofill:focus {
     transition: background-color 0s 600000s;
-  }
+}
 
-.editButton{
+/* Avisos de comprobaciones de formulario */
+.alert {
+    height: 22px;
+    font-size: 0.8em;
+    text-align: left;
+    color: #820000;
+    margin: -12px 0 -5px -17px;
+}
+
+svg {
+    height: 19px;
+    width: 19px;
+    fill: #820000;
+    margin-top: -3px;
+}
+
+/* Estilo botones */
+.buttons {
+    margin-bottom: 5px;
+    margin-right: -20px;
+}
+
+.btn.btn-success {
+    background-color: rgb(253, 160, 54);
+    border: none;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.btn.btn-success:hover {
+    background-color: rgb(255, 141, 11);
+    --bs-btn-disabled-bg: rgb(252, 163, 40);
+    --bs-btn-disabled-border-color: rgb(252, 163, 40);
+}
+
+.btn:first-child:active {
+    border: none;
+}
+
+.btn:first-child:hover {
+    background-color: rgb(240, 238, 238);
+}
+
+.edit-button {
     background-color: rgb(253, 160, 54);
     border: none;
     width: 35px;
     height: 35px;
     border-radius: 40px;
-    /* position: fixed; */
     float: right;
 }
 
-.edit{
+.edit {
     filter: invert(100%);
-	width: 23px;
-    height: 23px;    
-}
-
-.buttons{
-    margin-bottom: 5px;
-    margin-right: -20px;
-}
-
-.alert{
-    height: 22px;
-    font-size: 0.8em;
-    text-align: left;
-    color: #820000;
-    margin-top: -12px;
-    margin-left: -13px;
-    margin-bottom: -5px;
-    /* margin-top: -30px;
-    margin-left: -19px; */
-   
-} 
-
-svg{
-   height: 19px;
-    width: 19px; 
-    fill: #820000;
-    margin-top: -3px;
-    
+    width: 23px;
+    height: 23px;
 }

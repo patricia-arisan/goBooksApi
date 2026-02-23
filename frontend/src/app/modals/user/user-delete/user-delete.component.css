@@ -1,17 +1,20 @@
-h2 {
+.title {
+    color: white;
     background-color: rgb(253, 197, 127);
 }
 
-.mat-mdc-dialog-title {
-    color: white;
-}
-
-p{
+p {
     padding-top: 15px;
-    
     font-size: 1.1em;
 }
-.btn{
+
+/* Estilo botones */
+.buttons {
+    margin-bottom: 5px;
+    margin-right: -20px;
+}
+
+.btn {
     font-size: 1.1em;
 }
 
@@ -26,15 +29,10 @@ p{
     background-color: rgb(255, 141, 11);
 }
 
-.btn:first-child:active{
+.btn:first-child:active {
     border: none;
- }
-
-.btn:first-child:hover{
-    background-color: rgb(240, 238, 238);
 }
 
- .buttons{
-    margin-bottom: 5px;
-    margin-right: -20px;
- }
+.btn:first-child:hover {
+    background-color: rgb(240, 238, 238);
+}

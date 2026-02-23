@@ -1,0 +1,8 @@
+<h2 mat-dialog-title class="title">Eliminar género</h2>
+<mat-dialog-content>
+    <p>¿Deseas eliminar "{{genre.nombre}}"?</p>
+    <mat-dialog-actions class="buttons">
+        <button type="button" class="btn" (click)="closeDialog()">Cancelar</button>
+        <button type="submit" class="btn btn-success" (click)="deleteGenre()">Eliminar</button>
+    </mat-dialog-actions>
+</mat-dialog-content>

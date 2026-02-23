@@ -9,7 +9,7 @@ import { AuthorService } from '../../../services/author-service';
 import { Autor } from '../../../interfaces/autor';
 import { AutorDTO } from '../../../interfaces/autorDTO';
 import { AuthorUpdateComponent } from '../../../modals/author/author-update/author-update.component';
-import { DeleteAuthorComponent } from '../../../modals/author/author-delete/delete-author.component';
+import { AuthorDeleteComponent } from '../../../modals/author/author-delete/author-delete.component';
 
 /**
  * Componente de Administrar autores 
@@ -104,7 +104,7 @@ export class AdminAuthorsComponent implements OnInit, AfterViewInit {
   readonly dialog = inject(MatDialog);
 
   // Funcion para abrir el componente para editar al autor
-  openDialog(autor: AutorDTO, enterAnimationDuration: string, exitAnimationDuration: string): void {
+  openUpdateDialog(autor: AutorDTO, enterAnimationDuration: string, exitAnimationDuration: string): void {
     console.log(autor.idAutor)
     this.dialog.open(AuthorUpdateComponent, {
       width: '250px',
@@ -121,7 +121,7 @@ export class AdminAuthorsComponent implements OnInit, AfterViewInit {
 
   // Funcion para abrir el componente para eliminar al autor
   openDeleteDialog(autor: AutorDTO, enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(DeleteAuthorComponent, {
+    this.dialog.open(AuthorDeleteComponent, {
       width: '350px',
       enterAnimationDuration,
       exitAnimationDuration,

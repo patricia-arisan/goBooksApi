@@ -1,24 +1,13 @@
-h2 {
+.title {
+    color: white;
     background-color: rgb(253, 197, 127);
 }
 
-.mat-mdc-dialog-title {
-    color: white;
-}
-
-
-
-.control-label {
-    font-size: 1.1em;
-    font-weight: 500;
-    color: black;
-    margin-bottom: 10px;
-}
 p{
-    padding-top: 15px;
-    
+    padding-top: 15px;    
 }
 
+/* Estilo botones */
 .buttons{
     margin-bottom: 5px;
     margin-right: -20px;

@@ -1,10 +1,8 @@
-<h2 mat-dialog-title>Eliminar editorial</h2>
+<h2 mat-dialog-title class="title">Eliminar editorial</h2>
 <mat-dialog-content>
-<p>¿Deseas eliminar "{{editorial.nombre}}"?</p>
-<mat-dialog-actions class="buttons">
-<button type="button" class="btn" (click)="closeDialog()">Cancelar</button>
-<button type="submit" class="btn btn-success" (click)="deletePublisher()">Eliminar</button>
-</mat-dialog-actions>
+    <p>¿Deseas eliminar "{{publisher.nombre}}"?</p>
+    <mat-dialog-actions class="buttons">
+        <button type="button" class="btn" (click)="closeDialog()">Cancelar</button>
+        <button type="submit" class="btn btn-success" (click)="deletePublisher()">Eliminar</button>
+    </mat-dialog-actions>
 </mat-dialog-content>
-
-   

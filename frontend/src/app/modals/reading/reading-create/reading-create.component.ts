@@ -8,37 +8,37 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { StateService } from '../../../services/state-service';
 import { Estado } from '../../../interfaces/estado';
 import { Libro } from '../../../interfaces/libro';
-import { ActivatedRoute } from '@angular/router';
+
 import { BookService } from '../../../services/book-service';
 import { Usuario } from '../../../interfaces/usuario';
 
 import { ReadingService } from '../../../services/reading-service';
 import { LecturaDTO } from '../../../interfaces/lecturaDTO';
-import {CommonModule} from "@angular/common"
+import { CommonModule } from "@angular/common"
 import { Lectura } from '../../../interfaces/lectura';
 import { UserService } from '../../../services/user-service';
 
 @Component({
   selector: 'app-reading-create',
   standalone: true,
-  imports: [CommonModule,MatIconModule,MatToolbarModule,MatButtonModule, MatDialogActions, MatDialogTitle, MatDialogContent,FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, MatIconModule, MatToolbarModule, MatButtonModule, MatDialogActions, MatDialogTitle, MatDialogContent, FormsModule, ReactiveFormsModule],
   templateUrl: './reading-create.component.html',
   styleUrl: './reading-create.component.css',
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReadingCreateComponent implements OnInit{
+export class ReadingCreateComponent implements OnInit {
   user!: Usuario;
   estados!: Estado[];
   lectura!: Lectura;
   libro!: Libro;
-  rateStars: number=5;
-  ratingArray:any=[];
-  selectedStar:number= 0;
-  previousSelection:number=0;
-  selectedOption: string="";
-  
-  
-  
+  rateStars: number = 5;
+  ratingArray: any = [];
+  selectedStar: number = 0;
+  previousSelection: number = 0;
+  selectedOption: string = "";
+
+
+
   readonly dialogRef = inject(MatDialogRef<BookSectionComponent>);
 
   fromParentComponent: number;
@@ -50,151 +50,126 @@ export class ReadingCreateComponent implements OnInit{
     private stateService: StateService,
     private userService: UserService,
     private readingService: ReadingService,
-    
-    
-  ){
+
+
+  ) {
     this.fromParentComponent = data;
   }
 
   ngOnInit(): void {
-    
-    console.log(this.data)
-    
-    
 
-    this.formNewReading = this.formBuilder.group ({
-      idLectura:[null],
-      idLibro:[{id:null}],
-      idUsuario:[{id:null}],
-      idEstado:[{id:null}],
-      puntuacion:[null]
-      
-      
+    this.formNewReading = this.formBuilder.group({
+      idLectura: [null],
+      idLibro: [{ id: null }],
+      idUsuario: [{ id: null }],
+      idEstado: [{ id: null }],
+      puntuacion: [null]
+
+
     });
-    
+
     this.retrieveFromLocalStorage();
     this.getStates();
 
     this.fillForm();
-    
+
     // this.getStates();
 
-    this.ratingArray= Array(this.rateStars).fill(0);
+    this.ratingArray = Array(this.rateStars).fill(0);
     this.getCurrentBook();
     // this.getBookState();
 
   }
-  
-  getCurrentBook(){
-    
-    this.bookService.getBookById(this.data).subscribe((data:Libro)=>{
-          this.libro = data;
-          
-        })
+
+  getCurrentBook() {
+    this.bookService.getBookById(this.data).subscribe((data: Libro) => {
+      this.libro = data;
+    });
   }
 
   retrieveFromLocalStorage() {
-        this.user = JSON.parse(localStorage.getItem('usuario') || '')
-        
-        let value = this.userService.getItem('id');
-           
-        let currentUser = 0;
-        if(value!=null){
-          currentUser = parseInt(value);
-                      
-          this.userService.getLoggedUser(currentUser).subscribe((data:Usuario)=>{
-            
-            this.user = data;
-            
-                
-          });
-        }
-        
-        
-      }
+    let value = this.userService.getItem('id');
+    let currentUser = 0;
+    if (value != null) {
+      currentUser = parseInt(value);
+      this.userService.getLoggedUser(currentUser).subscribe((data: Usuario) => {
+        this.user = data;
+      });
+    }
+  }
 
-      fillForm(){
-        this.formNewReading.patchValue({
-          idUsuario:this.user.id,
-          idLibro: this.data,
-          idEstado: 1,
-          
-          
-        })
-      }
+  fillForm() {
+    this.formNewReading.patchValue({
+      idUsuario: this.user.id,
+      idLibro: this.data,
+      idEstado: 1,
+    });
+  }
 
-  formNewReading:FormGroup = new FormGroup({
+  formNewReading: FormGroup = new FormGroup({
     idLectura: new FormControl(null),
     idLibro: new FormControl(null),
     idUsuario: new FormControl(null),
     idEstado: new FormControl(null),
     puntuacion: new FormControl(0)
-    
   })
 
-  
 
-  getStates(){
-    this.stateService.getStatesList().subscribe((data:Estado[])=>{
+
+  getStates() {
+    this.stateService.getStatesList().subscribe((data: Estado[]) => {
       this.estados = data;
-    })
+    });
+  }
+
+
+
+  registerReading() {
+    if (this.formNewReading.value.idEstado !== 1) {
+      this.readingService.saveReading(this.formNewReading.value).subscribe((data: LecturaDTO) => {
+        console.log(data);
+        //this.ngOnInit();
+        this.dialogRef.close(data);
+      });
+    }
+  }
+
+  setStar(index: number) {
+    this.selectedStar = index + 1;
+  }
+
+  unselectStar() {
+    if (this.previousSelection !== 0) {
+      this.selectedStar = this.previousSelection;
+    } else {
+      this.selectedStar = 0;
+    }
+  }
+
+  rating(index: number) {
+    this.selectedStar = index + 1;
+    this.previousSelection = this.selectedStar;
+    console.log(this.selectedStar)
+    this.fillRating();
+
+  }
+  fillRating() {
+    this.formNewReading.patchValue({
+      puntuacion: this.selectedStar,
+    });
   }
 
   
 
-      registerReading(){
-        if(this.formNewReading.value.idEstado!==1){
-        this.readingService.saveReading(this.formNewReading.value).subscribe((data:LecturaDTO) =>{
-                  console.log(data);
-                  //this.ngOnInit();
-                  this.dialogRef.close(data);
-      });
-      }
-    }
+  captureSelect(event: Event) {
+    const selectedValue = (event.target as HTMLSelectElement)!.value;
+    console.log(selectedValue);
+    this.selectedOption = selectedValue;
+  }
 
-    setStar(index:number){
-      this.selectedStar= index+1;
-    }
-
-    unselectStar(){
-      if(this.previousSelection!==0){
-        this.selectedStar = this.previousSelection;
-      }else{
-        this.selectedStar=0;
-      }
-    }
-
-    rating(index:number){
-      this.selectedStar= index+1;
-      this.previousSelection= this.selectedStar;
-      console.log(this.selectedStar)
-      this.fillRating();
-      
-    }
-  fillRating(){
-      this.formNewReading.patchValue({
-          
-          puntuacion: this.selectedStar,
-          
-        })
-    }
-
+  // Funcion para cerrar el dialog
   closeForm(): void {
     this.dialogRef.close();
   }
 
-  // getBookState(){
-  //     let idLibro = parseInt(this.id)
-  //     this.readingService.getReadingBookState(this.user.id,idLibro).subscribe((data:Lectura)=>{
-  //           this.lectura = data;
-            
-  //         })
-  //   }
-    captureSelect(event:Event){
-      
-      const selectedValue = (event.target as HTMLSelectElement)!.value;
-      console.log(selectedValue);
-      this.selectedOption = selectedValue;
-    }
-  
 }
