@@ -28,7 +28,7 @@ export class GenreUpdateComponent implements OnInit {
     private genreService: GenreService,
   ) {
     /**
-     * Almacenamiento del id de genero del componente que viene de AdminGenresComponent,
+     * Almacenamiento del id de genero que puede venir del componente AdminGenresComponent,
      * BookUpdateComponent o AdminBooksUpdateComponent
      */
     this.fromParentComponent = data;

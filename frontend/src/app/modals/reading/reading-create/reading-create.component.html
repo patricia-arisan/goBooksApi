@@ -1,65 +1,48 @@
 <h2 mat-dialog-title class="title">Añadir libro</h2>
 <mat-dialog-content>
-        <p class="name">{{libro.nombre}}</p>
-        <form [formGroup]="formNewReading" (submit)="registerReading()"> <!--(submit)="registerReading()" -->
+        <p class="name">{{book.nombre}}</p>
+        <!-- Formulario para agregar el libro como pendiente o leido -->
+        <form [formGroup]="formNewReading" (submit)="registerReading()">
                 <div class="form-group">
-                        <label class="control-label" for="id"> </label> <input id="id" type="hidden"
-                                formControlName="idLectura" class="form-control" autofocus="autofocus">
+                        <input id="idReading" type="hidden" formControlName="idLectura" class="form-control">
 
-                        <label class="control-label" for="id"> </label> <input id="id" type="hidden"
-                                formControlName="idLibro" class="form-control" autofocus="autofocus">
+                        <input id="idBook" type="hidden" formControlName="idLibro" class="form-control">
 
-                        <label class="control-label" for="id"> </label> <input id="id" type="hidden"
-                                formControlName="idUsuario" class="form-control" autofocus="autofocus">
+                        <input id="idUser" type="hidden" formControlName="idUsuario" class="form-control">
                 </div>
+
                 <div class="form-group">
-
-                        <!-- <label class="control-label" for="estado">Estado: </label> -->
-                        <select formControlName="idEstado" name="estado" class="estado"
-                                (change)="captureSelect($event)">
-
-                                @for (estado of estados; track estado.id){
-
-                                <!-- <option [ngValue]=""  [selected]="estado.id===1"> -->
-                                @if(estado.id===1){
-                                <option [value]="estado.id" disabled>
-
-                                        {{ estado.situacion}}
-                                </option>
-                                }@else{
-                                <option [value]="estado.id">
-
-                                        {{ estado.situacion}}
-                                </option>
-                                }
-
-
+                        <select formControlName="idEstado" name="estado" class="state" (change)="captureSelect($event)">
+                                @for (estado of states; track estado.id) {
+                                        @if (estado.id === 1) {
+                                        <option [value]="estado.id" disabled>{{estado.situacion}}</option>
+                                        } @else {
+                                        <option [value]="estado.id">{{estado.situacion}}</option>
+                                        }
                                 }
                         </select>
                 </div>
+
                 <div class="form-group">
-                        <label class="control-label" for="puntuacion"> </label> <input id="puntuacion" type="hidden"
-                                formControlName="puntuacion" class="form-control" autofocus="autofocus">
+                        <input id="puntuacion" type="hidden" formControlName="puntuacion" class="form-control">
                 </div>
-                @if(selectedOption==="2"){
-                <!-- <mat-toolbar color="primary"></mat-toolbar> -->
+                <!-- Apartado para puntuar si se selecciona el libro como Leido-->
+                @if (selectedOption === "2") {
                 <div class="rating">
+                        <!-- Recorrido del array de 5 estrellas sin marcar -->
                         @for (star of ratingArray; track star; let index = $index){
-                        <mat-icon (mouseenter)="setStar(index)" [ngClass]="{checked:selectedStar>index}"
+                        <!-- Componente para marcar, desmarcar y confirmar la seleccion de estrellas de puntuacion -->
+                        <mat-icon (mouseenter)="setStar(index)" [ngClass]="{checked: selectedStar > index}"
                                 (mouseleave)="unselectStar()" (click)="rating(index)" class="star">star</mat-icon>
                         }
                 </div>
                 }
+
                 <div class="form-group">
                         <mat-dialog-actions class="buttons">
-                                <button type="button" class="btn " (click)="closeForm()">Atrás</button>
-
+                                <button type="button" class="btn" (click)="closeForm()">Atrás</button>
                                 <button type="submit" class="btn btn-success">Añadir</button>
-
                         </mat-dialog-actions>
-
                 </div>
-
         </form>
-
 </mat-dialog-content>

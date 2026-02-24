@@ -29,7 +29,7 @@ export class AuthorUpdateComponent implements OnInit {
     private authorService: AuthorService,
   ) {
     /**
-     * Almacenamiento del id de autor del componente que viene de AdminAuthorsComponent,
+     * Almacenamiento del id de autor que puede venir del componente AdminAuthorsComponent,
      * BookUpdateComponent o AdminBooksUpdateComponent
      */ 
     this.fromParentComponent = data;

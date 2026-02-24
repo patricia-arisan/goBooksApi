@@ -1,45 +1,40 @@
-<h2 mat-dialog-title>Actualizar lectura</h2>
+<h2 mat-dialog-title class="title">Actualizar lectura</h2>
 <mat-dialog-content>
-        <p class="name">{{libro.nombre}}</p>
+        <p class="name">{{book.nombre}}</p>
+        <!-- Formulario modificar el estado de la lectura o eliminarla -->
         <form [formGroup]="formUpdateReading" (submit)="changeSituation()">
                 <div class="form-group">
-
                         <input type="hidden" formControlName="puntuacion" id="puntuacion" class="form-control">
-
                 </div>
+
                 <div class="form-group" formGroupName="estado">
-
-
-                        <select formControlName="id" class="estado" (change)="captureSelect($event)">
-                                @for (estado of estados; track estado.id){
-
-
-                                <option [value]="estado.id">
-                                        {{ estado.situacion}}
-                                </option>
+                        <select formControlName="id" class="state" (change)="captureSelect($event)">
+                                @for (estado of states; track estado.id) {
+                                <option [value]="estado.id">{{estado.situacion}}</option>
                                 }
-
                         </select>
                 </div>
-                @if((lectura.estado.id===2 && selectedOption!=="1" && selectedOption!=="3") || (lectura.estado.id===3 &&
-                selectedOption=="2")) {
-                <!-- <mat-toolbar color="primary"></mat-toolbar> -->
-                <div class="rating"> 
-                @for (star of ratingArray; track star; let index = $index){
-                <mat-icon [ngClass]="{checked:selectedStar>index}"
-                         (click)="rating(index)" class="star">star</mat-icon>
-                }
+
+                <!-- Control de la aparicion de las estrellas en funcion de que el libro este leido y 
+                 no se seleccione No leido ni Pendiente, o que este en Pendiente y se seleccione la 
+                 opcion de leido -->
+                @if((reading.estado.id === 2 && selectedOption !== "1" && selectedOption !== "3") || (reading.estado.id === 3 &&
+                selectedOption === "2")) {
+                <div class="rating">
+                        <!-- Recorrido del array de estrellas -->
+                        @for (star of ratingArray; track star; let index = $index) {
+                        <!-- Compnente para marcar las estrellas -->
+                        <mat-icon [ngClass]="{checked: selectedStar > index}" (click)="rating(index)"
+                                class="star">star</mat-icon>
+                        }
                 </div>
                 }
-                <div class="form-group">  
-                <mat-dialog-actions class="buttons">
-                    
-                        <button type="button" class="btn " (click)="closeForm()">Atrás</button>
-                        <button type="submit" class="btn btn-success">Añadir</button>
-                        
-                        
-                </mat-dialog-actions>
-                </div> 
-        </form>
-</mat-dialog-content> 
 
+                <div class="form-group">
+                        <mat-dialog-actions class="buttons">
+                                <button type="button" class="btn " (click)="closeForm()">Atrás</button>
+                                <button type="submit" class="btn btn-success">Añadir</button>
+                        </mat-dialog-actions>
+                </div>
+        </form>
+</mat-dialog-content>

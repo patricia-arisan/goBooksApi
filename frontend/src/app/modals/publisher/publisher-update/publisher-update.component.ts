@@ -28,7 +28,7 @@ export class PublisherUpdateComponent implements OnInit {
     private publisherService: PublisherService,
   ) {
     /**
-     * Almacenamiento del id de la editorial del componente que viene de AdminPublishersComponent,
+     * Almacenamiento del id de la editorial que puede venir del componente AdminPublishersComponent,
      * BookUpdateComponent o AdminBooksUpdateComponent
      */
     this.fromParentComponent = data;
