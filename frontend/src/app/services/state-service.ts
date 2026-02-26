@@ -14,7 +14,7 @@ export class StateService {
   // Obtener el listado de todos los estados de las lecturas
   private readonly stateServiceUrl = `${environment.proyectoUrl}api/estado/listadoEstados`;
   getStatesList(): Observable<Estado[]> {
-    // Recuperacion del token
+    // Recuperacion del token de sesion
     const credentials = localStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
@@ -22,7 +22,7 @@ export class StateService {
       'Authorization': credentials || ''
     });
 
-    return this.client.get<Estado[]>(`${this.stateServiceUrl}`, {headers, withCredentials: true});
+    return this.client.get<Estado[]>(`${this.stateServiceUrl}`, { headers, withCredentials: true });
   }
 
 }

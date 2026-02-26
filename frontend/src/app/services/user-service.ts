@@ -2,173 +2,149 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { Usuario } from '../interfaces/usuario';
-import { BehaviorSubject, map, Observable, take, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  //private readonly currentUserSubject: BehaviorSubject<Usuario> = new BehaviorSubject<Usuario>({} as Usuario);
-  // private readonly currentUserSubject: BehaviorSubject<Usuario> = new BehaviorSubject<Usuario>({} as Usuario);
-  // currentUser$ = this.currentUserSubject.asObservable();
+  // Inyeccion del cliente http para realizar las peticiones
+  constructor(private client: HttpClient) { }
 
-constructor(private client: HttpClient) { }
-  
+  // Crear usuario
   private readonly userServiceUrl = `${environment.proyectoUrl}api/registroUsuario`;
-
-  createUser(user: Usuario): Observable<Usuario>{
-    console.log("POST " + user)
-    return this.client.post<Usuario>(`${this.userServiceUrl}`,user)
+  createUser(user: Usuario): Observable<Usuario> {
+    // Peticion post que envia el objeto usuario
+    return this.client.post<Usuario>(`${this.userServiceUrl}`, user);
   }
 
+  // Autenticacion del usuario
   private readonly userServiceLoginUrl = `${environment.proyectoUrl}api/login`;
-
-  sendUser(user: Usuario): Observable<Usuario>{
-    console.log(user);
-    
+  sendUser(user: Usuario): Observable<Usuario> {
+    // Creacion de las cabeceras si el usuario existe
     const headers = new HttpHeaders(user ? {
-            'Content-Type': 'application/json',
-            'Access-Control-Expose-Headers': 'Authorization',
-            
-            Authorization :'Basic ' + btoa(user.username + ':' + user.password),
-            
-            
-        } : {});
-        console.log(headers); 
-        localStorage.setItem('token',headers.get('Authorization')|| '');
-        console.log(headers); 
-        // return this.client.post<Usuario>(`${this.userServiceLoginUrl}`,'user', {headers: headers})
-        return this.client.post<Usuario>(`${this.userServiceLoginUrl}`,user,{headers,withCredentials:true}) 
-        // return this.client.post<Usuario>(`${this.userServiceLoginUrl}`,user,{headers,withCredentials:true})
-        
-          
+      'Content-Type': 'application/json',
+      // Exposicion de la cabecera para que pueda acceder el cliente
+      'Access-Control-Expose-Headers': 'Authorization',
+      // Implementacion de la autenticacion básica, convirtiendo username y password a Base64 
+      Authorization: 'Basic ' + btoa(user.username + ':' + user.password),
+    } : {});
+    // Peticion post para enviar el objeto usuario junto a las credenciales de la cabecera
+    return this.client.post<Usuario>(`${this.userServiceLoginUrl}`, user, { headers, withCredentials: true })
+      .pipe(tap(() => {
+        // Almacenamiento del token tras el login exitoso
+        localStorage.setItem('token', headers.get('Authorization') || '');
+      })
+      );
   }
 
- 
+  // Obtener el usuario autenticado mediante el id
+  private readonly userServiceLoggedUrl = `${environment.proyectoUrl}api/usuario`;
+  getLoggedUser(id: number): Observable<Usuario> {
+    // Recuperacion del token de sesion
+    const credentials = localStorage.getItem('token');
+    // Cabecera de autenticacion
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': credentials || ''
+    });
 
-  
+    return this.client.get<Usuario>(`${this.userServiceLoggedUrl}/${id}`, { headers, withCredentials: true });
+  }
 
+  // Actualizar usuario
+  updateUser(id: number, user: Usuario): Observable<Usuario> {
+    // Recuperacion del token de sesion
+    const credentials = localStorage.getItem('token');
+    // Cabecera de autenticacion
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': credentials || ''
+    });
+    // Peticion put, actualiza al usuario por su id 
+    return this.client.put<Usuario>(`${this.userServiceLoggedUrl}/${id}`, user, { headers, withCredentials: true });
+  }
+
+  // Actualizar solo password del usuario
+  private readonly userServiceUpdatePassUrl = `${environment.proyectoUrl}api/usuario/cambiarPassword`;
+  updateUserPassword(id: number, password: string): Observable<Usuario> {
+    // Recuperacion del token
+    const credentials = localStorage.getItem('token');
+    // Cabecera de autenticacion
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': credentials || ''
+    });
+    // Creacion del objeto password
+    const body = { password: password };
+    // Peticion put, actualiza el password del usuario por su id
+    return this.client.put<Usuario>(`${this.userServiceUpdatePassUrl}/${id}`, body, { headers, withCredentials: true });
+  }
+
+  // Eliminar usuario
+  private readonly userServiceDeleteUrl = `${environment.proyectoUrl}api/usuario`;
+  deleteLoggedUser(id: number): Observable<any> {
+    // Recuperacion del token
+    const credentials = localStorage.getItem('token');
+    // Cabecera de autenticacion
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': credentials || ''
+    });
+    // Peticion delete con id del usuario para eliminar el registro
+    return this.client.delete<any>(`${this.userServiceDeleteUrl}/${id}`, { headers, withCredentials: true });
+  }
+
+  // Cerrar sesion
+  private readonly userServiceLogoutUrl = `${environment.proyectoUrl}auth/logout`;
+  logoutUser() {
+    // Recuperacion del token
+    const credentials = localStorage.getItem('token');
+    // Cabecera de autenticacion
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': credentials || ''
+    });
+
+    return this.client.post(`${this.userServiceLogoutUrl}`, null, { headers, withCredentials: true });
+  }
+
+  // Funcion para el guardado en el almacenamiento local
   setItem(key: string, value: string): void {
     localStorage.setItem(key, value);
   }
 
+  // Funcion para recuperar un valor almacenado
   getItem(key: string): string | null {
-    
     return localStorage.getItem(key);
   }
 
-
-  private readonly userServiceLoggedUrl = `${environment.proyectoUrl}api/usuario`;
-
-  
-  getLoggedUser(id: number): Observable<Usuario>{
-    console.log("Service " + id);
-    const credentials = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            
-            'Authorization' : credentials || ''
-           
-        })
-    
-    
-    return this.client.get<Usuario>(`${this.userServiceLoggedUrl}/${id}`,{headers,withCredentials:true})
-    
-    
-  }
- 
- updateUser(id: number,user: Usuario): Observable<Usuario>{
-    //updateUser(user: Usuario): Observable<Usuario>{
-    console.log("PUT " + user)
-    const credentials = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            
-            'Authorization' : credentials || ''
-           
-        })
-    
-    return this.client.put<Usuario>(`${this.userServiceLoggedUrl}/${id}`,user,{headers,withCredentials:true})
+  // Funcion para comprobar el inicio de sesion del usuario, si hay un token almacenado devuelve true
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
+    return !!token;
   }
 
-
-   private readonly userServiceUpdatePassUrl = `${environment.proyectoUrl}api/usuario/cambiarPassword`; 
-   updateUserPassword(id: number,password: string): Observable<Usuario>{
-    //updateUser(user: Usuario): Observable<Usuario>{
-    
-    const credentials = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            
-            'Authorization' : credentials || ''
-           
-        })
-    let params = new HttpParams().set('password', password);
-
-    
-      
-    return this.client.put<Usuario>(`${this.userServiceUpdatePassUrl}/${id}`,password,{headers, params:params,withCredentials:true})
+  // Funcion para verificar si el usuario tiene el rol de Administrador
+  isAdmin(): boolean {
+    const user = JSON.parse(localStorage.getItem('usuario') || '');
+    if (user) {
+      // Obtencion del nombre del rol para su comprobacion
+      let rol = user.rol.nombre;
+      return rol === 'Administrador'
+    }
+    return false;
   }
 
-   
-
-  ////////delete
-  private readonly userServiceDeleteUrl = `${environment.proyectoUrl}api/usuario`;
-
-  
-  deleteLoggedUser(id: number): Observable<any>{
-    console.log("Service " + id);
-    const credentials = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            
-            'Authorization' : credentials || ''
-           
-        })
-    
-    
-    return this.client.delete<any>(`${this.userServiceDeleteUrl}/${id}`,{headers,withCredentials:true})
-    
-    
+  // Funcion para verificar si el usuario tiene el rol de Usuario
+  isUser(): boolean {
+    const user = JSON.parse(localStorage.getItem('usuario') || '');
+    if (user) {
+      // Obtencion del nombre del rol para su comprobacion
+      let rol = user.rol.nombre;
+      return rol === 'Usuario'
+    }
+    return false;
   }
 
-  private readonly userServiceLogoutUrl = `${environment.proyectoUrl}auth/logout`;
-
-  logoutUser(){
-    const credentials = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            
-            'Authorization' : credentials || ''
-           
-        })
-
-    return this.client.post(`${this.userServiceLogoutUrl}`,null,{headers,withCredentials:true})
-  }
-
- isAuthenticated():boolean{
-  const token = localStorage.getItem('token');
-  //true si devuelve el token porque exista
-  return !!token; //doble negacion para convertirlo en booleano
- }
-
- isAdmin():boolean{
-  const user = JSON.parse(localStorage.getItem('usuario') || '');
-  if(user){
-    let rol = user.rol.nombre;
-    return rol==='Administrador'
-  }
-  return false;
- }
-
- isUser():boolean{
-  const user = JSON.parse(localStorage.getItem('usuario') || '');
-  if(user){
-    let rol = user.rol.nombre;
-    return rol==='Usuario'
-  }
-  return false;
- }
-  
- 
 }

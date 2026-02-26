@@ -23,7 +23,7 @@ export class AuthorService {
       'Authorization': credentials || '',
     });
     // Peticion post que envia el objeto autor y recibe el objeto autor mas su nuevo id de la bbdd
-    return this.client.post<Autor>(`${this.authorServiceUrl}`, autor, {headers, withCredentials: true});
+    return this.client.post<Autor>(`${this.authorServiceUrl}`, autor, { headers, withCredentials: true });
   }
 
   // Obtener el listado de todos los autores ordenados alfabeticamente
@@ -37,13 +37,13 @@ export class AuthorService {
       'Authorization': credentials || '',
     });
 
-    return this.client.get<Autor[]>(`${this.authorListServiceUrl}`, {headers, withCredentials: true});
+    return this.client.get<Autor[]>(`${this.authorListServiceUrl}`, { headers, withCredentials: true });
   }
 
   // Actualizar autor
   private readonly updateAuthorServiceUrl = `${environment.proyectoUrl}api/autor`
   updateAuthor(id: number, autor: Autor): Observable<Autor> {
-    // Recuperacion del token
+    // Recuperacion del token de sesion
     const credentials = localStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
@@ -51,7 +51,7 @@ export class AuthorService {
       'Authorization': credentials || ''
     });
     // Peticion put, actualiza el objeto autor por su id
-    return this.client.put<Autor>(`${this.updateAuthorServiceUrl}/${id}`, autor, {headers, withCredentials: true});
+    return this.client.put<Autor>(`${this.updateAuthorServiceUrl}/${id}`, autor, { headers, withCredentials: true });
   }
 
   // Obtener el autor mediante el id
@@ -65,7 +65,7 @@ export class AuthorService {
       'Authorization': credentials || ''
     });
 
-    return this.client.get<Autor>(`${this.findAuthorServiceUrl}/${id}`, {headers, withCredentials: true});
+    return this.client.get<Autor>(`${this.findAuthorServiceUrl}/${id}`, { headers, withCredentials: true });
   }
 
   // Obtener el listado de todos los autores por orden alfabetico y con su numero de libros asociados
@@ -79,7 +79,7 @@ export class AuthorService {
       'Authorization': credentials || ''
     });
 
-    return this.client.get<AutorDTO[]>(`${this.numberBooksAuthorListServiceUrl}`, {headers, withCredentials: true});
+    return this.client.get<AutorDTO[]>(`${this.numberBooksAuthorListServiceUrl}`, { headers, withCredentials: true });
   }
 
   // Eliminar autor
@@ -93,7 +93,7 @@ export class AuthorService {
       'Authorization': credentials || ''
     });
     // Peticion delete con id del autor para eliminar el registro
-    return this.client.delete<any>(`${this.authorServiceDeleteUrl}/${id}`, {headers, withCredentials: true});
+    return this.client.delete<any>(`${this.authorServiceDeleteUrl}/${id}`, { headers, withCredentials: true });
   }
 
 }

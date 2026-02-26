@@ -93,15 +93,16 @@ export class ProfilePasswordComponent implements OnInit {
       // Envio del nuevo password del formulario al servicio de usuario
       this.userService.updateUserPassword(this.user.id, this.formPasswordUpdate.value.password).subscribe((data: Usuario) => {
         // Envio de las credenciales con el username y el nuevo password para relanzar el login y no perder la sesion
+        console.log(credentials)
         this.userService.sendUser(credentials).subscribe((data: Usuario) => {
           // Guardado en el almacenamiento local del objeto Usuario actualizado
           localStorage.setItem('usuario', JSON.stringify(data));
 
           const idUsuario = data.id.toString();
           this.userService.setItem('id', idUsuario);
-        });
-        // Navegacion a la pagina de Perfil tras realizar todas las acciones con exito
-        this.router.navigate(['/profile']);
+          // Navegacion a la pagina de Perfil tras realizar todas las acciones con exito
+          this.router.navigate(['/profile']);
+        });        
       });
     } else {
       // Mostrar error si la password nueva y su confirmacion no coinciden

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.atrium.gobooks.dto.PasswordDTO;
 import com.atrium.gobooks.entities.Usuario;
 import com.atrium.gobooks.exceptions.ServicioException;
 import com.atrium.gobooks.repositories.UsuarioRepository;
@@ -59,8 +60,8 @@ public class UsuarioController {
 	
 	@PreAuthorize("hasAuthority('Usuario')")
 	@PutMapping(value="/cambiarPassword/{id}")
-	public Usuario actualizarPasswordUsuario(@PathVariable Integer id, @RequestParam String password) throws ServicioException {
-		return usuarioServicio.modificarPassword(password, id);
+	public Usuario actualizarPasswordUsuario(@PathVariable Integer id, @RequestBody PasswordDTO password) throws ServicioException {
+		return usuarioServicio.modificarPassword(password.getPassword(), id);
 		
 		 
 		 
