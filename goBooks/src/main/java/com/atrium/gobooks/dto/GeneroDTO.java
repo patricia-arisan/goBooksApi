@@ -1,7 +1,7 @@
 package com.atrium.gobooks.dto;
 
 public class GeneroDTO {
-	
+
 	private Integer idGenero;
 
 	private String nombre;
@@ -43,7 +43,5 @@ public class GeneroDTO {
 	public String toString() {
 		return "GeneroDTO [idGenero=" + idGenero + ", nombre=" + nombre + ", numeroLibros=" + numeroLibros + "]";
 	}
-	
-	
 
 }

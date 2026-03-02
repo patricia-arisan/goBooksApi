@@ -1,18 +1,17 @@
 package com.atrium.gobooks.dto;
 
 public class LecturaDTO {
-	
+
 	private Integer idLectura;
-	
+
 	private Integer idLibro;
 
 	private Integer idUsuario;
-	
+
 	private Integer idEstado;
-	
+
 	private Float puntuacion;
-	
-	
+
 	public Integer getIdLectura() {
 		return idLectura;
 	}
@@ -52,10 +51,11 @@ public class LecturaDTO {
 	public void setPuntuacion(Float puntuacion) {
 		this.puntuacion = puntuacion;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "LecturaDTO [idLectura=" + idLectura + ", idLibro=" + idLibro + ", idUsuario=" + idUsuario
 				+ ", idEstado=" + idEstado + ", puntuacion=" + puntuacion + "]";
 	}
+	
 }

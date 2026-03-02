@@ -7,20 +7,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="ESTADO")
+@Table(name = "ESTADO")
 public class Estado {
-	
+
 	@Id
 	@GeneratedValue
-	@Column(name="ESTADO_ID")
+	@Column(name = "ESTADO_ID")
 	private Integer id;
-	
-	@Column(name="SITUACION")
+
+	@Column(name = "SITUACION")
 	private String situacion;
-	
-	
+
 	public Estado() {
-				
+
 	}
 
 	public Integer getId() {
@@ -43,8 +42,5 @@ public class Estado {
 	public String toString() {
 		return "Estado [id=" + id + ", situacion=" + situacion + "]";
 	}
-
-	
-	
 
 }

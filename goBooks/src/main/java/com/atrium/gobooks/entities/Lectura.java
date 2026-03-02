@@ -82,7 +82,6 @@ public class Lectura {
 	public String toString() {
 		return "Lectura [id=" + id + ", puntuacion=" + puntuacion + ", estado=" + estado + ", libro=" + libro
 				+ ", usuario=" + usuario + "]";
-	}
-	
+	}	
 	
 }

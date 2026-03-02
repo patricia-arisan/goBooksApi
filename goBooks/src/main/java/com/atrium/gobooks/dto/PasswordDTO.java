@@ -1,7 +1,7 @@
 package com.atrium.gobooks.dto;
 
 public class PasswordDTO {
-	
+
 	private String password;
 
 	public PasswordDTO(String password) {
@@ -20,6 +20,6 @@ public class PasswordDTO {
 	@Override
 	public String toString() {
 		return "PasswordDTO [password=" + password + "]";
-	}	
+	}
 
 }

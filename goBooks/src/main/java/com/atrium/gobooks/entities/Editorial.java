@@ -8,27 +8,25 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="EDITORIAL")
+@Table(name = "EDITORIAL")
 public class Editorial {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="EDITORIAL_ID")
+	@Column(name = "EDITORIAL_ID")
 	private Integer id;
-	
-	@Column(name="EDITORIAL_NOMBRE")
+
+	@Column(name = "EDITORIAL_NOMBRE")
 	private String nombre;
 
 	public Editorial() {
-		
+
 	}
-	
+
 	public Editorial(String nombre) {
 		super();
 		this.nombre = nombre;
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -50,6 +48,5 @@ public class Editorial {
 	public String toString() {
 		return "Editorial [id=" + id + ", nombre=" + nombre + "]";
 	}
-	
-	
+
 }

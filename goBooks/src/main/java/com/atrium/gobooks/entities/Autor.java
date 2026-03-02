@@ -8,28 +8,25 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="AUTOR")
+@Table(name = "AUTOR")
 public class Autor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="AUTOR_ID")
+	@Column(name = "AUTOR_ID")
 	private Integer id;
-	
-	@Column(name="AUTOR_NOMBRE")
+
+	@Column(name = "AUTOR_NOMBRE")
 	private String nombre;
 
 	public Autor() {
-		
+
 	}
-	
-	
+
 	public Autor(String nombre) {
 		super();
 		this.nombre = nombre;
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -51,8 +48,5 @@ public class Autor {
 	public String toString() {
 		return "Autor [id=" + id + ", nombre=" + nombre + "]";
 	}
-	
-	
-		
-	
+
 }

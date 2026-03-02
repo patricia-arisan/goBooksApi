@@ -15,16 +15,16 @@ import { adminGuard } from './core/guards/admin.guard';
 import { userGuard } from './core/guards/user.guard';
 
 
-
-
+// Resolver para obtener el nombre de un libro especifico y mostrarlo en el titulo de la pagina
 const titleResolver: ResolveFn<string> = (
   route: ActivatedRouteSnapshot,
 ): Observable<string> | string => {
   const bookId = route.paramMap.get('libro.id');
-  // Si es nulo devuelve vacio para evitar error
+  // Si es nulo el id, devuelve vacio para evitar error
   if (!bookId) {
     return ''; 
   }
+  // Inyeccion del servicio, busqueda del libro por id y mapeo para obtener su nombre
   return inject(BookService).getBookById(parseInt(bookId)).pipe(
     map((libro:Libro)=>{
         return libro.nombre || '';
@@ -32,14 +32,17 @@ const titleResolver: ResolveFn<string> = (
     );
 };
 
+// Resolver para obtener el nombre de un genero especifico y mostrarlo en el titulo de la pagina
 const titleGenreResolver: ResolveFn<string> = (
   route: ActivatedRouteSnapshot,
 ): Observable<string> | string => {
   const genreId = route.paramMap.get('id');
   const titleSection = 'Resultados';
+  // Si es nulo el id, devuelve el nombre de la seccion
   if (!genreId) {
     return titleSection; 
   }
+  // Inyeccion del servicio, busqueda del genero por id y mapeo para obtener su nombre
   return inject(GenreService).getGenreById(parseInt(genreId)).pipe(
     map((genero:Genero)=>{
         const genreName = genero.nombre || '';
@@ -48,14 +51,17 @@ const titleGenreResolver: ResolveFn<string> = (
     );
 };
 
+// Resolver para obtener el nombre de un autor especifico y mostrarlo en el titulo de la pagina
 const titleAuthorResolver: ResolveFn<string> = (
   route: ActivatedRouteSnapshot,
 ): Observable<string> | string => {
   const authorId = route.paramMap.get('id');
   const titleSection = 'Resultados';
+  // Si es nulo el id, devuelve el nombre de la seccion
   if (!authorId) {
     return titleSection; 
   }
+  // Inyeccion del servicio, busqueda del autor por id y mapeo para obtener su nombre
   return inject(AuthorService).getAuthorById(parseInt(authorId)).pipe(
     map((autor:Autor)=>{
         const authorName = autor.nombre || '';
@@ -64,14 +70,17 @@ const titleAuthorResolver: ResolveFn<string> = (
     );
 };
 
+// Resolver para obtener el nombre de una editorial especifico y mostrarlo en el titulo de la pagina
 const titlePublisherResolver: ResolveFn<string> = (
   route: ActivatedRouteSnapshot,
 ): Observable<string> | string => {
   const publisherId = route.paramMap.get('id');
   const titleSection = 'Resultados';
+  // Si es nulo el id, devuelve el nombre de la seccion
   if (!publisherId) {
     return titleSection; 
   }
+  // Inyeccion del servicio, busqueda de la editorial por id y mapeo para obtener su nombre
   return inject(PublisherService).getPublisherById(parseInt(publisherId)).pipe(
     map((editorial:Editorial)=>{
         const publisherName = editorial.nombre || '';
@@ -81,6 +90,7 @@ const titlePublisherResolver: ResolveFn<string> = (
 };
 
 export const routes: Routes = [
+    // Redireccion de la raiz al login
     {
         path: '',   
         redirectTo: 'login', 
@@ -90,9 +100,7 @@ export const routes: Routes = [
         path: 'login',
         component: LoginComponent,
         title: 'Login'
-    },
-    
-   
+    },   
     {
         path: 'registration',
         loadComponent: () =>
@@ -102,15 +110,17 @@ export const routes: Routes = [
             ),
         title: 'Registro'
     },
+
+    // Seccion de resultados
     {
-        path: 'home',
+        path: 'results/search/:searchedWord',        
         loadComponent: () =>
-            import('./pages/home/home.component').then(
-                (m) => m.HomeComponent
+            import('./pages/results/results-search/results-search.component').then(
+                (m) => m.ResultsSearchComponent
 
             ),
-        title: 'Home',
-        canActivate: [authGuard,userGuard]
+        title: 'Resultados - Libros',
+        canActivate: [authGuard]
     },
     {
         path: 'results/genre/:id',
@@ -121,7 +131,7 @@ export const routes: Routes = [
             ),
         title: titleGenreResolver,
         canActivate: [authGuard]
-    },
+    },    
     {
         path: 'results/author/:id',
         loadComponent: () =>
@@ -141,7 +151,7 @@ export const routes: Routes = [
             ),
         title: titlePublisherResolver,
         canActivate: [authGuard]
-    },
+    },    
     {
         path: 'results/score',
         loadComponent: () =>
@@ -162,18 +172,17 @@ export const routes: Routes = [
         title: 'Últimos libros',
         canActivate: [authGuard,userGuard]
     },
+    // Secciones propias del usuario
     {
-        path: 'results/search/:searchedWord',
-        
+        path: 'home',
         loadComponent: () =>
-            import('./pages/results/results-search/results-search.component').then(
-                (m) => m.ResultsSearchComponent
+            import('./pages/home/home.component').then(
+                (m) => m.HomeComponent
 
             ),
-        title: 'Resultados - Libros',
-        canActivate: [authGuard]
-    },
-    
+        title: 'Home',
+        canActivate: [authGuard,userGuard]
+    },    
     {
         path: 'books',
         loadComponent: () =>
@@ -185,16 +194,6 @@ export const routes: Routes = [
         canActivate: [authGuard,userGuard]
     },
     {
-        path: 'admin-books/book-section/:libro.id',
-        loadComponent: () =>
-            import('./pages/books/book-section/book-section.component').then(
-                (m) => m.BookSectionComponent
-
-            ),
-        title: titleResolver,
-        canActivate: [authGuard,adminGuard]
-    },
-    {
         path: 'books/book-section/:libro.id',
         loadComponent: () =>
             import('./pages/books/book-section/book-section.component').then(
@@ -202,8 +201,7 @@ export const routes: Routes = [
 
             ),
         title: titleResolver,
-        canActivate: [authGuard,userGuard]
-        
+        canActivate: [authGuard,userGuard]        
     },
     {
         path: 'readings',
@@ -235,6 +233,8 @@ export const routes: Routes = [
         title: 'Perfil - Cambiar contraseña',
         canActivate: [authGuard,userGuard]
     },
+
+    // Seccion de administracion
     {
     path: 'admin-books',
         loadComponent: () =>
@@ -243,6 +243,16 @@ export const routes: Routes = [
 
             ),
         title: 'Administrar libros',
+        canActivate: [authGuard,adminGuard]
+    },
+    {
+        path: 'admin-books/book-section/:libro.id',
+        loadComponent: () =>
+            import('./pages/books/book-section/book-section.component').then(
+                (m) => m.BookSectionComponent
+
+            ),
+        title: titleResolver,
         canActivate: [authGuard,adminGuard]
     },
     {

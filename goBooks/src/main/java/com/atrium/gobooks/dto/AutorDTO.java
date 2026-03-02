@@ -43,4 +43,5 @@ public class AutorDTO {
 	public String toString() {
 		return "AutorDTO [idAutor=" + idAutor + ", nombre=" + nombre + ", numeroLibros=" + numeroLibros + "]";
 	}
+	
 }

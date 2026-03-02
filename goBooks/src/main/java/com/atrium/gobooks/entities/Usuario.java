@@ -12,9 +12,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="USUARIO")
+@Table(name = "USUARIO")
 public class Usuario {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "USUARIO_ID")
@@ -25,27 +25,25 @@ public class Usuario {
 
 	@Column(name = "USUARIO_APELLIDO")
 	private String apellido;
-		
+
 	@Column(name = "USUARIO_EMAIL")
 	private String username;
 
 	@Column(name = "USUARIO_PASSWORD")
 	private String password;
 
-		
 	@Column(name = "USUARIO_FECHANACIMIENTO")
 	private Date fechaNacimiento;
-	
+
 	@ManyToOne
-	@JoinColumn(name="ROL_ID")
+	@JoinColumn(name = "ROL_ID")
 	private Rol rol;
-		
+
 	public Usuario() {
-			
+
 	}
 
-	public Usuario(String nombre, String apellido, String username, String password,
-			Date fechaNacimiento, Rol rol) {
+	public Usuario(String nombre, String apellido, String username, String password, Date fechaNacimiento, Rol rol) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -53,12 +51,6 @@ public class Usuario {
 		this.password = password;
 		this.fechaNacimiento = fechaNacimiento;
 		this.rol = rol;
-	}
-
-	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", username=" + username
-				+ ", password=" + password + ", fechaNacimiento=" + fechaNacimiento + ", rol=" + rol + "]";
 	}
 
 	public Integer getId() {
@@ -117,6 +109,10 @@ public class Usuario {
 		this.rol = rol;
 	}
 
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", username=" + username
+				+ ", password=" + password + ", fechaNacimiento=" + fechaNacimiento + ", rol=" + rol + "]";
+	}
 
-	
 }

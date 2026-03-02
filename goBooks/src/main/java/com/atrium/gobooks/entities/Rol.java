@@ -7,19 +7,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="ROL")
+@Table(name = "ROL")
 public class Rol {
-	
+
 	@Id
 	@GeneratedValue
-	@Column(name="ROL_ID")
+	@Column(name = "ROL_ID")
 	private Integer id;
-	
-	@Column(name="ROL_NOMBRE")
+
+	@Column(name = "ROL_NOMBRE")
 	private String nombre;
 
 	public Rol() {
-		
+
 	}
 
 	public Integer getId() {
@@ -42,7 +42,5 @@ public class Rol {
 	public String toString() {
 		return "Rol [id=" + id + ", nombre=" + nombre + "]";
 	}
-	
-	
-	
+
 }
