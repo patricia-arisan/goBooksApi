@@ -6,20 +6,34 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.atrium.gobooks.dto.EditorialDTO;
-import com.atrium.gobooks.entities.Autor;
 import com.atrium.gobooks.entities.Editorial;
 
-public interface EditorialRepository extends JpaRepository<Editorial,Integer>{
-	
-	@Query(value="SELECT e FROM Editorial e ORDER BY e.nombre")
+/**
+ * Repositorio encargado de gestionar la persistencia de datos de la Editorial
+ */
+public interface EditorialRepository extends JpaRepository<Editorial, Integer> {
+	/**
+	 * Recupera todos las editoriales de la bbdd ordenadas por nombre de la A a la Z
+	 * @return una lista de {@link Editorial} ordenadas de forma alfabetica
+	 */
+	@Query(value = "SELECT e FROM Editorial e ORDER BY e.nombre")
 	List<Editorial> buscarEditorialesPorOrdenAlfabetico();
-	
+
+	/**
+	 * Recupera todas las editoriales de la bbdd ordenadas por nombre de la A a la Z,
+	 * con el conteo de sus libros asociados
+	 * @return una lista de {@link EditorialDTO} ordenadas de forma alfabetica y con su numero de libros
+	 */
 	@Query(value = "SELECT NEW com.atrium.gobooks.dto.EditorialDTO(e.id,e.nombre, COUNT(l.editorial.nombre)) AS numeroLibros FROM "
 			+ "Editorial e LEFT JOIN Libro l ON e.id=l.editorial.id GROUP BY e.id ORDER BY e.nombre")
 	List<EditorialDTO> numeroLibrosEditorial();
-	
-	@Query(value="SELECT e FROM Editorial e WHERE e.nombre LIKE :nombre")
-	Editorial findByName(String nombre);
 
+	/**
+	 * Busqueda de editorial por el nombre
+	 * @param nombre El nombre de la editorial
+	 * @return la editorial encontrada y si no se encuentra, null
+	 */
+	@Query(value = "SELECT e FROM Editorial e WHERE e.nombre LIKE :nombre")
+	Editorial findByName(String nombre);
 
 }

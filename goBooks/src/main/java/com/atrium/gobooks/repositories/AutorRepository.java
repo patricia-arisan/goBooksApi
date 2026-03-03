@@ -8,18 +8,31 @@ import org.springframework.data.jpa.repository.Query;
 import com.atrium.gobooks.dto.AutorDTO;
 import com.atrium.gobooks.entities.Autor;
 
+/**
+ * Repositorio encargado de gestionar la persistencia de datos del Autor
+ */
 public interface AutorRepository extends JpaRepository<Autor, Integer> {
-
+	/**
+	 * Recupera todos los autores de la bbdd ordenados por nombre de la A a la Z
+	 * @return una lista de {@link Autor} ordenados de forma alfabetica
+	 */
 	@Query(value = "SELECT a FROM Autor a ORDER BY a.nombre")
 	List<Autor> buscarAutoresPorOrdenAlfabetico();
-
+	
+	/**
+	 * Recupera todos los autores de la bbdd ordenados por nombre de la A a la Z,
+	 * con el conteo de sus libros asociados
+	 * @return una lista de {@link AutorDTO} ordenados de forma alfabetica y con su numero de libros
+	 */
 	@Query(value = "SELECT NEW com.atrium.gobooks.dto.AutorDTO(a.id,a.nombre, COUNT(l.autor.nombre)) AS numeroLibros FROM "
 			+ "Autor a LEFT JOIN Libro l ON a.id=l.autor.id GROUP BY a.id ORDER BY a.nombre")
 	List<AutorDTO> numeroLibrosAutor();
-//	@Query(value = "SELECT NEW com.atrium.gobooks.dto.AutorDTO(a.id,a.nombre, COUNT(*)) as numeroLibros FROM Libro l, "
-//			+ "Autor a WHERE l.autor.id=a.id GROUP BY l.autor.id ORDER BY a.nombre") inner join, solo cuenta los que tienen libro
-	//FROM Autor a LEFT JOIN a.libros l GROUP BY a.id, a.nombre ORDER BY a.nombre"
-	//LEFT JOIN para contar autores sin libro, hay que usar count l.autor.nombre (sin esto cuenta a todos minimo una vez)
+
+	/**
+	 * Busqueda del autor por el nombre
+	 * @param nombre El nombre del autor
+	 * @return el autor encontrado y si no se encuentra, null
+	 */
 	@Query(value="SELECT a FROM Autor a WHERE a.nombre LIKE :nombre")
 	Autor findByName(String nombre);
 }

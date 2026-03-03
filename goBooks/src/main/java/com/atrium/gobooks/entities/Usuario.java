@@ -11,10 +11,17 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+/**
+ * Representa la entidad Usuario que se mapea en la tabla USUARIO de la bbdd,
+ * que puede ser un usuario normal del sitio o un administrador
+ */
 @Entity
 @Table(name = "USUARIO")
 public class Usuario {
 
+	/**
+	 * Identificador unico del usuario, que se autoincrementa en la bbdd
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "USUARIO_ID")
@@ -34,15 +41,29 @@ public class Usuario {
 
 	@Column(name = "USUARIO_FECHANACIMIENTO")
 	private Date fechaNacimiento;
-
+	
+	/**
+	 * Relacion con el rol que puede tener el usuario, que puede ser o usuario o administrador
+	 */
 	@ManyToOne
 	@JoinColumn(name = "ROL_ID")
 	private Rol rol;
 
+	// Constructor por defecto
 	public Usuario() {
 
 	}
 
+	/**
+	 * Constructor para crear un usuario con su nombre, apellido, username, password, fecha de 
+	 * nacimiento y rol
+	 * @param nombre El nombre del usuario
+	 * @param apellido El apellido del usuario
+	 * @param username El username del usuario, que es su correo electronico
+	 * @param password El password del usuario
+	 * @param fechaNacimiento La fecha de nacimiento del usuario
+	 * @param rol El rol del usuario
+	 */
 	public Usuario(String nombre, String apellido, String username, String password, Date fechaNacimiento, Rol rol) {
 		super();
 		this.nombre = nombre;
@@ -53,6 +74,10 @@ public class Usuario {
 		this.rol = rol;
 	}
 
+	/**
+	 * Getters y setters para obtener o establecer el id, nombre, apellido, username, password,
+	 * fecha de nacimiento y rol del usuario
+	 */
 	public Integer getId() {
 		return id;
 	}
@@ -109,6 +134,9 @@ public class Usuario {
 		this.rol = rol;
 	}
 
+	/**
+	 * Retorna un string con los detalles del usuario
+	 */
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", username=" + username
