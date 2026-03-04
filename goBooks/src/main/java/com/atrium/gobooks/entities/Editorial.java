@@ -59,7 +59,7 @@ public class Editorial {
 	}
 
 	/**
-	 * Retorna un string con los detalles de la editorial
+	 * Retorna un String con los detalles de la editorial
 	 */
 	@Override
 	public String toString() {

@@ -49,7 +49,7 @@ public class Rol {
 	}
 
 	/**
-	 * Retorna un string con los detalles del rol
+	 * Retorna un String con los detalles del rol
 	 */
 	@Override
 	public String toString() {

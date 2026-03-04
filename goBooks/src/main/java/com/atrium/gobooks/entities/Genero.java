@@ -56,7 +56,7 @@ public class Genero {
 	}
 
 	/**
-	 * Retorna un string con los detalles del genero
+	 * Retorna un String con los detalles del genero
 	 */
 	@Override
 	public String toString() {

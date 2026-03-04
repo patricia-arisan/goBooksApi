@@ -101,7 +101,7 @@ public class Lectura {
 	}
 	
 	/**
-	 * Retorna un string con los detalles de la lectura
+	 * Retorna un String con los detalles de la lectura
 	 */
 	@Override
 	public String toString() {

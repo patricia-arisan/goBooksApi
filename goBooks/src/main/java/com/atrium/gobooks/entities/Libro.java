@@ -154,7 +154,7 @@ public class Libro {
 	}
 
 	/**
-	 * Retorna un string con los detalles del libro
+	 * Retorna un String con los detalles del libro
 	 */
 	@Override
 	public String toString() {

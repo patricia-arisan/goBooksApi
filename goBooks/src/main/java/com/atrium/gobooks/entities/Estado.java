@@ -49,7 +49,7 @@ public class Estado {
 	}
 
 	/**
-	 * Retorna un string con los detalles del estado
+	 * Retorna un String con los detalles del estado
 	 */
 	@Override
 	public String toString() {

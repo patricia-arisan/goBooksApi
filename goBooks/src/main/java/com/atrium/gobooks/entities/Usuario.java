@@ -135,7 +135,7 @@ public class Usuario {
 	}
 
 	/**
-	 * Retorna un string con los detalles del usuario
+	 * Retorna un String con los detalles del usuario
 	 */
 	@Override
 	public String toString() {

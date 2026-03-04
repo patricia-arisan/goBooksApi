@@ -59,7 +59,7 @@ public class Autor {
 	}
 
 	/**
-	 * Retorna un string con los detalles del autor
+	 * Retorna un String con los detalles del autor
 	 */
 	@Override
 	public String toString() {
