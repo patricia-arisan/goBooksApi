@@ -29,7 +29,7 @@ public interface AutorRepository extends JpaRepository<Autor, Integer> {
 	List<AutorDTO> numeroLibrosAutor();
 
 	/**
-	 * Busqueda del autor por el nombre
+	 * Busqueda del {@link Autor} por el nombre
 	 * @param nombre El nombre del autor
 	 * @return el autor encontrado y si no se encuentra, null
 	 */

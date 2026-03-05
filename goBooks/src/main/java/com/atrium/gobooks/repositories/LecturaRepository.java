@@ -12,7 +12,7 @@ import com.atrium.gobooks.entities.Lectura;
  */
 public interface LecturaRepository extends JpaRepository<Lectura, Integer> {
 	/**
-	 * Busca la lectura de un libro poe el usuario y el libro
+	 * Busca la {@link Lectura} de un libro poe el usuario y el libro
 	 * @param idLibro El id del libro de la lectura
 	 * @param idUsuario El id del usuario de la lectura
 	 * @return la lectura encontrada y si no se encuentra, null

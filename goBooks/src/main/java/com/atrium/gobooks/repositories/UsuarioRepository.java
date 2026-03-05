@@ -10,7 +10,7 @@ import com.atrium.gobooks.entities.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
 	/**
-	 * Busqueda del usuario por el correo que sirve de username
+	 * Busqueda del {@link Usuario} por el correo que sirve de username
 	 * @param username El username del usuario
 	 * @return el usuario encontrado y si no lo encuentra, devuelve null
 	 */

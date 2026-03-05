@@ -13,7 +13,7 @@ import com.atrium.gobooks.entities.Editorial;
  */
 public interface EditorialRepository extends JpaRepository<Editorial, Integer> {
 	/**
-	 * Recupera todos las editoriales de la bbdd ordenadas por nombre de la A a la Z
+	 * Recupera todas las editoriales de la bbdd ordenadas por nombre de la A a la Z
 	 * @return una lista de {@link Editorial} ordenadas de forma alfabetica
 	 */
 	@Query(value = "SELECT e FROM Editorial e ORDER BY e.nombre")
@@ -29,7 +29,7 @@ public interface EditorialRepository extends JpaRepository<Editorial, Integer> {
 	List<EditorialDTO> numeroLibrosEditorial();
 
 	/**
-	 * Busqueda de editorial por el nombre
+	 * Busqueda de {@link Editorial} por el nombre
 	 * @param nombre El nombre de la editorial
 	 * @return la editorial encontrada y si no se encuentra, null
 	 */

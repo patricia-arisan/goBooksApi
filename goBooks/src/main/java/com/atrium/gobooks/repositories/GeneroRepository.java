@@ -29,7 +29,7 @@ public interface GeneroRepository extends JpaRepository<Genero, Integer> {
 	List<GeneroDTO> numeroLibrosGenero();
 	
 	/**
-	 * Busqueda del genero por el nombre
+	 * Busqueda del {@link Genero} por el nombre
 	 * @param nombre El nombre del genero
 	 * @return el genero encontrado y si no se encuentra, null
 	 */

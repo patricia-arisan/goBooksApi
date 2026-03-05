@@ -85,7 +85,7 @@ public interface LibroRepository extends JpaRepository<Libro, Integer> {
 	List<Libro> buscarLibro(String clave);
 	
 	/**
-	 * Busqueda del libro por su nombre
+	 * Busqueda del {@link Libro} por su nombre
 	 * @param nombre El nombre del libro
 	 * @return el libro encontado y si no lo encuentra, devuelve null
 	 */
@@ -93,7 +93,7 @@ public interface LibroRepository extends JpaRepository<Libro, Integer> {
 	Libro findByName(String nombre);
 	
 	/**
-	 * Busqueda del libro por su isbn
+	 * Busqueda del {@link Libro} por su isbn
 	 * @param isbn El isbn del libro, que sera un numero en formato String
 	 * @return el libro encontado y si no lo encuentra, devuelve null
 	 */

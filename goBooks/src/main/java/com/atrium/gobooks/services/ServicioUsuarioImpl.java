@@ -31,18 +31,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario{
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
-	@Override
-	public List<Usuario> listarUsuarios() throws ServicioException {
-		log.info("[listarUsuarios]");
-		List<Usuario> usuarios;
-		try {
-			usuarios = usuarioRepository.findAll();
-		} catch (Exception e) {
-			log.error("Exception", e);
-			throw new ServicioException(CodigoError.ERROR_GENERAL, e);
-		}
-		return usuarios;
-	}
+	
 
 //	@Override
 
