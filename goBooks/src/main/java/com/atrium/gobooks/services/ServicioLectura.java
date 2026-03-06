@@ -54,7 +54,7 @@ public interface ServicioLectura {
 	List <Lectura> buscarLecturasEstadoUsuario(Integer idUsuario, Integer idEstado) throws ServicioException;
 	
 	/**
-	 * Busca la {@link Lectura} de un libro poe el usuario y el libro
+	 * Busca la {@link Lectura} de un libro por el usuario y el libro
 	 * @param idLibro El id del libro de la lectura
 	 * @param idUsuario El id del usuario de la lectura
 	 * @return la lectura encontrada y si no se encuentra, null
