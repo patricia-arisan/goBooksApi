@@ -13,7 +13,7 @@ import com.atrium.gobooks.exceptions.ServicioException;
  * Extiende de {@link UserDetailsService} para poder cargar datos especificos del usuario y 
  * poder trabajar con Spring Security
  */
-public interface ServicioUsuario extends UserDetailsService{
+public interface ServicioUsuario extends UserDetailsService {
 	
 	/**
 	 * Agrega y guarda un nuevo usuario en la bbdd
