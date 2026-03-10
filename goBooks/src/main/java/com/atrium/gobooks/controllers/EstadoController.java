@@ -11,16 +11,25 @@ import com.atrium.gobooks.entities.Estado;
 import com.atrium.gobooks.exceptions.ServicioException;
 import com.atrium.gobooks.services.ServicioEstado;
 
+/**
+ * Controlador Rest para la gestion de estados.
+ * Proporciona endpoint para consulta
+ */
 @RestController
 @RequestMapping("/api/estado")
 public class EstadoController {
-	
+
 	@Autowired
 	private ServicioEstado servicioEstado;
-	
+
+	/**
+	 * Recupera todos los estados de la bbdd
+	 * @return una lista de {@link Estado}
+	 * @throws ServicioException Si se produce un error durante la consulta
+	 */
 	@GetMapping("/listadoEstados")
-	public List <Estado> listarEstados() throws ServicioException{
-		List <Estado> estados = servicioEstado.listaEstados();
+	public List<Estado> listarEstados() throws ServicioException {
+		List<Estado> estados = servicioEstado.listaEstados();
 		return estados;
 	}
 

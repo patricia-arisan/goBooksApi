@@ -32,7 +32,7 @@ public class ServicioEstadoImpl implements ServicioEstado{
 	EstadoRepository estadoRepository;
 
 	/**
-	 * Recupera todos los estado de la bbdd 
+	 * Recupera todos los estados de la bbdd 
 	 * @return una lista de {@link Estado}
 	 * @throws ServicioException Si se produce un error durante la consulta
 	 */

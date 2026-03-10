@@ -71,23 +71,6 @@ export class ReadingService {
     return this.client.get<number>(`${this.readingAverageServiceUrl}/${idLibro}`, { headers, withCredentials: true });
   }
 
-  // Obtener el estado actual de un libro para un usuario
-  private readonly readingBookUserServiceUrl = `${environment.proyectoUrl}api/lectura/estadoLecturaUsuario`;
-  getReadingBookState(idUsuario: number, idLibro: number): Observable<Lectura> {
-    // Recuperacion del token
-    const credentials = localStorage.getItem('token');
-    // Cabecera de autenticacion
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': credentials || ''
-    });
-
-    // Configuracion del parametro de consulta
-    let params = new HttpParams().set('idLibro', idLibro);
-
-    return this.client.get<Lectura>(`${this.readingBookUserServiceUrl}/${idUsuario}`, { headers, params: params, withCredentials: true });
-  }
-
   // Actualizar el estado de la lectura de un libro
   private readonly readingUpdateServiceUrl = `${environment.proyectoUrl}api/lectura`;
   updateReading(id: number, lectura: Lectura): Observable<Lectura> {

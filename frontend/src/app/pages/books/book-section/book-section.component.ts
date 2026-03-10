@@ -150,7 +150,7 @@ export class BookSectionComponent implements OnInit {
   getBookState() {
     let idBook = parseInt(this.id);
     // Envio del id del libro obtenido de la url y el id del usuario al servicio de la lectura
-    this.readingService.getReadingBookState(this.user.id, idBook).subscribe((data: Lectura) => {
+    this.readingService.getReadingBook(this.user.id, idBook).subscribe((data: Lectura) => {
       this.reading = data;
     });
   }

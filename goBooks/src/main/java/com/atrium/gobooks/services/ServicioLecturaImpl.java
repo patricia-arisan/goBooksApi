@@ -69,6 +69,10 @@ public class ServicioLecturaImpl implements ServicioLectura {
 	public Lectura grabarLectura(LecturaDTO lecturaDTO) throws ServicioException {
 		log.info("[grabarLectura]");
 		log.info("lectura: " + lecturaDTO.toString());
+		// Comprobacion de la existencia de la lectura para evitar duplicados
+		if(this.buscarLecturaUsuario(lecturaDTO.getIdLibro(), lecturaDTO.getIdUsuario()) != null) {
+			return null;
+		}
 
 		Lectura lectura = new Lectura();
 		try {
