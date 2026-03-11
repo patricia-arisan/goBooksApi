@@ -27,6 +27,9 @@ import com.atrium.gobooks.services.ServicioGenero;
 @RequestMapping("/api/genero")
 public class GeneroController {
 
+	/**
+	 * Inyeccion del servicio {@link ServicioGenero}
+	 */
 	@Autowired
 	private ServicioGenero servicioGenero;
 

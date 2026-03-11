@@ -15,7 +15,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
@@ -33,69 +32,59 @@ public class SecurityConfig {
 //err too many redirects? se ha puesto extends websecurityconfiguration	
 	@Autowired
 	private ServicioUsuario usuarioServicio;
-	
+
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
 		http
-			
+
 //			.cors(Customizer.withDefaults()) 
-		.cors(cors -> cors.configurationSource(corsConfigurationSource()))
-			.authorizeHttpRequests((authz) -> authz
-					.requestMatchers("/","/api/login/**", "/api/registroUsuario/**", "/js/**", "/css/**", "/img/**").permitAll()
-					.anyRequest().authenticated())
-			//.formLogin(Customizer.withDefaults())
-			.formLogin((form) -> form
-					//.formLogin(withDefaults());
-					.loginPage("/login")
-					
-					.failureUrl("/loginError")
-					//.successForwardUrl("/user").permitAll()
-					)
-			.logout((logout) -> logout
-					.logoutUrl("/auth/logout")
-					.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
-					//.logoutSuccessUrl("/login?logout")
-					.permitAll()
-					
-					//.logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
-			          
-					)
-			
-		.httpBasic(Customizer.withDefaults())
-		.csrf((csrf) -> csrf
-				.disable()
-				//.csrf((AbstractHttpConfigurer::disable)
+				.cors(cors -> cors.configurationSource(corsConfigurationSource()))
+				.authorizeHttpRequests((authz) -> authz.requestMatchers("/", "/api/login/**", "/api/registroUsuario/**",
+						"/js/**", "/css/**", "/img/**").permitAll().anyRequest().authenticated())
+				// .formLogin(Customizer.withDefaults())
+				.formLogin((form) -> form
+						// .formLogin(withDefaults());
+						.loginPage("/login")
+
+						.failureUrl("/loginError")
+				// .successForwardUrl("/user").permitAll()
 				)
-		.headers((headers)-> headers
-				.disable());
-		
+				.logout((logout) -> logout.logoutUrl("/auth/logout")
+						.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
+						// .logoutSuccessUrl("/login?logout")
+						.permitAll()
+
+				// .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
+
+				)
+
+				.httpBasic(Customizer.withDefaults()).csrf((csrf) -> csrf.disable()
+				// .csrf((AbstractHttpConfigurer::disable)
+				).headers((headers) -> headers.disable());
+
 		return http.build();
 
 	}
-	
+
 	@Bean
-	CorsConfigurationSource corsConfigurationSource(){
+	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
 		configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-		configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE","PATCH","OPTIONS","HEAD"));
+		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD"));
 		configuration.setAllowCredentials(true);
 		configuration.setAllowedHeaders(List.of("*"));
 //		configuration.setExposedHeaders(List.of("Access-Control-Expose-Headers", "Authorization", "Set-Cookie"));
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-		
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
+
 	}
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
-
-
-
-
 
 //que inicies la aplicacion, por lo cual tus contrasenas encriptadas no funcionaran bien
 
@@ -106,14 +95,10 @@ public class SecurityConfig {
 //
 //	  @Bean public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception { return
 //	  authenticationConfiguration.getAuthenticationManager(); }
-	
 
 //	@Autowired
 //    public void configure(AuthenticationManagerBuilder auth) throws Exception {
 //        auth.userDetailsService(usuarioServicio).passwordEncoder(passwordEncoder());
 //    } Estaba este
-	  
-
-	 
 
 }

@@ -19,6 +19,9 @@ import com.atrium.gobooks.services.ServicioEstado;
 @RequestMapping("/api/estado")
 public class EstadoController {
 
+	/**
+	 * Inyeccion del servicio {@link ServicioEstado}
+	 */
 	@Autowired
 	private ServicioEstado servicioEstado;
 

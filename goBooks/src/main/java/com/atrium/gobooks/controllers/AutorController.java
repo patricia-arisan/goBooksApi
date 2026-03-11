@@ -26,7 +26,10 @@ import com.atrium.gobooks.services.ServicioAutor;
 @RestController
 @RequestMapping("/api/autor")
 public class AutorController {
-
+	
+	/**
+	 * Inyeccion del servicio {@link ServicioAutor}
+	 */
 	@Autowired
 	private ServicioAutor servicioAutor;
 

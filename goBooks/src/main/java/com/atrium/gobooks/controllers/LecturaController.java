@@ -28,6 +28,9 @@ import com.atrium.gobooks.services.ServicioLectura;
 @RequestMapping("/api/lectura")
 public class LecturaController {
 
+	/**
+	 * Inyeccion del servicio {@link ServicioLectura}
+	 */
 	@Autowired
 	private ServicioLectura servicioLectura;
 

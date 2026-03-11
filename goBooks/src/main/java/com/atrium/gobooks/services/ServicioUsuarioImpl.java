@@ -73,7 +73,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 
 	/*
 	 * Agrega y guarda un nuevo usuario en la bbdd, cifrando su password
-	 * @param usuario El nuevo  {@link Usuario} a guardar
+	 * @param usuario El nuevo {@link Usuario} a guardar
 	 * @return El usuario guardado junto a su identificador unico proporcionado por la bbdd
 	 * @throws ServicioException Si ocurre algun problema durante el proceso
 	 */

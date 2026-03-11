@@ -27,6 +27,9 @@ import com.atrium.gobooks.services.ServicioEditorial;
 @RequestMapping("/api/editorial")
 public class EditorialController {
 
+	/**
+	 * Inyeccion del servicio {@link ServicioEditorial}
+	 */
 	@Autowired
 	private ServicioEditorial servicioEditorial;
 
