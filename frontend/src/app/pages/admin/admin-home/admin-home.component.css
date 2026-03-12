@@ -122,13 +122,11 @@ h3 {
 
 @media (max-width: 999px) {
 	.home {
-		max-width: 850px;	
-		background-color: aqua;	
+		max-width: 850px;
 	}
 
 	.last-books {
 		max-width: 670px;
-		background-color: blueviolet;
 	}
 
 	.book-list {

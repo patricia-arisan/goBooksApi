@@ -3,14 +3,9 @@ package com.atrium.gobooks.security;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -22,83 +17,86 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.atrium.gobooks.services.ServicioUsuario;
-
+/**
+ * Apartado de configuracion de la seguridad de la aplicacion.
+ * Define las las reglas de acceso, politicas de cors, encriptacion de password
+ * y la cadena de filtros de seguridad
+ */
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(prePostEnabled = true) // Nuevoooooo
-
+// Para permitir el uso de @PreAuthorize en los controladores
+@EnableMethodSecurity(prePostEnabled = true) 
 public class SecurityConfig {
-//err too many redirects? se ha puesto extends websecurityconfiguration	
-	@Autowired
-	private ServicioUsuario usuarioServicio;
 
+	/**
+	 * Define la cadena de filtros de seguridad, SecurityFilterChain.
+	 * Configura las rutas que son publicas y las que no lo son 
+	 * @param http El objeto HttpSecurity para configurar la seguridad web
+	 * @return El filtro ya configurado
+	 * @throws Exception Si ocurre un error durante la configuracion
+	 */
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
 		http
-
-//			.cors(Customizer.withDefaults()) 
+				// Configuracion de cors en funcion del Bean que aparece posteriormente
 				.cors(cors -> cors.configurationSource(corsConfigurationSource()))
-				.authorizeHttpRequests((authz) -> authz.requestMatchers("/", "/api/login/**", "/api/registroUsuario/**",
-						"/js/**", "/css/**", "/img/**").permitAll().anyRequest().authenticated())
-				// .formLogin(Customizer.withDefaults())
-				.formLogin((form) -> form
-						// .formLogin(withDefaults());
-						.loginPage("/login")
-
-						.failureUrl("/loginError")
-				// .successForwardUrl("/user").permitAll()
+				// Reglas de autorizacion de peticiones
+				.authorizeHttpRequests((authz) -> authz
+						// Endpoints publicos
+						.requestMatchers("/", "/api/login/**", "/api/registroUsuario/**", "/js/**", "/css/**", "/img/**").permitAll()
+						// El resto de peticiones con autenticacion del usuario
+						.anyRequest().authenticated()
 				)
-				.logout((logout) -> logout.logoutUrl("/auth/logout")
+				// Configuracion de cierre de sesion
+				.logout((logout) -> logout
+						.logoutUrl("/auth/logout")
+						// Devuelve un estado 200 Ok en vez de redireccionar
 						.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
-						// .logoutSuccessUrl("/login?logout")
 						.permitAll()
-
-				// .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
-
 				)
-
-				.httpBasic(Customizer.withDefaults()).csrf((csrf) -> csrf.disable()
-				// .csrf((AbstractHttpConfigurer::disable)
-				).headers((headers) -> headers.disable());
+				// Habilita la autenticacion basica, Basic Authentication, por defecto
+				.httpBasic(Customizer.withDefaults())
+				// Desactiva csrf
+				.csrf((csrf) -> csrf.disable());
 
 		return http.build();
 
 	}
 
+	/**
+	 * Configuracion del mecanismo de seguridad de los cors.
+	 * Se definen las conexiones de la api y los metodos permitidos
+	 * @return La configuracion resultante de cors
+	 */
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
+		// Origen de la aplicacion
 		configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+		// Metodos HTTP permitidos
 		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD"));
+		// Permiso de envio de credenciales, como cookies o cabeceras de autenticacion
 		configuration.setAllowCredentials(true);
+		// Se permiten todas las cabeceras
 		configuration.setAllowedHeaders(List.of("*"));
-//		configuration.setExposedHeaders(List.of("Access-Control-Expose-Headers", "Authorization", "Set-Cookie"));
+
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		// Aplicacion de la configuracion a todas las cabeceras
 		source.registerCorsConfiguration("/**", configuration);
 		return source;
 
 	}
 
+	/**
+	 * Bean para la encriptacion de la password
+	 * @return El bean de BCryptPasswordEncoder con fuerza de hash nivel 4
+	 */
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
-
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
-
-//que inicies la aplicacion, por lo cual tus contrasenas encriptadas no funcionaran bien
 
 		return bCryptPasswordEncoder;
 
 	}
-
-//
-//	  @Bean public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception { return
-//	  authenticationConfiguration.getAuthenticationManager(); }
-
-//	@Autowired
-//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(usuarioServicio).passwordEncoder(passwordEncoder());
-//    } Estaba este
 
 }
