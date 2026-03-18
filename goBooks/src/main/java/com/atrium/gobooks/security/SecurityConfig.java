@@ -17,6 +17,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 /**
  * Apartado de configuracion de la seguridad de la aplicacion.
  * Define las las reglas de acceso, politicas de cors, encriptacion de password
@@ -47,6 +49,16 @@ public class SecurityConfig {
 						// El resto de peticiones con autenticacion del usuario
 						.anyRequest().authenticated()
 				)
+				// Configuracion de autenticacion basica personalizada, evita ventana emergente
+				.httpBasic(basic -> basic
+					    .authenticationEntryPoint((request, response, authException) -> {
+					        // Se establece el status 401 Unauthorized con un json
+					        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+					        response.setContentType("application/json");
+					        // Mensaje de error
+					        response.getWriter().write("{\"error\": \"Unauthorized\", \"message\": \"Credenciales incorrectas\"}");
+					    })
+					)
 				// Configuracion de cierre de sesion
 				.logout((logout) -> logout
 						.logoutUrl("/auth/logout")
@@ -54,8 +66,6 @@ public class SecurityConfig {
 						.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
 						.permitAll()
 				)
-				// Habilita la autenticacion basica, Basic Authentication, por defecto
-				.httpBasic(Customizer.withDefaults())
 				// Desactiva csrf
 				.csrf((csrf) -> csrf.disable());
 
