@@ -38,8 +38,8 @@ export class ProfilePasswordComponent implements OnInit {
     this.formPasswordUpdate = this.formBuilder.group({
       id: [0],
       // Patron de password sin espacios, que aceta numeros, letras y simbolos
-      password: ["", [Validators.required, Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&()+-{|},;.:_^<=>~\"'`/])(?!.*\\s).{4,}$")]],
-      confirmPassword: ["", [Validators.required, Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&()+-{|},;.:_^<=>~\"'`/])(?!.*\\s).{4,}$")]]
+      password: ["", [Validators.required, Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&()+-{|},;.:_^<=>~\"'`/])(?!.*\\s).{6,}$")]],
+      confirmPassword: ["", [Validators.required, Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&()+-{|},;.:_^<=>~\"'`/])(?!.*\\s).{6,}$")]]
     });
 
     this.retrieveFromLocalStorage();

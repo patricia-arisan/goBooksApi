@@ -63,7 +63,7 @@ public interface LibroRepository extends JpaRepository<Libro, Integer> {
 	 * @return una lista de {@link Libro} con su media por orden decreciente
 	 */
 	@Query(value = "SELECT l, AVG(le.puntuacion) AS media FROM Lectura le, Libro l WHERE l.id=le.libro.id GROUP BY l.id "
-			+ "ORDER BY media DESC")
+			+ "HAVING AVG(le.puntuacion) IS NOT NULL ORDER BY media DESC")
 	List<Libro> listaLibrosMayorPuntuacion();
 	
 	/**
@@ -71,7 +71,7 @@ public interface LibroRepository extends JpaRepository<Libro, Integer> {
 	 * @return una lista de {@link Libro} con las cuatro mejores puntuaciones medias de lecturas
 	 */
 	@Query(value = "SELECT l, AVG(le.puntuacion) AS media FROM Lectura le, Libro l WHERE l.id=le.libro.id GROUP BY l.id "
-			+ "ORDER BY media DESC LIMIT 4")
+			+ "HAVING AVG(le.puntuacion) IS NOT NULL ORDER BY media DESC LIMIT 4")
 	List<Libro> librosMayorPuntuacion();
 	
 	/**

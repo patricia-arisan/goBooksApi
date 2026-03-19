@@ -42,7 +42,7 @@ export class RegistrationComponent {
       apellido: [""],
       username: ["", [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
       // Patron de password sin espacios, que aceta numeros, letras y simbolos
-      password: ["", [Validators.required, Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&()+-{|},;.:_^<=>~\"'`/])(?!.*\\s).{4,}$")]],
+      password: ["", [Validators.required, Validators.pattern("^(?=.*[a-zA-Z0-9$@#$!%*?&()+-{|},;.:_^<=>~\"'`/])(?!.*\\s).{6,}$")]],
       fechaNacimiento: [null],
       rol: [{id:2}]
     });
