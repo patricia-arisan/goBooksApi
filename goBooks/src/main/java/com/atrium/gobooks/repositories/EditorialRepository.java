@@ -33,7 +33,7 @@ public interface EditorialRepository extends JpaRepository<Editorial, Integer> {
 	 * @param nombre El nombre de la editorial
 	 * @return la editorial encontrada y si no se encuentra, null
 	 */
-	@Query(value = "SELECT e FROM Editorial e WHERE e.nombre LIKE :nombre")
+	@Query(value = "SELECT e FROM Editorial e WHERE e.nombre = :nombre")
 	Editorial findByName(String nombre);
 
 }

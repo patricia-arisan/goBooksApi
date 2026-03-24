@@ -17,7 +17,7 @@ import com.atrium.gobooks.repositories.EditorialRepository;
 /**
  * Implementacion de la interfaz {@link ServicioEditorial}, y proporciona la logica de negocio para 
  * la gestion de editoriales
- * Se comunica con la capa de persistencia mediante {@link EditorialRepository}
+ * Se comunica con la capa de persistencia mediante {@link EditorialRepositoryTest}
  */
 @Service
 public class ServicioEditorialImpl implements ServicioEditorial {

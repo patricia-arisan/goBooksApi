@@ -33,7 +33,7 @@ public interface GeneroRepository extends JpaRepository<Genero, Integer> {
 	 * @param nombre El nombre del genero
 	 * @return el genero encontrado y si no se encuentra, null
 	 */
-	@Query(value = "SELECT g FROM Genero g WHERE g.nombre LIKE :nombre")
+	@Query(value = "SELECT g FROM Genero g WHERE g.nombre = :nombre")
 	Genero findByName(String nombre);
 
 }
