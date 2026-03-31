@@ -59,6 +59,16 @@ public class LibroController {
 			} else if (e.getCodigo().equals(CodigoError.ISBN_FOUND)) {
 				codigo = CodigoError.ISBN_FOUND;
 				mensaje = "El isbn ya existe";
+			// Manejo de errores para evitar campos vacios
+			} else if (e.getCodigo().equals(CodigoError.AUTOR_REQUIRED)) {
+				codigo = CodigoError.AUTOR_REQUIRED;
+				mensaje = "Autor requerido";
+			} else if (e.getCodigo().equals(CodigoError.EDITORIAL_REQUIRED)) {
+				codigo = CodigoError.EDITORIAL_REQUIRED;
+				mensaje = "Editorial requerida";
+			} else if (e.getCodigo().equals(CodigoError.GENERO_REQUIRED)) {
+				codigo = CodigoError.GENERO_REQUIRED;
+				mensaje = "Genero requerido";
 			}
 			ErrorResponse errorResponse = new ErrorResponse(codigo, mensaje);
 			return ResponseEntity.badRequest().body(errorResponse);

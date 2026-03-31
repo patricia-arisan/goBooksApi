@@ -47,5 +47,14 @@ public class CodigoError {
 	
 	/** El isbn ha sido encontrado porque ya existe en la bbdd */
 	public static final String ISBN_FOUND = "00000014";
+	
+	/** El campoo del autor ha sido enviado vacio */
+	public static final String AUTOR_REQUIRED = "00000015";
+	
+	/** El campoo del editorial ha sido enviado vacio */
+	public static final String EDITORIAL_REQUIRED = "00000016";
+	
+	/** El campoo del genero ha sido enviado vacio */
+	public static final String GENERO_REQUIRED = "00000017";
 
 }

@@ -194,6 +194,7 @@ public class ServicioLecturaImpl implements ServicioLectura {
 			lectura = lecturaRepository.buscarLecturaUsuario(idLibro, idUsuario);
 
 		} catch (ServicioException se) {
+			log.error(se.getCodigo());
 			log.error("ServicioException", se);
 			throw se;
 		} catch (Exception e) {

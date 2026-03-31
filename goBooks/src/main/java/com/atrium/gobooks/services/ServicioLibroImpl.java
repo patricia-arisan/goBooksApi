@@ -96,7 +96,25 @@ public class ServicioLibroImpl implements ServicioLibro {
 	public Libro guardarLibro(Libro registro) throws ServicioException {
 		log.info("[grabarLibro]");
 		log.info("[libro: " + registro.toString() + "]");
-
+		
+		/**
+		 * Comprobacion de que no vengan nulos los campos de autor, editorial y genero
+		 */
+		if (registro.getAutor() == null || registro.getAutor().getId() == null) {
+			log.error(CodigoError.AUTOR_REQUIRED);
+			throw new ServicioException(CodigoError.AUTOR_REQUIRED);
+		}
+		
+		if (registro.getEditorial() == null || registro.getEditorial().getId() == null) {
+			log.error(CodigoError.EDITORIAL_REQUIRED);
+			throw new ServicioException(CodigoError.EDITORIAL_REQUIRED);
+		}
+		
+		if (registro.getGenero() == null || registro.getGenero().getId() == null) {
+			log.error(CodigoError.GENERO_REQUIRED);
+			throw new ServicioException(CodigoError.GENERO_REQUIRED);
+		}
+		
 		/**
 		 *  Formateado del texto. Primero quita los posibles espacios de delante y de detras, 
 		 *  y despues transforma a mayuscula la inicial del nombre 
@@ -121,10 +139,29 @@ public class ServicioLibroImpl implements ServicioLibro {
 		if (registro.getSinopsis() != null) {
 			sinopsis = registro.getSinopsis().trim();
 		}
+		/**
+		 *  Comprobacion de portada vacia y, si es asi, rellenado del campo con imagen por defecto.
+		 *  Si no viene vacia, despues se comprueba la extension de la imagen, que si es correcta 
+		 *  se formatea y almacena
+		 */
+		String portada = "";
+		if (registro.getPortada() != null && registro.getPortada() != "") {
+			if(registro.getPortada().endsWith("jpg") || registro.getPortada().endsWith("jpeg") || 
+					registro.getPortada().endsWith("png") || registro.getPortada().endsWith("gif") ||
+					registro.getPortada().endsWith("webp")) {
+				portada = registro.getPortada().trim();
+			} else {
+				throw new IllegalArgumentException("Formato de imagen no válido. Use .jpg, .jpeg, .png, "
+						+ ".gif o .webp");
+			}
+			
+		} else {
+			portada = "/assets/icons/book.png";
+		}
 
 		// Creacion del libro con los campos formateados y los que no necesitaban tratamiento
 		Libro libro = new Libro(titulo, registro.getAutor(), isbn, registro.getEditorial(), sinopsis,
-				registro.getPortada().trim(), registro.getGenero());
+				portada, registro.getGenero());
 
 		try {
 			// Verificacion de existencia del nombre del libro en la bbdd

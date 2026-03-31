@@ -78,7 +78,7 @@ export class AdminBooksUpdateComponent implements OnInit {
         id: [null],
         nombre: ["", [Validators.required]]
       }),
-      portada: [""],
+      portada: ["", [Validators.pattern('.*\\.(jpg|jpeg|png|gif|webp)$')]],
       sinopsis: [""],
     })
 
@@ -260,6 +260,10 @@ export class AdminBooksUpdateComponent implements OnInit {
   // Getter para acceder desde HTML a los controles del formulario
   get name() {
     return this.formUpdate.get('nombre')!;
+  }
+
+  get cover() {
+    return this.formUpdate.get('portada')!;
   }
 
 }

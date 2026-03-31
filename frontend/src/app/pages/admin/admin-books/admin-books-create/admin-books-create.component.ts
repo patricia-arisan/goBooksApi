@@ -64,7 +64,7 @@ export class AdminBooksCreateComponent implements OnInit {
         id: [null, [Validators.required]],
         nombre: [""]
       }),
-      portada: [""],
+      portada: ["", [Validators.pattern('.*\\.(jpg|jpeg|png|gif|webp)$')]],
       genero: this.formBuilder.group({
         id: [null, [Validators.required]],
         nombre: [""]
@@ -198,7 +198,7 @@ export class AdminBooksCreateComponent implements OnInit {
     // Comprobacion de si esta vacio o con espacios el campo de la portada
     if (this.url === null || this.url.trim().length === 0) {
       this.url = "/assets/icons/book.png";
-    }
+    } 
   }
 
   // Getters para acceder desde HTML a los controles del formulario de nombre, autor, editorial y genero
@@ -214,6 +214,10 @@ export class AdminBooksCreateComponent implements OnInit {
   }
   get idGenre() {
     return this.formNewBook.get('genero.id')!;
+  }
+
+  get cover() {
+    return this.formNewBook.get('portada')!;
   }
 
 }
