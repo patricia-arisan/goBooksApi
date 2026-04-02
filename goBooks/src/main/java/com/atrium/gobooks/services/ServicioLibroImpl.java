@@ -98,8 +98,13 @@ public class ServicioLibroImpl implements ServicioLibro {
 		log.info("[libro: " + registro.toString() + "]");
 		
 		/**
-		 * Comprobacion de que no vengan nulos los campos de autor, editorial y genero
+		 * Comprobacion de que no vengan nulos los campos de nombre, autor, editorial y genero
 		 */
+		if (registro.getNombre() == null || registro.getNombre().trim().isEmpty()) {
+			log.error(CodigoError.NOMBRE_REQUIRED);
+			throw new ServicioException(CodigoError.NOMBRE_REQUIRED);
+		}
+		
 		if (registro.getAutor() == null || registro.getAutor().getId() == null) {
 			log.error(CodigoError.AUTOR_REQUIRED);
 			throw new ServicioException(CodigoError.AUTOR_REQUIRED);
@@ -397,6 +402,29 @@ public class ServicioLibroImpl implements ServicioLibro {
 		// Si el id no esta presente en la bbdd, lanza el error de libro no encontrado
 		if (!libroOp.isPresent())
 			throw new ServicioException(CodigoError.LIBRO_NOT_FOUND);
+		
+		/**
+		 * Comprobacion de que no vengan nulos los campos de nombre, autor, editorial y genero
+		 */
+		if (libro.getNombre() == null || libro.getNombre().trim().isEmpty()) {
+			log.error(CodigoError.NOMBRE_REQUIRED);
+			throw new ServicioException(CodigoError.NOMBRE_REQUIRED);
+		}
+		
+		if (libro.getAutor() == null || libro.getAutor().getId() == null) {
+			log.error(CodigoError.AUTOR_REQUIRED);
+			throw new ServicioException(CodigoError.AUTOR_REQUIRED);
+		}
+		
+		if (libro.getEditorial() == null || libro.getEditorial().getId() == null) {
+			log.error(CodigoError.EDITORIAL_REQUIRED);
+			throw new ServicioException(CodigoError.EDITORIAL_REQUIRED);
+		}
+		
+		if (libro.getGenero() == null || libro.getGenero().getId() == null) {
+			log.error(CodigoError.GENERO_REQUIRED);
+			throw new ServicioException(CodigoError.GENERO_REQUIRED);
+		}
 
 		/**
 		 *  Formateado del texto. Primero quita los posibles espacios de delante y de detras, 
@@ -426,6 +454,26 @@ public class ServicioLibroImpl implements ServicioLibro {
 			sinopsis = libro.getSinopsis().trim();
 			libro.setSinopsis(sinopsis);
 		}
+		
+		/**
+		 *  Comprobacion de portada vacia y, si es asi, rellenado del campo con imagen por defecto.
+		 *  Si no viene vacia, despues se comprueba la extension de la imagen, que si es correcta 
+		 *  se formatea y almacena
+		 */
+		String portada = "";
+		if (libro.getPortada() != null && libro.getPortada() != "") {
+			if(libro.getPortada().endsWith("jpg") || libro.getPortada().endsWith("jpeg") || 
+					libro.getPortada().endsWith("png") || libro.getPortada().endsWith("gif") ||
+					libro.getPortada().endsWith("webp")) {
+				portada = libro.getPortada().trim();
+			} else {
+				throw new IllegalArgumentException("Formato de imagen no válido. Use .jpg, .jpeg, .png, "
+						+ ".gif o .webp");
+			}
+			
+		} else {
+			portada = "/assets/icons/book.png";
+		}
 
 		try {
 			// Verificacion de existencia del nombre del libro en la bbdd
@@ -434,14 +482,14 @@ public class ServicioLibroImpl implements ServicioLibro {
 			 * Si se encuentra el libro por el nombre en la bbdd, pero es un libro con un id 
 			 * distinto al que se va a actualizar, se lanza el error de libro encontrado
 			 */
-			if (libroNombre != null && libroNombre.getId() != libro.getId())
+			if (libroNombre != null && !libroNombre.getId().equals(libro.getId()))
 				throw new ServicioException(CodigoError.LIBRO_FOUND);
 			// Comprobaciones si el isbn no esta vacio y nulo
 			if (libro.getIsbn() != null && !libro.getIsbn().isEmpty()) {
 				// Verificacion de existencia del isbn del libro en la bbdd
 				Libro libroIsbn = libroRepository.findByIsbn(libro.getIsbn());
 				// Si se encuentra, se lanza la excepcion de isbn encontrado al ser true
-				if (libroIsbn != null)
+				if (libroIsbn != null && !libroIsbn.getId().equals(libro.getId()))
 					throw new ServicioException(CodigoError.ISBN_FOUND);
 			}
 			// Se guarda en la bbdd el libro actualizado

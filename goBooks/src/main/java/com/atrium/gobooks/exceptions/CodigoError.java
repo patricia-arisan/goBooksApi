@@ -56,5 +56,8 @@ public class CodigoError {
 	
 	/** El campoo del genero ha sido enviado vacio */
 	public static final String GENERO_REQUIRED = "00000017";
+	
+	/** El campoo del nombre ha sido enviado vacio */
+	public static final String NOMBRE_REQUIRED = "00000018";
 
 }
