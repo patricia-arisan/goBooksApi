@@ -100,8 +100,11 @@ public class ServicioLibroImplTest {
 	@Test
 	public void obtenerLibroTest() throws ServicioException {
 		Libro libro = libroRepository.save(new Libro("Libro de prueba", autor, "000000", editorial, 
-				"Resumen de la historia", "imagen.png", genero));
+				"Resumen de la historia", "imagen.png", genero));		
 		Integer id = libro.getId();
+		
+		entityManager.flush();
+		entityManager.clear();
 		
 		Libro encontrado = servicioLibro.obtenerLibro(id);
 		
@@ -130,7 +133,7 @@ public class ServicioLibroImplTest {
 		
 		servicioLibro.eliminarLibro(id);
 		
-		assertThat(autorRepository.findById(id)).isEmpty();
+		assertThat(libroRepository.findById(id)).isEmpty();
 	}
 	
 	@Test
@@ -139,7 +142,7 @@ public class ServicioLibroImplTest {
 				"Resumen de la historia", "imagen.png", genero));
 		libroRepository.save(new Libro("Libro segundo", autor, "000001", editorial, 
 				"Resumen de la historia", "imagen.png", genero));
-		libroRepository.save(new Libro("Libro último", autor, "000001", editorial, 
+		libroRepository.save(new Libro("Libro último", autor, "000002", editorial, 
 				"Resumen de la historia", "imagen.png", genero));
 		
 		List<Libro> resultados = servicioLibro.buscarTodosUltimosLibrosIncorporados();
