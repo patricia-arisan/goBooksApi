@@ -19,6 +19,11 @@ public class AutorDTO {
 	 * Numero de libros asociados al autor
 	 */
 	private Long numeroLibros;
+	
+	// Constructor por defecto
+	public AutorDTO() {
+		
+	}
 
 	/**
 	 * Constructor para crear un autor con su identificador, nombre y numero del conteo de libros
