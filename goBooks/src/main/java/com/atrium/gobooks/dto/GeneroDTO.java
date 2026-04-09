@@ -18,6 +18,11 @@ public class GeneroDTO {
 	 * Numero de libros asociados al genero
 	 */
 	private Long numeroLibros;
+	
+	// Constructor por defecto
+	public GeneroDTO() {
+		
+	}
 
 	/**
 	 * Constructor para crear un genero con su identificador, nombre y numero del conteo de libros

@@ -42,7 +42,7 @@ public class EditorialController {
 	 */
 	@PreAuthorize("hasAuthority('Administrador')")
 	@PostMapping(value = "/registroEditorial")
-	public Editorial registrarNuevoEditorial(@RequestBody Editorial editorial) throws ServicioException {
+	public Editorial registrarNuevaEditorial(@RequestBody Editorial editorial) throws ServicioException {
 		return servicioEditorial.guardarEditorial(editorial);
 
 	}

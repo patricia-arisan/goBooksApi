@@ -19,6 +19,11 @@ public class EditorialDTO {
 	 * Numero de libros pertenecientes a la editorial
 	 */
 	private Long numeroLibros;
+	
+	// Constructor por defecto
+	public EditorialDTO() {
+		
+	}
 
 	/**
 	 * Constructor para crear una editorial con su identificador, nombre y numero del conteo de libros

@@ -23,96 +23,96 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.atrium.gobooks.dto.AutorDTO;
-import com.atrium.gobooks.entities.Autor;
+import com.atrium.gobooks.dto.GeneroDTO;
+import com.atrium.gobooks.entities.Genero;
 import com.atrium.gobooks.security.SecurityConfig;
-import com.atrium.gobooks.services.ServicioAutor;
+import com.atrium.gobooks.services.ServicioGenero;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebMvcTest(AutorController.class)
+@WebMvcTest(GeneroController.class)
 @Import(SecurityConfig.class)
-public class AutorControllerTest {
-
+public class GeneroControllerTest {
+	
 	@Autowired
 	private MockMvc mockMvc;
 
 	@MockitoBean
-	private ServicioAutor servicioAutor;
+	private ServicioGenero servicioGenero;
 
 	@Autowired
 	private ObjectMapper objectMapper;
 
-	private Autor autor;
+	private Genero genero;
 
 	@BeforeEach
 	void iniciarDatos() {
-		autor = new Autor();
-		autor.setId(1);
-		autor.setNombre("Autor Prueba");
+		genero = new Genero();
+		genero.setId(1);
+		genero.setNombre("Genero Prueba");
 	}
 
 	@Test
 	@WithMockUser(authorities = "Administrador")
-	public void registrarNuevoAutorTest() throws Exception {
-		when(servicioAutor.guardarAutor(any(Autor.class))).thenReturn(autor);
+	public void registrarNuevoGeneroTest() throws Exception {
+		when(servicioGenero.guardarGenero(any(Genero.class))).thenReturn(genero);
 
-		mockMvc.perform(post("/api/autor/registroAutor")
+		mockMvc.perform(post("/api/genero/registroGenero")
 				.with(csrf())
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(autor)))
+				.content(objectMapper.writeValueAsString(genero)))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.nombre").value("Autor Prueba"));
+				.andExpect(jsonPath("$.nombre").value("Genero Prueba"));
 
 	}
 
 	@Test
 	@WithMockUser(authorities = "Usuario")
-	void registrarNuevoAutorNoAdminTest() throws Exception {
-		mockMvc.perform(post("/api/autor/registroAutor")
+	void registrarNuevoGeneroNoAdminTest() throws Exception {
+		mockMvc.perform(post("/api/genero/registroGenero")
 				.with(csrf())
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(autor)))
+				.content(objectMapper.writeValueAsString(genero)))
 				.andExpect(status().isForbidden());
 	}
 
 	@Test
 	@WithMockUser
-	public void listarAutoresTest() throws Exception {
-		List<Autor> autores = new ArrayList<Autor>();
-		autores.add(autor);
+	public void listarGenerosTest() throws Exception {
+		List<Genero> generos = new ArrayList<Genero>();
+		generos.add(genero);
 
-		when(servicioAutor.buscarAutoresPorOrdenAlfabetico()).thenReturn(autores);
+		when(servicioGenero.buscarGenerosPorOrdenAlfabetico()).thenReturn(generos);
 
-		mockMvc.perform(get("/api/autor/listadoAutores"))
+		mockMvc.perform(get("/api/genero/listadoGeneros"))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$[0].id").value(1))
-				.andExpect(jsonPath("$[0].nombre").value("Autor Prueba"));
+				.andExpect(jsonPath("$[0].nombre").value("Genero Prueba"));
 	}
 
 	@Test
 	@WithMockUser(authorities = "Administrador")
-	public void actualizarAutorTest() throws Exception {
-		Integer idAutor = 1;
-		autor.setNombre("Autor Actualizado");
+	public void actualizarGeneroTest() throws Exception {
+		Integer idGenero = 1;
+		genero.setNombre("Genero Actualizado");
 
-		when(servicioAutor.modificarAutor(any(Autor.class))).thenReturn(autor);
+		when(servicioGenero.modificarGenero(any(Genero.class))).thenReturn(genero);
 
-		mockMvc.perform(put("/api/autor/{id}", idAutor)
+		mockMvc.perform(put("/api/genero/{id}", idGenero)
 				.with(csrf())
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(autor)))
+				.content(objectMapper.writeValueAsString(genero)))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.id").value(idAutor))
-				.andExpect(jsonPath("$.nombre").value("Autor Actualizado"));
+				.andExpect(jsonPath("$.id").value(idGenero))
+				.andExpect(jsonPath("$.nombre").value("Genero Actualizado"));
 
 	}
 
 	@Test
 	@WithMockUser
-	public void buscarAutorTest() throws Exception {
-		when(servicioAutor.obtenerAutor(1)).thenReturn(autor);
+	public void buscarGeneroTest() throws Exception {
+		when(servicioGenero.obtenerGenero(1)).thenReturn(genero);
 
-		mockMvc.perform(get("/api/autor/1"))
+		mockMvc.perform(get("/api/genero/1"))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.id").value(1));
 
@@ -120,8 +120,8 @@ public class AutorControllerTest {
 
 	@Test
 	@WithMockUser(authorities = "Administrador")
-	public void eliminarAutorTest() throws Exception {
-		mockMvc.perform(delete("/api/autor/1")
+	public void eliminarGeneroTest() throws Exception {
+		mockMvc.perform(delete("/api/genero/1")
 				.with(csrf()))
 				.andExpect(status().isOk());
 
@@ -129,21 +129,21 @@ public class AutorControllerTest {
 
 	@Test
 	@WithMockUser
-	public void conteoLibrosAutorTest() throws Exception {
-		AutorDTO autorDTO = new AutorDTO();
-		autorDTO.setIdAutor(1);
-		autorDTO.setNombre("Autor Libros");
-		autorDTO.setNumeroLibros(6L);
+	public void conteoLibrosGeneroTest() throws Exception {
+		GeneroDTO generoDTO = new GeneroDTO();
+		generoDTO.setIdGenero(1);
+		generoDTO.setNombre("Genero Libros");
+		generoDTO.setNumeroLibros(6L);
 
-		List<AutorDTO> autoresLibros = new ArrayList<AutorDTO>();
-		autoresLibros.add(autorDTO);
+		List<GeneroDTO> generosLibros = new ArrayList<GeneroDTO>();
+		generosLibros.add(generoDTO);
 
-		when(servicioAutor.numeroLibrosAutor()).thenReturn(autoresLibros);
+		when(servicioGenero.numeroLibrosGenero()).thenReturn(generosLibros);
 
-		mockMvc.perform(get("/api/autor/conteoLibros")).andExpect(status().isOk())
+		mockMvc.perform(get("/api/genero/conteoLibros")).andExpect(status().isOk())
 				.andExpect(jsonPath("$.length()").value(1))
-				.andExpect(jsonPath("$[0].nombre").value("Autor Libros"))
+				.andExpect(jsonPath("$[0].nombre").value("Genero Libros"))
 				.andExpect(jsonPath("$[0].numeroLibros").value(6));
 	}
-	
+
 }
