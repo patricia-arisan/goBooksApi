@@ -6,6 +6,11 @@ package com.atrium.gobooks.dto;
 public class PasswordDTO {
 
 	private String password;
+	
+	// Constructor por defecto
+	public PasswordDTO() {
+		
+	}
 
 	/**
 	 * Constructor para almacenar la password en un objeto

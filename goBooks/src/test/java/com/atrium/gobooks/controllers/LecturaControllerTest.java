@@ -3,9 +3,16 @@ package com.atrium.gobooks.controllers;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -82,4 +89,91 @@ public class LecturaControllerTest {
 				.andExpect(jsonPath("$.id").value(1));
 
 	}
+	
+	@Test
+	@WithMockUser(authorities ="Usuario")
+	public void mostrarLecturaTest() throws Exception {		
+		Integer idLibro = 1;
+		Integer idUsuario = 1;
+		when(servicioLectura.buscarLecturaUsuario(idLibro, idUsuario)).thenReturn(lectura);
+		
+		mockMvc.perform(get("/api/lectura/1")				
+				.param("idLibro",idLibro.toString()))		
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.id").value(1));
+	}
+	
+	@Test
+	@WithMockUser(authorities ="Usuario")
+	public void actualizarLecturaTest() throws Exception {
+		Integer idLectura = 1;
+		Estado estado = new Estado();
+		estado.setId(3);
+		estado.setSituacion("Pendiente");
+		lectura.setEstado(estado);
+		
+		when(servicioLectura.modificarLectura(any(Lectura.class))).thenReturn(lectura);
+		
+		mockMvc.perform(put("/api/lectura/{id}", idLectura)
+				.with(csrf())
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(lectura)))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.id").value(idLectura))
+				.andExpect(jsonPath("$.estado.id").value(3));
+	}
+	
+	@Test
+	@WithMockUser(authorities ="Usuario")
+	public void eliminarLecturaTest() throws Exception {
+		mockMvc.perform(delete("/api/lectura/1")
+				.with(csrf()))
+				.andExpect(status().isOk());
+	}
+	
+	@Test
+	@WithMockUser(authorities ="Usuario")
+	public void listarLecturasTest() throws Exception {
+		List<Lectura> lecturas = new ArrayList<Lectura>();
+		lecturas.add(lectura);
+		
+		Integer idUsuario = 1;
+		
+		when(servicioLectura.buscarLecturasUsuario(idUsuario)).thenReturn(lecturas);
+		
+		mockMvc.perform(get("/api/lectura/listadoLecturas/{id}",idUsuario))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$[0].id").value(1))
+				.andExpect(jsonPath("$.length()").value(1));
+			
+	}
+	
+	@Test
+	@WithMockUser(authorities ="Usuario")
+	public void listarLecturasPorEstadoTest() throws Exception {
+		List<Lectura> lecturas = new ArrayList<Lectura>();
+		lecturas.add(lectura);
+		
+		Integer idUsuario = 1;
+		Integer idEstado = 2;
+		
+		when(servicioLectura.buscarLecturasEstadoUsuario(idUsuario,idEstado)).thenReturn(lecturas);
+		
+		mockMvc.perform(get("/api/lectura/listadoLecturasEstado/{idUsuario}",idUsuario)
+				.param("idEstado",idEstado.toString()))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$[0].id").value(1))
+				.andExpect(jsonPath("$.length()").value(1));
+	}
+	
+	@Test
+	@WithMockUser
+	public void mediaPuntuacionTest() throws Exception {
+		when(servicioLectura.mediaLectura(1)).thenReturn(4f);
+
+        mockMvc.perform(get("/api/lectura/mediaPuntuacionLibro/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("4.0"));
+	}
+	
 }
