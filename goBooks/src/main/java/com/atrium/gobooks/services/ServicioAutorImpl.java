@@ -44,7 +44,7 @@ public class ServicioAutorImpl implements ServicioAutor {
 	public Autor guardarAutor(Autor registro) throws ServicioException {
 		log.info("[grabarAutor]");
 		log.info("[autor: " + registro.toString() + "]");
-
+		
 		/**
 		 *  Formateado del texto. Primero quita los posibles espacios de delante y de detras, 
 		 *  y despues transforma a mayuscula la inicial del nombre 

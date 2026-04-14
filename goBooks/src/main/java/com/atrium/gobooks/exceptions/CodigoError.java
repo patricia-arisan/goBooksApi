@@ -48,16 +48,31 @@ public class CodigoError {
 	/** El isbn ha sido encontrado porque ya existe en la bbdd */
 	public static final String ISBN_FOUND = "00000014";
 	
-	/** El campoo del autor ha sido enviado vacio */
+	/** El campo del autor ha sido enviado vacio */
 	public static final String AUTOR_REQUIRED = "00000015";
 	
-	/** El campoo del editorial ha sido enviado vacio */
+	/** El campo del editorial ha sido enviado vacio */
 	public static final String EDITORIAL_REQUIRED = "00000016";
 	
-	/** El campoo del genero ha sido enviado vacio */
+	/** El campo del genero ha sido enviado vacio */
 	public static final String GENERO_REQUIRED = "00000017";
 	
-	/** El campoo del nombre ha sido enviado vacio */
+	/** El campo del nombre ha sido enviado vacio */
 	public static final String NOMBRE_REQUIRED = "00000018";
+	
+	/** La lectura no puede almacenarse como no leida */
+	public static final String LECTURA_INVALID_STATE = "00000019";
+	
+	/** El campo del usuario ha sido enviado vacio */
+	public static final String USUARIO_REQUIRED = "00000020";
+	
+	/** El campo del estado ha sido enviado vacio */
+	public static final String ESTADO_REQUIRED = "00000021";
+	
+	/** El campo del libro ha sido enviado vacio */
+	public static final String LIBRO_REQUIRED = "00000022";
+	
+	/** Lectura encontrada en la bbdd */
+	public static final String LECTURA_FOUND = "00000023";
 
 }

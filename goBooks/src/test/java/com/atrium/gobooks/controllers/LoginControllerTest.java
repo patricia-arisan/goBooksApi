@@ -83,7 +83,7 @@ public class LoginControllerTest {
 	
 	@Test
     @WithMockUser(username = "usuarionoexiste@prueba.com")
-    void getCurrentNosExistUserTest() throws Exception {
+    void getCurrentNonExistUserTest() throws Exception {
         
         when(servicioUsuario.findByUsername("usuarionoexiste@prueba.com")).thenReturn(Optional.empty());
 

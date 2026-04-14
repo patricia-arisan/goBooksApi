@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.atrium.gobooks.dto.LecturaDTO;
 import com.atrium.gobooks.entities.Lectura;
+import com.atrium.gobooks.exceptions.CodigoError;
+import com.atrium.gobooks.exceptions.ErrorResponse;
 import com.atrium.gobooks.exceptions.ServicioException;
 import com.atrium.gobooks.services.ServicioLectura;
 
@@ -43,8 +45,34 @@ public class LecturaController {
 	 */
 	@PreAuthorize("hasAuthority('Usuario')")
 	@PostMapping(value = "/registroLectura")
-	public Lectura registrarNuevaLectura(@RequestBody LecturaDTO lectura) throws ServicioException {
-			return servicioLectura.grabarLectura(lectura);
+	public ResponseEntity<Object> registrarNuevaLectura(@RequestBody LecturaDTO lectura) throws ServicioException {
+		Lectura lecturaResponse = null;
+		
+		try {
+			lecturaResponse = servicioLectura.grabarLectura(lectura);
+		} catch (ServicioException e) {
+			String codigo = "";
+			String mensaje = "";
+			if (e.getCodigo().equals(CodigoError.LECTURA_INVALID_STATE)) {
+				codigo = CodigoError.LECTURA_INVALID_STATE;
+				mensaje = "La lectura no puede guardarse con estado 1 (No leído) en la base de datos";
+			} else if (e.getCodigo().equals(CodigoError.LIBRO_REQUIRED)) {
+				codigo = CodigoError.LIBRO_REQUIRED;
+				mensaje = "Libro requerido";
+			} else if (e.getCodigo().equals(CodigoError.USUARIO_REQUIRED)) {
+				codigo = CodigoError.USUARIO_REQUIRED;
+				mensaje = "Usuario requerido";
+			} else if (e.getCodigo().equals(CodigoError.ESTADO_REQUIRED)) {
+				codigo = CodigoError.ESTADO_REQUIRED;
+				mensaje = "Estado requerido";
+			} else if (e.getCodigo().equals(CodigoError.LECTURA_FOUND)) {
+				codigo = CodigoError.LECTURA_FOUND;
+				mensaje = "Ya existe una lectura de este libro por el usuario";
+			}
+			ErrorResponse errorResponse = new ErrorResponse(codigo, mensaje);
+			return ResponseEntity.badRequest().body(errorResponse);
+		}
+		return ResponseEntity.ok(lecturaResponse);
 			
 	}
 
@@ -69,13 +97,35 @@ public class LecturaController {
 	 * con acceso restringido a usuarios con rol de Usuario
 	 * @param id El id de la lectura a actualizar
 	 * @param lectura La {@link Lectura} a actualizar
-	 * @return La lectura tras ejecutarse la actualizacion
+	 * @return Un ResponseEntity con la lectura tras ejecutarse la actualizacion
 	 * @throws ServicioException Si la lectura no existe o se produce un error al actualizar
 	 */
 	@PreAuthorize("hasAuthority('Usuario')")
 	@PutMapping(value = "/{id}")
-	public Lectura actualizarLectura(@PathVariable Integer id, @RequestBody Lectura lectura) throws ServicioException {
-		return servicioLectura.modificarLectura(lectura);
+	public ResponseEntity<Object> actualizarLectura(@PathVariable Integer id, @RequestBody Lectura lectura) throws ServicioException {
+		Lectura lecturaResponse = null;
+		try {
+			lecturaResponse = servicioLectura.modificarLectura(lectura);
+		} catch (ServicioException e) {
+			String codigo = "";
+			String mensaje = "";
+			if (e.getCodigo().equals(CodigoError.LECTURA_INVALID_STATE)) {
+				codigo = CodigoError.LECTURA_INVALID_STATE;
+				mensaje = "La lectura no puede guardarse con estado 1 (No leído) en la base de datos";
+			} else if (e.getCodigo().equals(CodigoError.LIBRO_REQUIRED)) {
+				codigo = CodigoError.LIBRO_REQUIRED;
+				mensaje = "Libro requerido";
+			} else if (e.getCodigo().equals(CodigoError.USUARIO_REQUIRED)) {
+				codigo = CodigoError.USUARIO_REQUIRED;
+				mensaje = "Usuario requerido";
+			} else if (e.getCodigo().equals(CodigoError.ESTADO_REQUIRED)) {
+				codigo = CodigoError.ESTADO_REQUIRED;
+				mensaje = "Estado requerido";
+			}
+			ErrorResponse errorResponse = new ErrorResponse(codigo, mensaje);
+			return ResponseEntity.badRequest().body(errorResponse);
+		}
+		return ResponseEntity.ok(lecturaResponse);
 	}
 
 	/**

@@ -69,9 +69,32 @@ public class ServicioLecturaImpl implements ServicioLectura {
 	public Lectura grabarLectura(LecturaDTO lecturaDTO) throws ServicioException {
 		log.info("[grabarLectura]");
 		log.info("lectura: " + lecturaDTO.toString());
+		
+		if (lecturaDTO.getIdLibro() == null) {
+			log.error(CodigoError.LIBRO_REQUIRED);
+			throw new ServicioException(CodigoError.LIBRO_REQUIRED);
+		}
+		
+		if (lecturaDTO.getIdUsuario() == null) {
+			log.error(CodigoError.USUARIO_REQUIRED);
+			throw new ServicioException(CodigoError.USUARIO_REQUIRED);
+		}
+		
+		if (lecturaDTO.getIdEstado() == null) {
+			log.error(CodigoError.ESTADO_REQUIRED);
+			throw new ServicioException(CodigoError.ESTADO_REQUIRED);
+		}
+		
+		// Comprobacion para no almacenar el registro como No leido, estado 1
+		if(lecturaDTO.getIdEstado()==1) {
+			log.error(CodigoError.LECTURA_INVALID_STATE);
+			throw new ServicioException(CodigoError.LECTURA_INVALID_STATE);
+		}
+		
 		// Comprobacion de la existencia de la lectura para evitar duplicados
 		if(this.buscarLecturaUsuario(lecturaDTO.getIdLibro(), lecturaDTO.getIdUsuario()) != null) {
-			return null;
+			log.error(CodigoError.LECTURA_FOUND);
+			throw new ServicioException(CodigoError.LECTURA_FOUND);
 		}
 
 		Lectura lectura = new Lectura();
@@ -100,8 +123,13 @@ public class ServicioLecturaImpl implements ServicioLectura {
 			// Se almacena el id del estado si se obtiene true en la busqueda de este
 			lectura.setEstado(estadoOp.get());
 			
-			// Se extrae la puntuacion del DTO y se almacena en la Lectura
-			lectura.setPuntuacion(lecturaDTO.getPuntuacion());
+			// Si la lectura se marca como Pendiente, con estado 3, se restablece la puntuacion a nulo
+			if(lectura.getEstado() != null && lectura.getEstado().getId()==3) {
+				lectura.setPuntuacion(null);
+			} else {
+				// Se extrae la puntuacion del DTO y se almacena en la Lectura
+				lectura.setPuntuacion(lecturaDTO.getPuntuacion());
+			}			
 
 			// Se registra la lectura
 			lecturaRepository.save(lectura);
@@ -212,7 +240,7 @@ public class ServicioLecturaImpl implements ServicioLectura {
 	 */
 	@Override
 	public Float mediaLectura(Integer idLibro) throws ServicioException {
-		log.info("[meadiaLecturas]");
+		log.info("[mediaLecturas]");
 
 		Float mediaLectura = 0F;
 
@@ -240,8 +268,33 @@ public class ServicioLecturaImpl implements ServicioLectura {
 		// Si el id no esta presente en la bbdd lanza el error de lectura no encontrado
 		if (!lecturaOp.isPresent())
 			throw new ServicioException(CodigoError.LECTURA_NOT_FOUND);
+		
+		if (lectura.getLibro() == null || lectura.getLibro().getId() == null) {
+			log.error(CodigoError.LIBRO_REQUIRED);
+			throw new ServicioException(CodigoError.LIBRO_REQUIRED);
+		}
+		
+		if (lectura.getUsuario() == null || lectura.getUsuario().getId() == null) {
+			log.error(CodigoError.USUARIO_REQUIRED);
+			throw new ServicioException(CodigoError.USUARIO_REQUIRED);
+		}
+		
+		if (lectura.getEstado() == null || lectura.getEstado().getId() == null) {
+			log.error(CodigoError.ESTADO_REQUIRED);
+			throw new ServicioException(CodigoError.ESTADO_REQUIRED);
+		}
+		
+		// Comprobacion para no almacenar el registro como No leido, estado 1
+		if(lectura.getEstado().getId()==1) {
+			log.error(CodigoError.LECTURA_INVALID_STATE);
+			throw new ServicioException(CodigoError.LECTURA_INVALID_STATE);
+		}
 
 		try {
+			// Si la lectura se marca como Pendiente, con estado 3, se restablece la puntuacion a nulo
+			if(lectura.getEstado() != null && lectura.getEstado().getId()==3) {
+				lectura.setPuntuacion(null);
+			}
 			// Se guarda en la bbdd la lectura actualizada
 			lectura = lecturaRepository.save(lectura);
 

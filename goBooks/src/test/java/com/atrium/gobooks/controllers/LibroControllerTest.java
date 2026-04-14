@@ -80,6 +80,19 @@ public class LibroControllerTest {
 	}
 	
 	@Test
+	@WithMockUser(authorities = "Usuario")
+	public void registrarNuevoLibroNoAdminTest() throws Exception {
+		when(servicioLibro.guardarLibro(any(Libro.class))).thenReturn(libro);
+		
+		mockMvc.perform(post("/api/libro/registroLibro")
+				.with(csrf())
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(libro)))
+				.andExpect(status().isForbidden());
+		
+	}
+	
+	@Test
 	@WithMockUser
 	public void listarLibrosTest() throws Exception {
 		List<Libro> libros = new ArrayList<Libro>();
