@@ -30,8 +30,13 @@
     </div>
     }
   </div>
+  @if(books.length===0){
+        <p class="alert">No hay resultados para esta búsqueda.</p>
+  }
   <!-- Seccion de paginacion de la lista de libros -->
+  @if (books && books.length>0) {
   <mat-paginator class="paginator" [length]="totalItems" [pageSize]="pageSize" [pageIndex]="pageIndex"
     [pageSizeOptions]="[16, 32, 40]" aria-label="Select page" (page)="onPageChange($event)">
   </mat-paginator>
+  }
 </div>
