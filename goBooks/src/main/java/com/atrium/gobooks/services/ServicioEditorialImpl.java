@@ -47,6 +47,14 @@ public class ServicioEditorialImpl implements ServicioEditorial {
 		log.info("[editorial: " + registro.toString() + "]");
 
 		/**
+		 * Comprobacion de que no venga nulo el nombre de la editorial
+		 */
+		if (registro.getNombre() == null || registro.getNombre().trim().isEmpty()) {
+			log.error(CodigoError.NOMBRE_REQUIRED);
+			throw new ServicioException(CodigoError.NOMBRE_REQUIRED);
+		}
+		
+		/**
 		 *  Formateado del texto. Primero quita los posibles espacios de delante y de detras, 
 		 *  y despues transforma a mayuscula la inicial del nombre 
 		 */
@@ -113,6 +121,14 @@ public class ServicioEditorialImpl implements ServicioEditorial {
 		if (!editorialOp.isPresent())
 			throw new ServicioException(CodigoError.EDITORIAL_NOT_FOUND);
 
+		/**
+		 * Comprobacion de que no venga nulo el nombre de la editorial
+		 */
+		if (editorial.getNombre() == null || editorial.getNombre().trim().isEmpty()) {
+			log.error(CodigoError.NOMBRE_REQUIRED);
+			throw new ServicioException(CodigoError.NOMBRE_REQUIRED);
+		}
+		
 		/**
 		 *  Formateado del texto. Primero quita los posibles espacios de delante y de detras, 
 		 *  y despues transforma a mayuscula la inicial del nombre 

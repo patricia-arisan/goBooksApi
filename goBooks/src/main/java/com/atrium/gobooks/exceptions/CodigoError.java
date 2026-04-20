@@ -74,5 +74,17 @@ public class CodigoError {
 	
 	/** Lectura encontrada en la bbdd */
 	public static final String LECTURA_FOUND = "00000023";
+	
+	/** El campo del username ha sido enviado vacio */
+	public static final String USERNAME_REQUIRED = "00000024";
+	
+	/** El campo del password no tiene un formato valido */
+	public static final String PASSWORD_INVALID_FORMAT = "00000025";
+	
+	/** El campo del password ha sido enviado vacio */
+	public static final String PASSWORD_REQUIRED = "00000026";
+	
+	/** El campo del username no tiene un formato valido */
+	public static final String USERNAME_INVALID_FORMAT = "00000027";
 
 }

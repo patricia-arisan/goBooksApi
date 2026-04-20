@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.atrium.gobooks.dto.AutorDTO;
 import com.atrium.gobooks.entities.Autor;
+import com.atrium.gobooks.exceptions.CodigoError;
+import com.atrium.gobooks.exceptions.ErrorResponse;
 import com.atrium.gobooks.exceptions.ServicioException;
 import com.atrium.gobooks.services.ServicioAutor;
 
@@ -37,13 +39,33 @@ public class AutorController {
 	 * Registro de un nuevo autor en la bbdd, con acceso restringido a usuarios 
 	 * con rol de Administrador
 	 * @param autor El {@link Autor} a guardar
-	 * @return El autor guardado junto a su id proporcionado por la bbdd
+	 * @return Un ResponseEntity con el autor guardado junto a su id proporcionado por la bbdd,
+	 * o un ErrorResponse si el autor ya existe o si el nombre es nulo
 	 * @throws ServicioException Si ocurre algun error durante el proceso
 	 */
 	@PreAuthorize("hasAuthority('Administrador')")
 	@PostMapping(value = "/registroAutor")
-	public Autor registrarNuevoAutor(@RequestBody Autor autor) throws ServicioException {
-		return servicioAutor.guardarAutor(autor);
+	public ResponseEntity<Object> registrarNuevoAutor(@RequestBody Autor autor) throws ServicioException {
+		Autor autorResponse = null;
+		try {
+			autorResponse = servicioAutor.guardarAutor(autor);
+		} catch (ServicioException e) {
+			String codigo = "";
+			String mensaje = "";
+			
+			if (e.getCodigo().equals(CodigoError.NOMBRE_REQUIRED)) {
+				codigo = CodigoError.NOMBRE_REQUIRED;
+				mensaje = "Nombre requerido";
+			} else if (e.getCodigo().equals(CodigoError.AUTOR_FOUND)) {
+				codigo = CodigoError.AUTOR_FOUND;
+				mensaje = "El autor ya existe";
+			}
+			
+			ErrorResponse errorResponse = new ErrorResponse(codigo, mensaje);
+			return ResponseEntity.badRequest().body(errorResponse);
+		}
+		
+		return ResponseEntity.ok(autorResponse);
 
 	}
 
@@ -63,13 +85,33 @@ public class AutorController {
 	 * con acceso restringido a usuarios con rol de Administrador
 	 * @param id El id del autor a actualizar
 	 * @param autor El {@link Autor} a actualizar
-	 * @return El autor tras ejecutarse la actualizacion
+	 * @return Un ResponseEntity con el autor tras ejecutarse la actualizacion,
+	 * o un ErrorResponse si el autor ya existe o si el nombre es nulo
 	 * @throws ServicioException Si se produce un error durante la consulta
 	 */
 	@PreAuthorize("hasAuthority('Administrador')")
 	@PutMapping(value = "/{id}")
-	public Autor actualizarAutor(@PathVariable Integer id, @RequestBody Autor autor) throws ServicioException {
-		return servicioAutor.modificarAutor(autor);
+	public ResponseEntity<Object> actualizarAutor(@PathVariable Integer id, @RequestBody Autor autor) throws ServicioException {
+		Autor autorResponse = null;
+		try {
+			autorResponse = servicioAutor.modificarAutor(autor);
+		} catch (ServicioException e) {
+			String codigo = "";
+			String mensaje = "";
+			
+			if (e.getCodigo().equals(CodigoError.NOMBRE_REQUIRED)) {
+				codigo = CodigoError.NOMBRE_REQUIRED;
+				mensaje = "Nombre requerido";
+			} else if (e.getCodigo().equals(CodigoError.AUTOR_FOUND)) {
+				codigo = CodigoError.AUTOR_FOUND;
+				mensaje = "El autor ya existe";
+			}
+			
+			ErrorResponse errorResponse = new ErrorResponse(codigo, mensaje);
+			return ResponseEntity.badRequest().body(errorResponse);
+		}
+		
+		return ResponseEntity.ok(autorResponse);
 	}
 
 	/**

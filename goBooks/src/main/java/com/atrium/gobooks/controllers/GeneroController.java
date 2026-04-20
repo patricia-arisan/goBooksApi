@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.atrium.gobooks.dto.GeneroDTO;
 import com.atrium.gobooks.entities.Genero;
+import com.atrium.gobooks.exceptions.CodigoError;
+import com.atrium.gobooks.exceptions.ErrorResponse;
 import com.atrium.gobooks.exceptions.ServicioException;
 import com.atrium.gobooks.services.ServicioGenero;
 
@@ -37,13 +39,33 @@ public class GeneroController {
 	 * Registro de un nuevo genero en la bbdd, con acceso restringido a usuarios 
 	 * con rol de Administrador
 	 * @param genero El {@link Genero} a guardar
-	 * @return El genero guardado junto a su id unico proporcionado por la bbdd
+	 * @return Un ResponseEntity con el genero guardado junto a su id unico proporcionado por la bbdd,
+	 * o un ErrorResponse si el genero ya existe o si el nombre es nulo
 	 * @throws ServicioException Si ocurre algun error durante el proceso
 	 */
 	@PreAuthorize("hasAuthority('Administrador')")
 	@PostMapping(value = "/registroGenero")
-	public Genero registrarNuevoGenero(@RequestBody Genero genero) throws ServicioException {
-		return servicioGenero.guardarGenero(genero);
+	public ResponseEntity<Object> registrarNuevoGenero(@RequestBody Genero genero) throws ServicioException {
+		Genero generoResponse = null;
+		try {
+			generoResponse = servicioGenero.guardarGenero(genero);
+		} catch (ServicioException e) {
+			String codigo = "";
+			String mensaje = "";
+			
+			if (e.getCodigo().equals(CodigoError.NOMBRE_REQUIRED)) {
+				codigo = CodigoError.NOMBRE_REQUIRED;
+				mensaje = "Nombre requerido";
+			} else if (e.getCodigo().equals(CodigoError.GENERO_FOUND)) {
+				codigo = CodigoError.GENERO_FOUND;
+				mensaje = "El género ya existe";
+			}
+			
+			ErrorResponse errorResponse = new ErrorResponse(codigo, mensaje);
+			return ResponseEntity.badRequest().body(errorResponse);
+		}
+		
+		return ResponseEntity.ok(generoResponse);
 
 	}
 
@@ -63,13 +85,33 @@ public class GeneroController {
 	 * con acceso restringido a usuarios con rol de Administrador
 	 * @param id El id del genero a actualizar
 	 * @param genero El {@link Genero} a actualizar
-	 * @return El genero tras ejecutarse la actualizacion
+	 * @return Un ResponseEntity con el genero tras ejecutarse la actualizacion,
+	 * o un ErrorResponse si el genero ya existe o si el nombre es nulo
 	 * @throws ServicioException Si el genero no existe o se produce un error al actualizar
 	 */
 	@PreAuthorize("hasAuthority('Administrador')")
 	@PutMapping(value = "/{id}")
-	public Genero actualizarGenero(@PathVariable Integer id, @RequestBody Genero genero) throws ServicioException {
-		return servicioGenero.modificarGenero(genero);
+	public ResponseEntity<Object> actualizarGenero(@PathVariable Integer id, @RequestBody Genero genero) throws ServicioException {
+		Genero generoResponse = null;
+		try {
+			generoResponse = servicioGenero.modificarGenero(genero);
+		} catch (ServicioException e) {
+			String codigo = "";
+			String mensaje = "";
+			
+			if (e.getCodigo().equals(CodigoError.NOMBRE_REQUIRED)) {
+				codigo = CodigoError.NOMBRE_REQUIRED;
+				mensaje = "Nombre requerido";
+			} else if (e.getCodigo().equals(CodigoError.GENERO_FOUND)) {
+				codigo = CodigoError.GENERO_FOUND;
+				mensaje = "El género ya existe";
+			}
+			
+			ErrorResponse errorResponse = new ErrorResponse(codigo, mensaje);
+			return ResponseEntity.badRequest().body(errorResponse);
+		}
+		
+		return ResponseEntity.ok(generoResponse);
 	}
 
 	/**

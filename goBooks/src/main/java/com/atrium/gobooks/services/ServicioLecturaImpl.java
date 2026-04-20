@@ -70,6 +70,9 @@ public class ServicioLecturaImpl implements ServicioLectura {
 		log.info("[grabarLectura]");
 		log.info("lectura: " + lecturaDTO.toString());
 		
+		/**
+		 * Comprobacion de que no vengan nulos los campos de libro, usuario y estado
+		 */
 		if (lecturaDTO.getIdLibro() == null) {
 			log.error(CodigoError.LIBRO_REQUIRED);
 			throw new ServicioException(CodigoError.LIBRO_REQUIRED);
@@ -269,6 +272,9 @@ public class ServicioLecturaImpl implements ServicioLectura {
 		if (!lecturaOp.isPresent())
 			throw new ServicioException(CodigoError.LECTURA_NOT_FOUND);
 		
+		/**
+		 * Comprobacion de que no vengan nulos los campos de libro, usuario y estado
+		 */
 		if (lectura.getLibro() == null || lectura.getLibro().getId() == null) {
 			log.error(CodigoError.LIBRO_REQUIRED);
 			throw new ServicioException(CodigoError.LIBRO_REQUIRED);

@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.atrium.gobooks.entities.Rol;
 import com.atrium.gobooks.entities.Usuario;
 import com.atrium.gobooks.exceptions.CodigoError;
 import com.atrium.gobooks.exceptions.ServicioException;
@@ -82,10 +83,55 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 		log.info("[registrarUsuario]");
 		log.debug("[registro_Usuario: " + registro.toString() + "]");
 
+		/**
+		 * Comprobacion para evitar campos nulos o invalidos en username y password
+		 */
+		if (registro.getUsername() == null || registro.getUsername().trim().isEmpty()) {
+			log.error(CodigoError.USERNAME_REQUIRED);
+			throw new ServicioException(CodigoError.USERNAME_REQUIRED);
+		}
+		
+		String emailRegex ="^[A-Za-z0-9_.-]+@(.+)$";
+		if(!registro.getUsername().matches(emailRegex)) {
+			throw new ServicioException(CodigoError.USERNAME_INVALID_FORMAT);
+		}
+		
+		if (registro.getPassword() == null || registro.getPassword().trim().isEmpty()) {
+			log.error(CodigoError.PASSWORD_REQUIRED);
+			throw new ServicioException(CodigoError.PASSWORD_REQUIRED);
+		}
+		
+		String passwordPattern = "^(?=.*[a-zA-Z0-9$@#$!%*?&()+-{|},;.:_^<=>~\"'`/])(?!.*\\s).{6,}$";
+		if(!registro.getPassword().matches(passwordPattern)) {
+			throw new ServicioException(CodigoError.PASSWORD_INVALID_FORMAT);
+		}
+		
+		String nombre = "";
+		if (registro.getNombre() != null) {
+			nombre = registro.getNombre().trim();
+		} else {
+			nombre = "Usuario";
+		}
+		
+		String apellido = "";
+		if (registro.getApellido() != null) {
+			apellido = registro.getApellido().trim();
+		}
+		
+		Integer rol = 0;
+		if (registro.getRol() == null || registro.getRol().getId() == null){
+			rol = 2;
+		} else {
+			rol = registro.getRol().getId();
+		}
+		Rol rolGuardado = new Rol();
+		rolGuardado.setId(rol);
+				
+		
 		// Creacion del usuario sin espacios en el nombre, en el apellido y en la password encriptada
-		Usuario usuario = new Usuario(registro.getNombre().trim(), registro.getApellido().trim(),
-				registro.getUsername(), passwordEncoder.encode(registro.getPassword().trim()),
-				registro.getFechaNacimiento(), registro.getRol());
+		Usuario usuario = new Usuario(nombre, apellido,
+				registro.getUsername().trim(), passwordEncoder.encode(registro.getPassword().trim()),
+				registro.getFechaNacimiento(), rolGuardado);
 
 		try {
 			// Verificacion de existencia del username del usuario en la bbdd
@@ -119,6 +165,40 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 		// Si el id no esta presente en la bbdd, lanza el error de usuario no encontrado
 		if (!usuarioOp.isPresent())
 			throw new ServicioException(CodigoError.USUARIO_NOT_FOUND);
+		
+		/**
+		 * Comprobacion para evitar campos nulos o invalidos en username y password
+		 */
+		if (usuario.getUsername() == null || usuario.getUsername().trim().isEmpty()) {
+			log.error(CodigoError.USERNAME_REQUIRED);
+			throw new ServicioException(CodigoError.USERNAME_REQUIRED);
+		}
+		
+		String emailRegex ="^[A-Za-z0-9_.-]+@(.+)$";
+		if(!usuario.getUsername().matches(emailRegex)) {
+			throw new ServicioException(CodigoError.USERNAME_INVALID_FORMAT);
+		}
+		
+		String nombre = "";
+		if (usuario.getNombre() != null) {
+			nombre = usuario.getNombre().trim();
+		} else {
+			nombre = "Usuario";
+		}
+		
+		String apellido = "";
+		if (usuario.getApellido() != null) {
+			apellido = usuario.getApellido().trim();
+		}
+		
+		Integer rol = 0;
+		if (usuario.getRol() == null || usuario.getRol().getId() == null){
+			rol = 2;
+		} else {
+			rol = usuario.getRol().getId();
+		}
+		Rol rolGuardado = new Rol();
+		rolGuardado.setId(rol);
 
 		try {
 			// Verificacion de existencia del username del usuario en la bbdd
@@ -129,6 +209,8 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 			 */
 			if (usuarioAux != null && usuarioAux.getId() != usuario.getId())
 				throw new ServicioException(CodigoError.USUARIO_FOUND);
+			
+			//////usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 			// Se guarda en la bbdd al usuario actualizado
 			usuario = usuarioRepository.save(usuario);
 		} catch (ServicioException se) {
@@ -214,6 +296,17 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 			throw new ServicioException(CodigoError.USUARIO_NOT_FOUND);
 		// Si lo encuentra, se almacena el usuario
 		Usuario usuario = usuarioOp.get();
+		
+		//Comprobacion para evitar que el password sea nulo o tenga un formato incorrecto
+		if (password == null || password.trim().isEmpty()) {
+			log.error(CodigoError.PASSWORD_REQUIRED);
+			throw new ServicioException(CodigoError.PASSWORD_REQUIRED);
+		}
+		
+		String passwordPattern = "^(?=.*[a-zA-Z0-9$@#$!%*?&()+-{|},;.:_^<=>~\"'`/])(?!.*\\s).{6,}$";
+		if(!password.matches(passwordPattern)) {
+			throw new ServicioException(CodigoError.PASSWORD_INVALID_FORMAT);
+		}
 		
 		try {
 			// Se almacena el nuevo password encriptado en el usuario

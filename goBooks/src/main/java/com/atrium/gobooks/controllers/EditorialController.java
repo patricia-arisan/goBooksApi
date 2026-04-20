@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.atrium.gobooks.dto.EditorialDTO;
 import com.atrium.gobooks.entities.Editorial;
+import com.atrium.gobooks.exceptions.CodigoError;
+import com.atrium.gobooks.exceptions.ErrorResponse;
 import com.atrium.gobooks.exceptions.ServicioException;
 import com.atrium.gobooks.services.ServicioEditorial;
 
@@ -37,13 +39,33 @@ public class EditorialController {
 	 * Registro de una nueva editorial en la bbdd, con acceso restringido a usuarios 
 	 * con rol de Administrador
 	 * @param editorial La {@link Editorial} a guardar
-	 * @return La editorial guardada junto a su id unico proporcionado por la bbdd
+	 * @return Un ResponseEntity con la editorial guardada junto a su id unico proporcionado por la bbdd,
+	 * o un ErrorResponse si la editorial ya existe o si el nombre es nulo
 	 * @throws ServicioException Si ocurre algun problema durante el proceso
 	 */
 	@PreAuthorize("hasAuthority('Administrador')")
 	@PostMapping(value = "/registroEditorial")
-	public Editorial registrarNuevaEditorial(@RequestBody Editorial editorial) throws ServicioException {
-		return servicioEditorial.guardarEditorial(editorial);
+	public ResponseEntity<Object> registrarNuevaEditorial(@RequestBody Editorial editorial) throws ServicioException {
+		Editorial editorialResponse = null;
+		try {
+			editorialResponse = servicioEditorial.guardarEditorial(editorial);
+		} catch (ServicioException e) {
+			String codigo = "";
+			String mensaje = "";
+			
+			if (e.getCodigo().equals(CodigoError.NOMBRE_REQUIRED)) {
+				codigo = CodigoError.NOMBRE_REQUIRED;
+				mensaje = "Nombre requerido";
+			} else if (e.getCodigo().equals(CodigoError.EDITORIAL_FOUND)) {
+				codigo = CodigoError.EDITORIAL_FOUND;
+				mensaje = "La editorial ya existe";
+			}
+			
+			ErrorResponse errorResponse = new ErrorResponse(codigo, mensaje);
+			return ResponseEntity.badRequest().body(errorResponse);
+		}
+		
+		return ResponseEntity.ok(editorialResponse);
 
 	}
 
@@ -63,14 +85,34 @@ public class EditorialController {
 	 * con acceso restringido a usuarios con rol de Administrador
 	 * @param id El id de la editorial a actualizar
 	 * @param editorial La {@link Editorial} a actualizar
-	 * @return La editorial tras ejecutarse la actualizacion
+	 * @return Un ResponseEntity con la editorial tras ejecutarse la actualizacion,
+	 * o un ErrorResponse si la editorial ya existe o si el nombre es nulo
 	 * @throws ServicioException Si la editorial no existe o se produce un error al actualizar
 	 */
 	@PreAuthorize("hasAuthority('Administrador')")
 	@PutMapping(value = "/{id}")
-	public Editorial actualizarEditorial(@PathVariable Integer id, @RequestBody Editorial editorial)
+	public ResponseEntity<Object> actualizarEditorial(@PathVariable Integer id, @RequestBody Editorial editorial)
 			throws ServicioException {
-		return servicioEditorial.modificarEditorial(editorial);
+		Editorial editorialResponse = null;
+		try {
+			editorialResponse = servicioEditorial.modificarEditorial(editorial);
+		} catch (ServicioException e) {
+			String codigo = "";
+			String mensaje = "";
+			
+			if (e.getCodigo().equals(CodigoError.NOMBRE_REQUIRED)) {
+				codigo = CodigoError.NOMBRE_REQUIRED;
+				mensaje = "Nombre requerido";
+			} else if (e.getCodigo().equals(CodigoError.EDITORIAL_FOUND)) {
+				codigo = CodigoError.EDITORIAL_FOUND;
+				mensaje = "La editorial ya existe";
+			}
+			
+			ErrorResponse errorResponse = new ErrorResponse(codigo, mensaje);
+			return ResponseEntity.badRequest().body(errorResponse);
+		}
+		
+		return ResponseEntity.ok(editorialResponse);
 	}
 
 	/**

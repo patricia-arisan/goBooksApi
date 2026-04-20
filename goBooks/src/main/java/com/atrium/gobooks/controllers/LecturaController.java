@@ -40,7 +40,9 @@ public class LecturaController {
 	 * Registro de una nueva lectura en la bbdd, con acceso restringido a usuarios 
 	 * con rol de Usuario
 	 * @param lectura La {@link LecturaDTO} a guardar
-	 * @return La lectura guardada junto a su identificador unico proporcionado por la bbdd
+	 * @return Un ResponseEntity con la lectura guardada junto a su identificador unico proporcionado 
+	 * por la bbdd, o un ErrorResponse si la lectura recibe un estado 1 o si no se introduce el libro,
+	 * el usuario o el estado
 	 * @throws ServicioException Si ocurre algun problema durante el proceso
 	 */
 	@PreAuthorize("hasAuthority('Usuario')")
@@ -97,7 +99,9 @@ public class LecturaController {
 	 * con acceso restringido a usuarios con rol de Usuario
 	 * @param id El id de la lectura a actualizar
 	 * @param lectura La {@link Lectura} a actualizar
-	 * @return Un ResponseEntity con la lectura tras ejecutarse la actualizacion
+	 * @return Un ResponseEntity con la lectura tras ejecutarse la actualizacion,
+	 * o un ErrorResponse si la lectura recibe un estado 1 o si no se introduce el libro,
+	 * el usuario o el estado
 	 * @throws ServicioException Si la lectura no existe o se produce un error al actualizar
 	 */
 	@PreAuthorize("hasAuthority('Usuario')")

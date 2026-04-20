@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.atrium.gobooks.entities.Autor;
 import com.atrium.gobooks.entities.Usuario;
+import com.atrium.gobooks.exceptions.CodigoError;
+import com.atrium.gobooks.exceptions.ErrorResponse;
 import com.atrium.gobooks.exceptions.ServicioException;
 import com.atrium.gobooks.services.ServicioUsuario;
 
@@ -54,12 +57,43 @@ public class LoginController {
 	/**
 	 * Registro de un nuevo usuario en la bbdd
 	 * @param usuario El nuevo {@link Usuario} a guardar
-	 * @return El usuario guardado junto a su identificador unico proporcionado por la bbdd
+	 * @return Un ResponseEntity con el usuario guardado junto a su identificador unico proporcionado 
+	 * por la bbdd, o un ErrorResponse si el usuario ya existe, si el username o el password son nulos
+	 * o no validos
 	 * @throws ServicioException Si ocurre algun error durante el proceso
 	 */
 	@PostMapping(value = "/registroUsuario")
-	public Usuario registrarCuentaDeUsuario(@RequestBody Usuario usuario) throws ServicioException {
-		return servicio.registrar(usuario);
+	public ResponseEntity<Object> registrarCuentaDeUsuario(@RequestBody Usuario usuario) throws ServicioException {
+		Usuario usuarioResponse = null;
+		try {
+			usuarioResponse = servicio.registrar(usuario);
+		} catch (ServicioException e) {
+			String codigo = "";
+			String mensaje = "";
+			
+			if (e.getCodigo().equals(CodigoError.USERNAME_REQUIRED)) {
+				codigo = CodigoError.USERNAME_REQUIRED;
+				mensaje = "Username requerido";
+			} else if (e.getCodigo().equals(CodigoError.USERNAME_INVALID_FORMAT)) {
+				codigo = CodigoError.USERNAME_INVALID_FORMAT;
+				mensaje = "El formato de la dirección de correo no es válido";
+			} else if (e.getCodigo().equals(CodigoError.PASSWORD_REQUIRED)) {
+				codigo = CodigoError.PASSWORD_REQUIRED;
+				mensaje = "Contraseña requerida";
+			} else if (e.getCodigo().equals(CodigoError.PASSWORD_INVALID_FORMAT)) {
+				codigo = CodigoError.PASSWORD_INVALID_FORMAT;
+				mensaje = "El formato de la contraseña no es válido, debe tener al menos 6 caracteres, "
+						+ "sin espacios en blanco";
+			} else if (e.getCodigo().equals(CodigoError.USUARIO_FOUND)) {
+				codigo = CodigoError.USUARIO_FOUND;
+				mensaje = "El usuario ya existe";
+			}
+			
+			ErrorResponse errorResponse = new ErrorResponse(codigo, mensaje);
+			return ResponseEntity.badRequest().body(errorResponse);
+		}
+		
+		return ResponseEntity.ok(usuarioResponse);
 
 	}
 

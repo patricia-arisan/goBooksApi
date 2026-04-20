@@ -43,7 +43,15 @@ public class ServicioAutorImpl implements ServicioAutor {
 	@Override
 	public Autor guardarAutor(Autor registro) throws ServicioException {
 		log.info("[grabarAutor]");
-		log.info("[autor: " + registro.toString() + "]");
+		log.info("[autor: " + registro.toString() + "]");		
+		
+		/**
+		 * Comprobacion de que no venga nulo el nombre del autor
+		 */
+		if (registro.getNombre() == null || registro.getNombre().trim().isEmpty()) {
+			log.error(CodigoError.NOMBRE_REQUIRED);
+			throw new ServicioException(CodigoError.NOMBRE_REQUIRED);
+		} 
 		
 		/**
 		 *  Formateado del texto. Primero quita los posibles espacios de delante y de detras, 
@@ -112,6 +120,14 @@ public class ServicioAutorImpl implements ServicioAutor {
 		if (!autorOp.isPresent())
 			throw new ServicioException(CodigoError.AUTOR_NOT_FOUND);
 
+		/**
+		 * Comprobacion de que no venga nulo el nombre del autor
+		 */
+		if (autor.getNombre() == null || autor.getNombre().trim().isEmpty()) {
+			log.error(CodigoError.NOMBRE_REQUIRED);
+			throw new ServicioException(CodigoError.NOMBRE_REQUIRED);
+		}
+		
 		/**
 		 *  Formateado del texto. Primero quita los posibles espacios de delante y de detras, 
 		 *  y despues transforma a mayuscula la inicial del nombre 

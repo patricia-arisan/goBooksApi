@@ -44,6 +44,15 @@ public class ServicioGeneroImpl implements ServicioGenero {
 	public Genero guardarGenero(Genero registro) throws ServicioException {
 		log.info("[grabarGenero]");
 		log.info("[genero: " + registro.toString() + "]");
+		
+		/**
+		 * Comprobacion de que no venga nulo el nombre del genero
+		 */
+		if (registro.getNombre() == null || registro.getNombre().trim().isEmpty()) {
+			log.error(CodigoError.NOMBRE_REQUIRED);
+			throw new ServicioException(CodigoError.NOMBRE_REQUIRED);
+		}
+		
 		/**
 		 * Formateado del texto. Primero quita los posibles espacios de delante y de
 		 * detras, y despues transforma a mayuscula la inicial del nombre
@@ -111,6 +120,14 @@ public class ServicioGeneroImpl implements ServicioGenero {
 		if (!generoOp.isPresent())
 			throw new ServicioException(CodigoError.GENERO_NOT_FOUND);
 
+		/**
+		 * Comprobacion de que no venga nulo el nombre del genero
+		 */
+		if (genero.getNombre() == null || genero.getNombre().trim().isEmpty()) {
+			log.error(CodigoError.NOMBRE_REQUIRED);
+			throw new ServicioException(CodigoError.NOMBRE_REQUIRED);
+		}
+		
 		/**
 		 *  Formateado del texto. Primero quita los posibles espacios de delante y de detras, 
 		 *  y despues transforma a mayuscula la inicial del nombre 

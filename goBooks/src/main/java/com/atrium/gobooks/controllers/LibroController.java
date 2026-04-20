@@ -40,7 +40,8 @@ public class LibroController {
 	 * con rol de Administrador
 	 * @param libro El {@link Libro} a guardar
 	 * @return Un ResponseEntity con el libro guardado junto con su id proporcionado por la bbdd,
-	 * o un ErrorResponse si el libro o el isbn ya existen
+	 * o un ErrorResponse si el libro o el isbn ya existen, o si no se incluye al autor, el genero, 
+	 * la editorial o el nombre del libro 
 	 * @throws ServicioException Si ocurre algun problema durante el proceso
 	 */
 	@PreAuthorize("hasAuthority('Administrador')")
@@ -204,7 +205,8 @@ public class LibroController {
 	 * @param id El id del libro a actualizar
 	 * @param libro El {@link Libro} a actualizar
 	 * @return Un ResponseEntity con el libro tras actualizarse correctamente,
-	 * o un ErrorResponse si el libro o el isbn ya existen
+	 * o un ErrorResponse si el libro o el isbn ya existen, o si no se incluye al autor, el genero, 
+	 * la editorial o el nombre del libro
 	 * @throws ServicioException Si el libro no existe o se produce un error al actualizar
 	 */
 	@PreAuthorize("hasAuthority('Administrador')")
