@@ -12,7 +12,7 @@
     <!-- Listado de libros -->
     <div class="book-list">
         <!-- Recorrido del array de libros mostrando la seleccion extraida de items del paginador-->
-        @for (lectura of readings?.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track lectura.id) {
+        @for (lectura of trackedReadings; track lectura.id) {
         <div class="book">
             <a [routerLink]="['/books/book-section',lectura.libro.id]"><img src="{{lectura.libro.portada}}"
                     id="cover" alt="{{lectura.libro.nombre}}" /></a>
@@ -21,6 +21,10 @@
         </div>
         }
     </div>
+    <!-- Mensaje en caso de que alguno de los listados este vacio -->
+    @if (!existReadings) {
+        <p class="alert">Todavía no has añadido ninguna lectura a la lista, ¡descubre libros <a routerLink="/books">aquí</a>!</p>
+    }
     <!-- Seccion de paginacion de la lista de libros -->
     @if (readings && readings.length>0) {
     <mat-paginator class="paginator" [length]="totalItems" [pageSize]="pageSize" [pageIndex]="pageIndex"

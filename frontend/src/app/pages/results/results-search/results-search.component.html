@@ -1,42 +1,44 @@
-@if (user.rol.id===1) {
-<!-- Header con navegacion para el administrador -->
-<app-header-admin></app-header-admin>
-} @else if (user.rol.id===2) {
-<!-- Header con navegacion para el usuario -->
-<app-header-user></app-header-user>
-}
-<!-- Cuerpo de pagina Resultados -->
-<div class="books">
-  <h3>Resultados de libros para "{{searchedWord}}"</h3>
-  <!-- Listado de libros -->
-  <div class="book-list">
-    <!-- Recorrido del array de libros mostrando la seleccion extraida de items del paginador-->
-    @for (libro of books?.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize); track libro) {
-    <div class="book">
-      @if (user.rol.id===2) {
-      <a [routerLink]="['/books/book-section',libro.id]">
-        <img src="{{libro.portada}}" id="cover" alt="{{libro.nombre}}" /></a>
-      } @else if(user.rol.id===1) {
-      <a [routerLink]="['/admin-books/book-section',libro.id]">
-        <img src="{{libro.portada}}" id="cover" alt="{{libro.nombre}}" /></a>
+@if (user && books) {
+  @if (user.rol.id===1) {
+  <!-- Header con navegacion para el administrador -->
+  <app-header-admin></app-header-admin>
+  } @else if (user.rol.id===2) {
+  <!-- Header con navegacion para el usuario -->
+  <app-header-user></app-header-user>
+  }
+  <!-- Cuerpo de pagina Resultados -->
+  <div class="books">
+    <h3>Resultados de libros para "{{searchedWord}}"</h3>
+    <!-- Listado de libros -->
+    <div class="book-list">
+      <!-- Recorrido del array de libros mostrando la seleccion extraida de items del paginador-->
+      @for (libro of trackedBooks; track libro) {
+      <div class="book">
+        @if (user.rol.id===2) {
+        <a [routerLink]="['/books/book-section',libro.id]">
+          <img src="{{libro.portada}}" id="cover" alt="{{libro.nombre}}" /></a>
+        } @else if(user.rol.id===1) {
+        <a [routerLink]="['/admin-books/book-section',libro.id]">
+          <img src="{{libro.portada}}" id="cover" alt="{{libro.nombre}}" /></a>
+        }
+        <p class="name">
+        @if (user.rol.id===2) {
+        <a [routerLink]="['/books/book-section',libro.id]">{{libro.nombre}}</a>
+        } @else if (user.rol.id===1) {
+        <a [routerLink]="['/admin-books/book-section',libro.id]">{{libro.nombre}}</a>
+        }
+        </p>
+      </div>
       }
-      <p class="name">
-      @if (user.rol.id===2) {
-      <a [routerLink]="['/books/book-section',libro.id]">{{libro.nombre}}</a>
-      } @else if (user.rol.id===1) {
-      <a [routerLink]="['/admin-books/book-section',libro.id]">{{libro.nombre}}</a>
-      }
-      </p>
     </div>
+    @if (books.length===0) {
+          <p class="alert">No hay resultados para esta búsqueda.</p>
+    }
+    <!-- Seccion de paginacion de la lista de libros -->
+    @if (books && books.length>0) {
+    <mat-paginator class="paginator" [length]="totalItems" [pageSize]="pageSize" [pageIndex]="pageIndex"
+      [pageSizeOptions]="[16, 32, 40]" aria-label="Select page" (page)="onPageChange($event)">
+    </mat-paginator>
     }
   </div>
-  @if(books.length===0){
-        <p class="alert">No hay resultados para esta búsqueda.</p>
-  }
-  <!-- Seccion de paginacion de la lista de libros -->
-  @if (books && books.length>0) {
-  <mat-paginator class="paginator" [length]="totalItems" [pageSize]="pageSize" [pageIndex]="pageIndex"
-    [pageSizeOptions]="[16, 32, 40]" aria-label="Select page" (page)="onPageChange($event)">
-  </mat-paginator>
-  }
-</div>
+}

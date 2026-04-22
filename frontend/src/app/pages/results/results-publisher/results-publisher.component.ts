@@ -32,6 +32,8 @@ export class ResultsPublisherComponent implements OnInit {
   totalItems = 0;
   pageSize = 16;
   pageIndex = 0;
+  // Libros a mostrar por el paginador
+  trackedBooks!: Libro[];
 
   constructor(
     private route: ActivatedRoute,
@@ -77,6 +79,7 @@ export class ResultsPublisherComponent implements OnInit {
       this.books = data;
       // Guardado del total de elementos del listado para la posterior paginacion
       this.totalItems = this.books.length;
+      this.updateVisibleBooks();
     });
   }
 
@@ -106,6 +109,13 @@ export class ResultsPublisherComponent implements OnInit {
   onPageChange(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
+    this.updateVisibleBooks();
+  }
+
+  // Funcion para calcular los libros a mostrar 
+  updateVisibleBooks() {
+    this.trackedBooks = this.books.slice(this.pageSize * this.pageIndex, this.pageSize * this.pageIndex + 
+      this.pageSize);
   }
 
 }

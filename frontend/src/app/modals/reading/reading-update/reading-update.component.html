@@ -1,4 +1,5 @@
 <h2 mat-dialog-title class="title">Actualizar lectura</h2>
+@if (book && reading) {
 <mat-dialog-content>
         <p class="name">{{book.nombre}}</p>
         <!-- Formulario modificar el estado de la lectura o eliminarla -->
@@ -38,3 +39,4 @@
                 </div>
         </form>
 </mat-dialog-content>
+}

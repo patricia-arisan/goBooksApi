@@ -20,7 +20,9 @@ export class BooksComponent implements OnInit{
   // Controles del paginator
   totalItems = 0;
   pageSize = 16;
-  pageIndex = 0;  
+  pageIndex = 0; 
+  // Libros a mostrar por el paginador
+  trackedBooks!: Libro[]; 
   
   constructor(
     private bookService: BookService,
@@ -55,13 +57,21 @@ export class BooksComponent implements OnInit{
             this.books = data;
             // Guardado del total de elementos del listado para la posterior paginacion
             this.totalItems=this.books.length;  
+            this.updateVisibleBooks();
           });    
   }
 
   // Funcion para detectar los cambios de pagina y en los elementos a mostrar por el paginator 
   onPageChange(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
-    this.pageSize = event.pageSize;    
+    this.pageSize = event.pageSize;   
+    this.updateVisibleBooks(); 
+  }
+
+  // Funcion para calcular los libros a mostrar 
+  updateVisibleBooks() {
+    this.trackedBooks = this.books.slice(this.pageSize * this.pageIndex, this.pageSize * this.pageIndex + 
+      this.pageSize);
   }
 
 }

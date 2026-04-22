@@ -31,6 +31,8 @@ export class ResultsGenreComponent implements OnInit{
   totalItems = 0;
   pageSize = 16;
   pageIndex = 0;
+  // Libros a mostrar por el paginador
+  trackedBooks!: Libro[];
 
   constructor(
     private route: ActivatedRoute,
@@ -75,7 +77,8 @@ export class ResultsGenreComponent implements OnInit{
     this.bookService.getBookByGenreId(idGenre).subscribe((data:Libro[])=>{
           this.books = data;
           // Guardado del total de elementos del listado para la posterior paginacion
-          this.totalItems=this.books.length;          
+          this.totalItems=this.books.length;  
+          this.updateVisibleBooks();        
         });
   }
 
@@ -105,6 +108,13 @@ export class ResultsGenreComponent implements OnInit{
   onPageChange(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
+    this.updateVisibleBooks();
+  }
+
+  // Funcion para calcular los libros a mostrar 
+  updateVisibleBooks() {
+    this.trackedBooks = this.books.slice(this.pageSize * this.pageIndex, this.pageSize * this.pageIndex + 
+      this.pageSize);
   }
 
 }

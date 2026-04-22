@@ -28,6 +28,8 @@ export class AdminBooksComponent implements OnInit, AfterViewInit {
   totalItems = 0;
   pageSize = 16;
   pageIndex = 0;
+  // Libros a mostrar por el paginador
+  trackedBooks!: Libro[];
   // Configuraciones de la tabla y el paginador
   dataSource = new MatTableDataSource<Libro>();
   displayedColumns: string[] = ['name', 'author', 'publisher', 'genre', 'edit'];
@@ -68,7 +70,8 @@ export class AdminBooksComponent implements OnInit, AfterViewInit {
       // Guardado del total de elementos del listado para la posterior paginacion
       this.totalItems = this.books.length;
       // Almacenamiento de los libros en el dataSource
-      this.dataSource.data = this.books;
+      this.dataSource.data = this.books;  
+      this.updateVisibleBooks();    
     });
   }
 
@@ -97,7 +100,8 @@ export class AdminBooksComponent implements OnInit, AfterViewInit {
   // Funcion para filtrar solo por algunos elementos definidos del libro y no por todos
   filterByItem() {
     this.dataSource.filterPredicate = function (data, filter: string): boolean {
-      return data.nombre.toLowerCase().includes(filter) || data.autor.nombre.toLowerCase().includes(filter) || data.editorial.nombre.toLowerCase().includes(filter) || data.genero.nombre.toLowerCase().includes(filter);
+      return data.nombre.toLowerCase().includes(filter) || data.autor.nombre.toLowerCase().includes(filter) || 
+      data.editorial.nombre.toLowerCase().includes(filter) || data.genero.nombre.toLowerCase().includes(filter);
     }
   }
 
@@ -108,13 +112,16 @@ export class AdminBooksComponent implements OnInit, AfterViewInit {
     this.filteredBooks = this.books.filter(libro => libro.nombre.toLowerCase().includes(filterValue));
     // Guardado del total de elementos del listado para la posterior paginacion
     this.totalItems = this.filteredBooks.length;
+    // Reinicio a la primera pagina al filtrar
+    this.pageIndex = 0;
+    this.updateVisibleBooks();
   }
 
   // Funcion para detectar los cambios de pagina y en los elementos a mostrar por el paginator
   onPageChange(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
-
+    this.updateVisibleBooks();
   }
 
   // Funcion para cambiar el idioma y personalizar el paginator
@@ -129,6 +136,17 @@ export class AdminBooksComponent implements OnInit, AfterViewInit {
       const totalPaginas = Math.ceil(length / pageSize);
       return `Página ${page + 1} de ${totalPaginas}`;
     }
+  }
+
+  // Funcion para calcular los libros a mostrar 
+  updateVisibleBooks() {
+    if (this.filteredBooks && this.filteredBooks.length>0) {
+      this.trackedBooks = this.filteredBooks.slice(this.pageSize * this.pageIndex, this.pageSize * this.pageIndex + 
+      this.pageSize);
+    } else {
+      this.trackedBooks = this.books.slice(this.pageSize * this.pageIndex, this.pageSize * this.pageIndex + 
+      this.pageSize);
+    }    
   }
 
   // Inyeccion de dependencias para usar MatDialog

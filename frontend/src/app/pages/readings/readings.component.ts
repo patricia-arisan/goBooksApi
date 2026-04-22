@@ -21,10 +21,13 @@ import { UserService } from '../../services/user-service';
 export class ReadingsComponent implements OnInit {
   user!: Usuario;
   readings!: Lectura[];
+  existReadings = true;
   // Controles del paginator
   totalItems = 0;
   pageSize = 16;
   pageIndex = 0;
+  // Lecturas de libros a mostrar por el paginador
+  trackedReadings!: Lectura[];
 
   constructor(
     private userService: UserService,
@@ -52,6 +55,11 @@ export class ReadingsComponent implements OnInit {
         this.readings = data;
         // Guardado del total de elementos del listado para la posterior paginacion
         this.totalItems = this.readings.length;
+        this.updateVisibleBooks();
+        // Comprobacion de si la lista esta vacia
+        if (this.totalItems === 0) {
+          this.existReadings = false;
+        }
       }); 
     }   
   }
@@ -67,6 +75,7 @@ export class ReadingsComponent implements OnInit {
         this.readings = data;
         // Guardado del total de elementos del listado para la posterior paginacion
         this.totalItems = this.readings.length;
+        this.updateVisibleBooks();
       });
     }
   }
@@ -89,6 +98,13 @@ export class ReadingsComponent implements OnInit {
   onPageChange(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
+    this.updateVisibleBooks();
+  }
+
+  // Funcion para calcular las lecturas a mostrar 
+  updateVisibleBooks() {
+    this.trackedReadings = this.readings.slice(this.pageSize * this.pageIndex, this.pageSize * this.pageIndex + 
+      this.pageSize);
   }
 
 }

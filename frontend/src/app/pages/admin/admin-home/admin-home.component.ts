@@ -29,6 +29,8 @@ export class AdminHomeComponent implements OnInit {
   pageSize = 16;
   pageIndex = 0;
   searchedWord!: string;
+  // Libros a mostrar por el paginador
+  trackedBooks!: Libro[];
 
   constructor(
     private router: Router,
@@ -62,6 +64,7 @@ export class AdminHomeComponent implements OnInit {
       this.books = data;
       // Guardado del total de elementos del listado para la posterior paginacion
       this.totalItems = this.books.length;
+      this.updateVisibleBooks();
     });
   }
 
@@ -82,11 +85,18 @@ export class AdminHomeComponent implements OnInit {
   onPageChange(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
+    this.updateVisibleBooks();
   }
 
   // Redireccion a la pagina de resultados en la que se hara la busqueda del termino introducido
   search() {
     let searchedWord = this.formSearch.get('clave')?.value;
     this.router.navigate(['results/search', searchedWord]);
+  }
+
+  // Funcion para calcular los libros a mostrar 
+  updateVisibleBooks() {
+    this.trackedBooks = this.books.slice(this.pageSize * this.pageIndex, this.pageSize * this.pageIndex + 
+      this.pageSize);
   }
 }

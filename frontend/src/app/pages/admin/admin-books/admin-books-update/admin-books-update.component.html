@@ -2,6 +2,7 @@
 <app-header-admin></app-header-admin>
 <!-- Cuerpo de pagina Editar libro -->
 <div class="container">
+  @if (book) {
   <!-- Breadcrumd para navegar hacia paginas anteriores -->
   <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -144,4 +145,5 @@
 
   <button type="button" class="delete-adaptable" matButton="elevated" (click)="openDeleteBookDialog('0ms', '0ms')"><img
       src="/assets/icons/bin.png" class="delete" alt="Eliminar" /></button>
+  }
 </div>

@@ -26,7 +26,9 @@
         <div class="options">
           <button type="button" (click)="toggleViewAccount()" class="account">
             <img src="/assets/user/user.png" alt="Usuario" id="user" />
-            <span class="username">{{user.nombre}}</span>
+            @if (user) {
+              <span class="username">{{user.nombre}}</span>
+            }
           </button>
           @if (!hideAccount) {
           <ul class="options-user">

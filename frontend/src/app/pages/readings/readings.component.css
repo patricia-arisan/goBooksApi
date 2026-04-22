@@ -70,6 +70,19 @@ button:focus {
 
 }
 
+.alert{
+    max-width: 100%;
+    background-color: rgb(228, 226, 226);
+    padding: 15px 10px;
+    margin-top: -30px;
+}
+
+.alert a{
+    text-decoration: none;
+    color: #46434e;
+    font-weight: bold;
+}
+
 /* Estilo del paginador */
 .paginator {
     margin-top: 14px;
