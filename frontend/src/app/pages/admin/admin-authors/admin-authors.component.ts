@@ -10,6 +10,7 @@ import { Autor } from '../../../interfaces/autor';
 import { AutorDTO } from '../../../interfaces/autorDTO';
 import { AuthorUpdateComponent } from '../../../modals/author/author-update/author-update.component';
 import { AuthorDeleteComponent } from '../../../modals/author/author-delete/author-delete.component';
+import { Router } from '@angular/router';
 
 /**
  * Componente de Administrar autores 
@@ -34,7 +35,8 @@ export class AdminAuthorsComponent implements OnInit, AfterViewInit {
 
   constructor(
     private paginatorIn: MatPaginatorIntl,
-    private authorService: AuthorService
+    private authorService: AuthorService,
+    private router: Router,
   ) {}
 
   /**
@@ -131,6 +133,11 @@ export class AdminAuthorsComponent implements OnInit, AfterViewInit {
       // Si el dialog devuelve un true al cerrarse, la pagina se actualiza para mostrar el nuevo listado
       if (reloadView) window.location.reload();
     });
+  }
+
+  // Funcion para dirigir al administrador a la pagina de resultados de libros del autor
+  goAuthorBooks(autor: AutorDTO) {
+    this.router.navigate(["/results/author", autor.idAutor]);
   }
 
 }

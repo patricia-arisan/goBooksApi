@@ -13,6 +13,7 @@ import { Editorial } from '../../../interfaces/editorial';
 import { PublisherService } from '../../../services/publisher-service';
 import { PublisherUpdateComponent } from '../../../modals/publisher/publisher-update/publisher-update.component';
 import { PublisherDeleteComponent } from '../../../modals/publisher/publisher-delete/publisher-delete.component';
+import { Router } from '@angular/router';
 
 /**
  * Componente de Administrar editoriales 
@@ -37,7 +38,8 @@ export class AdminPublishersComponent implements OnInit, AfterViewInit {
 
   constructor(
     private publisherService: PublisherService,
-    private paginatorIn: MatPaginatorIntl
+    private paginatorIn: MatPaginatorIntl,
+    private router: Router,
   ) {}
 
   /**
@@ -135,5 +137,10 @@ export class AdminPublishersComponent implements OnInit, AfterViewInit {
       if (reloadView) window.location.reload();
     });
   }
+
+  // Funcion para dirigir al administrador a la pagina de resultados de libros de una editorial
+    goPublisherBooks(editorial: EditorialDTO) {
+      this.router.navigate(["/results/publisher", editorial.idEditorial]);
+    }
 
 }

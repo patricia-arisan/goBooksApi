@@ -10,6 +10,7 @@ import { GenreService } from '../../../services/genre-service';
 import { GeneroDTO } from '../../../interfaces/generoDTO';
 import { GenreUpdateComponent } from '../../../modals/genre/genre-update/genre-update.component';
 import { GenreDeleteComponent } from '../../../modals/genre/genre-delete/genre-delete.component';
+import { Router } from '@angular/router';
 
 /**
  * Componente de Administrar generos 
@@ -34,7 +35,8 @@ export class AdminGenresComponent implements OnInit, AfterViewInit {
 
   constructor(
     private genreService: GenreService,
-    private paginatorIn: MatPaginatorIntl
+    private paginatorIn: MatPaginatorIntl,
+    private router: Router,
   ) {}
 
   /**
@@ -131,4 +133,9 @@ export class AdminGenresComponent implements OnInit, AfterViewInit {
       if (reloadView) window.location.reload();
     });
   }
+
+  // Funcion para dirigir al administrador a la pagina de resultados de libros de un genero
+    goGenreBooks(genero: GeneroDTO) {
+      this.router.navigate(["/results/genre", genero.idGenero]);
+    }
 }
