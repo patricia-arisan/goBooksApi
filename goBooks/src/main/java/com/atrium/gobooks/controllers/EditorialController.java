@@ -149,8 +149,25 @@ public class EditorialController {
 	@PreAuthorize("hasAuthority('Administrador')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<?> eliminarEditorial(@PathVariable Integer id) throws ServicioException {
-		servicioEditorial.eliminarEditorial(id);
-		return ResponseEntity.ok().build();
+		try {
+			servicioEditorial.eliminarEditorial(id);
+			return ResponseEntity.ok().build();
+
+		} catch (ServicioException e) {
+			String codigo = "";
+			String mensaje = "";
+			
+			if (e.getCodigo().equals(CodigoError.EDITORIAL_NOT_FOUND)) {
+				codigo = CodigoError.EDITORIAL_NOT_FOUND;
+				mensaje = "No existe una editorial con el presente id en la base de datos";
+			} else if (e.getCodigo().equals(CodigoError.EDITORIAL_HAS_BOOKS)) {
+				codigo = CodigoError.EDITORIAL_HAS_BOOKS;
+				mensaje = "No puede ser eliminada una editorial con libros asociados";
+			}
+			
+			ErrorResponse errorResponse = new ErrorResponse(codigo, mensaje);
+			return ResponseEntity.badRequest().body(errorResponse);
+		}
 	}
 
 }

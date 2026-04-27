@@ -35,5 +35,13 @@ public interface EditorialRepository extends JpaRepository<Editorial, Integer> {
 	 */
 	@Query(value = "SELECT e FROM Editorial e WHERE e.nombre = :nombre")
 	Editorial findByName(String nombre);
+	
+	/**
+	 * Busqueda del numero de libros que tiene una editorial
+	 * @param id de la {@link Editrial} que se busca
+	 * @return el numero de libros que tiene esa editorial
+	 */
+	@Query(value = "SELECT COUNT(l) FROM Libro l WHERE l.editorial.id = :id")
+	Long busquedaNumeroLibrosPorEditorial(Integer id);
 
 }

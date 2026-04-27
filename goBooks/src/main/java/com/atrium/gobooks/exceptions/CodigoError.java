@@ -86,5 +86,14 @@ public class CodigoError {
 	
 	/** El campo del username no tiene un formato valido */
 	public static final String USERNAME_INVALID_FORMAT = "00000027";
+	
+	/** El autor tiene libros asociados */
+	public static final String AUTOR_HAS_BOOKS = "00000028";
+	
+	/** El genero tiene libros asociados */
+	public static final String GENERO_HAS_BOOKS = "00000029";
+	
+	/** La editorial tiene libros asociados */
+	public static final String EDITORIAL_HAS_BOOKS = "00000030";
 
 }

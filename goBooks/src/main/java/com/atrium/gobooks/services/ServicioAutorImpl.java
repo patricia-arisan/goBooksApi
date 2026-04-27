@@ -221,6 +221,18 @@ public class ServicioAutorImpl implements ServicioAutor {
 	public void eliminarAutor(Integer id) throws ServicioException {
 		log.info("[eliminarAutor]");
 		log.debug("[idAutor: " + id + "]");
+		
+		// Optional para comprobar si el registro existe antes de ser eliminado
+		Optional<Autor> autorOp = autorRepository.findById(id);
+		// Si el id no esta presente en la bbdd, lanza el error de autor no encontrado
+		if (!autorOp.isPresent())
+			throw new ServicioException(CodigoError.AUTOR_NOT_FOUND);
+		
+		Long numeroLibros = autorRepository.busquedaNumeroLibrosPorAutor(id);
+		
+		if (numeroLibros > 0) {
+			throw new ServicioException(CodigoError.AUTOR_HAS_BOOKS);
+		}
 
 		try {
 			autorRepository.deleteById(id);

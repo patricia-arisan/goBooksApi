@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import com.atrium.gobooks.dto.AutorDTO;
 import com.atrium.gobooks.entities.Autor;
@@ -36,4 +35,12 @@ public interface AutorRepository extends JpaRepository<Autor, Integer> {
 	 */
 	@Query(value="SELECT a FROM Autor a WHERE a.nombre = :nombre")
 	Autor findByName(String nombre);
+	
+	/**
+	 * Busqueda del numero de libros que tiene un autor
+	 * @param id del {@link Autor} que se busca
+	 * @return el numero de libros que tiene ese autor
+	 */
+	@Query(value = "SELECT COUNT(l) FROM Libro l WHERE l.autor.id = :id")
+	Long busquedaNumeroLibrosPorAutor(Integer id);
 }

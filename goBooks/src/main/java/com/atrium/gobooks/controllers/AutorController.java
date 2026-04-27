@@ -147,8 +147,26 @@ public class AutorController {
 	@PreAuthorize("hasAuthority('Administrador')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<?> eliminarAutor(@PathVariable Integer id) throws ServicioException {
-		servicioAutor.eliminarAutor(id);
-		return ResponseEntity.ok().build();
+
+		try {
+			servicioAutor.eliminarAutor(id);
+			return ResponseEntity.ok().build();
+
+		} catch (ServicioException e) {
+			String codigo = "";
+			String mensaje = "";
+			
+			if (e.getCodigo().equals(CodigoError.AUTOR_NOT_FOUND)) {
+				codigo = CodigoError.AUTOR_NOT_FOUND;
+				mensaje = "No existe un autor con el presente id en la base de datos";
+			} else if (e.getCodigo().equals(CodigoError.AUTOR_HAS_BOOKS)) {
+				codigo = CodigoError.AUTOR_HAS_BOOKS;
+				mensaje = "No puede ser eliminado un autor con libros asociados";
+			}
+			
+			ErrorResponse errorResponse = new ErrorResponse(codigo, mensaje);
+			return ResponseEntity.badRequest().body(errorResponse);
+		}
 	}
 
 }

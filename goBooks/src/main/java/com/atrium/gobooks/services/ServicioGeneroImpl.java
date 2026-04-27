@@ -220,6 +220,18 @@ public class ServicioGeneroImpl implements ServicioGenero {
 	public void eliminarGenero(Integer id) throws ServicioException {
 		log.info("[eliminarGenero]");
 		log.debug("[idGenero: " + id + "]");
+		
+		// Optional para comprobar si el registro existe en la bbdd
+		Optional<Genero> generoOp = generoRepository.findById(id);
+		// Si el id no esta presente en la bbdd lanza el error de genero no encontrado
+		if (!generoOp.isPresent())
+			throw new ServicioException(CodigoError.GENERO_NOT_FOUND);
+		
+		Long numeroLibros = generoRepository.busquedaNumeroLibrosPorGenero(id);
+		
+		if (numeroLibros > 0) {
+			throw new ServicioException(CodigoError.GENERO_HAS_BOOKS);
+		}
 
 		try {
 			generoRepository.deleteById(id);

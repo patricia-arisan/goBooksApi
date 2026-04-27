@@ -222,6 +222,18 @@ public class ServicioEditorialImpl implements ServicioEditorial {
 		log.info("[eliminarEditorial]");
 		log.debug("[idEditorial: " + id + "]");
 
+		// Optional para comprobar si el registro existe en la bbdd
+		Optional<Editorial> editorialOp = editorialRepository.findById(id);
+		// Si el id no esta presente en la bbdd lanza el error de editorial no encontrada
+		if (!editorialOp.isPresent())
+			throw new ServicioException(CodigoError.EDITORIAL_NOT_FOUND);
+		
+		Long numeroLibros = editorialRepository.busquedaNumeroLibrosPorEditorial(id);
+		
+		if (numeroLibros > 0) {
+			throw new ServicioException(CodigoError.EDITORIAL_HAS_BOOKS);
+		}
+		
 		try {
 			editorialRepository.deleteById(id);
 		} catch (Exception e) {

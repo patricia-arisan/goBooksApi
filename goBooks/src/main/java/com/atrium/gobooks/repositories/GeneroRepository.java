@@ -35,5 +35,13 @@ public interface GeneroRepository extends JpaRepository<Genero, Integer> {
 	 */
 	@Query(value = "SELECT g FROM Genero g WHERE g.nombre = :nombre")
 	Genero findByName(String nombre);
+	
+	/**
+	 * Busqueda del numero de libros que tiene un genero
+	 * @param id del {@link Genero} que se busca
+	 * @return el numero de libros que tiene ese autor
+	 */
+	@Query(value = "SELECT COUNT(l) FROM Libro l WHERE l.genero.id = :id")
+	Long busquedaNumeroLibrosPorGenero(Integer id);
 
 }
