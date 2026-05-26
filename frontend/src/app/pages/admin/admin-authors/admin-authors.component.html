@@ -32,7 +32,7 @@
 
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef> </th>
-      <td mat-cell *matCellDef="let autor">
+      <td mat-cell *matCellDef="let autor" (click)="$event.stopPropagation()">
         @if (autor.numeroLibros === 0) {
         <!-- Dialog para eliminar el registro si no esta asociado a ningun libro -->
         <button type="button" (click)="openDeleteDialog(autor,'0ms', '0ms')" class="delete-button"><img
