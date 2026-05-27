@@ -90,10 +90,11 @@ h3 {
 /* Estilo secciones ultimos libros y mejor valorados */
 .last-books {
 	margin-bottom: 80px;
+	margin-top: 60px;
 }
 
-.last-books, .scored-books {
-	margin-top: 30px;
+.scored-books {
+	margin-top: -20px;
 }
 
 /* Estilo para los listados de libros */
