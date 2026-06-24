@@ -16,7 +16,7 @@ export class AuthorService {
   private readonly authorServiceUrl = `${environment.proyectoUrl}api/autor/registroAutor`;
   createAuthor(autor: Autor): Observable<Autor> {
     // Recuperacion del token 
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export class AuthorService {
   private readonly authorListServiceUrl = `${environment.proyectoUrl}api/autor/listadoAutores`;
   getAuthorsByNameOrder(): Observable<Autor[]> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ export class AuthorService {
   private readonly updateAuthorServiceUrl = `${environment.proyectoUrl}api/autor`
   updateAuthor(id: number, autor: Autor): Observable<Autor> {
     // Recuperacion del token de sesion
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ export class AuthorService {
   private readonly findAuthorServiceUrl = `${environment.proyectoUrl}api/autor`;
   getAuthorById(id: number): Observable<Autor> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ export class AuthorService {
   private readonly numberBooksAuthorListServiceUrl = `${environment.proyectoUrl}api/autor/conteoLibros`;
   getListBookAuthorNumber(): Observable<AutorDTO[]> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export class AuthorService {
   private readonly authorServiceDeleteUrl = `${environment.proyectoUrl}api/autor`;
   deleteAuthor(id: number): Observable<any> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

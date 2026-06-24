@@ -15,7 +15,7 @@ export class StateService {
   private readonly stateServiceUrl = `${environment.proyectoUrl}api/estado/listadoEstados`;
   getStatesList(): Observable<Estado[]> {
     // Recuperacion del token de sesion
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

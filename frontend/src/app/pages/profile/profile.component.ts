@@ -157,6 +157,7 @@ export class ProfileComponent implements OnInit {
   logout() {
     this.userService.logoutUser().subscribe(() => {
       localStorage.clear();
+      sessionStorage.clear();
       this.router.navigate(['/login']);
     });
   }

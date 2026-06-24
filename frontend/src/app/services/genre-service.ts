@@ -16,7 +16,7 @@ export class GenreService {
   private readonly genreServiceUrl = `${environment.proyectoUrl}api/genero/registroGenero`;
   createGenre(genero: Genero): Observable<Genero> {
     // Recuperacion del token de sesion
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export class GenreService {
   private readonly genreListServiceUrl = `${environment.proyectoUrl}api/genero/listadoGeneros`;
   getGenresByNameOrder(): Observable<Genero[]> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ export class GenreService {
   private readonly updateGenreServiceUrl = `${environment.proyectoUrl}api/genero`
   updateGenre(id: number, genero: Genero): Observable<Genero> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ export class GenreService {
   private readonly findGenreServiceUrl = `${environment.proyectoUrl}api/genero`;
   getGenreById(id: number): Observable<Genero> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ export class GenreService {
   private readonly numberBooksGenreListServiceUrl = `${environment.proyectoUrl}api/genero/conteoLibros`;
   getListBookGenreNumber(): Observable<GeneroDTO[]> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export class GenreService {
   private readonly genreServiceDeleteUrl = `${environment.proyectoUrl}api/genero`;
   deleteGenre(id: number): Observable<any> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

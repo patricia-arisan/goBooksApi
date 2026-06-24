@@ -15,7 +15,7 @@ export class PublisherService {
   private readonly publisherServiceUrl = `${environment.proyectoUrl}api/editorial/registroEditorial`;
   createPublisher(editorial: Editorial): Observable<Editorial> {
     // Recuperacion del token de sesion
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ export class PublisherService {
   private readonly publisherListServiceUrl = `${environment.proyectoUrl}api/editorial/listadoEditoriales`;
   getPublishersByNameOrder(): Observable<Editorial[]> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ export class PublisherService {
   private readonly updatePublisherServiceUrl = `${environment.proyectoUrl}api/editorial`
   updatePublisher(id: number, editorial: Editorial): Observable<Editorial> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ export class PublisherService {
   private readonly findPublisherServiceUrl = `${environment.proyectoUrl}api/editorial`;
   getPublisherById(id: number): Observable<Editorial> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ export class PublisherService {
   private readonly numberBooksPublisherListServiceUrl = `${environment.proyectoUrl}api/editorial/conteoLibros`;
   getListBookPublisherNumber(): Observable<EditorialDTO[]> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ export class PublisherService {
   private readonly deletePublisherServiceUrl = `${environment.proyectoUrl}api/editorial`;
   deletePublisher(id: number): Observable<any> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

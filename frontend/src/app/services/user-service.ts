@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { Usuario } from '../interfaces/usuario';
@@ -21,19 +21,18 @@ export class UserService {
   // Autenticacion del usuario
   private readonly userServiceLoginUrl = `${environment.proyectoUrl}api/login`;
   sendUser(user: Usuario): Observable<Usuario> {
+    // Implementacion de la autenticacion básica, convirtiendo username y password a Base64
+    const auth = 'Basic ' + btoa(user.username + ':' + user.password);
     // Creacion de las cabeceras si el usuario existe
     const headers = new HttpHeaders(user ? {
       'Content-Type': 'application/json',
-      // Exposicion de la cabecera para que pueda acceder el cliente
-      'Access-Control-Expose-Headers': 'Authorization',
-      // Implementacion de la autenticacion básica, convirtiendo username y password a Base64 
-      Authorization: 'Basic ' + btoa(user.username + ':' + user.password),
+      'Authorization': auth
     } : {});
     // Peticion post para enviar el objeto usuario junto a las credenciales de la cabecera
     return this.client.post<Usuario>(`${this.userServiceLoginUrl}`, user, { headers, withCredentials: true })
       .pipe(tap(() => {
         // Almacenamiento del token tras el login exitoso
-        localStorage.setItem('token', headers.get('Authorization') || '');
+        sessionStorage.setItem('token', auth);
       })
       );
   }
@@ -42,7 +41,7 @@ export class UserService {
   private readonly userServiceLoggedUrl = `${environment.proyectoUrl}api/usuario`;
   getLoggedUser(id: number): Observable<Usuario> {
     // Recuperacion del token de sesion
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -55,7 +54,7 @@ export class UserService {
   // Actualizar usuario
   updateUser(id: number, user: Usuario): Observable<Usuario> {
     // Recuperacion del token de sesion
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -69,7 +68,7 @@ export class UserService {
   private readonly userServiceUpdatePassUrl = `${environment.proyectoUrl}api/usuario/cambiarPassword`;
   updateUserPassword(id: number, password: string): Observable<Usuario> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -85,7 +84,7 @@ export class UserService {
   private readonly userServiceDeleteUrl = `${environment.proyectoUrl}api/usuario`;
   deleteLoggedUser(id: number): Observable<any> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -99,7 +98,7 @@ export class UserService {
   private readonly userServiceLogoutUrl = `${environment.proyectoUrl}auth/logout`;
   logoutUser() {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -119,9 +118,19 @@ export class UserService {
     return localStorage.getItem(key);
   }
 
+  // Funcion para el guardado en el almacenamiento de sesión
+  setToken(key: string, value: string): void {
+    sessionStorage.setItem(key, value);
+  }
+
+  // Funcion para recuperar un valor almacenado
+  getToken(key: string): string | null {
+    return sessionStorage.getItem(key);
+  }
+
   // Funcion para comprobar el inicio de sesion del usuario, si hay un token almacenado devuelve true
   isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     return !!token;
   }
 

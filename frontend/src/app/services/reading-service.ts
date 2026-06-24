@@ -16,7 +16,7 @@ export class ReadingService {
   private readonly readingServiceUrl = `${environment.proyectoUrl}api/lectura/registroLectura`;
   saveReading(lectura: LecturaDTO): Observable<LecturaDTO> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export class ReadingService {
   private readonly readingUserServiceUrl = `${environment.proyectoUrl}api/lectura/listadoLecturas`;
   getReadingsByUser(id: number): Observable<Lectura[]> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ export class ReadingService {
   private readonly readingUserStateServiceUrl = `${environment.proyectoUrl}api/lectura/listadoLecturasEstado`;
   getReadingsByUserState(idUsuario: number, idEstado: number): Observable<Lectura[]> {
     // Recuperacion del token de sesion
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export class ReadingService {
   private readonly readingAverageServiceUrl = `${environment.proyectoUrl}api/lectura/mediaPuntuacionLibro`;
   getAverageReading(idLibro: number): Observable<number> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ export class ReadingService {
   private readonly readingUpdateServiceUrl = `${environment.proyectoUrl}api/lectura`;
   updateReading(id: number, lectura: Lectura): Observable<Lectura> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ export class ReadingService {
   private readonly readingBookServiceUrl = `${environment.proyectoUrl}api/lectura`;
   getReadingBook(idUsuario: number, idLibro: number): Observable<Lectura> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ export class ReadingService {
   private readonly readingServiceDeleteUrl = `${environment.proyectoUrl}api/lectura`;
   deleteReading(id: number): Observable<any> {
     // Recuperacion del token
-    const credentials = localStorage.getItem('token');
+    const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

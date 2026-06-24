@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { Usuario } from '../../interfaces/usuario';
 import { HeaderUserComponent } from '../shared/headers/header-user/header-user.component';
 import { BookService } from '../../services/book-service';
 import { Libro } from '../../interfaces/libro';
