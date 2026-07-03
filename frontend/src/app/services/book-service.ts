@@ -154,7 +154,7 @@ export class BookService {
   
   // Obtener el resultado de busqueda de libros por titulo, autor, editorial o isbn
   private readonly searchServiceUrl = `${environment.proyectoUrl}api/libro/resultadosBusqueda`;
-  searchByBookAuthorEditorial(searchedWord: string): Observable<Libro[]> {
+  searchByBookAuthorPublisher(searchedWord: string): Observable<Libro[]> {
     // Recuperacion del token
     const credentials = sessionStorage.getItem('token');
     // Cabecera de autenticacion

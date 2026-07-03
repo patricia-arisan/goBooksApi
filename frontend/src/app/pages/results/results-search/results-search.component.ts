@@ -68,7 +68,7 @@ export class ResultsSearchComponent implements OnInit {
 
   // Funcion para buscar el resultado o resultados con el servicio libro
   getCurrentSearch() {
-    this.bookService.searchByBookAuthorEditorial(this.searchedWord).subscribe((data: Libro[]) => {
+    this.bookService.searchByBookAuthorPublisher(this.searchedWord).subscribe((data: Libro[]) => {
       this.books = data;
       // Guardado del total de elementos del listado para la posterior paginacion
       this.totalItems = this.books.length;
