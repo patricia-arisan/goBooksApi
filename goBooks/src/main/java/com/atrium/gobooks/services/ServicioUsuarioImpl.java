@@ -56,7 +56,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 	 * Convierte a la entidad usuario en un objeto UserDetails para la autenticacion
 	 * @param username El username del usuario, que es el correo con el que debe loguearse
 	 * @return UserDetails con credenciales y roles
-	 * @throws UsernameNotFoundExceptio si no encuentra el usuario en la bbdd
+	 * @throws UsernameNotFoundException si no encuentra el usuario en la bbdd
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -210,7 +210,6 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 			if (usuarioAux != null && usuarioAux.getId() != usuario.getId())
 				throw new ServicioException(CodigoError.USUARIO_FOUND);
 			
-			//////usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 			// Se guarda en la bbdd al usuario actualizado
 			usuario = usuarioRepository.save(usuario);
 		} catch (ServicioException se) {
