@@ -13,7 +13,8 @@ Este documento contiene la descripción de la aplicación GoBooks, sistema de ge
 ## Estructura del repositorio
 
 El proyecto está estructurado en dos directorios:
-* `/backend`: API REST construida en Java y Spring Boot.
+* `/goBooks`: API REST construida en Java y Spring Boot.
+    * `/goBooks/bbdd`: Contiene los scripts SQL del sistema (`gobooks_ddl.sql` y `gobooks_dml.sql`). 
 * `/frontend`: Interfaz gráfica de la aplicación realizada en Angular.
 
 
